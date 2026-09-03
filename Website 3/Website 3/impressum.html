@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – GLORIA ROMANA</title>
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      padding:0;
+      background:#000000;
+      color:#e8dcc8;
+      font-family:Georgia, "Times New Roman", serif;
+      line-height:1.7;
+    }
+
+    a{
+      color:#d59a57;
+      text-decoration:none;
+    }
+
+    a:hover{
+      color:#ffffff;
+    }
+
+    .page{
+      width:100%;
+      min-height:100vh;
+      background:#000000;
+    }
+
+    /* HERO HEADER */
+
+    .hero-header{
+      position:relative;
+      width:100%;
+      height:22vw;
+      min-height:180px;
+      max-height:340px;
+      overflow:hidden;
+      border-bottom:5px solid #b87333;
+    }
+
+    .hero-banner{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:1;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.28);
+      z-index:2;
+    }
+
+    /* HEADER CONTENT */
+
+    .header-content{
+      position:relative;
+      z-index:3;
+      width:100%;
+      padding-top:35px;
+    }
+
+    .header-inner{
+      width:100%;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap:70px;
+    }
+
+    /* LOGO */
+
+    .logo-link{
+      margin-left:40px;
+      flex-shrink:0;
+    }
+
+    .logo{
+      width:300px;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 0 20px rgba(0,0,0,0.45));
+    }
+
+    /* NAVIGATION */
+
+    .nav{
+      display:flex;
+      gap:35px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav a{
+      color:#f0d2a2;
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      transition:0.3s;
+      position:relative;
+      font-weight:bold;
+    }
+
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0;
+      height:2px;
+      background:#b87333;
+      transition:0.3s;
+    }
+
+    .nav a:hover{
+      color:#ffffff;
+    }
+
+    .nav a:hover::after{
+      width:100%;
+    }
+
+    /* PAGE CONTENT */
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      padding:60px 30px;
+    }
+
+    h1{
+      margin-top:0;
+      margin-bottom:35px;
+      color:#d59a57;
+      font-size:36px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-align:left;
+    }
+
+    h2{
+      margin-top:35px;
+      margin-bottom:12px;
+      color:#b87333;
+      font-size:20px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      text-align:left;
+    }
+
+    p{
+      margin:0 0 16px;
+      font-size:15px;
+      color:#f0e3cf;
+      text-align:left;
+    }
+
+    .box{
+      background:#080808;
+      border:1px solid #242424;
+      border-top:4px solid #b87333;
+      padding:30px;
+      margin-bottom:30px;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      padding:25px;
+      text-align:center;
+      color:#756a5d;
+      font-size:12px;
+      border-top:1px solid #1f1f1f;
+      background:#000000;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      .hero-header{
+        height:180px;
+      }
+
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+      }
+
+      .logo-link{
+        margin-left:20px;
+      }
+
+      .logo{
+        width:220px;
+      }
+
+      .nav{
+        gap:20px;
+        padding-left:20px;
+        padding-right:20px;
+      }
+
+      .container{
+        padding:45px 20px;
+      }
+
+      h1{
+        font-size:30px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- HERO HEADER -->
+
+    <header class="hero-header">
+
+      <img src="images/impressum-banner.webp"
+      alt="GLORIA ROMANA Banner"
+      class="hero-banner">
+
+      <div class="hero-overlay"></div>
+
+      <div class="header-content">
+
+        <div class="header-inner">
+
+          <!-- LOGO -->
+
+          <a href="index.html" class="logo-link">
+
+            <img src="images/logo.png"
+            alt="GLORIA ROMANA Logo"
+            class="logo">
+
+          </a>
+
+          <!-- NAVIGATION -->
+
+          <nav class="nav">
+
+            <a href="index.html">
+              Startseite
+            </a>
+
+            <a href="index.html#investment">
+              Investment
+            </a>
+
+            <a href="index.html#vorteile">
+              Vorteile
+            </a>
+
+            <a href="index.html#investmentbarren">
+              Investmentbarren
+            </a>
+
+          </nav>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- CONTENT -->
+
+    <main class="container">
+
+      <h1>Impressum</h1>
+
+      <div class="box">
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+
+        <p>
+          <strong>[Firmenname]</strong><br>
+          [Straße und Hausnummer]<br>
+          [PLZ Ort]<br>
+          [Land]
+        </p>
+
+        <h2>Vertreten durch</h2>
+
+        <p>
+          [Vorname Nachname]
+        </p>
+
+        <h2>Kontakt</h2>
+
+        <p>
+          Telefon: [Telefonnummer]<br>
+          E-Mail:
+          <a href="mailto:[E-Mail-Adresse]">
+            [E-Mail-Adresse]
+          </a>
+        </p>
+
+        <h2>Registereintrag</h2>
+
+        <p>
+          Eintragung im Handelsregister.<br>
+          Registergericht: [Registergericht]<br>
+          Registernummer: [Registernummer]
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+
+        <p>
+          Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+          [USt-IdNr.]
+        </p>
+
+        <h2>Verantwortlich für den Inhalt</h2>
+
+        <p>
+          [Vorname Nachname]<br>
+          [Straße und Hausnummer]<br>
+          [PLZ Ort]
+        </p>
+
+      </div>
+
+      <div class="box">
+
+        <h2>EU-Streitschlichtung</h2>
+
+        <p>
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:
+        </p>
+
+        <p>
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">
+            https://ec.europa.eu/consumers/odr/
+          </a>
+        </p>
+
+        <h2>Verbraucherstreitbeilegung</h2>
+
+        <p>
+          Wir sind nicht verpflichtet und nicht bereit,
+          an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+      </div>
+
+      <div class="box">
+
+        <h2>Haftung für Inhalte</h2>
+
+        <p>
+          Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten
+          nach den allgemeinen Gesetzen verantwortlich.
+        </p>
+
+        <h2>Haftung für Links</h2>
+
+        <p>
+          Unser Angebot enthält Links zu externen Websites Dritter,
+          auf deren Inhalte wir keinen Einfluss haben.
+        </p>
+
+        <h2>Urheberrecht</h2>
+
+        <p>
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke
+          auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+        </p>
+
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+      © 2019 GLORIA ROMANA
+
+    </footer>
+
+  </div>
+
+</body>
+</html>

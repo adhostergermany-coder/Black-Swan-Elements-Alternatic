@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLORIA ROMANA – Kupfer Investmentbarren</title>
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,
+    body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      background:#000000;
+      color:#e8dcc8;
+      font-family:Georgia, "Times New Roman", serif;
+      line-height:1.7;
+      overflow:hidden;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    .page{
+      width:100%;
+      height:100vh;
+      overflow-y:scroll;
+      overflow-x:hidden;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
+      background:#000000;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      padding-left:30px;
+      padding-right:30px;
+      position:relative;
+      z-index:3;
+    }
+
+    /* FULLSCREEN SECTIONS */
+
+    .hero,
+    .section,
+    .cta{
+      width:100%;
+      height:100vh;
+      min-height:100vh;
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* HERO */
+
+    .hero{
+      border-bottom:5px solid #b87333;
+    }
+
+    .hero-banner{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:1;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.28);
+      z-index:2;
+    }
+
+    /* HEADER */
+
+    .hero-header{
+      position:absolute;
+      top:35px;
+      left:0;
+      width:100%;
+      z-index:5;
+    }
+
+    .hero-header-inner{
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap:70px;
+      width:100%;
+    }
+
+    /* LOGO */
+
+    .logo-link{
+      margin-left:40px;
+      flex-shrink:0;
+    }
+
+    .logo{
+      width:300px;
+      height:auto;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 0 20px rgba(0,0,0,0.45));
+    }
+
+    /* NAVIGATION */
+
+    .nav{
+      display:flex;
+      gap:35px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav a{
+      color:#f0d2a2;
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      transition:0.3s;
+      position:relative;
+      font-weight:bold;
+    }
+
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0;
+      height:2px;
+      background:#b87333;
+      transition:0.3s;
+    }
+
+    .nav a:hover{
+      color:#ffffff;
+    }
+
+    .nav a:hover::after{
+      width:100%;
+    }
+
+    /* HERO CONTENT */
+
+    .hero-content{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      width:100%;
+    }
+
+    .hero-content h1{
+      margin:0;
+      font-size:72px;
+      letter-spacing:7px;
+      color:#d59a57;
+      text-transform:uppercase;
+      text-shadow:0 0 25px rgba(0,0,0,0.7);
+    }
+
+    .hero-content p{
+      max-width:850px;
+      margin:35px auto 0;
+      font-size:22px;
+      color:#f0e3cf;
+      line-height:1.9;
+      text-shadow:0 0 18px rgba(0,0,0,0.7);
+      text-align:center;
+    }
+
+    /* BUTTON */
+
+    .button{
+      display:inline-block;
+      margin-top:40px;
+      padding:17px 42px;
+      background:#b87333;
+      color:#ffffff;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .button:hover{
+      background:#d5924f;
+      box-shadow:0 0 30px rgba(184,115,51,0.35);
+    }
+
+    /* STANDARD SECTIONS */
+
+    .section{
+      background:#000000;
+      border-top:1px solid #1f1f1f;
+      padding:40px 0;
+    }
+
+    .section h2{
+      margin-top:0;
+      margin-bottom:35px;
+      font-size:38px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#b87333;
+      text-align:center;
+      text-shadow:0 0 15px rgba(0,0,0,0.7);
+    }
+
+    .text{
+      color:#f0e3cf;
+      font-size:18px;
+      text-align:center;
+      max-width:1000px;
+      margin:0 auto 25px;
+      text-shadow:0 0 12px rgba(0,0,0,0.7);
+    }
+
+    /* BACKGROUND SECTIONS */
+
+    .background-section{
+      position:relative;
+    }
+
+    .background-section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:1;
+    }
+
+    .background-section::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.28);
+      z-index:2;
+    }
+
+    /* INVESTMENT BACKGROUND */
+
+    .investment-section::before{
+      background-image:url("images/investment-banner.webp");
+    }
+
+    /* BENEFITS BACKGROUND */
+
+    .benefits-section::before{
+      background-image:url("images/benefits-banner.webp");
+    }
+
+    /* BENEFITS */
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+      gap:25px;
+      margin-top:35px;
+    }
+
+    .benefit-box{
+      background:rgba(8,8,8,0.68);
+      border:1px solid rgba(255,255,255,0.08);
+      border-top:4px solid #b87333;
+      padding:30px;
+      transition:0.3s;
+      text-align:center;
+      backdrop-filter:blur(3px);
+    }
+
+    .benefit-box:hover{
+      transform:translateY(-4px);
+      box-shadow:0 0 25px rgba(184,115,51,0.12);
+    }
+
+    .benefit-box h3{
+      margin-top:0;
+      color:#d59a57;
+      font-size:24px;
+      text-shadow:0 0 12px rgba(0,0,0,0.7);
+    }
+
+    .benefit-box p{
+      color:#f0e3cf;
+      font-size:16px;
+      text-align:center;
+      text-shadow:0 0 10px rgba(0,0,0,0.7);
+    }
+
+    /* PRODUCT */
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .product-image{
+      background:#080808;
+      border:1px solid #242424;
+      padding:25px;
+      text-align:center;
+    }
+
+    .product-image img{
+      width:150px;
+      height:500px;
+      object-fit:contain;
+    }
+
+    /* PRODUCT SECTION TEXT */
+
+    #investmentbarren h2{
+      text-align:center;
+    }
+
+    .product-text{
+      color:#d7c8b2;
+      text-align:left;
+    }
+
+    .product-text p{
+      text-align:left;
+    }
+
+    /* TABLE */
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:35px;
+    }
+
+    td{
+      padding:15px;
+      border-bottom:1px solid #242424;
+      text-align:left;
+    }
+
+    td:first-child{
+      width:38%;
+      color:#c88643;
+      font-weight:bold;
+    }
+
+    /* CTA */
+
+    .cta{
+      text-align:center;
+    }
+
+    .cta::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url("images/copper-values-banner.webp");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:1;
+    }
+
+    .cta::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.28);
+      z-index:2;
+    }
+
+    .cta-content{
+      position:relative;
+      z-index:3;
+      width:100%;
+    }
+
+    .cta h2{
+      margin-top:0;
+      font-size:46px;
+      color:#d59a57;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-align:center;
+      text-shadow:0 0 15px rgba(0,0,0,0.7);
+    }
+
+    .cta p{
+      max-width:760px;
+      margin:25px auto;
+      font-size:20px;
+      color:#f0e3cf;
+      text-align:center;
+      text-shadow:0 0 12px rgba(0,0,0,0.7);
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#000000;
+      padding:30px;
+      text-align:center;
+      color:#756a5d;
+      font-size:13px;
+      border-top:1px solid #1f1f1f;
+      scroll-snap-align:end;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:950px){
+
+      html,
+      body{
+        overflow:auto;
+      }
+
+      .page{
+        height:auto;
+        overflow:visible;
+        scroll-snap-type:none;
+      }
+
+      .hero,
+      .section,
+      .cta{
+        height:auto;
+        min-height:100vh;
+        scroll-snap-align:none;
+        padding:80px 0;
+      }
+
+      .hero-header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:25px;
+      }
+
+      .logo-link{
+        margin-left:0;
+      }
+
+      .logo{
+        width:220px;
+      }
+
+      .nav{
+        gap:20px;
+      }
+
+      .hero-content h1{
+        font-size:42px;
+        letter-spacing:3px;
+      }
+
+      .hero-content p{
+        font-size:18px;
+      }
+
+      .product-grid{
+        grid-template-columns:1fr;
+      }
+
+      .product-image img{
+        width:120px;
+        height:400px;
+      }
+
+      .container{
+        padding-left:20px;
+        padding-right:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- HERO -->
+
+    <section class="hero" id="top">
+
+      <img src="images/top_hero.webp"
+      alt="GLORIA ROMANA Banner"
+      class="hero-banner">
+
+      <div class="hero-overlay"></div>
+
+      <!-- HEADER -->
+
+      <div class="hero-header">
+
+        <div class="hero-header-inner">
+
+          <a href="#top" class="logo-link">
+
+            <img src="images/logo.png"
+            alt="GLORIA ROMANA Logo"
+            class="logo">
+
+          </a>
+
+          <nav class="nav">
+
+            <a href="#investment">
+              Investment
+            </a>
+
+            <a href="#vorteile">
+              Vorteile
+            </a>
+
+            <a href="#investmentbarren">
+              Investmentbarren
+            </a>
+
+            <a href="#cta">
+              Wo zu kaufen?
+            </a>
+			
+            <a href="impressum.html">
+              Impressum
+            </a>
+
+          </nav>
+
+        </div>
+
+      </div>
+
+      <!-- HERO CONTENT -->
+
+      <div class="container">
+
+        <div class="hero-content">
+
+          <h1>GLORIA ROMANA</h1>
+
+          <p>
+
+            Hochwertige Kupfer Investmentbarren mit klassischer,
+            zeitloser Gestaltung — inspiriert von Stabilität,
+            Stärke und dem Erbe antiker Handelsreiche.
+
+          </p>
+
+          <a href="#investment" class="button">
+            Jetzt entdecken
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- INVESTMENT -->
+
+    <section class="section background-section investment-section" id="investment">
+
+      <div class="container">
+
+        <h2>Investment in Kupfer</h2>
+
+        <p class="text">
+
+          Kupfer zählt zu den bedeutendsten Industriemetallen der Welt
+          und spielt eine zentrale Rolle in modernen Technologien,
+          Energieinfrastruktur, Elektromobilität und Industrieanwendungen.
+
+        </p>
+
+        <p class="text">
+
+          Die Investmentbarren der Serie „GLORIA ROMANA“ verbinden die
+          klassische Ästhetik historischer Handels- und Wirtschaftsmächte
+          mit einer modernen und wertbeständigen Form physischer Sachwerte.
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- BENEFITS -->
+
+    <section class="section background-section benefits-section" id="vorteile">
+
+      <div class="container">
+
+        <h2>Vorteile physischer Kupferbarren</h2>
+
+        <div class="benefits">
+
+          <div class="benefit-box">
+
+            <h3>Physischer Sachwert</h3>
+
+            <p>
+              Kupfer besitzt als Industriemetall weltweit
+              eine hohe wirtschaftliche Bedeutung.
+            </p>
+
+          </div>
+
+          <div class="benefit-box">
+
+            <h3>Langfristige Nachfrage</h3>
+
+            <p>
+              Elektromobilität, Energiewende und Infrastruktur
+              sorgen für steigenden Kupferbedarf.
+            </p>
+
+          </div>
+
+          <div class="benefit-box">
+
+            <h3>Massives<br>Metall</h3>
+
+            <p>
+              Hochwertig gefertigte Barren mit klassischer
+              Metalloptik und präziser Verarbeitung.
+            </p>
+
+          </div>
+
+          <div class="benefit-box">
+
+            <h3>Zeitloses<br>Design</h3>
+
+            <p>
+              Elegante Gestaltung ohne überladene Motive —
+              Mit Fokus auf Material und Wert.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PRODUCT -->
+
+    <section class="section" id="investmentbarren">
+
+      <div class="container">
+
+        <h2>Der Investmentbarren</h2>
+
+        <div class="product-grid">
+
+          <div class="product-image">
+
+            <img src="images/copper_bar.png"
+            alt="Kupfer Investmentbarren">
+
+          </div>
+
+          <div class="product-text">
+
+            <p>
+
+              Die Gestaltung orientiert sich an klassischen
+              Edelmetallbarren mit klaren Linien und hochwertiger
+              Laserbeschriftung.
+
+            </p>
+
+            <table>
+
+              <tr>
+                <td>Produkt</td>
+                <td>Kupfer Investmentbarren</td>
+              </tr>
+
+              <tr>
+                <td>Marke</td>
+                <td>GLORIA ROMANA</td>
+              </tr>
+
+              <tr>
+                <td>Material</td>
+                <td>Kupfer</td>
+              </tr>
+
+              <tr>
+                <td>Feinheit</td>
+                <td>999 Feinkupfer (99,9)</td>
+              </tr>
+
+              <tr>
+                <td>Gewicht</td>
+                <td>500 g</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta" id="cta">
+
+      <div class="container">
+
+        <div class="cta-content">
+
+          <h2>Physische Werte aus Kupfer</h2>
+
+          <p>
+
+            Hochwertige Kupfer Investmentbarren mit zeitloser
+            Gestaltung und Fokus auf Material, Reinheit und
+            Wertbeständigkeit.
+
+          </p>
+
+          <a href="https://ebay.de" class="button">
+            JETZT KAUFEN
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      © 2019 GLORIA ROMANA
+
+    </footer>
+
+  </div>
+
+</body>
+</html>

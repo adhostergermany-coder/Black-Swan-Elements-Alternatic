@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northstar Heritage Mint – Kupferbarren mit Segelschiff-Motiv</title>
+
+  <style>
+    :root{
+      --bg:#02070d;
+      --bg-soft:#07111c;
+      --gold:#c9a45c;
+      --gold-light:#e2c37a;
+      --copper:#b87333;
+      --text:#eadcc4;
+      --text-soft:#d8c9ad;
+      --border:rgba(201,164,92,0.35);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Georgia, "Times New Roman", serif;
+      line-height:1.7;
+    }
+
+    img{
+      max-width:100%;
+      height:auto;
+      display:block;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .page{
+      width:100%;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top, rgba(201,164,92,0.16), transparent 35%),
+        var(--bg);
+    }
+
+    .container{
+      width:min(1200px, 100% - 40px);
+      margin:0 auto;
+      position:relative;
+      z-index:3;
+    }
+
+    .header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:20;
+      background:rgba(2,7,13,0.82);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .header-inner{
+      min-height:86px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:40px;
+    }
+
+    .logo{
+      width:clamp(170px, 20vw, 285px);
+      filter:drop-shadow(0 0 16px rgba(0,0,0,0.7));
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:28px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      font-size:14px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      color:var(--gold-light);
+      font-weight:bold;
+      position:relative;
+    }
+
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0;
+      height:2px;
+      background:var(--gold);
+      transition:0.3s ease;
+    }
+
+    .nav a:hover{
+      color:#ffffff;
+    }
+
+    .nav a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      min-height:100vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      padding:150px 0 90px;
+      overflow:hidden;
+      border-bottom:4px solid var(--gold);
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:1;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
+      background:
+        linear-gradient(90deg, rgba(2,7,13,0.90), rgba(2,7,13,0.42), rgba(2,7,13,0.80)),
+        rgba(0,0,0,0.18);
+    }
+
+    .hero-box{
+      max-width:780px;
+      padding:44px;
+      background:rgba(2,7,13,0.56);
+      border:1px solid rgba(255,255,255,0.08);
+      border-left:5px solid var(--gold);
+      backdrop-filter:blur(5px);
+      box-shadow:0 0 45px rgba(0,0,0,0.5);
+    }
+
+    .eyebrow{
+      color:var(--gold-light);
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:14px;
+      font-weight:bold;
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0;
+      color:var(--gold);
+      font-size:clamp(38px, 6vw, 78px);
+      line-height:1.05;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      text-shadow:0 0 28px rgba(0,0,0,0.8);
+    }
+
+    .hero-text{
+      margin:28px 0 0;
+      font-size:clamp(18px, 2vw, 23px);
+      color:var(--text);
+      max-width:700px;
+      text-shadow:0 0 18px rgba(0,0,0,0.8);
+    }
+
+    .button-row{
+      margin-top:38px;
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .button{
+      display:inline-block;
+      padding:15px 34px;
+      background:var(--gold);
+      color:#07111c;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:14px;
+      font-weight:bold;
+      transition:0.3s ease;
+      border:1px solid var(--gold);
+    }
+
+    .button:hover{
+      background:var(--gold-light);
+      box-shadow:0 0 30px rgba(201,164,92,0.35);
+    }
+
+    .button.secondary{
+      background:transparent;
+      color:var(--gold-light);
+    }
+
+    .button.secondary:hover{
+      background:rgba(201,164,92,0.16);
+      color:#ffffff;
+    }
+
+    .section{
+      position:relative;
+      padding:110px 0;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+
+    .section-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:1;
+    }
+
+    .section.has-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
+      background:
+        linear-gradient(180deg, rgba(2,7,13,0.74), rgba(2,7,13,0.62)),
+        rgba(0,0,0,0.22);
+    }
+
+    .section-title{
+      text-align:center;
+      max-width:900px;
+      margin:0 auto 55px;
+    }
+
+    .section-title h2{
+      margin:0;
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      font-size:clamp(30px, 4vw, 48px);
+      text-shadow:0 0 18px rgba(0,0,0,0.8);
+    }
+
+    .section-title p{
+      margin:20px auto 0;
+      max-width:850px;
+      color:var(--text);
+      font-size:clamp(17px, 1.8vw, 20px);
+      text-align:center;
+      text-shadow:0 0 14px rgba(0,0,0,0.8);
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:55px;
+      align-items:center;
+    }
+
+    .intro-card{
+      background:linear-gradient(145deg, rgba(7,17,28,0.96), rgba(2,7,13,0.98));
+      border:1px solid var(--border);
+      padding:42px;
+      box-shadow:0 0 40px rgba(0,0,0,0.35);
+    }
+
+    .intro-card h2{
+      margin-top:0;
+      color:var(--gold-light);
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.2;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .intro-card p{
+      font-size:18px;
+      color:var(--text);
+      margin-bottom:0;
+    }
+
+    .intro-image{
+      border:1px solid rgba(255,255,255,0.1);
+      background:#050b12;
+      padding:18px;
+      box-shadow:0 0 38px rgba(0,0,0,0.5);
+    }
+
+    .intro-image img{
+      width:100%;
+      aspect-ratio:4 / 5;
+      object-fit:cover;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:24px;
+    }
+
+    .benefit-box{
+      background:rgba(2,7,13,0.74);
+      border:1px solid rgba(255,255,255,0.09);
+      border-top:4px solid var(--gold);
+      padding:32px 26px;
+      text-align:center;
+      backdrop-filter:blur(4px);
+      transition:0.3s ease;
+    }
+
+    .benefit-box:hover{
+      transform:translateY(-6px);
+      box-shadow:0 0 28px rgba(201,164,92,0.16);
+    }
+
+    .benefit-number{
+      font-size:34px;
+      color:var(--gold);
+      margin-bottom:12px;
+    }
+
+    .benefit-box h3{
+      margin:0 0 14px;
+      color:var(--gold-light);
+      font-size:22px;
+    }
+
+    .benefit-box p{
+      margin:0;
+      color:var(--text);
+      font-size:16px;
+    }
+
+    .product-layout{
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .product-frame{
+      background:
+        radial-gradient(circle at center, rgba(201,164,92,0.16), transparent 55%),
+        #050b12;
+      border:1px solid var(--border);
+      padding:40px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:560px;
+    }
+
+    .product-frame img{
+      width:min(260px, 78%);
+      max-height:500px;
+      object-fit:contain;
+      filter:drop-shadow(0 20px 30px rgba(0,0,0,0.75));
+    }
+
+    .product-info h2{
+      margin-top:0;
+      color:var(--gold);
+      font-size:clamp(30px, 4vw, 46px);
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .product-info p{
+      color:var(--text);
+      font-size:18px;
+      margin-bottom:30px;
+    }
+
+    .spec-table{
+      width:100%;
+      border-collapse:collapse;
+      background:rgba(2,7,13,0.36);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .spec-table td{
+      padding:16px 18px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+      font-size:16px;
+    }
+
+    .spec-table tr:last-child td{
+      border-bottom:none;
+    }
+
+    .spec-table td:first-child{
+      width:38%;
+      color:var(--gold-light);
+      font-weight:bold;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:14px;
+    }
+
+    .collection-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:26px;
+    }
+
+    .collection-card{
+      min-height:260px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.09);
+      background:#050b12;
+    }
+
+    .collection-card img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.4s ease;
+    }
+
+    .collection-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,7,13,0.12), rgba(2,7,13,0.88));
+      z-index:2;
+    }
+
+    .collection-card:hover img{
+      transform:scale(1.06);
+    }
+
+    .collection-content{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:24px;
+      z-index:3;
+    }
+
+    .collection-content h3{
+      margin:0 0 8px;
+      color:var(--gold-light);
+      font-size:24px;
+      text-transform:uppercase;
+    }
+
+    .collection-content p{
+      margin:0;
+      color:var(--text);
+      font-size:15px;
+    }
+
+    .cta{
+      min-height:70vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      text-align:center;
+      padding:110px 0;
+      overflow:hidden;
+    }
+
+    .cta-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:1;
+    }
+
+    .cta::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
+      background:
+        radial-gradient(circle, rgba(201,164,92,0.18), transparent 45%),
+        rgba(2,7,13,0.72);
+    }
+
+    .cta-box{
+      max-width:850px;
+      margin:0 auto;
+      position:relative;
+      z-index:3;
+    }
+
+    .cta h2{
+      margin:0;
+      color:var(--gold);
+      font-size:clamp(34px, 5vw, 58px);
+      line-height:1.15;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-shadow:0 0 22px rgba(0,0,0,0.8);
+    }
+
+    .cta p{
+      margin:28px auto 0;
+      max-width:740px;
+      color:var(--text);
+      font-size:20px;
+      text-shadow:0 0 14px rgba(0,0,0,0.8);
+    }
+
+    .footer{
+      background:#010407;
+      border-top:1px solid var(--border);
+      padding:34px 0;
+      color:#9f8f70;
+      font-size:13px;
+      text-align:center;
+    }
+
+    @media(max-width:1050px){
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:22px 0;
+        gap:20px;
+      }
+
+      .nav{
+        justify-content:flex-start;
+        gap:18px 24px;
+      }
+
+      .hero{
+        padding-top:190px;
+      }
+
+      .intro-grid,
+      .product-layout{
+        grid-template-columns:1fr;
+      }
+
+      .product-frame{
+        min-height:auto;
+      }
+
+      .benefits{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .collection-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:700px){
+      .container{
+        width:min(100% - 28px, 1200px);
+      }
+
+      .header{
+        position:absolute;
+      }
+
+      .hero{
+        min-height:auto;
+        padding:210px 0 80px;
+      }
+
+      .hero-box{
+        padding:28px 22px;
+      }
+
+      h1{
+        letter-spacing:2px;
+      }
+
+      .section{
+        padding:78px 0;
+      }
+
+      .benefits,
+      .collection-grid{
+        grid-template-columns:1fr;
+      }
+
+      .intro-card{
+        padding:28px 22px;
+      }
+
+      .product-frame{
+        padding:30px 18px;
+      }
+
+      .product-frame img{
+        width:min(210px, 78%);
+        max-height:420px;
+      }
+
+      .spec-table td{
+        display:block;
+        width:100%;
+        padding:12px 14px;
+      }
+
+      .spec-table td:first-child{
+        width:100%;
+        padding-bottom:2px;
+      }
+
+      .button{
+        width:100%;
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <header class="header">
+
+      <div class="container header-inner">
+
+        <a href="#top">
+          <img src="images/logo.png" alt="Northstar Heritage Mint Logo" class="logo">
+        </a>
+
+        <nav class="nav">
+          <a href="#heritage">Heritage</a>
+          <a href="#vorteile">Vorteile</a>
+          <a href="#barren">Kupferbarren</a>
+          <a href="#kollektion">Kollektion</a>
+          <a href="#kaufen">Kaufen</a>
+          <a href="impressum.html">Impressum</a>
+        </nav>
+
+      </div>
+
+    </header>
+
+    <section class="hero" id="top">
+
+      <img src="images/top_hero.webp" alt="Northstar Heritage Mint Segelschiff Banner" class="hero-bg">
+
+      <div class="container">
+
+        <div class="hero-box">
+
+          <div class="eyebrow">Copper · Heritage · Navigation</div>
+
+          <h1>Northstar Heritage Mint</h1>
+
+          <p class="hero-text">
+            Hochwertige Kupferbarren mit Segelschiff-Motiv —
+            inspiriert von Entdeckung, Handel, Beständigkeit
+            und der zeitlosen Kraft maritimer Handelsrouten.
+          </p>
+
+          <div class="button-row">
+            <a href="#heritage" class="button">Jetzt entdecken</a>
+            <a href="#barren" class="button secondary">Zum Barren</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="heritage">
+
+      <div class="container">
+
+        <div class="intro-grid">
+
+          <div class="intro-card">
+
+            <div class="eyebrow">Northstar Heritage Mint</div>
+
+            <h2>Ein Barren wie eine Reise über alte Handelsmeere</h2>
+
+            <p>
+              Das Segelschiff steht für Aufbruch, Orientierung und weltweiten Handel.
+              In Verbindung mit massivem Kupfer entsteht ein Barren mit starker
+              symbolischer Wirkung und klassischer Heritage-Ästhetik.
+            </p>
+
+            <p>
+              Northstar Heritage Mint verbindet maritime Geschichte,
+              hochwertige Metalloptik und eine klare Investmentbarren-Form
+              zu einem repräsentativen Sammler- und Sachwertobjekt.
+            </p>
+
+          </div>
+
+          <div class="intro-image">
+            <img src="images/ship-heritage-banner.webp" alt="Historisches Segelschiff auf See">
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section has-bg" id="vorteile">
+
+      <img src="images/ocean-copper-banner.webp" alt="Kupferbarren mit maritimer Atmosphäre" class="section-bg">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>Vorteile physischer Kupferbarren</h2>
+
+          <p>
+            Massive Kupferbarren verbinden Materialwert, historische Symbolik
+            und eine hochwertige Präsentation für Sammler, Investoren und Liebhaber
+            klassischer Metallgestaltung.
+          </p>
+
+        </div>
+
+        <div class="benefits">
+
+          <div class="benefit-box">
+            <div class="benefit-number">I</div>
+            <h3>Maritimes Motiv</h3>
+            <p>Das Segelschiff steht für Handel, Entdeckung und Beständigkeit.</p>
+          </div>
+
+          <div class="benefit-box">
+            <div class="benefit-number">II</div>
+            <h3>Massives Kupfer</h3>
+            <p>Solide Verarbeitung mit warmer Metallfarbe und starker Präsenz.</p>
+          </div>
+
+          <div class="benefit-box">
+            <div class="benefit-number">III</div>
+            <h3>Heritage Design</h3>
+            <p>Klassische Optik mit edler Navy- und Antikgold-Anmutung.</p>
+          </div>
+
+          <div class="benefit-box">
+            <div class="benefit-number">IV</div>
+            <h3>Sammlerwirkung</h3>
+            <p>Ein prägnantes Motiv macht den Barren optisch eigenständig.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="barren">
+
+      <div class="container">
+
+        <div class="product-layout">
+
+          <div class="product-frame">
+            <img src="images/copper_ship_bar.png" alt="Northstar Heritage Mint Kupferbarren mit Segelschiff-Motiv">
+          </div>
+
+          <div class="product-info">
+
+            <div class="eyebrow">Kupferbarren mit Segelschiff-Motiv</div>
+
+            <h2>Northstar Heritage Mint Copper Bar</h2>
+
+            <p>
+              Der Kupferbarren zeigt ein klassisches Segelschiff als Symbol
+              für Orientierung, Fernhandel und historische Beständigkeit.
+              Die Gestaltung eignet sich besonders für eine maritime
+              Heritage-Serie mit hochwertiger Metallwirkung.
+            </p>
+
+            <table class="spec-table">
+
+              <tr>
+                <td>Produkt</td>
+                <td>Kupferbarren mit Segelschiff-Motiv</td>
+              </tr>
+
+              <tr>
+                <td>Marke</td>
+                <td>Northstar Heritage Mint</td>
+              </tr>
+
+              <tr>
+                <td>Material</td>
+                <td>Kupfer</td>
+              </tr>
+
+              <tr>
+                <td>Feinheit</td>
+                <td>999 Feinkupfer</td>
+              </tr>
+
+              <tr>
+                <td>Motiv</td>
+                <td>Historisches Segelschiff</td>
+              </tr>
+
+              <tr>
+                <td>Designstil</td>
+                <td>Maritim, klassisch, Heritage</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="kollektion">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>Heritage Collection</h2>
+
+          <p>
+            Eine Kollektion rund um Kupfer, Seefahrt, Handel und historische Werte.
+          </p>
+
+        </div>
+
+        <div class="collection-grid">
+
+          <div class="collection-card">
+            <img src="images/collection-ship.webp" alt="Segelschiff Motiv">
+            <div class="collection-content">
+              <h3>Voyage</h3>
+              <p>Das Segelschiff als Symbol für Aufbruch und Entdeckung.</p>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <img src="images/collection-compass.webp" alt="Kompass Motiv">
+            <div class="collection-content">
+              <h3>Northstar</h3>
+              <p>Orientierung, Richtung und Beständigkeit.</p>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <img src="images/collection-harbor.webp" alt="Historischer Hafen">
+            <div class="collection-content">
+              <h3>Trade</h3>
+              <p>Inspiriert von alten Handelsrouten und wertvollen Rohstoffen.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="cta" id="kaufen">
+
+      <img src="images/ship-copper-values-banner.webp" alt="Northstar Heritage Mint Kupfer Werte Banner" class="cta-bg">
+
+      <div class="container">
+
+        <div class="cta-box">
+
+          <h2>Northstar Heritage Mint</h2>
+
+          <p>
+            Kupferbarren mit Segelschiff-Motiv —
+            geschaffen für Sammler, Liebhaber klassischer Metallgestaltung
+            und Freunde physischer Werte.
+          </p>
+
+          <div class="button-row" style="justify-content:center;">
+            <a href="https://ebay.de" class="button">Jetzt kaufen</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer class="footer">
+
+      <div class="container">
+        © 2019 Northstar Heritage Mint · Kupferbarren mit Segelschiff-Motiv
+      </div>
+
+    </footer>
+
+  </div>
+
+</body>
+</html>

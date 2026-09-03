@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Swan Elements - All Websites</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .website-card {
+            background: linear-gradient(145deg, #1e1e2f, #2a2a3f);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .website-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .website-card:hover::before {
+            left: 100%;
+        }
+
+        .website-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #4a9eff;
+        }
+
+        .website-card.active {
+            background: linear-gradient(145deg, #1a3a5c, #2a4a6c);
+            border-color: #4a9eff;
+        }
+
+        .website-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .website-card.disabled:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .card-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4a9eff;
+            margin-bottom: 10px;
+        }
+
+        .website-card.disabled .card-number {
+            color: #555;
+        }
+
+        .card-title {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .card-status {
+            color: #4ade80;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .website-card.disabled .card-status {
+            color: #666;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px 40px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4a9eff;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .website-card {
+                padding: 20px 15px;
+            }
+
+            .card-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Black Swan Elements</h1>
+        <p class="subtitle">Collection of 30 Websites</p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">30</div>
+                <div class="stat-label">Total Websites</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">27</div>
+                <div class="stat-label">Coming Soon</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <a href="Website 1/Website 1/index.html" class="website-card active" target="_blank">
+                <div class="card-number">01</div>
+                <div class="card-title">Website 1</div>
+                <div class="card-status">Active</div>
+            </a>
+
+            <a href="Website 2/Website 2/index.html" class="website-card active" target="_blank">
+                <div class="card-number">02</div>
+                <div class="card-title">Website 2</div>
+                <div class="card-status">Active</div>
+            </a>
+
+            <a href="Website 3/Website 3/index-1.html" class="website-card active" target="_blank">
+                <div class="card-number">03</div>
+                <div class="card-title">Website 3</div>
+                <div class="card-status">Active</div>
+            </a>
+
+            <div class="website-card disabled">
+                <div class="card-number">04</div>
+                <div class="card-title">Website 4</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">05</div>
+                <div class="card-title">Website 5</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">06</div>
+                <div class="card-title">Website 6</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">07</div>
+                <div class="card-title">Website 7</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">08</div>
+                <div class="card-title">Website 8</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">09</div>
+                <div class="card-title">Website 9</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">10</div>
+                <div class="card-title">Website 10</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">11</div>
+                <div class="card-title">Website 11</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">12</div>
+                <div class="card-title">Website 12</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">13</div>
+                <div class="card-title">Website 13</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">14</div>
+                <div class="card-title">Website 14</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">15</div>
+                <div class="card-title">Website 15</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">16</div>
+                <div class="card-title">Website 16</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">17</div>
+                <div class="card-title">Website 17</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">18</div>
+                <div class="card-title">Website 18</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">19</div>
+                <div class="card-title">Website 19</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">20</div>
+                <div class="card-title">Website 20</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">21</div>
+                <div class="card-title">Website 21</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">22</div>
+                <div class="card-title">Website 22</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">23</div>
+                <div class="card-title">Website 23</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">24</div>
+                <div class="card-title">Website 24</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">25</div>
+                <div class="card-title">Website 25</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">26</div>
+                <div class="card-title">Website 26</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">27</div>
+                <div class="card-title">Website 27</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">28</div>
+                <div class="card-title">Website 28</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">29</div>
+                <div class="card-title">Website 29</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+
+            <div class="website-card disabled">
+                <div class="card-number">30</div>
+                <div class="card-title">Website 30</div>
+                <div class="card-status">Coming Soon</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
