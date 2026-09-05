@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HIGHHORN RESERVE – Kupferbarren mit Berghorn-Motiv</title>
+    <meta
+      name="description"
+      content="HIGHHORN RESERVE – massive Kupferbarren mit Berghorn- und Gipfel-Motiv. 999 Feinkupfer, 1000 g, alpine Reserve-Edition."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cream: #f7f4eb;
+        --cream-2: #efe9d8;
+        --card: #fffdf7;
+        --ink: #22291f;
+        --soft: #5a6355;
+        --faint: #8b917f;
+        --line: #ddd3ba;
+        --spruce: #1e4d3b;
+        --spruce-deep: #143327;
+        --copper: #b26a24;
+        --copper-deep: #8a4f14;
+        --sage: #e4e7d5;
+        --radius: 16px;
+        --shadow: 0 20px 50px rgba(30, 77, 59, 0.1);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Inter", system-ui, sans-serif;
+        line-height: 1.65;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .page {
+        width: 100%;
+        overflow: hidden;
+      }
+      .wrap {
+        width: min(1200px, calc(100% - 48px));
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+      }
+      h1 em,
+      h2 em {
+        font-style: italic;
+        font-weight: 400;
+        color: var(--spruce);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal.d1 {
+        transition-delay: 0.08s;
+      }
+      .reveal.d2 {
+        transition-delay: 0.16s;
+      }
+      .reveal.d3 {
+        transition-delay: 0.24s;
+      }
+      body.gsap-on .reveal {
+        transition: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none;
+        }
+        * {
+          animation: none !important;
+        }
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2.6px;
+        text-transform: uppercase;
+        color: var(--copper-deep);
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: var(--copper);
+        border-radius: 2px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 28px;
+        border-radius: 999px;
+        background: var(--spruce);
+        color: #fff;
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        border: 1px solid var(--spruce);
+        transition: 0.22s;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        background: var(--spruce-deep);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(30, 77, 59, 0.3);
+      }
+      .btn.copper {
+        background: var(--copper);
+        border-color: var(--copper);
+      }
+      .btn.copper:hover {
+        background: var(--copper-deep);
+        box-shadow: 0 14px 28px rgba(178, 106, 36, 0.35);
+      }
+      .btn.ghost {
+        background: transparent;
+        color: var(--spruce);
+        border-color: var(--spruce);
+      }
+      .btn.ghost:hover {
+        background: var(--spruce);
+        color: #fff;
+      }
+      .btnrow {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+
+      /* ---------- top bar ---------- */
+      .topbar {
+        background: var(--spruce-deep);
+        color: #e9e4d2;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.4px;
+      }
+      .topbar-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        padding: 9px 0;
+      }
+      .topbar b {
+        color: #f0c886;
+        font-weight: 700;
+      }
+      .topbar-right {
+        display: flex;
+        gap: 20px;
+      }
+      .topbar a:hover {
+        color: #f0c886;
+      }
+
+      /* ---------- header ---------- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(247, 244, 235, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+      body.scrolled .header {
+        box-shadow: 0 10px 30px rgba(34, 41, 31, 0.1);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 14px 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .hornmark {
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+        border-radius: 50%;
+        background: var(--spruce);
+        display: grid;
+        place-items: center;
+        color: #f0c886;
+      }
+      .hornmark svg {
+        width: 26px;
+        height: 26px;
+      }
+      .brand-text {
+        line-height: 1.1;
+      }
+      .brand-text strong {
+        display: block;
+        font-family: "Source Serif 4", serif;
+        font-size: 19px;
+        letter-spacing: 0.5px;
+      }
+      .brand-text span {
+        font-size: 10.5px;
+        letter-spacing: 3px;
+        font-weight: 800;
+        color: var(--copper-deep);
+      }
+      .nav {
+        display: flex;
+        gap: 24px;
+        font-size: 13.5px;
+        font-weight: 600;
+      }
+      .nav a {
+        color: var(--soft);
+        padding: 6px 0;
+        border-bottom: 2px solid transparent;
+      }
+      .nav a:hover {
+        color: var(--ink);
+        border-color: var(--copper);
+      }
+      .header-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-cta .btn {
+        padding: 11px 22px;
+        font-size: 12.5px;
+      }
+      .burger {
+        display: none;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        font-size: 19px;
+        padding: 8px 13px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      /* ---------- hero: type wall + animated background ---------- */
+      .hero {
+        padding: 88px 0 66px;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        color: #fff;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .hero-bg img {
+        width: 110%;
+        height: 110%;
+        object-fit: cover;
+        object-position: center 35%;
+        filter: saturate(0.65) brightness(0.45);
+        transform-origin: 30% 20%;
+        animation: kbZoom 18s ease-in-out infinite alternate;
+      }
+      @keyframes kbZoom {
+        0% {
+          transform: scale(1) translate(0, 0);
+        }
+        100% {
+          transform: scale(1.18) translate(-3%, 2%);
+        }
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 20, 15, 0.62) 0%,
+          rgba(10, 20, 15, 0.38) 45%,
+          rgba(10, 20, 15, 0.78) 100%
+        );
+      }
+      .hero > .wrap {
+        position: relative;
+        z-index: 1;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 6px;
+        z-index: 2;
+        background: linear-gradient(
+          90deg,
+          var(--spruce) 0 40%,
+          var(--copper) 40% 72%,
+          var(--spruce-deep) 72% 100%
+        );
+      }
+      .typewall {
+        margin: 20px 0 6px;
+        font-size: clamp(62px, 12.5vw, 176px);
+        line-height: 0.88;
+      }
+      .typewall .row {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.06em;
+      }
+      .typewall .h-line {
+        display: block;
+        will-change: transform;
+      }
+      .typewall .outline {
+        color: transparent;
+        -webkit-text-stroke: 2.5px rgba(255, 255, 255, 0.7);
+      }
+      .typewall .row.mono {
+        margin-top: 16px;
+        overflow: visible;
+      }
+      .typewall .row.mono .h-line {
+        font-family: "Inter", sans-serif;
+        font-weight: 800;
+        font-size: clamp(15px, 2.2vw, 26px);
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #f0c886;
+      }
+      .typewall .row.mono .h-line b {
+        color: #fff;
+      }
+      .hero p.lead {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 17.5px;
+        max-width: 62ch;
+        margin-top: 18px;
+      }
+      .hero p.lead strong {
+        color: #fff;
+      }
+      .tickets {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .tickets span {
+        border: 1.5px dashed var(--copper);
+        border-radius: 12px;
+        background: var(--card);
+        padding: 12px 20px;
+        margin: 0 12px 12px 0;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: var(--soft);
+      }
+      .tickets span b {
+        font-family: "Source Serif 4", serif;
+        font-size: 21px;
+        color: var(--spruce);
+        margin-right: 8px;
+        letter-spacing: 0;
+      }
+      .hero .eyebrow {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .hero .eyebrow::before {
+        background: rgba(255, 255, 255, 0.35);
+      }
+      .hero .btn.ghost {
+        border-color: rgba(255, 255, 255, 0.5);
+        color: #fff;
+      }
+      .hero .btn.ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .scrollcue {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 22px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--spruce);
+        border-bottom: 2px solid var(--copper);
+        padding-bottom: 4px;
+      }
+      .hero .scrollcue:hover {
+        color: #fff;
+        border-bottom-color: #fff;
+      }
+      .hero .tickets span {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(240, 200, 134, 0.45);
+        color: rgba(255, 255, 255, 0.88);
+      }
+      .hero .tickets span b {
+        color: #f0c886;
+      }
+
+      /* ---------- fact strip ---------- */
+      .strip {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--cream-2);
+      }
+      .strip-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 15px 0;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--soft);
+      }
+      .strip b {
+        color: var(--copper-deep);
+      }
+
+      /* ---------- sections ---------- */
+      .sec {
+        padding: 90px 0;
+      }
+      .sec.tint {
+        background: var(--cream-2);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .sec-head {
+        max-width: 740px;
+        margin-bottom: 46px;
+      }
+      .sec-head h2 {
+        font-size: clamp(32px, 4vw, 50px);
+        margin: 12px 0 14px;
+      }
+      .sec-head p {
+        color: var(--soft);
+        font-size: 16.5px;
+      }
+
+      /* story: alternating rows */
+      .row2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        margin-bottom: 64px;
+      }
+      .row2:last-child {
+        margin-bottom: 0;
+      }
+      .row2 img {
+        width: 100%;
+        height: 360px;
+        object-fit: cover;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .row2 .step-no {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2.4px;
+        color: #fff;
+        background: var(--spruce);
+        border-radius: 999px;
+        padding: 6px 14px;
+        margin-bottom: 14px;
+      }
+      .row2 h3 {
+        font-size: clamp(24px, 2.8vw, 34px);
+        margin-bottom: 12px;
+      }
+      .row2 p {
+        color: var(--soft);
+        font-size: 15.5px;
+      }
+      .row2 p + p {
+        margin-top: 12px;
+      }
+      .caption {
+        margin-top: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: var(--faint);
+      }
+
+      /* benefits 2x2 */
+      .grid4 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .bcard {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 30px 28px;
+        transition: 0.22s;
+      }
+      .bcard:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+        border-color: var(--copper);
+      }
+      .bcard .num {
+        font-family: "Source Serif 4", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: var(--copper);
+      }
+      .bcard h3 {
+        font-size: 22px;
+        margin: 10px 0 8px;
+      }
+      .bcard p {
+        font-size: 14.5px;
+        color: var(--soft);
+      }
+
+      /* product — annotated plate: centered, no split, no table */
+      .plate-head {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 38px;
+      }
+      .plate-head h2 {
+        font-size: clamp(32px, 4.4vw, 54px);
+        margin: 12px 0 14px;
+      }
+      .plate-head p {
+        color: var(--soft);
+        font-size: 16px;
+      }
+      .macro-fig {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        background: #101510;
+      }
+      .macro-fig img {
+        width: 100%;
+        height: clamp(300px, 44vw, 520px);
+        object-fit: cover;
+      }
+      .hot {
+        position: absolute;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #f0c886, var(--copper));
+        border: 3px solid #fffdf7;
+        display: grid;
+        place-items: center;
+        font-family: "Source Serif 4", serif;
+        font-size: 20px;
+        color: #3d2c07;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+      }
+      .hot::after {
+        content: "";
+        position: absolute;
+        inset: -9px;
+        border-radius: 50%;
+        border: 2px solid rgba(240, 200, 134, 0.8);
+        animation: ping 2.2s ease-out infinite;
+      }
+      @keyframes ping {
+        0% {
+          transform: scale(0.7);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.25);
+          opacity: 0;
+        }
+      }
+      .hot.h1 {
+        left: 26%;
+        top: 30%;
+      }
+      .hot.h2 {
+        left: 55%;
+        top: 62%;
+      }
+      .hot.h3 {
+        left: 79%;
+        top: 28%;
+      }
+      .macro-bar {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        background: var(--spruce-deep);
+        color: #e9e4d2;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 13px 20px;
+      }
+      .macro-bar b {
+        color: #f0c886;
+      }
+      .hot-legend {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .hot-legend article {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .hot-legend .n {
+        font-family: "Source Serif 4", serif;
+        font-style: italic;
+        font-size: 19px;
+        color: var(--copper);
+      }
+      .hot-legend h3 {
+        font-size: 20px;
+        margin: 8px 0 6px;
+      }
+      .hot-legend p {
+        font-size: 14px;
+        color: var(--soft);
+      }
+      .statband {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .stat {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--spruce);
+        border-radius: 12px;
+        padding: 15px 17px;
+      }
+      .stat.hot-stat {
+        border-top-color: var(--copper);
+        background: #fff8e8;
+      }
+      .stat span {
+        display: block;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--faint);
+        margin-bottom: 4px;
+      }
+      .stat strong {
+        font-family: "Source Serif 4", serif;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      .slip {
+        margin-top: 22px;
+        background: #f3ead2;
+        border: 2px dashed var(--copper);
+        border-radius: 16px;
+        padding: 26px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        position: relative;
+      }
+      .slip .cut {
+        position: absolute;
+        top: -13px;
+        left: 28px;
+        background: var(--cream);
+        padding: 0 10px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: var(--copper-deep);
+      }
+      .slip strong {
+        font-family: "Source Serif 4", serif;
+        font-size: 26px;
+        display: block;
+      }
+      .slip small {
+        font-size: 12.5px;
+        color: var(--soft);
+        font-weight: 600;
+      }
+      .slip .micro {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--faint);
+        max-width: 56ch;
+      }
+
+      /* collection */
+      .cards3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .pcard {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: 0.22s;
+      }
+      .pcard:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow);
+      }
+      .pcard img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+      .pcard-body {
+        padding: 22px;
+      }
+      .pcard .wt {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--spruce);
+        background: var(--sage);
+        border-radius: 999px;
+        padding: 5px 12px;
+        margin-bottom: 10px;
+      }
+      .pcard h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .pcard p {
+        font-size: 14px;
+        color: var(--soft);
+      }
+      .pcard a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--copper-deep);
+        border-bottom: 2px solid var(--copper);
+        padding-bottom: 2px;
+      }
+      .pcard a:hover {
+        color: var(--spruce);
+        border-color: var(--spruce);
+      }
+
+      /* steps */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 30px;
+      }
+      .step {
+        border-top: 3px solid var(--spruce);
+        padding-top: 18px;
+      }
+      .step .n {
+        font-family: "Source Serif 4", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: var(--copper);
+      }
+      .step h3 {
+        font-size: 20px;
+        margin: 8px 0 6px;
+      }
+      .step p {
+        font-size: 14px;
+        color: var(--soft);
+      }
+
+      /* cta */
+      .cta {
+        padding: 0 0 90px;
+      }
+      .cta-box {
+        background: var(--spruce-deep);
+        color: #eef2e6;
+        border-radius: 24px;
+        padding: 64px 48px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-box::before {
+        content: "⛰";
+        position: absolute;
+        right: 24px;
+        bottom: -30px;
+        font-size: 200px;
+        opacity: 0.08;
+        pointer-events: none;
+      }
+      .cta-box h2 {
+        font-size: clamp(32px, 4.4vw, 52px);
+        color: #fff;
+        margin: 12px 0 14px;
+      }
+      .cta-box h2 em {
+        color: #f0c886;
+      }
+      .cta-box p {
+        color: #b9c4ae;
+        max-width: 60ch;
+        margin: 0 auto;
+      }
+      .cta-box .btnrow {
+        justify-content: center;
+      }
+      .btn.light {
+        background: #fff;
+        border-color: #fff;
+        color: var(--spruce-deep);
+      }
+      .btn.light:hover {
+        background: #f0c886;
+        border-color: #f0c886;
+        color: #3d2c07;
+      }
+      .btn.outline-w {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .btn.outline-w:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #fff;
+        box-shadow: none;
+      }
+
+      /* footer */
+      .footer {
+        background: var(--spruce-deep);
+        color: #a9b8a6;
+        padding: 56px 0 0;
+      }
+      .foot-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 36px;
+        padding-bottom: 42px;
+      }
+      .foot-grid h4 {
+        font-size: 12px;
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      .foot-grid ul {
+        list-style: none;
+      }
+      .foot-grid li {
+        margin-bottom: 9px;
+      }
+      .foot-grid a {
+        font-size: 14px;
+      }
+      .foot-grid a:hover {
+        color: #f0c886;
+      }
+      .foot-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        padding: 18px 0 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 13px;
+      }
+      .foot-bottom a {
+        color: #f0c886;
+        font-weight: 700;
+      }
+
+      @media (max-width: 1020px) {
+        .row2 {
+          grid-template-columns: 1fr;
+        }
+        .row2.flip > div:first-child {
+          order: 2;
+        }
+        .grid4 {
+          grid-template-columns: 1fr;
+        }
+        .nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--card);
+          border-bottom: 1px solid var(--line);
+          padding: 14px 24px;
+          flex-direction: column;
+          gap: 4px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .nav.open {
+          display: flex;
+        }
+        .burger {
+          display: block;
+        }
+        .cards3,
+        .steps {
+          grid-template-columns: 1fr 1fr;
+        }
+        .statband {
+          grid-template-columns: 1fr 1fr;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .wrap {
+          width: calc(100% - 32px);
+        }
+        .sec {
+          padding: 64px 0;
+        }
+        .hero {
+          padding: 56px 0 48px;
+        }
+        .typewall .row.mono .h-line {
+          letter-spacing: 3px;
+        }
+        .cards3,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .hot-legend {
+          grid-template-columns: 1fr;
+        }
+        .hot {
+          width: 38px;
+          height: 38px;
+          font-size: 17px;
+        }
+        .cta-box {
+          padding: 44px 24px;
+        }
+        .foot-grid {
+          grid-template-columns: 1fr;
+        }
+        .header-cta .btn {
+          display: none;
+        }
+        .topbar-right a:last-child {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <div class="wrap topbar-inner">
+          <span>Highhorn Reserve · <b>999 Feinkupfer</b> · 1000 g</span>
+          <span class="topbar-right">
+            <a href="https://ebay.de">eBay Shop</a>
+            <a href="impressum.html">Impressum</a>
+          </span>
+        </div>
+      </div>
+
+      <header class="header">
+        <div class="wrap header-inner">
+          <a href="#top" class="brand" aria-label="HIGHHORN RESERVE Startseite">
+            <span class="hornmark" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              >
+                <path d="M4 19 L10 6 L14 13 L16.5 9.5 L20 19 Z" />
+              </svg>
+            </span>
+            <span class="brand-text"
+              ><strong>Highhorn</strong><span>RESERVE</span></span
+            >
+          </a>
+          <nav class="nav" id="nav">
+            <a href="#revier">Revier</a>
+            <a href="#vorteile">Vorteile</a>
+            <a href="#barren">Kupferbarren</a>
+            <a href="#sortiment">Sortiment</a>
+            <a href="#kaufen">Kaufen</a>
+            <a href="impressum.html">Impressum</a>
+          </nav>
+          <div class="header-cta">
+            <a href="https://ebay.de" class="btn copper">Jetzt kaufen</a>
+            <button class="burger" id="burger" aria-label="Menü öffnen">
+              ☰
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO — TYPE WALL + ANIMATED BACKGROUND -->
+      <section class="hero" id="top">
+        <div class="hero-bg" aria-hidden="true">
+          <img src="images/hero-bg.jpg" alt="" />
+        </div>
+        <div class="wrap">
+          <span class="eyebrow h-anim">Alpine Reserve-Edition · No. 06</span>
+          <h1 class="typewall">
+            <span class="row"><span class="h-line">Highhorn</span></span>
+            <span class="row"
+              ><span class="h-line outline">Reserve</span></span
+            >
+            <span class="row mono"
+              ><span class="h-line"
+                >Kupfer · <b>CU 999</b> · 1 KG</span
+              ></span
+            >
+          </h1>
+          <p class="lead h-anim">
+            <strong
+              >Massiver Kupferbarren mit Berghorn- und Gipfel-Motiv</strong
+            >
+            — klare Form, tiefes Relief, matte Oberfläche. 999 Feinkupfer für
+            Bestand und Sammlung.
+          </p>
+          <div class="btnrow h-anim">
+            <a href="#revier" class="btn ghost">Revier entdecken</a>
+            <a href="#barren" class="btn copper">Zum Kupferbarren</a>
+          </div>
+          <div class="tickets h-anim">
+            <span><b>999</b>Feinkupfer</span>
+            <span><b>1000 g</b>Massiv</span>
+            <span><b>Cu 29</b>Kupfer</span>
+            <span><b>Horn</b>Gipfel-Motiv</span>
+          </div>
+          <a href="#revier" class="scrollcue h-anim">↓ Revier entdecken</a>
+        </div>
+      </section>
+
+      <div class="strip">
+        <div class="wrap strip-inner">
+          <span>Dichte <b>8,96 g/cm³</b></span>
+          <span>Schmelzpunkt <b>1084 °C</b></span>
+          <span>Feinheit <b>999 / 1000</b></span>
+          <span>Motiv <b>Berghorn · Gipfel</b></span>
+        </div>
+      </div>
+
+      <!-- REVIER -->
+      <section class="sec" id="revier">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow reveal">Das Revier</span>
+            <h2 class="reveal d1">Ein Barren wie ein <em>Gipfel.</em></h2>
+            <p class="reveal d2">
+              Das Berghorn steht für Schutz und Höhe, der Gipfel für Ankommen
+              und Bleiben — geprägt in massives Kupfer.
+            </p>
+          </div>
+          <div class="row2">
+            <div class="reveal">
+              <span class="step-no">01 · Horn</span>
+              <h3>Schutz &amp; Höhe</h3>
+              <p>
+                Breite Hornkurve über schroffer Gipfellinie — tief geprägt, gut
+                lesbar, mit matter Kupferhaut.
+              </p>
+              <p>
+                Ruhige alpine Formensprache: kantig, materialecht, ohne
+                verspielte Details.
+              </p>
+            </div>
+            <div class="reveal d1">
+              <img
+                src="images/placeholder.jpg"
+                alt="Berghorn-Motiv im Detail"
+              />
+              <div class="caption">Horn-Linie · Tiefenrelief</div>
+            </div>
+          </div>
+          <div class="row2 flip">
+            <div class="reveal">
+              <img
+                src="images/placeholder.jpg"
+                alt="Gipfel-Relief und Kupferfläche"
+              />
+              <div class="caption">Gipfel-Relief · matte Fläche</div>
+            </div>
+            <div class="reveal d1">
+              <span class="step-no">02 · Bestand</span>
+              <h3>Fels &amp; Kupfer</h3>
+              <p>
+                1 kg Vollmaterial mit sauberer Kante — stapelbar, robust und
+                lagerfähig.
+              </p>
+              <p>Für Sammlung, Geschenk und Reserve: trocken lagern, fertig.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VORTEILE -->
+      <section class="sec tint" id="vorteile">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow reveal">Vorteile</span>
+            <h2 class="reveal d1">Warum die <em>Reserve</em> trägt</h2>
+            <p class="reveal d2">
+              Vier Gründe für das Horn-Format — Werkstoff, Motiv und
+              Verarbeitung.
+            </p>
+          </div>
+          <div class="grid4">
+            <div class="bcard reveal">
+              <span class="num">— 01</span>
+              <h3>Physischer Sachwert</h3>
+              <p>
+                Kupfer zählt zu den wichtigsten Industriemetallen — gefragt in
+                Energie, Bau und Elektromobilität.
+              </p>
+            </div>
+            <div class="bcard reveal d1">
+              <span class="num">— 02</span>
+              <h3>Alpines Design</h3>
+              <p>
+                Kantige Reserve-Geometrie mit Horn und Gipfel — ruhig, zeitlos,
+                ohne überladene Motive.
+              </p>
+            </div>
+            <div class="bcard reveal d2">
+              <span class="num">— 03</span>
+              <h3>Berghorn-Motiv</h3>
+              <p>
+                Horn als Zeichen für Schutz und Höhe, Gipfel als Zeichen für
+                Bestand und Ankommen.
+              </p>
+            </div>
+            <div class="bcard reveal d3">
+              <span class="num">— 04</span>
+              <h3>Massive Prägung</h3>
+              <p>
+                1 kg Vollmaterial, tiefes Relief, matte Oberfläche — stapelbar
+                und robust.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCT — ANNOTATED PLATE -->
+      <section class="sec" id="barren">
+        <div class="wrap">
+          <div class="plate-head">
+            <span class="eyebrow reveal">Prägeplatte No. 06</span>
+            <h2 class="reveal d1">Highhorn Reserve <em>Copper Bar</em></h2>
+            <p class="reveal d2">
+              Drei markierte Stellen, acht harte Fakten, ein Depot-Schein —
+              der Barren im Prüfbild.
+            </p>
+          </div>
+          <figure class="macro-fig reveal">
+            <img
+              id="barrenImg"
+              src="images/placeholder.jpg"
+              alt="HIGHHORN RESERVE Kupferbarren – Prüfbild mit markierten Details"
+            />
+            <span class="hot h1">1</span>
+            <span class="hot h2">2</span>
+            <span class="hot h3">3</span>
+            <figcaption class="macro-bar">
+              <span>Prüfbild · M 1:1</span
+              ><span><b>CU 999</b> · 1000 G · Horn-Relief</span>
+            </figcaption>
+          </figure>
+          <div class="hot-legend">
+            <article class="reveal">
+              <span class="n">Marke 01</span>
+              <h3>Horn-Relief</h3>
+              <p>
+                Berghorn über der Gipfellinie — tief geprägt, gut lesbar, mit
+                matter Kupferhaut.
+              </p>
+            </article>
+            <article class="reveal d1">
+              <span class="n">Marke 02</span>
+              <h3>Kante</h3>
+              <p>
+                Saubere Industrie-Kante — robust, stapelbar und lagerfähig für
+                den Bestand.
+              </p>
+            </article>
+            <article class="reveal d2">
+              <span class="n">Marke 03</span>
+              <h3>Schrift</h3>
+              <p>
+                Klare Barren-Typografie mit Charge No. 06 — lesbar wie ein
+                Prägestempel.
+              </p>
+            </article>
+          </div>
+          <div class="statband">
+            <div class="stat reveal"><span>Produkt</span><strong>Kupferbarren</strong></div>
+            <div class="stat reveal d1"><span>Marke</span><strong>HIGHHORN RESERVE</strong></div>
+            <div class="stat reveal d2"><span>Material</span><strong>Kupfer (Cu 29)</strong></div>
+            <div class="stat hot-stat reveal d3"><span>Feinheit</span><strong>999 Feinkupfer</strong></div>
+            <div class="stat reveal"><span>Motiv</span><strong>Berghorn · Gipfel</strong></div>
+            <div class="stat hot-stat reveal d1"><span>Gewicht</span><strong>1000 g</strong></div>
+            <div class="stat reveal d2"><span>Dichte</span><strong>8,96 g/cm³</strong></div>
+            <div class="stat reveal d3"><span>Design</span><strong>Alpin, matt</strong></div>
+          </div>
+          <div class="slip reveal">
+            <span class="cut">✂ Depot-Schein No. 06</span>
+            <div>
+              <strong>Reserve-Format · 1 KG</strong
+              ><small>Massiver Barren · trocken lagern</small>
+              <p class="micro">
+                Hinweis: Verkauf über eBay. Bilder sind Platzhalter und zeigen
+                Format und Anmutung. Details siehe Artikelbeschreibung.
+              </p>
+            </div>
+            <a href="https://ebay.de" class="btn copper">Jetzt kaufen</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SORTIMENT -->
+      <section class="sec tint" id="sortiment">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow reveal">Sortiment</span>
+            <h2 class="reveal d1">Die <em>Horn-</em>Kollektion</h2>
+            <p class="reveal d2">
+              Drei Formate, eine Haltung: massiv, klar und sammelwürdig.
+            </p>
+          </div>
+          <div class="cards3">
+            <article class="pcard reveal">
+              <img
+                src="images/placeholder.jpg"
+                alt="Highhorn Reserve Standard Barren 1 kg"
+              />
+              <div class="pcard-body">
+                <span class="wt">Bestseller · 1 KG</span>
+                <h3>Standard Barren</h3>
+                <p>
+                  Die Kern-Edition mit Horn und Gipfel — für Bestand und
+                  Sammlung.
+                </p>
+                <a href="https://ebay.de">Ansehen →</a>
+              </div>
+            </article>
+            <article class="pcard reveal d1">
+              <img
+                src="images/placeholder.jpg"
+                alt="Highhorn Reserve Geschenk-Edition"
+              />
+              <div class="pcard-body">
+                <span class="wt">Geschenk</span>
+                <h3>Geschenk-Edition</h3>
+                <p>
+                  Wuchtiges Format mit alpiner Symbolik — für Sammler verpackt.
+                </p>
+                <a href="https://ebay.de">Ansehen →</a>
+              </div>
+            </article>
+            <article class="pcard reveal d2">
+              <img src="images/placeholder.jpg" alt="Highhorn Reserve Set" />
+              <div class="pcard-body">
+                <span class="wt">Reserve-Set</span>
+                <h3>Reserve-Set</h3>
+                <p>
+                  Mehrere Barren im Set für stapelbaren Bestand und einheitliche
+                  Optik.
+                </p>
+                <a href="https://ebay.de">Ansehen →</a>
+              </div>
+            </article>
+          </div>
+          <div class="steps" id="kaufen">
+            <div class="step reveal">
+              <span class="n">01</span>
+              <h3>Auswählen</h3>
+              <p>
+                Format wählen und Artikeldetails auf eBay prüfen — Gewicht,
+                Motiv, Prägung.
+              </p>
+            </div>
+            <div class="step reveal d1">
+              <span class="n">02</span>
+              <h3>Sicher kaufen</h3>
+              <p>
+                Über eBay-Käuferschutz bestellen — transparent und abgesichert.
+              </p>
+            </div>
+            <div class="step reveal d2">
+              <span class="n">03</span>
+              <h3>Prüfen &amp; lagern</h3>
+              <p>
+                Lieferung prüfen, trocken lagern und stapeln — fertig ist die
+                Reserve.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta" id="cta">
+        <div class="wrap">
+          <div class="cta-box reveal">
+            <span
+              class="eyebrow"
+              style="color: #f0c886; justify-content: center"
+              >Physische Werte aus Kupfer</span
+            >
+            <h2>Highhorn <em>Reserve.</em></h2>
+            <p>
+              Kupferbarren mit alpiner Reserve-Ästhetik und Berghorn-Motiv — 999
+              Feinkupfer, 1000 g, bereit für Bestand und Sammlung.
+            </p>
+            <div class="btnrow">
+              <a href="https://ebay.de" class="btn copper">Jetzt kaufen</a>
+              <a href="#barren" class="btn outline-w">Zum Barren</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="wrap">
+          <div class="foot-grid">
+            <div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 14px;
+                "
+              >
+                <span class="hornmark" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 19 L10 6 L14 13 L16.5 9.5 L20 19 Z" /></svg
+                ></span>
+                <span
+                  ><strong
+                    style="
+                      font-family: &quot;Source Serif 4&quot;, serif;
+                      color: #fff;
+                      font-size: 18px;
+                      display: block;
+                    "
+                    >Highhorn</strong
+                  ><span
+                    style="
+                      font-size: 10px;
+                      letter-spacing: 3px;
+                      font-weight: 800;
+                      color: #f0c886;
+                    "
+                    >RESERVE</span
+                  ></span
+                >
+              </div>
+              <p style="font-size: 14px">
+                Massive Kupferbarren mit alpiner Symbolik — Horn, Gipfel und 999
+                Feinkupfer in klarer Reserve-Form.
+              </p>
+            </div>
+            <div>
+              <h4>Navigation</h4>
+              <ul>
+                <li><a href="#revier">Revier</a></li>
+                <li><a href="#vorteile">Vorteile</a></li>
+                <li><a href="#barren">Kupferbarren</a></li>
+                <li><a href="#sortiment">Sortiment</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Kaufen</h4>
+              <ul>
+                <li><a href="https://ebay.de">eBay Shop</a></li>
+                <li><a href="#kaufen">Reserve sichern</a></li>
+                <li><a href="#barren">Datenblatt</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Rechtliches</h4>
+              <ul>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="#top">Nach oben</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="foot-bottom">
+            <span>© 2019 HIGHHORN RESERVE</span>
+            <span
+              ><a href="impressum.html">Impressum</a> · Kupferbarren mit
+              Berghorn-Motiv</span
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      window.addEventListener("scroll", function () {
+        document.body.classList.toggle("scrolled", window.scrollY > 20);
+      });
+      document.getElementById("burger").addEventListener("click", function () {
+        document.getElementById("nav").classList.toggle("open");
+      });
+      document.querySelectorAll("#nav a").forEach(function (a) {
+        a.addEventListener("click", function () {
+          document.getElementById("nav").classList.remove("open");
+        });
+      });
+
+      if (window.gsap) {
+        document.body.classList.add("gsap-on");
+        if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+        var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".hero .typewall .h-line", {
+          yPercent: 112,
+          duration: 1,
+          stagger: 0.12,
+        })
+          .from(
+            ".hero .eyebrow",
+            { y: -14, opacity: 0, duration: 0.55 },
+            "-=0.7",
+          )
+          .from(".hero .lead", { y: 24, opacity: 0, duration: 0.65 }, "-=0.55")
+          .from(
+            ".hero .btnrow .btn",
+            { y: 16, opacity: 0, duration: 0.45, stagger: 0.08 },
+            "-=0.4",
+          )
+          .from(
+            ".hero .tickets span",
+            { y: 16, opacity: 0, duration: 0.45, stagger: 0.07 },
+            "-=0.35",
+          )
+          .from(
+            ".scrollcue",
+            { y: 12, opacity: 0, duration: 0.5 },
+            "-=0.3",
+          );
+
+        if (window.ScrollTrigger) {
+          gsap.to(".hero-bg img", {
+            yPercent: 14,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+          gsap.to("#barrenImg", {
+            yPercent: -8,
+            scale: 1.08,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".macro-fig",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+
+          gsap.utils.toArray(".reveal").forEach(function (el) {
+            var delay = el.classList.contains("d1")
+              ? 0.1
+              : el.classList.contains("d2")
+                ? 0.2
+                : el.classList.contains("d3")
+                  ? 0.3
+                  : 0;
+            gsap.fromTo(
+              el,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: delay,
+                scrollTrigger: { trigger: el, start: "top 88%", once: true },
+              },
+            );
+          });
+        } else {
+          document.querySelectorAll(".reveal").forEach(function (el) {
+            el.style.opacity = 1;
+          });
+        }
+      } else {
+        var els = document.querySelectorAll(".reveal");
+        document.querySelectorAll(".h-anim").forEach(function (el) {
+          el.style.opacity = 1;
+        });
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("visible");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12 },
+          );
+          els.forEach(function (el) {
+            io.observe(el);
+          });
+        } else {
+          els.forEach(function (el) {
+            el.classList.add("visible");
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
