@@ -4,12 +4,17 @@ Static-only repo: hand-written HTML sites, no build, no bundler, no package mana
 
 ## Structure
 
-- `index.html` — hub/landing page linking all 30 site slots (only 01–03 active).
+- `index.html` — hub/landing page linking all 30 site slots (01–08 active).
 - `"Website N/Website N/"` — double-nested dirs **with spaces**; inner dir holds the site. Quote paths in shell, e.g. `ls "Website 1/Website 1"`.
 - Entrypoints:
   - `Website 1/Website 1/index.html` + `impressum.html`
   - `Website 2/Website 2/index.html` (no impressum page)
   - `Website 3/Website 3/index-1.html` (hub links here, **not** `index.html`), plus `index-2.html` variant and `impressum.html`
+  - `Website 4/Website 4/index.html` + `impressum.html`
+  - `Website 5/Website 5/index.html` + `impressum.html`
+  - `Website 6/Website 6/index.html` + `impressum.html`
+  - `Website 7/Website 7/index.html` + `impressum.html`
+  - `Website 8/Website 8/index.html` + `impressum.html` (TALONRIDGE COPPER BARS)
 - Each site is self-contained: inline `<style>` in `<head>`, images in sibling `images/` via relative paths. Only inline `<script>` is small header/scroll logic in Website 1 & 2; Website 3 has no JS.
 
 ## Preview

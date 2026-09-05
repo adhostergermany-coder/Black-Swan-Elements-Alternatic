@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | TALONRIDGE COPPER BARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --copper: #B87333;
+            --copper-light: #D4956B;
+            --copper-dark: #8B5A2B;
+            --dark: #0D0D0D;
+            --dark-alt: #141414;
+            --light: #F8F6F1;
+            --text-dark: #1A1A1A;
+            --text-muted: #6B6560;
+            --text-light: #F0ECE3;
+            --text-muted-light: #9A9590;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            background: var(--light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+        }
+
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 18px 60px;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            text-decoration: none;
+        }
+
+        .logo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .logo-tagline {
+            font-size: 9px;
+            color: var(--copper);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .back-link {
+            color: var(--text-muted-light);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: var(--copper); }
+
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 160px 60px 100px;
+        }
+
+        .page-content h1 {
+            font-size: 42px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .page-content h2 {
+            font-size: 24px;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .page-content p,
+        .page-content li {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .page-content ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .page-content a {
+            color: var(--copper);
+            text-decoration: none;
+        }
+
+        .page-content a:hover { text-decoration: underline; }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin: 32px 0;
+        }
+
+        .footer-mini {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 60px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 700px) {
+            .header { padding: 16px 24px; }
+            .page-content { padding: 120px 24px 60px; }
+            .page-content h1 { font-size: 32px; }
+            .footer-mini { padding: 20px 24px; flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-name">TALONRIDGE</span><br>
+            <span class="logo-tagline">Copper Bars</span>
+        </a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            Talonridge Copper Bars<br>
+            Musterstraße 12<br>
+            80331 München
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0) 89 12345678<br>
+            E-Mail: <a href="mailto:info@talonridge.de">info@talonridge.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 123 456 789
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 Talonridge Copper Bars</p>
+        <a href="index.html" style="color:var(--copper); text-decoration:none;">Startseite</a>
+    </footer>
+
+</body>
+</html>
