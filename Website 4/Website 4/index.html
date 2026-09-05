@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELIOS HORSE FORTUNE – Kupferbarren mit Sonnenpferd-Motiv</title>
+  <meta name="description" content="HELIOS HORSE FORTUNE – massive Kupferbarren mit Sonnenpferd-Motiv. Sonne, Kraft und Fortune in 999 Feinkupfer.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --night:#17100a;
+      --espresso:#241610;
+      --card:#2b1d12;
+      --gold:#f0b429;
+      --gold-soft:#f6d47c;
+      --flame:#d97a2b;
+      --copper:#b87333;
+      --ivory:#faf5ea;
+      --sand:#e8dcc3;
+      --muted:#c9b896;
+      --line:rgba(240,180,41,.28);
+      --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--night);
+      color:var(--ivory);
+      font-family:'Manrope',system-ui,sans-serif;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    .page{width:100%;overflow:hidden}
+    .container{width:min(1240px,calc(100% - 48px));margin:0 auto;position:relative;z-index:3}
+    h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.12;letter-spacing:.5px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+      color:var(--gold);
+    }
+    .eyebrow::before{content:'';width:34px;height:2px;background:var(--gold);display:inline-block;border-radius:2px}
+    .button{
+      display:inline-block;padding:15px 32px;border-radius:999px;
+      background:linear-gradient(135deg,var(--gold),var(--flame));
+      color:#221304;font-weight:800;font-size:15px;letter-spacing:.4px;
+      border:0;box-shadow:0 12px 30px rgba(240,180,41,.28);
+      transition:.25s ease;
+    }
+    .button:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(240,180,41,.38)}
+    .button.ghost{background:transparent;color:var(--ivory);border:1px solid var(--line);box-shadow:none}
+    .button.ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
+
+    /* HEADER */
+    .header{
+      position:fixed;top:0;left:0;width:100%;z-index:100;
+      background:rgba(23,16,10,.86);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+      transition:.3s ease;
+    }
+    body.scrolled .header{background:rgba(23,16,10,.96)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;background:#000}
+    .brand-text{line-height:1.15}
+    .brand-text strong{display:block;font-family:'Fraunces',serif;font-size:17px;letter-spacing:1.5px}
+    .brand-text span{font-size:11px;letter-spacing:3px;color:var(--gold);font-weight:800}
+    .nav{display:flex;gap:26px;font-size:14px;font-weight:700;letter-spacing:.6px}
+    .nav a{opacity:.85;transition:.2s}
+    .nav a:hover{color:var(--gold);opacity:1}
+    .burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ivory);font-size:20px;padding:6px 12px;cursor:pointer}
+
+    /* HERO */
+    .hero{
+      padding:150px 0 70px;position:relative;
+      background:
+        radial-gradient(900px 480px at 82% 18%,rgba(240,180,41,.22),transparent 60%),
+        radial-gradient(700px 500px at 8% 90%,rgba(217,122,43,.16),transparent 60%),
+        linear-gradient(180deg,#241610,#17100a);
+      overflow:hidden;
+    }
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+    .hero h1{font-size:clamp(42px,6vw,76px);margin:16px 0 18px}
+    .hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--gold-soft),var(--gold) 45%,var(--flame));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-text{color:var(--sand);font-size:17px;max-width:56ch}
+    .button-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .stats{display:flex;gap:0;margin-top:34px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03)}
+    .stat{flex:1;padding:16px 18px;text-align:center}
+    .stat + .stat{border-left:1px solid var(--line)}
+    .stat strong{display:block;font-family:'Fraunces',serif;font-size:24px;color:var(--gold)}
+    .stat span{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
+    .hero-visual{position:relative;display:flex;justify-content:center}
+    .arch{
+      width:min(440px,100%);border-radius:999px 999px 28px 28px;overflow:hidden;
+      border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.5);
+      background:#000;position:relative;
+    }
+    .arch img{width:100%;height:560px;object-fit:cover}
+    .sun-badge{
+      position:absolute;left:-24px;bottom:44px;background:var(--gold);color:#221304;
+      border-radius:18px;padding:14px 18px;font-weight:800;box-shadow:0 16px 40px rgba(240,180,41,.4);
+      text-align:center;line-height:1.3;
+    }
+    .sun-badge small{display:block;font-size:11px;letter-spacing:2px}
+    .sun-ring{
+      position:absolute;top:-40px;right:-30px;width:150px;height:150px;border-radius:50%;
+      border:2px dashed rgba(240,180,41,.5);animation:spin 22s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* TICKER */
+    .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#1d130c;overflow:hidden;white-space:nowrap}
+    .ticker-track{display:inline-block;padding:13px 0;animation:tick 26s linear infinite;font-size:13px;font-weight:800;letter-spacing:3px;color:var(--gold)}
+    .ticker-track span{margin:0 26px}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* SECTIONS */
+    .section{padding:90px 0}
+    .section.alt{background:linear-gradient(180deg,#1d130c,#17100a);border-top:1px solid rgba(240,180,41,.14);border-bottom:1px solid rgba(240,180,41,.14)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+    .section h2{font-size:clamp(30px,4vw,46px);margin:14px 0 18px}
+    .section h2 em{font-style:normal;color:var(--gold)}
+    .lead{color:var(--sand);font-size:16.5px}
+    .lead + .lead{margin-top:14px}
+    .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .fact{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(240,180,41,.05)}
+    .fact strong{display:block;font-family:'Fraunces',serif;font-size:22px;color:var(--gold)}
+    .fact span{font-size:13px;color:var(--muted)}
+    .frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.45);background:#000}
+    .frame img{width:100%;height:440px;object-fit:cover}
+    .frame figcaption{padding:14px 18px;font-size:13.5px;color:var(--muted);background:#201409;border-top:1px solid var(--line)}
+
+    /* BENEFITS */
+    .center{text-align:center;max-width:760px;margin:0 auto 44px}
+    .center .eyebrow::after{content:'';width:34px;height:2px;background:var(--gold);display:inline-block;border-radius:2px}
+    .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .benefit{
+      background:linear-gradient(180deg,var(--card),#1e130b);
+      border:1px solid var(--line);border-radius:20px;padding:28px 22px;
+      position:relative;overflow:hidden;transition:.25s;
+    }
+    .benefit:hover{transform:translateY(-6px);border-color:var(--gold)}
+    .benefit::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--flame))}
+    .benefit-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:rgba(240,180,41,.14);border:1px solid var(--line);margin-bottom:16px}
+    .benefit h3{font-size:20px;margin-bottom:10px}
+    .benefit p{font-size:14.5px;color:var(--sand)}
+    .benefit-num{position:absolute;top:18px;right:20px;font-family:'Fraunces',serif;color:rgba(240,180,41,.35);font-size:22px}
+
+    /* PRODUCT */
+    .product{display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:28px;padding:36px}
+    .product-media{background:radial-gradient(circle at 50% 30%,rgba(240,180,41,.25),transparent 65%),#100b07;border:1px solid var(--line);border-radius:20px;padding:28px;text-align:center}
+    .product-media img{width:100%;height:380px;object-fit:contain;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+    .product-media small{display:block;margin-top:14px;color:var(--muted);font-size:13px;letter-spacing:1px}
+    .spec{width:100%;border-collapse:collapse;margin-top:22px;font-size:15px;overflow:hidden;border-radius:14px;border:1px solid var(--line)}
+    .spec td{padding:12px 16px;border-bottom:1px solid rgba(240,180,41,.14)}
+    .spec tr:last-child td{border-bottom:0}
+    .spec td:first-child{color:var(--muted);font-weight:700;width:38%;background:rgba(240,180,41,.05)}
+    .price-row{display:flex;align-items:center;gap:18px;margin-top:24px;flex-wrap:wrap}
+    .price{font-family:'Fraunces',serif;font-size:32px;color:var(--gold)}
+    .price small{font-family:'Manrope',sans-serif;font-size:13px;color:var(--muted);display:block;letter-spacing:1px}
+
+    /* CTA */
+    .cta{padding:90px 0}
+    .cta-box{
+      position:relative;overflow:hidden;border-radius:30px;border:1px solid var(--line);
+      background:linear-gradient(120deg,rgba(240,180,41,.16),rgba(217,122,43,.08)),#201409;
+      padding:64px 40px;text-align:center;
+    }
+    .cta-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22}
+    .cta-box > *{position:relative}
+    .cta-box h2{font-size:clamp(30px,4.4vw,50px);margin-bottom:14px}
+    .cta-box p{color:var(--sand);max-width:62ch;margin:0 auto 28px}
+
+    /* FOOTER */
+    .footer{border-top:1px solid var(--line);padding:26px 0 34px;color:var(--muted);font-size:14px}
+    .footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+    .footer a{color:var(--gold-soft);font-weight:700}
+    .footer a:hover{color:var(--gold)}
+
+    @media (max-width: 960px){
+      .hero-grid,.split,.product{grid-template-columns:1fr}
+      .benefits{grid-template-columns:1fr 1fr}
+      .arch img{height:460px}
+      .nav{display:none;position:absolute;top:74px;left:0;right:0;background:#1d130c;border-bottom:1px solid var(--line);padding:18px;flex-direction:column;gap:14px}
+      .nav.open{display:flex}
+      .burger{display:block}
+    }
+    @media (max-width: 600px){
+      .benefits{grid-template-columns:1fr}
+      .facts{grid-template-columns:1fr}
+      .stats{flex-direction:column}
+      .stat + .stat{border-left:0;border-top:1px solid var(--line)}
+      .section{padding:64px 0}
+      .hero{padding-top:128px}
+      .product{padding:22px}
+      .sun-badge{left:8px}
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#top" class="brand">
+        <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Logo">
+        <span class="brand-text"><strong>HELIOS</strong><span>HORSE FORTUNE</span></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#helios">Helios</a>
+        <a href="#vorteile">Vorteile</a>
+        <a href="#barren">Kupferbarren</a>
+        <a href="#kaufen">Kaufen</a>
+        <a href="impressum.html">Impressum</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Menü öffnen">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Sonne · Pferd · Fortune</span>
+        <h1>HELIOS<br><em>HORSE FORTUNE</em></h1>
+        <p class="hero-text">
+          Massive Kupferbarren mit Sonnenpferd-Motiv — inspiriert von Sonnenkraft,
+          Mut und Fortune. Solare Symbolik trifft auf 999 Feinkupfer
+          in klassischer Investmentbarren-Form.
+        </p>
+        <div class="button-row">
+          <a href="#helios" class="button">Jetzt entdecken</a>
+          <a href="#barren" class="button ghost">Zum Barren</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>999</strong><span>Feinkupfer</span></div>
+          <div class="stat"><strong>1000 g</strong><span>Massives Kupfer</span></div>
+          <div class="stat"><strong>Helios</strong><span>Sonnenpferd-Motiv</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="sun-ring"></div>
+        <div class="arch">
+          <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Banner – Sonne und Pferd">
+        </div>
+        <div class="sun-badge">HELIOS EDITION<small>SONNE · KRAFT · GLÜCK</small></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker"><div class="ticker-track"><span>PHYSISCHES KUPFER</span>·<span>999 FEINKUPFER</span>·<span>SONNENPFERD-MOTIV</span>·<span>MASSIVE PRÄGUNG</span>·<span>HELIOS HORSE FORTUNE</span>·<span>PHYSISCHES KUPFER</span>·<span>999 FEINKUPFER</span>·<span>SONNENPFERD-MOTIV</span>·<span>MASSIVE PRÄGUNG</span>·</div></div>
+
+  <!-- HELIOS / STORY -->
+  <section class="section" id="helios">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Helios Horse Fortune</span>
+        <h2>Ein Barren im Zeichen von <em>Sonne und Pferd</em></h2>
+        <p class="lead">
+          Das Pferd steht seit Jahrhunderten für Kraft, Freiheit und Fortune —
+          die Sonne für Energie, Klarheit und Beständigkeit. HELIOS HORSE FORTUNE
+          verbindet beide Symbole in einem kraftvollen Sonnenpferd-Motiv.
+        </p>
+        <p class="lead">
+          Das Ergebnis: ein massiver Kupferbarren mit solarer Fortune-Ästhetik,
+          präziser Prägung und klassischer Investment-Anmutung — gemacht für
+          Sammler und Sachwert-Investoren.
+        </p>
+        <div class="facts">
+          <div class="fact"><strong>☀</strong><span>Sonne als Symbol für Energie und Wertbeständigkeit</span></div>
+          <div class="fact"><strong>♞</strong><span>Pferd als Symbol für Kraft, Mut und Fortune</span></div>
+          <div class="fact"><strong>⬢</strong><span>Massives Kupfer, präzise Prägung</span></div>
+        </div>
+      </div>
+      <figure class="frame">
+        <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Sonnenpferd-Motiv">
+        <figcaption>Sonnenpferd-Motiv — Glück, Kraft und Beständigkeit in Kupfer geprägt.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section alt" id="vorteile">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Vorteile</span>
+        <h2>Vorteile physischer <em>Kupferbarren</em></h2>
+        <p class="lead">Massive Kupferbarren verbinden Materialwert, solare Symbolik und hochwertige Präsentation.</p>
+      </div>
+      <div class="benefits">
+        <div class="benefit">
+          <span class="benefit-num">I</span>
+          <div class="benefit-icon">☀</div>
+          <h3>Fortune Design</h3>
+          <p>Solare Gestaltung mit Sonnenpferd — kraftvoll und zeitlos, ohne überladene Details.</p>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">II</span>
+          <div class="benefit-icon">⬢</div>
+          <h3>Physischer Sachwert</h3>
+          <p>Kupfer zählt weltweit zu den bedeutendsten Industriemetallen mit stabiler Nachfrage.</p>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">III</span>
+          <div class="benefit-icon">♞</div>
+          <h3>Sonnenpferd-Motiv</h3>
+          <p>Symbol für Kraft, Freiheit und Fortune — ideal für Sammlung und Geschenk.</p>
+        </div>
+        <div class="benefit">
+          <span class="benefit-num">IV</span>
+          <div class="benefit-icon">◈</div>
+          <h3>Massive Prägung</h3>
+          <p>Hochwertige Metalloptik mit präziser Prägung und klassischer Barrenform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="section" id="barren">
+    <div class="container">
+      <span class="eyebrow">Kupferbarren mit Sonnenpferd</span>
+      <h2 style="margin-bottom:28px">Helios Horse Fortune <em>Copper Bar</em></h2>
+      <div class="product">
+        <div class="product-media">
+          <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Kupferbarren">
+          <small>HELIOS EDITION · 1 KG · 999 FEINKUPFER</small>
+        </div>
+        <div>
+          <p class="lead">
+            Der Kupferbarren zeigt das Sonnenpferd als Symbol für Energie,
+            Mut und Fortune — umgeben von solaren Strahlen und
+            klassischer Barren-Typografie.
+          </p>
+          <table class="spec">
+            <tr><td>Produkt</td><td>Kupferbarren</td></tr>
+            <tr><td>Marke</td><td>HELIOS HORSE FORTUNE</td></tr>
+            <tr><td>Material</td><td>Kupfer</td></tr>
+            <tr><td>Feinheit</td><td>999 Feinkupfer</td></tr>
+            <tr><td>Motiv</td><td>Sonnenpferd (Sonne · Pferd · Fortune)</td></tr>
+            <tr><td>Gewicht</td><td>1000 g</td></tr>
+            <tr><td>Design</td><td>Solare Fortune-Optik</td></tr>
+          </table>
+          <div class="price-row">
+            <div class="price">HELIOS EDITION<small>Massiver Investmentbarren</small></div>
+            <a href="https://ebay.de" class="button">Jetzt kaufen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="kaufen">
+    <div class="container">
+      <div class="cta-box">
+        <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Kupfer Werte">
+        <h2>Helios Horse Fortune</h2>
+        <p>
+          Kupferbarren mit solarer Fortune-Ästhetik, Sonnenpferd-Motiv
+          und klassischer Metallwirkung — physischer Sachwert mit Symbolkraft.
+        </p>
+        <a href="https://ebay.de" class="button">Jetzt kaufen</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2019 HELIOS HORSE FORTUNE</span>
+      <span><a href="#top">Nach oben</a> · <a href="impressum.html">Impressum</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener("scroll", function(){
+    document.body.classList.toggle("scrolled", window.scrollY > 80);
+  });
+  document.getElementById("burger").addEventListener("click", function(){
+    document.getElementById("nav").classList.toggle("open");
+  });
+  document.querySelectorAll("#nav a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.getElementById("nav").classList.remove("open");
+    });
+  });
+</script>
+
+</body>
+</html>
