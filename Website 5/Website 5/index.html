@@ -1,891 +1,563 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIKINGS MINERALS – Kupferbarren mit Wikingerschiff-Motiv</title>
-  <meta name="description" content="VIKINGS MINERALS – massive Kupferbarren mit Wikingerschiff- und Runen-Motiv. Nordische Symbolik in 999 Feinkupfer.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vikings Minerals – Kupfer Cu 999 · Material &amp; Details</title>
+<meta name="description" content="Vikings Minerals – Feinkupfer Cu 999 im Detail: Zusammensetzung, physikalische Eigenschaften, Lieferformen, Prüfung und Herkunft. 1000-g-Barren, gegossen in Kiel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf8f3;
+  --panel:#f1ece1;
+  --ink:#1c1b18;
+  --muted:#6f6a5f;
+  --faint:#9a9486;
+  --line:#e2dccf;
+  --line-dark:#d3cab6;
+  --copper:#8c4a23;
+  --copper-soft:#f3e6d6;
+  --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Archivo',system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--copper);color:#fff}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Newsreader',Georgia,serif}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+/* ---------- top line ---------- */
+.topline{
+  border-bottom:1px solid var(--line);
+  font-size:12.5px;letter-spacing:.04em;color:var(--muted);
+}
+.topline .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:9px;padding-bottom:9px}
+.topline a{text-decoration:underline;text-underline-offset:3px}
+.topline a:hover{color:var(--copper)}
 
-  <style>
-    :root{
-      --paper:#f4efe4;
-      --paper-2:#ece5d3;
-      --card:#ffffff;
-      --ink:#16211f;
-      --ink-soft:#3d4a47;
-      --muted:#6f7a76;
-      --line:#d8cfb8;
-      --line-dark:rgba(255,255,255,.14);
-      --steel:#16323c;
-      --steel-2:#0f252d;
-      --teal:#2a7d7b;
-      --copper:#b45a26;
-      --copper-dark:#8a3f16;
-      --gold:#c99a3f;
-      --radius:6px;
-      --shadow:0 18px 50px rgba(22,33,31,.12);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      background:var(--paper);
-      color:var(--ink);
-      font-family:'Barlow',system-ui,-apple-system,sans-serif;
-      line-height:1.65;
-      overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
-    }
-    img{display:block;max-width:100%}
-    a{color:inherit;text-decoration:none}
-    .page{width:100%;overflow:hidden}
-    .container{width:min(1220px,calc(100% - 48px));margin:0 auto;position:relative;z-index:3}
-    h1,h2,h3{font-family:'Oswald',sans-serif;line-height:1.08;text-transform:uppercase;letter-spacing:.5px}
+/* ---------- header ---------- */
+.wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto}
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,248,243,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-header.scrolled{border-bottom-color:var(--line-dark)}
+.header-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand-mark{
+  width:34px;height:34px;border:1px solid var(--ink);
+  display:grid;place-items:center;flex-shrink:0;
+  font-family:'Newsreader',serif;font-size:20px;
+  background:var(--ink);color:var(--paper);
+}
+.brand-name{font-weight:700;font-size:16px;letter-spacing:.01em;line-height:1.1}
+.brand-name small{display:block;font-weight:500;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+.nav a{padding:4px 0;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--copper)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;
+  padding:11px 20px;border:1px solid var(--ink);
+  transition:border-color .2s,background .2s,color .2s;
+}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--copper);border-color:var(--copper)}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{border-color:var(--copper);color:var(--copper)}
+.burger{display:none;background:none;border:1px solid var(--line-dark);padding:8px 12px;font-size:16px;cursor:pointer;color:var(--ink)}
+.mobile-nav{display:none;border-top:1px solid var(--line);padding:8px 0 14px}
+.mobile-nav.open{display:block}
+.mobile-nav a{display:block;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink)}
+.mobile-nav a:last-child{border-bottom:0}
 
-    /* ---------- reveal animation (native, no CDN) ---------- */
-    .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:none}
-    .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
-    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes drawline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-    @media (prefers-reduced-motion:reduce){
-      .reveal{opacity:1;transform:none;transition:none}
-      *{animation:none !important}
-    }
+/* ---------- hero ---------- */
+.hero{border-bottom:1px solid var(--line);padding:64px 0 56px;position:relative;overflow:hidden}
+.hero::before{
+  content:'Cu';position:absolute;right:-30px;top:-40px;
+  font-family:'Newsreader',serif;font-size:clamp(200px,28vw,380px);line-height:1;
+  color:transparent;-webkit-text-stroke:1px var(--line-dark);opacity:.5;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:56px;align-items:start;position:relative}
+.eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--copper)}
+h1{
+  font-family:'Newsreader',Georgia,serif;font-weight:500;
+  font-size:clamp(38px,5vw,58px);line-height:1.08;letter-spacing:-.01em;
+  margin-bottom:18px;
+}
+h1 em{font-style:italic;color:var(--copper)}
+.lead{font-size:17px;color:#3d3a34;max-width:56ch}
+.lead strong{font-weight:600}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.meta-row{
+  display:flex;gap:0;margin-top:30px;border:1px solid var(--line);background:#fff;
+  font-size:13px;
+}
+.meta-row div{flex:1;padding:12px 16px;border-right:1px solid var(--line)}
+.meta-row div:last-child{border-right:0}
+.meta-row dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.meta-row dd{font-weight:600;font-variant-numeric:tabular-nums}
 
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:10px;
-      font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--copper-dark);
-    }
-    .eyebrow::before{content:'';width:32px;height:3px;background:var(--copper);display:inline-block}
-    .eyebrow.on-dark{color:var(--gold)}
-    .eyebrow.on-dark::before{background:var(--gold)}
+/* element card */
+.element{
+  border:1px solid var(--ink);background:#fff;
+}
+.element-top{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:20px 22px 16px;border-bottom:1px solid var(--line);
+}
+.element-top .num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.element-top .num strong{display:block;font-size:34px;color:var(--ink);line-height:1;font-weight:600}
+.element-symbol{font-family:'Newsreader',serif;font-size:76px;line-height:1;color:var(--copper)}
+.element-body{padding:16px 22px 20px}
+.element-body h2{font-family:'Newsreader',serif;font-weight:500;font-size:24px;margin-bottom:2px}
+.element-body p{font-size:13.5px;color:var(--muted)}
+.element-list{list-style:none;margin-top:14px;border-top:1px solid var(--line)}
+.element-list li{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;
+}
+.element-list li:last-child{border-bottom:0}
+.element-list span:first-child{color:var(--muted)}
+.element-list span:last-child{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.element-note{margin-top:14px;background:var(--copper-soft);border:1px solid #e0c9ab;padding:12px 14px;font-size:13px;color:#5a3a22}
 
-    .button{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:15px 30px;background:var(--steel);color:#fff;
-      font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
-      border:1px solid var(--steel);border-radius:3px;transition:.22s ease;cursor:pointer;
-    }
-    .button:hover{background:var(--steel-2);transform:translateY(-2px);box-shadow:0 14px 28px rgba(22,50,60,.28)}
-    .button.copper{background:var(--copper);border-color:var(--copper)}
-    .button.copper:hover{background:var(--copper-dark);box-shadow:0 14px 28px rgba(180,90,38,.35)}
-    .button.ghost{background:transparent;color:var(--steel);border-color:var(--steel)}
-    .button.ghost:hover{background:var(--steel);color:#fff}
-    .button.light-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
-    .button.light-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1);box-shadow:none}
-    .button-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+/* ---------- sections ---------- */
+section.block{padding:64px 0;border-bottom:1px solid var(--line)}
+.sec-label{
+  display:flex;align-items:baseline;gap:16px;margin-bottom:10px;
+  font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);
+}
+.sec-label b{color:var(--copper);font-weight:700}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--line);transform:translateY(-4px)}
+h2.title{
+  font-family:'Newsreader',Georgia,serif;font-weight:500;
+  font-size:clamp(28px,3.6vw,40px);line-height:1.15;letter-spacing:-.01em;
+  margin-bottom:12px;max-width:22ch;
+}
+.sec-intro{color:#3d3a34;max-width:68ch;margin-bottom:30px;font-size:16px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.two-col p{margin-bottom:14px;color:#33312c;font-size:15.5px}
+.factbox{border:1px solid var(--line-dark);background:var(--panel);padding:24px}
+.factbox h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600}
+.factbox dl{display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-size:14px}
+.factbox dt{color:var(--muted)}
+.factbox dd{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.factbox .src{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-dark);font-size:12px;color:var(--faint)}
 
-    /* ---------- top utility bar ---------- */
-    .topbar{background:var(--steel-2);color:#d9e4e1;font-size:12px;letter-spacing:1.6px;font-weight:600}
-    .topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;text-transform:uppercase}
-    .topbar a{color:var(--gold)}
-    .topbar a:hover{color:#fff}
-    .topbar-right{display:flex;gap:20px}
+/* tables */
+.table-wrap{border:1px solid var(--line-dark);background:#fff;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px;font-size:14px}
+thead th{
+  text-align:left;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;
+  padding:13px 18px;border-bottom:1px solid var(--line-dark);background:var(--panel);white-space:nowrap;
+}
+tbody td{padding:12px 18px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:#fbf7ee}
+td.main{font-weight:600}
+.tnote{font-size:13px;color:var(--muted);margin-top:12px;max-width:75ch}
 
-    /* ---------- header ---------- */
-    .header{
-      position:sticky;top:0;z-index:100;
-      background:rgba(244,239,228,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);transition:.25s ease;
-    }
-    body.scrolled .header{box-shadow:0 10px 30px rgba(22,33,31,.12);background:rgba(244,239,228,.97)}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 0}
-    .brand{display:flex;align-items:center;gap:13px}
-    .shield{
-      width:48px;height:52px;flex:0 0 48px;display:grid;place-items:center;
-      background:var(--steel);color:var(--gold);
-      clip-path:polygon(50% 0,100% 18%,100% 62%,50% 100%,0 62%,0 18%);
-      font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;
-    }
-    .brand img{width:48px;height:48px;object-fit:cover;border-radius:50%;border:2px solid var(--steel);background:#ddd;display:none}
-    .brand-text{line-height:1.1}
-    .brand-text strong{display:block;font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px}
-    .brand-text span{font-size:11px;letter-spacing:3.5px;font-weight:700;color:var(--copper-dark)}
-    .nav{display:flex;gap:24px;font-size:13.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
-    .nav a{position:relative;padding:6px 0;color:var(--ink-soft)}
-    .nav a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--copper);transition:.22s}
-    .nav a:hover{color:var(--ink)}
-    .nav a:hover::after{width:100%}
-    .header-cta{display:flex;align-items:center;gap:12px}
-    .header-cta .button{padding:11px 20px;font-size:12.5px}
-    .burger{display:none;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:20px;padding:7px 12px;cursor:pointer;color:var(--ink)}
+/* property grid */
+.prop-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-dark);background:#fff}
+.prop{padding:20px;border-right:1px solid var(--line)}
+.prop:last-child{border-right:0}
+.prop .k{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.prop .v{font-family:'Newsreader',serif;font-size:27px;line-height:1.1}
+.prop .u{font-size:13px;color:var(--muted);margin-top:2px}
 
-    /* ---------- hero — fjord panorama v2 (full-width, GSAP) ---------- */
-    .hero{
-      position:relative;overflow:hidden;
-      background:var(--steel-2);color:#eef3f1;
-      border-bottom:4px solid var(--copper);
-    }
-    .hero-bgwrap{position:absolute;inset:0;overflow:hidden}
-    .hero-bg{width:100%;height:118%;object-fit:cover;opacity:.48;will-change:transform}
-    .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,37,45,.66),rgba(15,37,45,.34) 42%,rgba(15,37,45,.9) 80%,var(--steel-2) 100%)}
-    .hero-shade::after{
-      content:'';position:absolute;inset:0;
-      background:
-        linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-      background-size:44px 44px;
-      -webkit-mask-image:linear-gradient(180deg,black,transparent 72%);
-      mask-image:linear-gradient(180deg,black,transparent 72%);
-    }
-    .hero-runes{
-      position:absolute;top:104px;right:20px;z-index:2;
-      writing-mode:vertical-rl;font-size:20px;letter-spacing:10px;
-      color:rgba(201,154,63,.55);user-select:none;
-    }
-    .hero-stack{padding:46px 0 64px;position:relative;z-index:2}
-    .hero-topline{
-      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
-      font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#c3d0cc;
-    }
-    .hero-topline b{color:var(--gold)}
-    .edition{
-      display:inline-flex;align-items:center;gap:9px;
-      border:1px solid rgba(201,154,63,.65);color:var(--gold);
-      border-radius:999px;padding:7px 15px;background:rgba(15,37,45,.55);
-    }
-    .edition i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;animation:blink 1.6s ease-in-out infinite}
-    @keyframes blink{50%{opacity:.2}}
-    .hero-title{margin:20px 0 0;font-size:clamp(54px,9.5vw,128px);line-height:.94;letter-spacing:1px;color:#fff}
-    .hero-title .row{display:block;overflow:hidden;padding-bottom:.06em}
-    .hero-title .row > span{display:block;will-change:transform}
-    .hero-title .t2{color:transparent;-webkit-text-stroke:2px var(--gold)}
-    .hero-kicker{margin-top:16px;max-width:64ch;color:#d3dedb;font-size:clamp(15px,1.9vw,18.5px)}
-    .hero-kicker strong{color:#fff}
-    .hero-pano{
-      position:relative;margin-top:30px;border-radius:12px;overflow:hidden;
-      border:1px solid rgba(255,255,255,.2);box-shadow:0 30px 80px rgba(0,0,0,.5);
-      background:#000;
-    }
-    .hero-pano img{width:100%;height:clamp(240px,38vw,430px);object-fit:cover;transform:scale(1.14);will-change:transform}
-    .pano-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,37,45,.6),transparent 55%,transparent);pointer-events:none}
-    .pano-chip{
-      position:absolute;left:18px;top:18px;z-index:2;
-      background:rgba(15,37,45,.82);border:1px solid rgba(201,154,63,.55);color:var(--gold);
-      font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-      padding:8px 14px;border-radius:4px;
-    }
-    .pano-caption{
-      position:absolute;right:18px;bottom:18px;z-index:2;text-align:right;
-      color:#fff;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-      background:rgba(15,37,45,.7);border:1px solid rgba(255,255,255,.2);
-      padding:9px 14px;border-radius:4px;
-    }
-    .pano-caption strong{color:var(--gold)}
-    .hero-dock{
-      display:grid;grid-template-columns:1.25fr auto;gap:22px;align-items:center;
-      background:#fff;color:var(--ink);
-      border:1px solid var(--line);border-radius:12px;
-      padding:24px 26px;margin-top:-52px;position:relative;z-index:3;
-      box-shadow:var(--shadow);
-    }
-    .hero-dock p{color:var(--ink-soft);font-size:15.5px;max-width:62ch}
-    .hero-dock p strong{color:var(--steel)}
-    .dock-specs{display:flex;gap:0;margin-top:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper)}
-    .dock-spec{flex:1;padding:12px 16px;text-align:center}
-    .dock-spec + .dock-spec{border-left:1px solid var(--line)}
-    .dock-spec strong{display:block;font-family:'Oswald',sans-serif;font-size:22px;color:var(--steel);line-height:1.1}
-    .dock-spec span{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-    .dock-actions{display:flex;flex-direction:column;gap:10px;min-width:230px}
-    .dock-actions .button{width:100%}
-    .dock-note{font-size:12px;color:var(--muted);text-align:center;font-weight:600}
-    .scrollhint{
-      display:flex;align-items:center;gap:10px;margin-top:22px;
-      color:#9fb3ae;font-size:11.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    }
-    .scrollhint::after{content:'';width:64px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);display:inline-block}
-    /* GSAP controls motion — kill CSS transition to avoid fighting the tween */
-    body.gsap-on .reveal{transition:none}
+/* forms */
+.form-list{border-top:1px solid var(--ink)}
+.form-row{
+  display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;
+  padding:24px 4px;border-bottom:1px solid var(--line);
+}
+.form-row:hover{background:#fff}
+.form-no{font-family:'Newsreader',serif;font-size:22px;color:var(--faint)}
+.form-row h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.form-row h3 span{font-weight:400;color:var(--muted);font-size:14px}
+.form-row p{font-size:14px;color:var(--muted);max-width:60ch}
+.form-side{text-align:right}
+.form-side .p{font-family:'Newsreader',serif;font-size:26px}
+.form-side .p small{font-family:'Archivo';font-size:12px;color:var(--muted)}
+.form-side a{font-size:13.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.form-side a:hover{color:var(--copper)}
 
-    /* ---------- stats band ---------- */
-    .stats-band{background:var(--steel);color:#eef3f1;border-top:4px solid var(--copper);border-bottom:4px solid var(--steel-2)}
-    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
-    .stat{padding:26px 24px;text-align:left;position:relative}
-    .stat + .stat{border-left:1px solid var(--line-dark)}
-    .stat strong{display:block;font-family:'Oswald',sans-serif;font-size:clamp(28px,3vw,40px);color:#fff}
-    .stat strong em{font-style:normal;color:var(--gold)}
-    .stat span{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#b9c8c4;font-weight:700}
-    .stat::after{content:'';position:absolute;left:24px;bottom:14px;width:44px;height:3px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:.5s}
-    .stats-band.inview .stat::after{animation:drawline .7s ease forwards}
-    .stats-band.inview .stat:nth-child(2)::after{animation-delay:.15s}
-    .stats-band.inview .stat:nth-child(3)::after{animation-delay:.3s}
-    .stats-band.inview .stat:nth-child(4)::after{animation-delay:.45s}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line-dark);background:#fff}
+.step{padding:26px 24px;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step .n{font-size:12px;letter-spacing:.16em;color:var(--copper);font-weight:700;margin-bottom:10px}
+.step h3{font-family:'Newsreader',serif;font-size:21px;font-weight:500;margin-bottom:8px}
+.step p{font-size:14px;color:#3d3a34}
 
-    /* ---------- sections ---------- */
-    .section{padding:88px 0}
-    .section.alt{background:#fbf8ef;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .section-head{max-width:780px;margin-bottom:44px}
-    .section-head h2{font-size:clamp(30px,4vw,48px);color:var(--steel);margin:12px 0 14px}
-    .section-head h2 em{font-style:normal;color:var(--copper-dark)}
-    .section-head p{color:var(--ink-soft);font-size:16.5px}
-    .center-head{text-align:left}
+/* use list */
+.use{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.use span{border:1px solid var(--line-dark);background:#fff;padding:8px 16px;font-size:13.5px;color:#3d3a34}
 
-    /* saga */
-    .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:start}
-    .sticky{position:sticky;top:110px}
-    .timeline{margin-top:28px;border-left:2px solid var(--line);padding-left:0}
-    .t-item{position:relative;padding:0 0 28px 30px}
-    .t-item::before{
-      content:attr(data-n);position:absolute;left:-19px;top:0;width:36px;height:36px;border-radius:50%;
-      background:var(--steel);color:#fff;display:grid;place-items:center;
-      font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;
-    }
-    .t-item h3{font-size:20px;color:var(--steel);margin-bottom:8px}
-    .t-item p{color:var(--ink-soft);font-size:15.5px}
-    .collage{position:relative;padding-bottom:56px}
-    .collage .img-a{border-radius:8px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#fff}
-    .collage .img-a img{width:100%;height:420px;object-fit:cover;background:#cfc6ad}
-    .collage .img-b{
-      position:absolute;right:24px;bottom:0;width:46%;border-radius:8px;overflow:hidden;
-      border:6px solid #fff;box-shadow:0 20px 50px rgba(22,33,31,.2);background:#fff;
-    }
-    .collage .img-b img{width:100%;height:210px;object-fit:cover;background:#bfb69c}
-    .collage figcaption{background:#fff;padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
-    .rune-strip{
-      display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;
-      font-size:20px;color:var(--copper-dark);letter-spacing:6px;
-    }
+/* faq */
+.faq{border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line);background:transparent}
+.faq summary{
+  cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px 4px;font-weight:600;font-size:15.5px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pm{color:var(--faint);font-weight:400;font-size:20px;flex-shrink:0}
+.faq details[open] summary .pm{color:var(--copper)}
+.faq .a{padding:0 4px 20px;color:#3d3a34;font-size:15px;max-width:72ch}
 
-    /* benefits — striped industrial rows */
-    .benefit-rows{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
-    .b-row{
-      display:grid;grid-template-columns:90px 64px 280px 1fr 44px;gap:18px;align-items:center;
-      padding:24px 26px;background:#fff;transition:.22s ease;position:relative;
-    }
-    .b-row + .b-row{border-top:1px solid var(--line)}
-    .b-row:hover{background:#fbf6e8}
-    .b-row:hover .b-num{background:var(--copper);color:#fff;border-color:var(--copper)}
-    .b-num{
-      font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:1.5px;
-      border:1px solid var(--line);border-radius:4px;padding:8px 0;text-align:center;color:var(--steel);background:var(--paper);
-      transition:.22s;
-    }
-    .b-icon{
-      width:52px;height:52px;border-radius:8px;display:grid;place-items:center;font-size:24px;
-      background:var(--steel);color:var(--gold);
-    }
-    .b-row h3{font-size:19px;color:var(--steel)}
-    .b-row p{color:var(--ink-soft);font-size:15px}
-    .b-arrow{font-size:22px;color:var(--copper);font-weight:700}
+/* cta */
+.cta{background:var(--ink);color:#ece7da;padding:64px 0}
+.cta-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.cta h2{font-family:'Newsreader',serif;font-weight:500;font-size:clamp(28px,3.4vw,38px);line-height:1.15;margin-bottom:12px}
+.cta p{color:#b7b0a1;font-size:15px;max-width:52ch}
+.cta .btn.solid{background:#ece7da;color:var(--ink);border-color:#ece7da}
+.cta .btn.solid:hover{background:var(--copper);border-color:var(--copper);color:#fff}
+.cta-facts{border:1px solid #3a382f;padding:20px 22px;font-size:13.5px;color:#c9c2b2}
+.cta-facts div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #2c2a24}
+.cta-facts div:last-child{border-bottom:0}
+.cta-facts b{color:#fff;font-weight:600}
 
-    /* product datasheet */
-    .product{
-      display:grid;grid-template-columns:.92fr 1.08fr;gap:0;background:#fff;
-      border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);
-    }
-    .product-media{background:linear-gradient(180deg,var(--steel),var(--steel-2));color:#dfe9e6;padding:30px;position:relative;overflow:hidden}
-    .product-media::after{
-      content:'ᚱ';position:absolute;right:-10px;bottom:-46px;font-size:220px;line-height:1;
-      color:rgba(255,255,255,.06);font-family:serif;pointer-events:none;
-    }
-    .product-media .tag{
-      display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-      background:var(--copper);color:#fff;padding:7px 12px;border-radius:3px;margin-bottom:18px;
-    }
-    .product-media img{width:100%;height:380px;object-fit:contain;background:transparent;filter:drop-shadow(0 22px 30px rgba(0,0,0,.5));position:relative;z-index:2}
-    .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;position:relative;z-index:2}
-    .thumbs figure{background:rgba(255,255,255,.06);border:1px solid var(--line-dark);border-radius:6px;overflow:hidden}
-    .thumbs img{width:100%;height:86px;object-fit:cover}
-    .thumbs figcaption{font-size:10.5px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;padding:8px;text-align:center;color:#c8d4d0}
-    .product-info{padding:36px 36px 32px}
-    .product-info h2{font-size:clamp(28px,3.4vw,40px);color:var(--steel);margin:10px 0 12px}
-    .product-info h2 em{font-style:normal;color:var(--copper-dark)}
-    .product-info > p{color:var(--ink-soft);font-size:15.5px}
-    .spec{width:100%;border-collapse:collapse;margin-top:20px;font-size:14.5px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-    .spec td{padding:12px 15px;border-bottom:1px solid var(--line);vertical-align:top}
-    .spec tr:last-child td{border-bottom:0}
-    .spec tr:nth-child(even){background:#faf6ec}
-    .spec td:first-child{width:34%;font-family:'Oswald',sans-serif;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel);font-weight:600}
-    .buybox{
-      margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-      background:var(--paper);border:1px dashed var(--copper);border-radius:8px;padding:18px 20px;
-    }
-    .buybox strong{font-family:'Oswald',sans-serif;font-size:22px;color:var(--steel);display:block;line-height:1.1}
-    .buybox small{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.6px}
-    .micro{margin-top:12px;font-size:12.5px;color:var(--muted)}
+/* footer */
+footer{padding:44px 0 24px;font-size:13.5px;color:var(--muted)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.foot-grid h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.foot-grid p{max-width:40ch}
+.foot-grid ul{list-style:none}
+.foot-grid li{margin:7px 0}
+.foot-grid a:hover{color:var(--copper);text-decoration:underline;text-underline-offset:3px}
+.foot-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:18px;font-size:12.5px;color:var(--faint)}
+.foot-bottom a{text-decoration:underline;text-underline-offset:3px}
 
-    /* sortiment */
-    .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .p-card{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:.22s;box-shadow:0 10px 30px rgba(22,33,31,.06)}
-    .p-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-    .p-card .imgwrap{position:relative;background:#e6ddc6}
-    .p-card .imgwrap img{width:100%;height:230px;object-fit:cover}
-    .p-card .pill{
-      position:absolute;left:14px;top:14px;background:var(--steel);color:#fff;font-size:11px;font-weight:700;
-      letter-spacing:2px;text-transform:uppercase;padding:6px 11px;border-radius:3px;
-    }
-    .p-card .pill.copper{background:var(--copper)}
-    .p-card .pill.teal{background:var(--teal)}
-    .p-card-body{padding:22px}
-    .p-card-body h3{font-size:19px;color:var(--steel);margin-bottom:8px}
-    .p-card-body p{font-size:14.5px;color:var(--ink-soft)}
-    .p-card-body a{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--copper-dark);border-bottom:2px solid var(--copper);padding-bottom:2px}
-    .p-card-body a:hover{color:var(--steel);border-color:var(--steel)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.reveal.on{opacity:1;transform:none}
 
-    /* ablauf */
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
-    .step{background:var(--steel);color:#e8efec;border-radius:8px;padding:28px 24px;position:relative;overflow:hidden}
-    .step:nth-child(2){background:var(--teal)}
-    .step:nth-child(3){background:#fff;color:var(--ink);border:1px solid var(--line)}
-    .step .n{font-family:'Oswald',sans-serif;font-size:44px;line-height:1;opacity:.28}
-    .step h3{font-size:19px;margin:10px 0 8px}
-    .step p{font-size:14.5px;opacity:.92}
-    .step:nth-child(3) p{color:var(--ink-soft)}
-    .step:nth-child(3) .n{color:var(--copper);opacity:.9}
-
-    /* cta */
-    .cta{padding:0 0 88px;background:var(--paper)}
-    .cta-box{
-      display:grid;grid-template-columns:1.1fr .9fr;background:var(--steel-2);color:#eef3f1;
-      border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:var(--shadow);
-    }
-    .cta-text{padding:56px 48px}
-    .cta-text h2{font-size:clamp(30px,4vw,48px);color:#fff;margin:12px 0 14px}
-    .cta-text h2 em{font-style:normal;color:var(--gold)}
-    .cta-text p{color:#c3d0cc;max-width:52ch}
-    .cta-media{position:relative;min-height:380px;background:#000}
-    .cta-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
-    .cta-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--steel-2) 0%,transparent 45%,rgba(15,37,45,.25) 100%)}
-    .cta-badge{
-      position:absolute;left:24px;bottom:24px;z-index:2;background:rgba(255,255,255,.94);color:var(--steel);
-      border-radius:8px;padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-    }
-    .cta-badge strong{color:var(--copper-dark)}
-
-    /* footer */
-    .footer{background:#0e1b20;color:#aebfbb;padding:56px 0 0;border-top:4px solid var(--copper)}
-    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px}
-    .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    .footer-brand .shield{width:42px;height:46px;font-size:19px}
-    .footer-brand strong{display:block;font-family:'Oswald',sans-serif;color:#fff;letter-spacing:2px;font-size:16px}
-    .footer-brand span{font-size:11px;letter-spacing:3px;font-weight:700;color:var(--gold)}
-    .footer p{font-size:14px}
-    .footer h4{font-family:'Oswald',sans-serif;color:#fff;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px}
-    .footer ul{list-style:none}
-    .footer li{margin-bottom:9px}
-    .footer ul a{font-size:14px;opacity:.9}
-    .footer ul a:hover{color:var(--gold)}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding:18px 0 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}
-    .footer-bottom a{color:var(--gold);font-weight:700}
-    .footer-bottom a:hover{color:#fff}
-
-    @media (max-width:1020px){
-      .split,.product,.cta-box{grid-template-columns:1fr}
-      .hero-dock{grid-template-columns:1fr}
-      .dock-actions{min-width:0;flex-direction:row;flex-wrap:wrap}
-      .dock-actions .button{flex:1;min-width:200px}
-      .hero-runes{display:none}
-      .stats-grid{grid-template-columns:1fr 1fr}
-      .stat:nth-child(3){border-left:0}
-      .stat{border-top:1px solid var(--line-dark)}
-      .stat:nth-child(1),.stat:nth-child(2){border-top:0}
-      .cards3,.steps{grid-template-columns:1fr 1fr}
-      .nav{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 24px;flex-direction:column;gap:6px;box-shadow:0 20px 40px rgba(0,0,0,.12)}
-      .nav.open{display:flex}
-      .burger{display:block}
-      .sticky{position:static}
-      .footer-grid{grid-template-columns:1fr 1fr}
-      .b-row{grid-template-columns:64px 52px 1fr 40px}
-      .b-row p{grid-column:1 / -1}
-      .b-row h3{font-size:17px}
-    }
-    @media (max-width:680px){
-      .container{width:calc(100% - 32px)}
-      .topbar-right a:last-child{display:none}
-      .section{padding:64px 0}
-      .hero-stack{padding:36px 0 52px}
-      .hero-dock{padding:20px;margin-top:-38px}
-      .dock-specs{flex-direction:column}
-      .dock-spec + .dock-spec{border-left:0;border-top:1px solid var(--line)}
-      .stats-grid{grid-template-columns:1fr}
-      .stat + .stat{border-left:0}
-      .stat{border-top:1px solid var(--line-dark) !important}
-      .stat:first-child{border-top:0 !important}
-      .cards3,.steps{grid-template-columns:1fr}
-      .product-info{padding:24px 20px}
-      .cta-text{padding:36px 24px}
-      .cta-media{min-height:260px}
-      .footer-grid{grid-template-columns:1fr}
-      .collage .img-a img{height:300px}
-      .header-cta .button{display:none}
-    }
-  </style>
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero::before{display:none}
+  .two-col{grid-template-columns:1fr}
+  .prop-grid{grid-template-columns:1fr 1fr}
+  .prop:nth-child(2){border-right:0}
+  .prop{border-bottom:1px solid var(--line)}
+  .prop:nth-child(3),.prop:nth-child(4){border-bottom:0}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .cta-grid{grid-template-columns:1fr}
+  .nav{display:none}
+  .header-cta{display:none}
+  .burger{display:block}
+}
+@media(max-width:600px){
+  .meta-row{flex-direction:column}
+  .meta-row div{border-right:0;border-bottom:1px solid var(--line)}
+  .meta-row div:last-child{border-bottom:0}
+  .prop-grid{grid-template-columns:1fr}
+  .prop{border-right:0;border-bottom:1px solid var(--line) !important}
+  .prop:last-child{border-bottom:0 !important}
+  .form-row{grid-template-columns:1fr;gap:10px}
+  .form-side{text-align:left}
+  .foot-grid{grid-template-columns:1fr}
+  section.block{padding:48px 0}
+  .hero{padding:44px 0 40px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
-<div class="page">
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>Vikings Minerals · 999 Feinkupfer · Massive Prägung</span>
-      <span class="topbar-right">
-        <a href="https://ebay.de">eBay Shop</a>
-        <a href="impressum.html">Impressum</a>
-      </span>
-    </div>
+<div class="topline">
+  <div class="wrap">
+    <span>Vikings Minerals · Feinkupfer-Manufaktur, Kiel</span>
+    <span>Verkauf über <a href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a> · Käuferschutz inklusive</span>
   </div>
+</div>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="VIKINGS MINERALS Startseite">
-        <span class="shield">ᚱ</span>
-        <span class="brand-text"><strong>VIKINGS</strong><span>MINERALS</span></span>
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <div class="header-in">
+      <a class="brand" href="#top" aria-label="Vikings Minerals Start">
+        <span class="brand-mark">V</span>
+        <span class="brand-name">Vikings Minerals<small>Cu 999 · Material &amp; Details</small></span>
       </a>
-      <nav class="nav" id="nav">
-        <a href="#saga">Saga</a>
-        <a href="#vorteile">Vorteile</a>
-        <a href="#barren">Kupferbarren</a>
-        <a href="#sortiment">Sortiment</a>
-        <a href="#kaufen">Kaufen</a>
-        <a href="impressum.html">Impressum</a>
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#material">Material</a>
+        <a href="#zusammensetzung">Datenblatt</a>
+        <a href="#formen">Lieferformen</a>
+        <a href="#pruefung">Prüfung</a>
+        <a href="#fragen">Fragen</a>
       </nav>
-      <div class="header-cta">
-        <a href="https://ebay.de" class="button copper">Jetzt kaufen</a>
-        <button class="burger" id="burger" aria-label="Menü öffnen">☰</button>
-      </div>
+      <a class="btn solid header-cta" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen</a>
+      <button class="burger" id="burger" aria-label="Menü öffnen">☰</button>
     </div>
-  </header>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+      <a href="#material">Material</a>
+      <a href="#zusammensetzung">Datenblatt</a>
+      <a href="#formen">Lieferformen</a>
+      <a href="#pruefung">Prüfung</a>
+      <a href="#fragen">Fragen</a>
+      <a href="https://ebay.de" target="_blank" rel="noopener"><strong>Auf eBay ansehen →</strong></a>
+    </nav>
+  </div>
+</header>
 
-  <!-- HERO — fjord panorama v2 -->
-  <section class="hero" id="top">
-    <div class="hero-bgwrap" aria-hidden="true">
-      <img class="hero-bg" id="heroBg" src="images/placeholder.jpg" alt="">
-      <div class="hero-shade"></div>
-    </div>
-    <div class="hero-runes" aria-hidden="true">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div>
+<main id="top">
 
-    <div class="container hero-stack">
-      <div class="hero-topline h-anim">
-        <span>Start / Kupferbarren / <b>Vikings Minerals</b></span>
-        <span class="edition"><i></i>Nordic Reserve · No. 05</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="row"><span class="h-line">Vikings</span></span>
-        <span class="row"><span class="h-line t2">Minerals</span></span>
-      </h1>
-
-      <p class="hero-kicker h-anim">
-        <strong>Kupferbarren mit Wikingerschiff- und Runen-Motiv</strong> —
-        inspiriert von nordischer Seefahrt, Handwerk und Beständigkeit.
-        999 Feinkupfer in klarer, materialbetonter Investment-Form.
-      </p>
-
-      <div class="hero-pano h-anim">
-        <img id="panoImg" src="images/placeholder.jpg" alt="VIKINGS MINERALS Kupferbarren Panorama mit Wikingerschiff-Motiv">
-        <div class="pano-shade"></div>
-        <span class="pano-chip">Langschiff-Prägung · Tiefenrelief</span>
-        <span class="pano-caption"><strong>1 KG</strong> · 999 Feinkupfer</span>
-      </div>
-
-      <div class="hero-dock h-anim">
-        <div>
-          <p>
-            <strong>Massives Reserve-Format für Bestand und Sammlung</strong> —
-            kantige Industrie-Geometrie, matte Kupferfläche, stapelbar und robust.
-          </p>
-          <div class="dock-specs">
-            <div class="dock-spec"><strong>999</strong><span>Feinkupfer</span></div>
-            <div class="dock-spec"><strong>1000 g</strong><span>Massiv</span></div>
-            <div class="dock-spec"><strong>Runen</strong><span>Schiffs-Motiv</span></div>
-          </div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Material Nr. 05 · Kupfer</p>
+        <h1>Kupfer, <em>ehrlich</em> beschrieben.</h1>
+        <p class="lead">Vikings Minerals steht für eine einzige Legierung, dafür mit vollständigem Datenblatt: <strong>Cu 999 Feinkupfer</strong>, gegossen in Kiel, geliefert als 1.000-g-Barren. Auf dieser Seite finden Sie Zusammensetzung, Eigenschaften, Maße und Prüfung — ohne Marketing-Schicht.</p>
+        <div class="hero-actions">
+          <a class="btn solid" href="https://ebay.de" target="_blank" rel="noopener">Aktuelles Angebot auf eBay</a>
+          <a class="btn line" href="#zusammensetzung">Datenblatt lesen</a>
         </div>
-        <div class="dock-actions">
-          <a href="#saga" class="button">Saga entdecken</a>
-          <a href="#barren" class="button copper">Datenblatt ansehen</a>
-          <span class="dock-note">Verkauf über eBay · Käuferschutz</span>
-        </div>
+        <dl class="meta-row">
+          <div><dt>Bezeichnung</dt><dd>Cu 999 · Feinkupfer</dd></div>
+          <div><dt>Reinheit</dt><dd>min. 99,9 % Cu</dd></div>
+          <div><dt>Format</dt><dd>Barren · 1.000 g</dd></div>
+        </dl>
       </div>
-
-      <div class="scrollhint h-anim">Scrollen · Die Saga beginnt</div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-band" id="statsBand">
-    <div class="container stats-grid">
-      <div class="stat"><strong><span data-count="999">0</span><em> / 1000</em></strong><span>Feinheit Feinkupfer</span></div>
-      <div class="stat"><strong><span data-count="1000">0</span><em> g</em></strong><span>Massives Barrengewicht</span></div>
-      <div class="stat"><strong><span data-count="100">0</span><em> %</em></strong><span>Physischer Sachwert</span></div>
-      <div class="stat"><strong>Nord<em>isch</em></strong><span>Runen- &amp; Schiffs-Motiv</span></div>
+      <aside class="element" aria-label="Elementkarte Kupfer">
+        <div class="element-top">
+          <div class="num"><strong>29</strong>Kupfer · Cuprum</div>
+          <div class="element-symbol">Cu</div>
+        </div>
+        <div class="element-body">
+          <h2 class="serif">63,55 u · Gruppe 11</h2>
+          <p>Übergangsmetall. Sehr gute elektrische und thermische Leitfähigkeit, gut umformbar, langlebig.</p>
+          <ul class="element-list">
+            <li><span>CAS-Nummer</span><span>7440-50-8</span></li>
+            <li><span>Dichte (20 °C)</span><span>8,96 g/cm³</span></li>
+            <li><span>Schmelzpunkt</span><span>1.084 °C</span></li>
+            <li><span>Leitfähigkeit</span><span>≈ 58 MS/m</span></li>
+          </ul>
+          <p class="element-note">Jede Lieferung enthält eine Materialkarte mit Chargennummer, Gewicht und Reinheitsangabe.</p>
+        </div>
+      </aside>
     </div>
   </div>
 
-  <!-- SAGA -->
-  <section class="section" id="saga">
-    <div class="container split">
-      <div class="sticky">
-        <span class="eyebrow reveal">Vikings Minerals Saga</span>
-        <h2 class="reveal d1" style="font-size:clamp(30px,4vw,48px);color:var(--steel);margin:12px 0 14px">Ein Barren im Zeichen von <em style="font-style:normal;color:var(--copper-dark)">Schiff &amp; Rune</em></h2>
-        <p class="reveal d2" style="color:var(--ink-soft);font-size:16.5px">
-          Das Langschiff steht für Aufbruch, Handel und Handwerk —
-          die Rune für Schutz, Herkunft und Beständigkeit. VIKINGS MINERALS
-          verbindet beide Zeichen in einem wuchtigen Kupferbarren für
-          Sammler und Sachwert-Käufer.
-        </p>
-        <div class="timeline">
-          <div class="t-item reveal" data-n="01">
-            <h3>Ursprung</h3>
-            <p>Nordische Formensprache: klar, kantig, materialehrlich — ohne verspielte Details.</p>
-          </div>
-          <div class="t-item reveal d1" data-n="02">
-            <h3>Prägung</h3>
-            <p>Tiefenwirksame Prägung mit Wikingerschiff, Runenkranz und klarer Barren-Typografie.</p>
-          </div>
-          <div class="t-item reveal d2" data-n="03">
-            <h3>Bestand</h3>
-            <p>Massives 1-kg-Format für Bestand, Geschenk und Sammlung — lagerfähig und robust.</p>
-          </div>
+  <!-- 01 MATERIAL -->
+  <section class="block" id="material">
+    <div class="wrap">
+      <p class="sec-label reveal"><b>01</b> Material im Überblick</p>
+      <h2 class="title serif reveal">Ein Werkstoff, drei Motive — die Basis bleibt gleich.</h2>
+      <p class="sec-intro reveal">Ob Odin, Thor oder Ragnar auf der Schauseite steht: Der Barrenkörper ist immer derselbe Werkstoff aus derselben Schmelze-Qualität. Die Prägung ist 1,2 mm tief und tastbar, die Oberfläche bewusst matt mit feiner Gussstruktur.</p>
+      <div class="two-col">
+        <div class="reveal">
+          <p>Wir verarbeiten Kathodenkupfer, das im Tiegel bei etwa 1.084 °C geschmolzen und in Stahlkokillen von Hand vergossen wird. Die langsame Abkühlung an Luft ergibt die typische, leicht lebendige Oberfläche — jeder Barren ein Unikat, ohne Beschichtung und ohne Lack.</p>
+          <p>Die Kanten werden von Hand entgratet, der Barrenfuß erhält eine gestanzte laufende Nummer. Dazu gehört eine gedruckte Materialkarte aus Kraftkarton mit Charge, Gewicht und Reinheit.</p>
         </div>
-      </div>
-      <div>
-        <figure class="collage reveal">
-          <div class="img-a">
-            <img src="images/placeholder.jpg" alt="Wikingerschiff-Motiv auf Kupferbarren">
-            <figcaption style="border-top:1px solid var(--line)">Langschiff-Prägung · Detailansicht</figcaption>
-          </div>
-          <div class="img-b">
-            <img src="images/placeholder.jpg" alt="Runen-Detail des Vikings Minerals Barrens">
-            <figcaption style="border-top:1px solid var(--line)">Runenkranz · 999 Feinkupfer</figcaption>
-          </div>
-        </figure>
-        <div class="rune-strip reveal" aria-hidden="true">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ ᚷ ᚹ</div>
-        <p class="reveal" style="margin-top:14px;color:var(--ink-soft);font-size:15.5px;max-width:56ch">
-          Jede Linie folgt nordischem Handwerk: breite Bordwand, tiefes Relief,
-          matte Kupferfläche. So bleibt der Barren lesbar, stapelbar und wertig —
-          wie ein Werkzeug, nicht wie Dekoration.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- VORTEILE -->
-  <section class="section alt" id="vorteile">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow reveal">Vorteile</span>
-        <h2 class="reveal d1">Vorteile physischer <em>Kupferbarren</em></h2>
-        <p class="reveal d2">Sachwert, Motiv und Verarbeitung — vier Gründe für die nordische Reserve-Edition.</p>
-      </div>
-      <div class="benefit-rows">
-        <div class="b-row reveal">
-          <span class="b-num">01</span>
-          <span class="b-icon">ᛟ</span>
-          <h3>Nordisches Design</h3>
-          <p>Kantige Industrie-Form mit Schiff und Runen — klar, maskulin und zeitlos, ohne überladene Motive.</p>
-          <span class="b-arrow">→</span>
-        </div>
-        <div class="b-row reveal d1">
-          <span class="b-num">02</span>
-          <span class="b-icon">⬢</span>
-          <h3>Physischer Sachwert</h3>
-          <p>Kupfer gehört zu den wichtigsten Industriemetallen — gefragt in Energie, Bau und Elektromobilität.</p>
-          <span class="b-arrow">→</span>
-        </div>
-        <div class="b-row reveal d2">
-          <span class="b-num">03</span>
-          <span class="b-icon">⛵</span>
-          <h3>Schiff &amp; Runen-Motiv</h3>
-          <p>Langschiff als Zeichen für Aufbruch und Handel, Runenkranz als Zeichen für Herkunft und Schutz.</p>
-          <span class="b-arrow">→</span>
-        </div>
-        <div class="b-row reveal d3">
-          <span class="b-num">04</span>
-          <span class="b-icon">◈</span>
-          <h3>Massive Prägung</h3>
-          <p>1 kg Vollmaterial mit tiefem Relief, matter Oberfläche und stapelbarer Barrengeometrie.</p>
-          <span class="b-arrow">→</span>
+        <div class="factbox reveal">
+          <h3>Kurzkennwerte · Cu 999</h3>
+          <dl>
+            <dt>Cu-Gehalt</dt><dd>≥ 99,90 %</dd>
+            <dt>Nenngewicht</dt><dd>1.000 g (± 5 g)</dd>
+            <dt>Maße</dt><dd>110 × 55 × 18 mm</dd>
+            <dt>Prägetiefe</dt><dd>1,2 mm</dd>
+            <dt>Oberfläche</dt><dd>matt, Gussstruktur</dd>
+            <dt>Auflage / Motiv</dt><dd>500 Stück</dd>
+          </dl>
+          <p class="src">Richtwerte; Einzelheiten siehe Tabellen unten. Stand 2026.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCT -->
-  <section class="section" id="barren">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow reveal">Kupferbarren mit Wikingerschiff</span>
-        <h2 class="reveal d1">Vikings Minerals <em>Copper Bar</em></h2>
-        <p class="reveal d2">Technisches Datenblatt der Reserve-Edition — alle Merkmale auf einen Blick.</p>
+  <!-- 02 DATENBLATT -->
+  <section class="block" id="zusammensetzung">
+    <div class="wrap">
+      <p class="sec-label reveal"><b>02</b> Datenblatt · Zusammensetzung</p>
+      <h2 class="title serif reveal">Was im Barren steckt — und was nicht.</h2>
+      <p class="sec-intro reveal">Chemische Zusammensetzung in Massenprozent. Kupfer bildet den Rest auf 100 %; Begleitelemente sind auf niedrige Grenzwerte begrenzt.</p>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>Element</th><th>Symbol</th><th>Gehalt / Grenzwert</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td class="main">Kupfer</td><td>Cu</td><td>min. 99,90 %</td><td>Rest auf 100 %</td></tr>
+            <tr><td class="main">Sauerstoff</td><td>O</td><td>max. 0,04 %</td><td>schmelzbedingt</td></tr>
+            <tr><td>Blei</td><td>Pb</td><td>max. 0,005 %</td><td>Spurenelement</td></tr>
+            <tr><td>Eisen</td><td>Fe</td><td>max. 0,01 %</td><td>Spurenelement</td></tr>
+            <tr><td>Nickel</td><td>Ni</td><td>max. 0,01 %</td><td>Spurenelement</td></tr>
+            <tr><td>Zink</td><td>Zn</td><td>max. 0,01 %</td><td>Spurenelement</td></tr>
+            <tr><td>Silber</td><td>Ag</td><td>wird als Cu gewertet</td><td>branchenüblich</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="product reveal">
-        <div class="product-media">
-          <span class="tag">Reserve-Edition · 1 KG</span>
-          <img src="images/placeholder.jpg" alt="VIKINGS MINERALS Kupferbarren – Vorder- und Rückseite">
-          <div class="thumbs">
-            <figure><img src="images/placeholder.jpg" alt="Barren Vorderseite mit Schiff"><figcaption>Front · Schiff</figcaption></figure>
-            <figure><img src="images/placeholder.jpg" alt="Barren Rückseite mit Schriftzug"><figcaption>Back · Schrift</figcaption></figure>
-            <figure><img src="images/placeholder.jpg" alt="Barren Kante und Prägung"><figcaption>Edge · Relief</figcaption></figure>
-          </div>
+      <p class="tnote reveal">Kein Messing, keine Beschichtung, kein Hohlkörper: massiver Vollguss. Geringe chargenbedingte Schwankungen innerhalb der Grenzwerte sind normal und werden auf der Materialkarte dokumentiert.</p>
+
+      <div style="height:36px"></div>
+      <p class="sec-label reveal"><b>02 b</b> Physikalische Eigenschaften</p>
+      <div class="prop-grid reveal">
+        <div class="prop"><div class="k">Dichte · 20 °C</div><div class="v serif">8,96</div><div class="u">g/cm³</div></div>
+        <div class="prop"><div class="k">Schmelzpunkt</div><div class="v serif">1.084</div><div class="u">°C</div></div>
+        <div class="prop"><div class="k">Elektr. Leitfähigkeit</div><div class="v serif">≈ 58</div><div class="u">MS/m (IACS ≈ 100 %)</div></div>
+        <div class="prop"><div class="k">Wärmeleitfähigkeit</div><div class="v serif">≈ 401</div><div class="u">W/(m·K)</div></div>
+      </div>
+      <p class="tnote reveal">Literatur- und Richtwerte für Reinkupfer bei Raumtemperatur; Gussgefüge kann Messwerte geringfügig beeinflussen.</p>
+    </div>
+  </section>
+
+  <!-- 03 FORMEN -->
+  <section class="block" id="formen">
+    <div class="wrap">
+      <p class="sec-label reveal"><b>03</b> Lieferformen</p>
+      <h2 class="title serif reveal">Drei Motive, ein Format.</h2>
+      <p class="sec-intro reveal">Alle Barren: 1.000 g, 110 × 55 × 18 mm, nummeriert, mit Materialkarte. Verkauf und Kaufabwicklung erfolgen über eBay.</p>
+      <div class="form-list reveal">
+        <div class="form-row">
+          <div class="form-no serif">I</div>
+          <div><h3>Odin <span>· Rabe und Auge, matt</span></h3><p>Ruhige Prägung, feine Gusshant. Für Sammler, die es sachlich mögen.</p></div>
+          <div class="form-side"><div class="p serif">89 € <small>inkl. MwSt.</small></div><a href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen →</a></div>
         </div>
-        <div class="product-info">
-          <p>
-            Der Barren zeigt ein Wikingerschiff unter Runenkranz — umgeben von
-            klarer Barren-Typografie und matter Kupferfläche. Wuchtig in der Hand,
-            präzise im Detail.
-          </p>
-          <table class="spec">
-            <tr><td>Produkt</td><td>Kupferbarren</td></tr>
-            <tr><td>Marke</td><td>VIKINGS MINERALS</td></tr>
-            <tr><td>Material</td><td>Kupfer</td></tr>
-            <tr><td>Feinheit</td><td>999 Feinkupfer</td></tr>
-            <tr><td>Motiv</td><td>Wikingerschiff mit Runenkranz</td></tr>
-            <tr><td>Gewicht</td><td>1000 g</td></tr>
-            <tr><td>Design</td><td>Nordische Reserve-Optik</td></tr>
-          </table>
-          <div class="buybox">
-            <div>
-              <strong>Reserve-Format · 1 KG</strong>
-              <small>Massiver Investmentbarren · lagerfähig</small>
-            </div>
-            <a href="https://ebay.de" class="button copper">Jetzt kaufen</a>
-          </div>
-          <p class="micro">Hinweis: Verkauf über eBay. Bilder sind Platzhalter und zeigen Format und Anmutung. Details siehe Artikelbeschreibung.</p>
+        <div class="form-row">
+          <div class="form-no serif">II</div>
+          <div><h3>Thor <span>· Hammer, Hammerschlag-Finish</span></h3><p>Etwas griffigere Oberfläche, tiefes Relief. Am häufigsten nachgefragt.</p></div>
+          <div class="form-side"><div class="p serif">89 € <small>inkl. MwSt.</small></div><a href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen →</a></div>
         </div>
+        <div class="form-row">
+          <div class="form-no serif">III</div>
+          <div><h3>Ragnar <span>· Schild, leichte Patina</span></h3><p>Mit dezentem Salzbad dunkler abgetönt. Jede Patina fällt anders aus.</p></div>
+          <div class="form-side"><div class="p serif">94 € <small>inkl. MwSt.</small></div><a href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen →</a></div>
+        </div>
+      </div>
+      <p class="tnote reveal">Versand aus Kiel innerhalb von 1–2 Werktagen, versichert mit DHL, neutral verpackt. Ab 150 € versandkostenfrei. 14 Tage Widerrufsrecht.</p>
+    </div>
+  </section>
+
+  <!-- 04 PRÜFUNG -->
+  <section class="block" id="pruefung">
+    <div class="wrap">
+      <p class="sec-label reveal"><b>04</b> Prüfung &amp; Herkunft</p>
+      <h2 class="title serif reveal">Nachvollziehbar vom Tiegel bis zum Paket.</h2>
+      <p class="sec-intro reveal">Drei einfache Schritte, immer gleich — das lässt sich im Zweifel auch Jahre später noch anhand der Nummer prüfen.</p>
+      <div class="steps reveal">
+        <div class="step"><p class="n">Schritt 1</p><h3 class="serif">Schmelzen &amp; Gießen</h3><p>Kathodenkupfer im Tiegel, Handguss in Kiel, Luftkühlung. Charge wird notiert und dem Barren zugeordnet.</p></div>
+        <div class="step"><p class="n">Schritt 2</p><h3 class="serif">Prägen &amp; Nummerieren</h3><p>40-t-Presse, 1,2 mm Prägetiefe. Laufende Nummer am Barrenfuß gestanzt, Gewicht einzeln kontrolliert.</p></div>
+        <div class="step"><p class="n">Schritt 3</p><h3 class="serif">Karte &amp; Versand</h3><p>Materialkarte mit Charge und Gewicht, verpackt ohne Metallhinweis, versicherter DHL-Versand.</p></div>
+      </div>
+      <div style="height:26px"></div>
+      <p class="sec-label reveal"><b>04 b</b> Wofür sich Kupfer eignet</p>
+      <div class="use reveal">
+        <span>Sammlung &amp; Geschenk</span><span>Materialkunde &amp; Lehre</span><span>Werkstatt &amp; Handwerk</span><span>Dekoration</span><span>Wertaufbewahrung (Industriemetall)</span>
       </div>
     </div>
   </section>
 
-  <!-- SORTIMENT -->
-  <section class="section alt" id="sortiment">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow reveal">Sortiment</span>
-        <h2 class="reveal d1">Die nordische <em>Kollektion</em></h2>
-        <p class="reveal d2">Drei Formate, eine Haltung: massiv, klar und sammelwürdig.</p>
-      </div>
-      <div class="cards3">
-        <article class="p-card reveal">
-          <div class="imgwrap">
-            <span class="pill copper">Bestseller</span>
-            <img src="images/placeholder.jpg" alt="Vikings Minerals Standard Barren 1 kg">
-          </div>
-          <div class="p-card-body">
-            <h3>Standard Barren · 1 KG</h3>
-            <p>Die Kern-Edition mit Schiff und Runen — für Bestand und Sammlung.</p>
-            <a href="https://ebay.de">Ansehen →</a>
-          </div>
-        </article>
-        <article class="p-card reveal d1">
-          <div class="imgwrap">
-            <span class="pill">Geschenk</span>
-            <img src="images/placeholder.jpg" alt="Vikings Minerals Geschenk-Edition">
-          </div>
-          <div class="p-card-body">
-            <h3>Geschenk-Edition</h3>
-            <p>Wuchtiges Format mit nordischer Symbolik — ideales Geschenk für Sammler.</p>
-            <a href="https://ebay.de">Ansehen →</a>
-          </div>
-        </article>
-        <article class="p-card reveal d2">
-          <div class="imgwrap">
-            <span class="pill teal">Reserve</span>
-            <img src="images/placeholder.jpg" alt="Vikings Minerals Reserve-Set">
-          </div>
-          <div class="p-card-body">
-            <h3>Reserve-Set</h3>
-            <p>Mehrere Barren im Set für stapelbaren Bestand und einheitliche Optik.</p>
-            <a href="https://ebay.de">Ansehen →</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="steps" style="margin-top:26px">
-        <div class="step reveal">
-          <div class="n">01</div>
-          <h3>Auswählen</h3>
-          <p>Format wählen und Artikeldetails auf eBay prüfen — Gewicht, Motiv, Prägung.</p>
-        </div>
-        <div class="step reveal d1">
-          <div class="n">02</div>
-          <h3>Sicher kaufen</h3>
-          <p>Über eBay-Käuferschutz bestellen — transparent, nachvollziehbar, abgesichert.</p>
-        </div>
-        <div class="step reveal d2">
-          <div class="n">03</div>
-          <h3>Prüfen &amp; lagern</h3>
-          <p>Lieferung prüfen, trocken lagern und stapeln — fertig ist die Reserve.</p>
-        </div>
+  <!-- 05 FRAGEN -->
+  <section class="block" id="fragen">
+    <div class="wrap">
+      <p class="sec-label reveal"><b>05</b> Fragen zum Material</p>
+      <h2 class="title serif reveal">Kurz beantwortet.</h2>
+      <div class="faq reveal">
+        <details open>
+          <summary>Ist der Barren massiv? <span class="pm">+</span></summary>
+          <p class="a">Ja. Massiver Vollguss aus Cu 999, kein Hohlkörper, keine Beschichtung. Gewicht und Maße stehen oben; die Toleranz beträgt ± 5 g.</p>
+        </details>
+        <details>
+          <summary>Warum sieht jeder Barren etwas anders aus? <span class="pm">+</span></summary>
+          <p class="a">Handguss und Luftkühlung erzeugen eine individuelle Gussstruktur. Kleine Poren, Farbspiele und bei Ragnar Patina-Unterschiede sind gewollt und kein Mangel.</p>
+        </details>
+        <details>
+          <summary>Wie kaufe ich, und wie läuft der Versand? <span class="pm">+</span></summary>
+          <p class="a">Über unsere Angebote auf ebay.de — dort gilt der eBay-Käuferschutz. Versand aus Kiel in 1–2 Werktagen mit DHL, versichert und neutral verpackt.</p>
+        </details>
+        <details>
+          <summary>Gibt es ein Rückgaberecht? <span class="pm">+</span></summary>
+          <p class="a">Ja, 14 Tage Widerrufsrecht ab Erhalt. Einzelheiten stehen im jeweiligen eBay-Angebot.</p>
+        </details>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta" id="kaufen">
-    <div class="container">
-      <div class="cta-box reveal">
-        <div class="cta-text">
-          <span class="eyebrow on-dark">Physische Werte aus Kupfer</span>
-          <h2>Vikings <em>Minerals</em></h2>
-          <p>
-            Kupferbarren mit nordischer Reserve-Ästhetik, Schiffsmotiv und
-            klassischer Metallwirkung — physischer Sachwert mit klarer Haltung.
-          </p>
-          <div class="button-row">
-            <a href="https://ebay.de" class="button copper">Jetzt kaufen</a>
-            <a href="#barren" class="button light-ghost">Zum Barren</a>
-          </div>
-        </div>
-        <div class="cta-media">
-          <img src="images/placeholder.jpg" alt="VIKINGS MINERALS Kupferwerte – Barren im Detail">
-          <div class="cta-badge"><strong>999</strong> Feinkupfer · <strong>1 KG</strong> massiv</div>
-        </div>
+  <div class="cta">
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <h2>Das Datenblatt endet hier — der Barren wiegt ein Kilo.</h2>
+        <p>Wenn Zusammensetzung und Maße passen: Das aktuelle Angebot mit verfügbaren Nummern finden Sie auf eBay. Fragen zum Material beantworten wir dort ebenfalls.</p>
+        <div style="height:20px"></div>
+        <a class="btn solid" href="https://ebay.de" target="_blank" rel="noopener">Verfügbarkeit auf eBay prüfen</a>
+      </div>
+      <div class="cta-facts reveal">
+        <div><span>Material</span><b>Cu 999 · min. 99,9 %</b></div>
+        <div><span>Gewicht</span><b>1.000 g</b></div>
+        <div><span>Herstellung</span><b>Handguss · Kiel</b></div>
+        <div><span>Beilage</span><b>Materialkarte · Nummer</b></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand">
-            <span class="shield">ᚱ</span>
-            <span><strong>VIKINGS</strong><span>MINERALS</span></span>
-          </div>
-          <p>Massive Kupferbarren mit nordischer Symbolik — Schiff, Runen und 999 Feinkupfer in klarer Reserve-Form.</p>
-        </div>
-        <div>
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#saga">Saga</a></li>
-            <li><a href="#vorteile">Vorteile</a></li>
-            <li><a href="#barren">Kupferbarren</a></li>
-            <li><a href="#sortiment">Sortiment</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Kaufen</h4>
-          <ul>
-            <li><a href="https://ebay.de">eBay Shop</a></li>
-            <li><a href="#kaufen">Reserve sichern</a></li>
-            <li><a href="#barren">Datenblatt</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Rechtliches</h4>
-          <ul>
-            <li><a href="impressum.html">Impressum</a></li>
-            <li><a href="#top">Nach oben</a></li>
-          </ul>
-        </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Vikings Minerals</h4>
+        <p>Feinkupfer-Manufaktur aus Kiel. Ein Werkstoff (Cu 999), drei Motive, vollständiges Datenblatt. Verkauf über eBay.</p>
       </div>
-      <div class="footer-bottom">
-        <span>© 2019 VIKINGS MINERALS</span>
-        <span><a href="impressum.html">Impressum</a> · Kupferbarren mit Wikingerschiff-Motiv</span>
+      <div>
+        <h4>Inhalt</h4>
+        <ul>
+          <li><a href="#material">Material</a></li>
+          <li><a href="#zusammensetzung">Datenblatt</a></li>
+          <li><a href="#formen">Lieferformen</a></li>
+          <li><a href="https://ebay.de" target="_blank" rel="noopener">eBay-Angebote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="#fragen">Versand &amp; Rückgabe</a></li>
+          <li><a href="#pruefung">Prüfung &amp; Herkunft</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Vikings Minerals · Kiel</span>
+      <span><a href="impressum.html">Impressum</a></span>
+    </div>
+  </div>
+</footer>
 
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-  // Header shadow
-  window.addEventListener("scroll", function(){
-    document.body.classList.toggle("scrolled", window.scrollY > 20);
-  });
-
-  // Mobile nav
-  document.getElementById("burger").addEventListener("click", function(){
-    document.getElementById("nav").classList.toggle("open");
-  });
-  document.querySelectorAll("#nav a").forEach(function(a){
-    a.addEventListener("click", function(){
-      document.getElementById("nav").classList.remove("open");
-    });
-  });
-
-  // Animated counters (shared)
-  var band = document.getElementById("statsBand");
-  var counted = false;
-  function animateCounts(){
-    if(counted) return; counted = true;
-    if(band) band.classList.add("inview");
-    document.querySelectorAll("[data-count]").forEach(function(el){
-      var target = parseInt(el.getAttribute("data-count"), 10);
-      if(window.gsap){
-        var obj = {v: 0};
-        gsap.to(obj, {v: target, duration: 1.4, ease: "power3.out",
-          onUpdate: function(){ el.textContent = Math.round(obj.v); }});
-      } else {
-        var start = null, dur = 1200;
-        function step(ts){
-          if(!start) start = ts;
-          var p = Math.min((ts - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased);
-          if(p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-    });
-  }
-
-  if(window.gsap){
-    document.body.classList.add("gsap-on");
-    if(window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-
-    // --- Hero intro timeline ---
-    var tl = gsap.timeline({defaults:{ease:"power3.out"}});
-    tl.from(".hero-title .h-line", {yPercent: 115, duration: 1, stagger: 0.12})
-      .from(".hero-topline", {y: -18, opacity: 0, duration: 0.7}, "-=0.7")
-      .from(".hero-kicker", {y: 26, opacity: 0, duration: 0.7}, "-=0.55")
-      .from(".hero-pano", {y: 60, opacity: 0, duration: 0.9}, "-=0.45")
-      .from(".hero-dock", {y: 44, opacity: 0, duration: 0.8}, "-=0.55")
-      .from(".scrollhint", {opacity: 0, x: -18, duration: 0.6}, "-=0.4");
-
-    // --- Cinematic parallax ---
-    if(window.ScrollTrigger){
-      gsap.to("#heroBg", {yPercent: 16, ease: "none",
-        scrollTrigger: {trigger: ".hero", start: "top top", end: "bottom top", scrub: true}});
-      gsap.fromTo("#panoImg", {yPercent: -8, scale: 1.22}, {yPercent: 8, scale: 1.14, ease: "none",
-        scrollTrigger: {trigger: ".hero-pano", start: "top bottom", end: "bottom top", scrub: true}});
-      gsap.to(".hero-runes", {y: 60, opacity: 0.2, ease: "none",
-        scrollTrigger: {trigger: ".hero", start: "top top", end: "bottom top", scrub: true}});
-
-      // --- Section reveals ---
-      gsap.utils.toArray(".reveal").forEach(function(el){
-        var delay = el.classList.contains("d1") ? 0.1 : el.classList.contains("d2") ? 0.2 : el.classList.contains("d3") ? 0.3 : 0;
-        gsap.fromTo(el, {y: 36, opacity: 0}, {y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: delay,
-          scrollTrigger: {trigger: el, start: "top 88%", once: true}});
-      });
-
-      // --- Counters + stats underline ---
-      ScrollTrigger.create({trigger: "#statsBand", start: "top 85%", once: true, onEnter: animateCounts});
-    } else {
-      document.querySelectorAll(".reveal").forEach(function(el){ el.style.opacity = 1; });
-      animateCounts();
-    }
-  } else {
-    // Fallback ohne CDN (offline): native IntersectionObserver
-    var revealEls = document.querySelectorAll(".reveal");
-    document.querySelectorAll(".h-anim").forEach(function(el){ el.style.opacity = 1; });
-    if("IntersectionObserver" in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){ e.target.classList.add("visible"); io.unobserve(e.target); }
-        });
-      }, {threshold:.12});
-      revealEls.forEach(function(el){ io.observe(el); });
-      var bio = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ animateCounts(); bio.disconnect(); } });
-      }, {threshold:.3});
-      if(band) bio.observe(band);
-    } else {
-      revealEls.forEach(function(el){ el.classList.add("visible"); });
-      animateCounts();
-    }
-  }
+(function(){
+  var h=document.getElementById('siteHeader');
+  function onScroll(){ if(h) h.classList.toggle('scrolled', window.scrollY>8); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var b=document.getElementById('burger'),m=document.getElementById('mobileNav');
+  if(b&&m){ b.addEventListener('click',function(){ m.classList.toggle('open'); }); m.addEventListener('click',function(e){ if(e.target.tagName==='A') m.classList.remove('open'); }); }
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target); } }); },{threshold:.1});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('on'); }); }
+  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+})();
 </script>
-
 </body>
 </html>
