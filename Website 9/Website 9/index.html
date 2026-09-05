@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKYTALON FORTUNE – Premium Kupferanlage</title>
+    <meta name="description" content="SKYTALON FORTUNE – Investieren Sie in hochreines 999 Kupfer. Zertifiziert, sicher, nachhaltig. Kupferbarren & Münzen direkt kaufen.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0B1426;
+            --navy-mid: #111D35;
+            --navy-light: #1A2744;
+            --teal: #2A9D8F;
+            --teal-dark: #1F7A6F;
+            --teal-glow: #3DCCBA;
+            --gold: #E9C46A;
+            --gold-dark: #D4A843;
+            --copper: #C87941;
+            --copper-light: #E09B65;
+            --warm-white: #FAFAF9;
+            --warm-gray: #F0EDE6;
+            --warm-gray-2: #E5E0D6;
+            --text-primary: #0B1426;
+            --text-secondary: #4A5568;
+            --text-muted: #8896A7;
+            --text-light: #F0ECE3;
+            --text-light-muted: #8896A7;
+            --white: #FFFFFF;
+            --radius: 0px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            color: var(--text-primary);
+            background: var(--warm-white);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0 40px;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(11, 20, 38, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .header-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-mark svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-sub {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--teal-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 1px;
+        }
+
+        .nav { display: flex; align-items: center; gap: 8px; }
+
+        .nav a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+
+        .nav-cta {
+            background: var(--teal) !important;
+            color: var(--white) !important;
+            padding: 10px 22px !important;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover { background: var(--teal-dark) !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 24px; height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 20, 38, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .mobile-nav.active { display: flex; }
+
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover { color: var(--teal-glow); }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px; right: 30px;
+            background: none; border: none;
+            color: var(--white);
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--navy);
+            overflow: hidden;
+        }
+
+        /* Left image side */
+        .hero-left {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .hero-left::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 60%, var(--navy) 100%);
+        }
+
+        /* Right content side */
+        .hero-right {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(42, 157, 143, 0.08);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            padding: 10px 22px;
+            margin-bottom: 40px;
+        }
+
+        .hero-badge-dot {
+            width: 8px; height: 8px;
+            background: var(--teal-glow);
+            border-radius: 50%;
+        }
+
+        .hero-badge span {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--teal-glow);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+
+        /* Giant stacked headline */
+        .hero-headline {
+            margin-bottom: 32px;
+        }
+
+        .hero-line {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-line-1 {
+            font-size: clamp(48px, 8vw, 100px);
+            color: rgba(255,255,255,0.07);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+        }
+
+        .hero-line-2 {
+            font-size: clamp(48px, 8vw, 100px);
+            color: var(--teal-glow);
+        }
+
+        .hero-line-3 {
+            font-size: clamp(48px, 8vw, 100px);
+            color: var(--white);
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--text-light-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-teal {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .btn-teal:hover {
+            background: var(--teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(42, 157, 143, 0.3);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.12);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--teal-glow);
+            color: var(--teal-glow);
+        }
+
+        /* Bottom data strip */
+        .hero-data-strip {
+            display: flex;
+            gap: 2px;
+            margin-top: 48px;
+        }
+
+        .hero-data-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .hero-data-item:hover {
+            background: rgba(42,157,143,0.06);
+            border-color: rgba(42,157,143,0.15);
+        }
+
+        .hero-data-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero-data-num small {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--teal-glow);
+        }
+
+        .hero-data-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-light-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+
+
+        /* ===== MARQUEE STRIP ===== */
+        .marquee-strip {
+            background: var(--teal);
+            overflow: hidden;
+            padding: 14px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marqueeScroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 36px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .marquee-item .dot {
+            width: 5px; height: 5px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--warm-white);
+            padding: 140px 0;
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-left {}
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-tag-line {
+            width: 32px; height: 2px;
+            background: var(--teal);
+        }
+
+        .section-tag span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .about h2 {
+            font-size: clamp(36px, 4vw, 50px);
+            margin-bottom: 28px;
+            line-height: 1.1;
+        }
+
+        .about h2 em {
+            font-style: italic;
+            color: var(--teal);
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+
+        .about-right {
+            position: relative;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-img-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-img-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            background: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .about-img-overlay .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--teal-glow);
+            line-height: 1;
+        }
+
+        .about-img-overlay .label {
+            font-size: 12px;
+            color: var(--text-light-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ===== PRODUCTS ===== */
+        .products {
+            background: var(--navy);
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .products .section-tag span { color: var(--teal-glow); }
+        .products .section-tag-line { background: var(--teal-glow); }
+
+        .products .section-header {
+            margin-bottom: 72px;
+        }
+
+        .section-header {
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: clamp(36px, 4vw, 52px);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 17px;
+            color: var(--text-light-muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .products-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .product-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 48px 36px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--teal);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .product-item:hover::before { transform: scaleX(1); }
+
+        .product-item:hover {
+            background: rgba(42, 157, 143, 0.04);
+            border-color: rgba(42, 157, 143, 0.15);
+        }
+
+        .product-weight {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--teal-glow);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .product-weight small {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-light-muted);
+        }
+
+        .product-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--text-light-muted);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .product-price small {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-light-muted);
+        }
+
+        .product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--teal);
+            color: var(--white);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .product-btn:hover {
+            background: var(--teal-dark);
+            transform: translateY(-1px);
+        }
+
+        .product-btn svg {
+            width: 14px; height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .product-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--navy);
+            background: var(--gold);
+            padding: 4px 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* ===== PROCESS / HOW IT WORKS ===== */
+        .process {
+            background: var(--warm-gray);
+            padding: 140px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 72px;
+        }
+
+        .process-step {
+            padding: 40px 32px;
+            border-right: 1px solid var(--warm-gray-2);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .process-step:last-child { border-right: none; }
+
+        .process-step:hover {
+            background: var(--white);
+        }
+
+        .step-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--warm-gray-2);
+            line-height: 1;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .process-step:hover .step-num { color: var(--teal); }
+
+        .step-title {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 72px;
+            right: -14px;
+            width: 28px; height: 28px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .step-connector svg {
+            width: 12px; height: 12px;
+            stroke: var(--white);
+            fill: none;
+            stroke-width: 2.5;
+        }
+
+        .process-step:last-child .step-connector { display: none; }
+
+        /* ===== BENEFITS ===== */
+        .benefits {
+            background: var(--warm-white);
+            padding: 140px 0;
+        }
+
+        .benefits-layout {
+            display: grid;
+            grid-template-columns: 0.4fr 0.6fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .benefits-left h2 {
+            font-size: clamp(36px, 4vw, 50px);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .benefits-left h2 em {
+            color: var(--teal);
+            font-style: italic;
+        }
+
+        .benefits-left > p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .benefit-item {
+            background: var(--warm-gray);
+            padding: 36px 32px;
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            background: var(--white);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .benefit-icon-wrap {
+            width: 48px; height: 48px;
+            background: rgba(42, 157, 143, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon-wrap svg {
+            width: 22px; height: 22px;
+            stroke: var(--teal);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .benefit-item h4 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            background: var(--navy-mid);
+            padding: 140px 0;
+            position: relative;
+        }
+
+        .testimonials .section-tag span { color: var(--teal-glow); }
+        .testimonials .section-tag-line { background: var(--teal-glow); }
+
+        .testimonials .section-header h2 { color: var(--white); }
+        .testimonials .section-header p { color: var(--text-light-muted); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 72px;
+        }
+
+        .testimonial-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 32px;
+            transition: var(--transition);
+        }
+
+        .testimonial-item:hover {
+            background: rgba(42, 157, 143, 0.04);
+            border-color: rgba(42, 157, 143, 0.15);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-stars svg {
+            width: 16px; height: 16px;
+            fill: var(--gold);
+        }
+
+        .testimonial-item blockquote {
+            font-size: 15px;
+            color: var(--text-light-muted);
+            line-height: 1.8;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .testimonial-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-light-muted);
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            background: var(--warm-white);
+            padding: 140px 0;
+        }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 0.4fr 0.6fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .faq-left h2 {
+            font-size: clamp(36px, 4vw, 50px);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .faq-left h2 em { color: var(--teal); font-style: italic; }
+
+        .faq-left > p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+        .faq-item {
+            background: var(--warm-gray);
+            border: none;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover { background: var(--warm-gray-2); }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover { color: var(--teal); }
+
+        .faq-question .icon {
+            width: 24px; height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-question .icon svg {
+            width: 16px; height: 16px;
+            stroke: var(--text-secondary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .faq-item.open .faq-question .icon { transform: rotate(45deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 28px 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: var(--navy);
+            padding: 140px 0;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: -100px; left: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(233, 196, 106, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .contact .section-tag span { color: var(--teal-glow); }
+        .contact .section-tag-line { background: var(--teal-glow); }
+
+        .contact .section-header h2 { color: var(--white); }
+        .contact .section-header p { color: var(--text-light-muted); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 72px;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            background: rgba(42, 157, 143, 0.06);
+            border-color: rgba(42, 157, 143, 0.2);
+        }
+
+        .contact-card-icon {
+            width: 52px; height: 52px;
+            background: rgba(42, 157, 143, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-card-icon svg {
+            width: 24px; height: 24px;
+            stroke: var(--teal-glow);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-card-label {
+            font-size: 11px;
+            color: var(--teal-glow);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .contact-card-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 40px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-light-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--teal);
+            background: rgba(42, 157, 143, 0.04);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.25);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-group select option { background: var(--navy); color: var(--white); }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--teal);
+            color: var(--white);
+            border: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-submit:hover {
+            background: var(--teal-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #060D1A;
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer-brand .logo { margin-bottom: 20px; }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-light-muted);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+        .footer-links a {
+            color: var(--text-light-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover { color: var(--teal-glow); }
+
+        .footer-bottom {
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-light-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: var(--text-light-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover { color: var(--teal-glow); }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1050px) {
+            .header { padding: 0 24px; }
+            .nav { display: none; }
+            .hamburger { display: flex; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-left { display: none; }
+            .hero-right { padding: 120px 40px 80px; }
+            .hero-data-strip { flex-wrap: wrap; justify-content: center; }
+            .hero-data-item { min-width: 160px; padding: 16px 24px; }
+            .container { padding: 0 24px; }
+            .about-layout { grid-template-columns: 1fr; gap: 48px; }
+            .about-right { order: -1; }
+            .products-row { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .process-step { border-right: none; border-bottom: 1px solid var(--warm-gray-2); }
+            .process-step:last-child { border-bottom: none; }
+            .step-connector { display: none; }
+            .benefits-layout { grid-template-columns: 1fr; gap: 48px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .faq-layout { grid-template-columns: 1fr; gap: 48px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 700px) {
+            .hero-right { padding: 100px 24px 60px; }
+            .hero-data-strip { flex-direction: column; align-items: center; }
+            .hero-data-item { width: 100%; max-width: 280px; justify-content: center; }
+            .process-steps { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .about-img-overlay { right: 16px; bottom: -20px; width: 140px; height: 140px; }
+            .about-img-overlay .num { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div>
+                    <div class="logo-text">Skytalon</div>
+                    <div class="logo-sub">Fortune</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="#about">Unternehmen</a>
+                <a href="#products">Produkte</a>
+                <a href="#process">Ablauf</a>
+                <a href="#benefits">Vorteile</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Kontakt</a>
+                <a href="impressum.html">Impressum</a>
+                <a href="https://ebay.de" target="_blank" class="nav-cta">Kaufen</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-close" id="mobileClose">&times;</button>
+        <a href="#about" class="mobile-link">Unternehmen</a>
+        <a href="#products" class="mobile-link">Produkte</a>
+        <a href="#process" class="mobile-link">Ablauf</a>
+        <a href="#benefits" class="mobile-link">Vorteile</a>
+        <a href="#faq" class="mobile-link">FAQ</a>
+        <a href="#contact" class="mobile-link">Kontakt</a>
+        <a href="impressum.html" class="mobile-link">Impressum</a>
+        <a href="https://ebay.de" target="_blank" class="mobile-link" style="color:var(--teal-glow);">Jetzt kaufen</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-left">
+            <img src="https://images.pexels.com/photos/321452/pexels-photo-321452.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Gold bars on dark background">
+        </div>
+        <div class="hero-right">
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                <span>999 Feinkupfer – Zertifiziert</span>
+            </div>
+
+            <div class="hero-headline">
+                <span class="hero-line hero-line-1">VERMÖGEN</span>
+                <span class="hero-line hero-line-2">IN KUPFER</span>
+                <span class="hero-line hero-line-3">VERANKERT</span>
+            </div>
+
+            <p class="hero-desc">Physisches Kupfer als Wertanlage – geprüft, zertifiziert und für die Zukunft gedacht. SKYTALON FORTUNE steht für stabilen Wert und transparente Qualität.</p>
+
+            <div class="hero-actions">
+                <a href="#products" class="btn btn-teal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Produkte entdecken
+                </a>
+                <a href="#about" class="btn btn-ghost">Mehr erfahren</a>
+            </div>
+
+            <div class="hero-data-strip">
+                <div class="hero-data-item">
+                    <div class="hero-data-num">999.9<small>Cu</small></div>
+                    <div class="hero-data-label">Feinkupfer<br>Reinheit</div>
+                </div>
+                <div class="hero-data-item">
+                    <div class="hero-data-num">+18.5<small>%</small></div>
+                    <div class="hero-data-label">Jährliche<br>Kurssteigerung</div>
+                </div>
+                <div class="hero-data-item">
+                    <div class="hero-data-num">24<small>h</small></div>
+                    <div class="hero-data-label">Schneller<br>Versand</div>
+                </div>
+                <div class="hero-data-item">
+                    <div class="hero-data-num">100<small>%</small></div>
+                    <div class="hero-data-label">Recycelbar<br>Nachhaltig</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <div class="marquee-item"><span class="dot"></span>999 Feinkupfer</div>
+            <div class="marquee-item"><span class="dot"></span>Zertifiziert</div>
+            <div class="marquee-item"><span class="dot"></span>Handgegossen</div>
+            <div class="marquee-item"><span class="dot"></span>100% Recycelbar</div>
+            <div class="marquee-item"><span class="dot"></span>Schneller Versand</div>
+            <div class="marquee-item"><span class="dot"></span>EU Hergestellt</div>
+            <div class="marquee-item"><span class="dot"></span>Premium Qualität</div>
+            <div class="marquee-item"><span class="dot"></span>999 Feinkupfer</div>
+            <div class="marquee-item"><span class="dot"></span>Zertifiziert</div>
+            <div class="marquee-item"><span class="dot"></span>Handgegossen</div>
+            <div class="marquee-item"><span class="dot"></span>100% Recycelbar</div>
+            <div class="marquee-item"><span class="dot"></span>Schneller Versand</div>
+            <div class="marquee-item"><span class="dot"></span>EU Hergestellt</div>
+            <div class="marquee-item"><span class="dot"></span>Premium Qualität</div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-left reveal">
+                    <div class="section-tag">
+                        <div class="section-tag-line"></div>
+                        <span>Über Skytalon Fortune</span>
+                    </div>
+                    <h2>Kupfer als <em>Wertanlage</em> – fundiert und transparent</h2>
+                    <p>SKYTALON FORTUNE wurde gegründet, um privaten und institutionellen Anlegern den Zugang zu physischem Kupfer als Wertanlage zu ermöglichen.</p>
+                    <p>Unsere Kupferbarren werden ausschließlich aus 999 Feinkupfer gefertigt und durchlaufen ein mehrstufiges Prüfverfahren. Von der Rohstoffgewinnung bis zum fertigen Barren – wir setzen auf volle Transparenz und Nachvollziehbarkeit.</p>
+                    <p>Jeder Barren wird individuell nummeriert und mit einem Prüfzertifikat ausgeliefert. So stellen wir sicher, dass Sie jederzeit die Echtheit und Qualität Ihrer Anlage nachweisen können.</p>
+                </div>
+                <div class="about-right reveal">
+                    <div class="about-visual">
+                        <div style="width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--teal-dark) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+                            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(42,157,143,0.2) 0%,transparent 60%);"></div>
+                            <div style="text-align:center;z-index:1;padding:40px;">
+                                <div style="font-family:'Space Grotesk',sans-serif;font-size:80px;font-weight:700;color:var(--teal-glow);line-height:1;">999</div>
+                                <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--text-light-muted);letter-spacing:4px;text-transform:uppercase;margin-top:8px;">Feinkupfer</div>
+                            </div>
+                        </div>
+                        <div class="about-img-overlay">
+                            <div class="num">12+</div>
+                            <div class="label">Jahre<br>Erfahrung</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag" style="justify-content:center;">
+                    <div class="section-tag-line"></div>
+                    <span>Kollektion</span>
+                </div>
+                <h2>Unsere Kupferbarren</h2>
+                <p>Verfügbare Größen – vom kompakten Einstiegsbarren bis zur Premium-Investition.</p>
+            </div>
+            <div class="products-row">
+                <div class="product-item reveal">
+                    <div class="product-weight">100<small>g</small></div>
+                    <div class="product-name">Skytalon Starter</div>
+                    <p class="product-desc">Der ideale Einstieg in die Kupferanlage. Kompakt, hochwertig und perfekt für Einsteiger, die ihren ersten Barren erwerben möchten.</p>
+                    <div class="product-price-row">
+                        <span class="product-price">ab €29<small> / Stück</small></span>
+                        <a href="https://ebay.de" target="_blank" class="product-btn">
+                            Kaufen
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-item reveal">
+                    <div class="product-tag">Bestseller</div>
+                    <div class="product-weight">500<small>g</small></div>
+                    <div class="product-name">Skytalon Core</div>
+                    <p class="product-desc">Das Herzstück unserer Kollektion. Überzeugt durch beachtliche Masse, feine Prägung und ein unverwechselbares Design.</p>
+                    <div class="product-price-row">
+                        <span class="product-price">ab €129<small> / Stück</small></span>
+                        <a href="https://ebay.de" target="_blank" class="product-btn">
+                            Kaufen
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-item reveal">
+                    <div class="product-tag" style="background:var(--teal);color:var(--white);">Premium</div>
+                    <div class="product-weight">1000<small>g</small></div>
+                    <div class="product-name">Skytalon Vault</div>
+                    <p class="product-desc">Für anspruchsvolle Investoren und Sammler. Maximale Reinheit, maximale Wirkung – Ihre Anlage für die Zukunft.</p>
+                    <div class="product-price-row">
+                        <span class="product-price">ab €249<small> / Stück</small></span>
+                        <a href="https://ebay.de" target="_blank" class="product-btn">
+                            Kaufen
+                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag" style="justify-content:center;">
+                    <div class="section-tag-line"></div>
+                    <span>So funktioniert's</span>
+                </div>
+                <h2>In 4 Schritten zum Kupferbarren</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <div class="step-num">01</div>
+                    <h4 class="step-title">Auswählen</h4>
+                    <p class="step-desc">Wählen Sie Ihr Wunschgewicht aus unserer Kollektion – von 100g bis 1kg.</p>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">02</div>
+                    <h4 class="step-title">Bestellen</h4>
+                    <p class="step-desc">Sichere Bestellung über unseren eBay-Shop. Schnell, einfach und geschützt.</p>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">03</div>
+                    <h4 class="step-title">Prüfen</h4>
+                    <p class="step-desc">Jeder Barren wird individuell geprüft und mit einem Zertifikat versehen.</p>
+                    <div class="step-connector">
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">04</div>
+                    <h4 class="step-title">Erhalten</h4>
+                    <p class="step-desc">Versicherter und diskreter Versand innerhalb von 24 Stunden direkt zu Ihnen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="benefits-layout">
+                <div class="benefits-left reveal">
+                    <div class="section-tag">
+                        <div class="section-tag-line"></div>
+                        <span>Ihre Vorteile</span>
+                    </div>
+                    <h2>Warum <em>Skytalon</em> Fortune?</h2>
+                    <p>Wir bieten mehr als nur Kupferbarren – wir bieten Sicherheit, Transparenz und langfristigen Wert für Ihr Portfolio.</p>
+                </div>
+                <div class="benefits-grid reveal">
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h4>999 Feinkupfer</h4>
+                        <p>Jeder Barren besteht aus reinem Kupfer ohne Legierungszusätze – höchste Materialqualität garantiert.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                        </div>
+                        <h4>Zertifiziert</h4>
+                        <p>Mehrstufige Qualitätskontrolle und individuelles Prüfzertifikat für jeden einzelnen Barren.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <h4>Schneller Versand</h4>
+                        <p>Versicherter und diskreter Versand innerhalb von 24 Stunden nach Zahlungseingang.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                        </div>
+                        <h4>100% Recycelbar</h4>
+                        <p>Kupfer ist endlich recycelbar – eine nachhaltige und zukunftsweisende Anlageform.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
+                        <h4>Wertstabil</h4>
+                        <p>Kupfer ist ein basics Rohstoff mit steigender Nachfrage – ideal als Inflationsschutz.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        </div>
+                        <h4>Persönlicher Support</h4>
+                        <p>Unser Team ist für Sie da – von der Beratung bis zur Nachbetreuung. Reaktionszeit unter 24h.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag" style="justify-content:center;">
+                    <div class="section-tag-line"></div>
+                    <span>Stimmen</span>
+                </div>
+                <h2>Was unsere Kunden sagen</h2>
+                <p>Echte Bewertungen von zufriedenen Kunden und Investoren.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-item reveal">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <blockquote>"Die Qualität der Skytalon Barren ist erstklassig. Besonders das Zertifikat und die individuelle Nummerierung geben ein Gefühl von Sicherheit."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">L.M.</div>
+                        <div>
+                            <div class="testimonial-name">Lukas M.</div>
+                            <div class="testimonial-role">Investor, Frankfurt</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item reveal">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <blockquote>"Schneller Versand, tolle Verpackung und der Barren sieht noch besser aus als erwartet. Kaufe definitiv wieder!"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S.B.</div>
+                        <div>
+                            <div class="testimonial-name">Sandra B.</div>
+                            <div class="testimonial-role">Sammlerin, München</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item reveal">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <blockquote>"Als langjähriger Kupfersammler kann ich Skytalon Fortune nur empfehlen. Konstante Qualität und fairer Preis."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R.K.</div>
+                        <div>
+                            <div class="testimonial-name">Ralf K.</div>
+                            <div class="testimonial-role">Sammler, Berlin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-layout">
+                <div class="faq-left reveal">
+                    <div class="section-tag">
+                        <div class="section-tag-line"></div>
+                        <span>Häufige Fragen</span>
+                    </div>
+                    <h2>Alles was Sie <em>wissen</em> müssen</h2>
+                    <p>Finden Sie Antworten auf die häufigsten Fragen zu unseren Produkten und Services.</p>
+                </div>
+                <div class="faq-list reveal">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Welche Reinheit haben Ihre Kupferbarren?
+                            <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">Alle unsere Kupferbarren bestehen aus 999 Feinkupfer (Cu 99,99%). Jeder Barren wird individuell geprüft und mit einem Prüfzertifikat ausgeliefert, das die Reinheit bestätigt.</div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wie schnell erfolgt der Versand?
+                            <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">Nach Zahlungseingang versenden wir Ihre Bestellung innerhalb von 24 Stunden. Der Versand erfolgt versichert und diskret direkt an Ihre Adresse.</div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Bieten Sie auch Großbestellungen an?
+                            <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">Ja, wir bieten attraktive Konditionen für Großbestellungen. Kontaktieren Sie uns für ein individuelles Angebot – wir beraten Sie gerne persönlich.</div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Wie speichere ich meine Kupferbarren richtig?
+                            <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">Kupferbarren sollten an einem trockenen, kühlen Ort gelagert werden. Vermeiden Sie direkte Sonneneinstrahlung und Feuchtigkeit. In der Originalverpackung sind Ihre Barren optimal geschützt.</div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Kann ich Kupferbarren später wieder verkaufen?
+                            <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">Ja, Kupferbarren sind jederzeit veräußerbar. Durch die hohe Reinheit und das Prüfzertifikat haben unsere Barren einen hohen Wiederverkaufswert auf dem Markt.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag" style="justify-content:center;">
+                    <div class="section-tag-line"></div>
+                    <span>Kontakt</span>
+                </div>
+                <h2>Sprechen Sie mit uns</h2>
+                <p>Haben Sie Fragen oder möchten Sie eine Großbestellung aufgeben? Wir sind für Sie da.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-cards reveal">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">E-Mail</div>
+                            <div class="contact-card-value">info@skytalonfortune.de</div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Standort</div>
+                            <div class="contact-card-value">Deutschland</div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Antwortzeit</div>
+                            <div class="contact-card-value">Innerhalb von 24h</div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form reveal" onsubmit="return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Ihr Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" id="email" placeholder="ihre@email.de">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Betreff</label>
+                        <select id="subject">
+                            <option value="">Bitte wählen...</option>
+                            <option>Produktanfrage</option>
+                            <option>Großbestellung</option>
+                            <option>Investment-Beratung</option>
+                            <option>Sonstiges</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nachricht</label>
+                        <textarea id="message" placeholder="Ihre Nachricht..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Nachricht senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <div>
+                            <div class="logo-text">Skytalon</div>
+                            <div class="logo-sub">Fortune</div>
+                        </div>
+                    </a>
+                    <p>Premium Kupferbarren aus 999 Feinkupfer. Zertifiziert, nachhaltig, wertstabil.</p>
+                </div>
+                <div>
+                    <h5>Produkte</h5>
+                    <ul class="footer-links">
+                        <li><a href="#products">100g Barren</a></li>
+                        <li><a href="#products">500g Barren</a></li>
+                        <li><a href="#products">1kg Barren</a></li>
+                        <li><a href="https://ebay.de" target="_blank">eBay Shop</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Unternehmen</h5>
+                    <ul class="footer-links">
+                        <li><a href="#about">Über uns</a></li>
+                        <li><a href="#benefits">Vorteile</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Rechtliches</h5>
+                    <ul class="footer-links">
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Skytalon Fortune. Alle Rechte vorbehalten.</p>
+                <div class="footer-bottom-links">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Header scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Mobile nav
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileClose = document.getElementById('mobileClose');
+        hamburger.addEventListener('click', () => mobileNav.classList.add('active'));
+        mobileClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileNav.classList.remove('active'));
+        });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+</html>

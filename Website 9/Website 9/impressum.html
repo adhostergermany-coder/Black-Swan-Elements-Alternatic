@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | SKYTALON FORTUNE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0B1426;
+            --navy-mid: #111D35;
+            --teal: #2A9D8F;
+            --teal-dark: #1F7A6F;
+            --teal-glow: #3DCCBA;
+            --warm-white: #FAFAF9;
+            --warm-gray: #F0EDE6;
+            --text-primary: #0B1426;
+            --text-secondary: #4A5568;
+            --text-muted: #8896A7;
+            --text-light: #F0ECE3;
+            --text-light-muted: #8896A7;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            color: var(--text-primary);
+            background: var(--warm-white);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 18px 40px;
+            background: rgba(11, 20, 38, 0.96);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 36px; height: 36px;
+            background: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-mark svg {
+            width: 18px; height: 18px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-sub {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--teal-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            color: var(--text-light-muted);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: var(--teal-glow); }
+
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 160px 40px 100px;
+        }
+
+        .page-content h1 {
+            font-size: 42px;
+            margin-bottom: 40px;
+        }
+
+        .page-content h2 {
+            font-size: 22px;
+            margin-top: 36px;
+            margin-bottom: 12px;
+        }
+
+        .page-content p,
+        .page-content li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .page-content ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .page-content a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        .page-content a:hover { text-decoration: underline; }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--warm-gray);
+            margin: 32px 0;
+        }
+
+        .footer-mini {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 40px;
+            border-top: 1px solid var(--warm-gray);
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-mini a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .header { padding: 16px 24px; }
+            .page-content { padding: 120px 24px 60px; }
+            .page-content h1 { font-size: 32px; }
+            .footer-mini { padding: 20px 24px; flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+                <div class="logo-text">Skytalon</div>
+                <div class="logo-sub">Fortune</div>
+            </div>
+        </a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            Skytalon Fortune<br>
+            Musterstraße 42<br>
+            10115 Berlin
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0) 30 98765432<br>
+            E-Mail: <a href="mailto:info@skytalonfortune.de">info@skytalonfortune.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 987 654 321
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 Skytalon Fortune</p>
+        <a href="index.html">Startseite</a>
+    </footer>
+
+</body>
+</html>
