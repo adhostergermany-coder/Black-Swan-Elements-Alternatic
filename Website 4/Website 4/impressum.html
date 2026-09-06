@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – AURORA CELESTIAL MINT</title>
+
+  <!-- Google Fonts: Italiana (Editorial Chic), Bodoni Moda (Haute Couture), Plus Jakarta Sans (Clean Modern Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070509;
+      --bg-surface: #0e0a12;
+      --bg-card: rgba(22, 16, 28, 0.7);
+
+      --copper-primary: #e08e6d;
+      --copper-light: #f7b79d;
+      --copper-glow: #ffcaa7;
+      --copper-dark: #a85839;
+
+      --champagne: #fbeddc;
+      --text-main: #f5efe8;
+      --text-muted: #bdaea2;
+
+      --border-subtle: rgba(224, 142, 109, 0.2);
+      --border-glow: rgba(247, 183, 157, 0.45);
+
+      --font-display: 'Italiana', serif;
+      --font-serif: 'Bodoni Moda', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--copper-light);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Ambient Glows */
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.25;
+    }
+
+    .glow-1 {
+      top: -100px;
+      left: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--copper-primary) 0%, transparent 70%);
+    }
+
+    /* HEADER */
+    .header {
+      position: relative;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 5, 9, 0.95);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-symbol {
+      width: 36px;
+      height: 36px;
+    }
+
+    .logo-symbol svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--copper-light);
+      stroke-width: 1.5;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ffffff 0%, var(--champagne) 40%, var(--copper-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tag {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      color: var(--copper-primary);
+      text-transform: uppercase;
+      margin-top: -3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    /* CONTENT */
+    .imprint-section {
+      padding: 80px 0 120px;
+      position: relative;
+    }
+
+    .imprint-header {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .imprint-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--champagne);
+      margin-bottom: 12px;
+    }
+
+    .imprint-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 50px 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .imprint-card h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--copper-light);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .imprint-card h3 {
+      font-size: 1.1rem;
+      color: var(--champagne);
+      margin-top: 24px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .imprint-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .imprint-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #040306;
+      border-top: 1px solid var(--border-subtle);
+      padding: 50px 0 30px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ambient-glow glow-1"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-symbol">
+          <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" />
+            <path d="M20 6 L20 34 M6 20 L34 20 M10 10 L30 30 M10 30 L30 10" />
+            <circle cx="20" cy="20" r="6" />
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">AURORA CELESTIAL</span>
+          <span class="brand-tag">Fine Copper Bullion · Mint</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Zurück zur Startseite</a>
+        <a href="index.html#details" class="nav-link">Der Barren</a>
+        <a href="https://ebay.de" target="_blank" rel="noopener" class="nav-link" style="color: var(--copper-light);">eBay Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="imprint-section">
+    <div class="container">
+
+      <div class="imprint-header">
+        <h1 class="imprint-title">Impressum</h1>
+        <p style="color: var(--copper-light); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem;">
+          Angaben gemäß § 5 TMG · Rechtliche Hinweise
+        </p>
+      </div>
+
+      <div class="imprint-card">
+        <h2>Unternehmensangaben</h2>
+        <p>
+          <strong>[Firmenname / Brand Owner]</strong><br>
+          [Straße und Hausnummer]<br>
+          [PLZ Ort]<br>
+          [Deutschland]
+        </p>
+
+        <h3>Vertreten durch:</h3>
+        <p>[Vorname Nachname / Geschäftsführer]</p>
+
+        <h3>Kontakt:</h3>
+        <p>
+          Telefon: [Telefonnummer]<br>
+          E-Mail: <a href="mailto:contact@auroracelestial.com">contact@auroracelestial.com</a>
+        </p>
+
+        <h3>Registereintrag:</h3>
+        <p>
+          Eintragung im Handelsregister.<br>
+          Registergericht: [Amtsgericht / Registergericht]<br>
+          Registernummer: [HRB XXXXX]
+        </p>
+
+        <h3>Umsatzsteuer-ID:</h3>
+        <p>
+          Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+          [DE XXXXXXXXX]
+        </p>
+      </div>
+
+      <div class="imprint-card">
+        <h2>EU-Streitschlichtung & Verbraucherstreitbeilegung</h2>
+        <p>
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>.<br>
+          Unsere E-Mail-Adresse finden Sie oben im Impressum.
+        </p>
+        <p>
+          Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </div>
+
+      <div class="imprint-card">
+        <h2>Haftung für Inhalte und Links</h2>
+        <h3>Haftung für Inhalte</h3>
+        <p>
+          Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+        <h3>Haftung für Links</h3>
+        <p>
+          Unser Angebot enthält Links zu externen Websites Dritter (insbesondere zu Plattformen wie eBay.de), auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+        <h3>Urheberrecht</h3>
+        <p>
+          Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Aurora Celestial Mint · A Part of Black Swan Elements Portfolio</p>
+    </div>
+  </footer>
+
+</body>
+</html>
