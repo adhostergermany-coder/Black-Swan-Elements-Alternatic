@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOLFCREST COPPER RESERVE | Kupfer-Reserve &amp; Barren</title>
+<meta name="description" content="WOLFCREST COPPER RESERVE — Kupfer als physische Reserve. Barren aus elektrolytisch raffiniertem Reinkupfer, gewogen, geprüft, nummeriert. Verkauf über eBay.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4 56 16v18c0 14-10 22-24 26C18 56 8 48 8 34V16Z' fill='%2312433B'/%3E%3Cpath d='M32 12 48 20v13c0 10-7 16-16 19-9-3-16-9-16-19V20Z' fill='%23C56A2B'/%3E%3Cpath d='M32 22c5 0 8 3.4 8 8.2 0 4.2-2.6 6.8-5.4 8.8L36 46h-3.4l-1.2-6h-1.6l-1.2 6H26l1.4-7c-2.8-2-5.4-4.6-5.4-8.8C22 25.4 27 22 32 22Zm0 4.4c-2.6 0-4.4 1.6-4.4 4 0 2.2 1.4 3.6 3 4.8l1.4 1 1.4-1c1.6-1.2 3-2.6 3-4.8 0-2.4-1.8-4-4.4-4Z' fill='%23F2EDDF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,900&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ==================================================================
+   WOLFCREST COPPER RESERVE — "OXIDIZED VAULT"
+   Design DNA (bewusst anders als Website 1–10):
+   · Palette: patiniertes Grün (Verdigris) statt Kupfer-Orange
+   · Typo: Fraunces (weiche Display-Serif) statt Cormorant/Oswald
+   · Layout: diagonale Clipped Sections statt Rail/Cards
+   · Motion: Embers, Gauge, Crest-Reveal, Kaskade statt Fade-Ups
+   ================================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --night:    #0A1412;
+  --night-2:  #0E1B18;
+  --pine:     #123430;
+  --pine-2:   #1A4A42;
+  --patina:   #2E7D6B;
+  --patina-2: #3E9B85;
+  --verd:     #6FC2A8;
+  --mint:     #9FDCC6;
+  --ash:      #B9C9C0;
+  --ash-dim:  #7E948A;
+  --bone:     #F0EBDD;
+  --paper:    #F4EFE2;
+  --copper:   #C56A2B;
+  --copper-2: #DA8A47;
+  --ember:    #E8A45C;
+  --rustdeep: #8A4718;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Archivo', 'Segoe UI', sans-serif;
+  background: var(--night);
+  color: var(--ash);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--copper); color: var(--night); }
+
+h1, h2, h3, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 600; line-height: 1.02; }
+.mono { font-family: 'Space Mono', monospace; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- ambient ember canvas ---------- */
+#embers { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+/* ---------- crest reveal curtain ---------- */
+.crest-veil {
+  position: fixed; inset: 0; z-index: 4000;
+  background: var(--night);
+  display: grid; place-items: center;
+  transition: opacity .9s var(--ease-io) .25s, visibility 0s 1.3s;
+}
+.crest-veil.gone { opacity: 0; visibility: hidden; }
+.crest-veil svg { width: min(340px, 60vw); height: auto; }
+.crest-veil .crest-path { fill: none; stroke: var(--verd); stroke-width: 2.4; stroke-dasharray: 420; stroke-dashoffset: 420; animation: crestDraw 1.05s var(--ease-io) forwards; }
+.crest-veil .crest-fill { fill: var(--pine-2); opacity: 0; animation: crestFillIn .5s var(--ease-out) .55s forwards; }
+.crest-veil .crest-word { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 7px; fill: var(--ash-dim); opacity: 0; animation: crestFillIn .5s var(--ease-out) .8s forwards; }
+@keyframes crestDraw   { to { stroke-dashoffset: 0; } }
+@keyframes crestFillIn { to { opacity: 1; } }
+
+/* ---------- smelt gauge (scroll progress, right edge) ---------- */
+.gauge {
+  position: fixed; right: 18px; top: 50%; transform: translateY(-50%);
+  z-index: 950; display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.gauge-track { position: relative; width: 6px; height: 220px; background: rgba(240,235,221,.08); border-radius: 99px; overflow: hidden; }
+.gauge-fill  { position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: linear-gradient(180deg, var(--ember), var(--copper) 60%, var(--rustdeep)); border-radius: 99px; transition: height .12s linear; }
+.gauge-num   { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--ember); writing-mode: vertical-rl; }
+.gauge-label { writing-mode: vertical-rl; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--ash-dim); }
+
+/* ---------- header ---------- */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px clamp(20px, 5vw, 64px);
+  transition: background .35s, box-shadow .35s, padding .35s;
+}
+.header.scrolled {
+  background: rgba(10, 20, 18, .82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(240,235,221,.08);
+  padding-top: 14px; padding-bottom: 14px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { width: 40px; height: 44px; }
+.brand-name { font-family: 'Fraunces', serif; font-weight: 900; font-size: 19px; letter-spacing: .16em; color: var(--bone); line-height: 1; }
+.brand-sub { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: .34em; color: var(--verd); margin-top: 3px; }
+.nav { display: flex; align-items: center; gap: 30px; }
+.nav a { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ash); position: relative; padding: 6px 0; transition: color .25s; }
+.nav a::before { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--copper); transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+.nav a:hover { color: var(--bone); }
+.nav a:hover::before { transform: scaleX(1); transform-origin: left; }
+.nav .nav-cta { color: var(--night); background: var(--copper); padding: 11px 22px; border-radius: 2px; font-weight: 700; letter-spacing: .1em; transition: background .25s, transform .25s; }
+.nav .nav-cta::before { display: none; }
+.nav .nav-cta:hover { background: var(--copper-2); transform: translateY(-1px); }
+
+.burger { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+.burger span { display: block; width: 26px; height: 2px; background: var(--bone); margin: 6px 0; transition: .3s; }
+.drawer { position: fixed; inset: 0; z-index: 990; background: rgba(10,20,18,.97); backdrop-filter: blur(18px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; opacity: 0; visibility: hidden; transition: .4s var(--ease-out); }
+.drawer.open { opacity: 1; visibility: visible; }
+.drawer a { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600; color: var(--bone); letter-spacing: .06em; }
+.drawer a:active { color: var(--verd); }
+.drawer .drawer-cta { font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .14em; color: var(--night); background: var(--copper); padding: 14px 30px; border-radius: 2px; margin-top: 8px; }
+
+/* ---------- shared section shell: diagonal clipping ---------- */
+.sec { position: relative; z-index: 2; padding: clamp(80px, 12vw, 150px) clamp(20px, 6vw, 90px); }
+.sec-clip-a { clip-path: polygon(0 0, 100% 6vw, 100% 100%, 0 calc(100% - 6vw)); margin-top: -5vw; padding-top: calc(clamp(80px, 12vw, 150px) + 4vw); }
+.sec-clip-b { clip-path: polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%); margin-top: -5vw; padding-top: calc(clamp(80px, 12vw, 150px) + 4vw); }
+.sec-dark  { background: var(--night-2); }
+.sec-pine  { background: linear-gradient(160deg, var(--pine) 0%, var(--night-2) 70%); }
+.sec-paper { background: var(--paper); color: #27302B; }
+
+.wrap { max-width: 1240px; margin: 0 auto; }
+
+/* kicker */
+.kicker { display: inline-flex; align-items: center; gap: 12px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--verd); }
+.kicker::before { content: ''; width: 34px; height: 1px; background: var(--copper); }
+.sec-paper .kicker { color: #1E6B57; }
+
+/* section titles with cascade reveal */
+.title-xl { font-size: clamp(38px, 6.2vw, 84px); font-weight: 900; color: var(--bone); letter-spacing: -0.015em; }
+.title-xl .ln { display: block; overflow: hidden; }
+.title-xl .ln > span { display: inline-block; transform: translateY(115%); transition: transform .9s var(--ease-out); }
+.title-xl .ln:nth-child(2) > span { transition-delay: .12s; }
+.title-xl .ln:nth-child(3) > span { transition-delay: .24s; }
+.title-xl.visible .ln > span { transform: translateY(0); }
+.sec-paper .title-xl { color: #1B2420; }
+.title-xl em { font-style: italic; font-weight: 300; color: var(--copper-2); }
+.sec-paper .title-xl em { color: #B05A1D; }
+
+/* generic reveal */
+.rise { opacity: 0; transform: translateY(34px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.rise.visible { opacity: 1; transform: none; }
+.rise.d1 { transition-delay: .1s; } .rise.d2 { transition-delay: .2s; } .rise.d3 { transition-delay: .3s; }
+
+/* ============ HERO ============ */
+.hero { position: relative; min-height: 100svh; z-index: 2; display: flex; align-items: stretch; overflow: hidden; }
+.hero-media { position: absolute; inset: 0; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; animation: heroDrift 22s var(--ease-io) infinite alternate; }
+@keyframes heroDrift { from { transform: scale(1.02) translateX(0); } to { transform: scale(1.1) translateX(-1.5%); } }
+.hero-media::before { content: ''; position: absolute; inset: 0; background: linear-gradient(78deg, rgba(10,20,18,.96) 0%, rgba(10,20,18,.82) 34%, rgba(18,52,48,.55) 62%, rgba(10,20,18,.35) 100%); }
+.hero-media::after { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 90% at 82% 20%, rgba(197,106,43,.18), transparent 55%); }
+
+.hero-inner { position: relative; z-index: 3; width: 100%; max-width: 1240px; margin: 0 auto; padding: 150px clamp(20px, 6vw, 90px) 90px; display: flex; flex-direction: column; justify-content: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .3em; color: var(--mint); border: 1px solid rgba(111,194,168,.35); padding: 9px 16px; border-radius: 999px; width: max-content; margin-bottom: 30px; background: rgba(18,52,48,.4); }
+.hero-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--verd); box-shadow: 0 0 12px var(--verd); animation: pulseDot 2.4s infinite; }
+@keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+.hero-h1 { font-size: clamp(52px, 9.6vw, 138px); font-weight: 900; letter-spacing: -0.02em; color: var(--bone); line-height: .94; text-wrap: balance; }
+.hero-h1 .wl { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.hero-h1 .wl > span { display: inline-block; transform: translateY(110%); animation: wordUp 1s var(--ease-out) forwards; }
+.hero-h1 .wl:nth-child(1) > span { animation-delay: .55s; }
+.hero-h1 .wl:nth-child(2) > span { animation-delay: .68s; }
+.hero-h1 .wl:nth-child(3) > span { animation-delay: .81s; }
+.hero-h1 .wl:nth-child(4) > span { animation-delay: .94s; }
+@keyframes wordUp { to { transform: translateY(0); } }
+.hero-h1 .molten { font-style: italic; font-weight: 300; color: transparent; background: linear-gradient(100deg, var(--copper-2), var(--ember) 45%, var(--copper) 80%); -webkit-background-clip: text; background-clip: text; background-size: 200% 100%; animation: moltenShift 6s ease-in-out infinite alternate; }
+@keyframes moltenShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+.hero-sub { max-width: 560px; margin-top: 28px; font-size: clamp(15px, 1.6vw, 18px); color: var(--ash); opacity: 0; animation: fadeUp .9s var(--ease-out) 1.25s forwards; }
+.hero-sub b { color: var(--bone); font-weight: 600; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; opacity: 0; animation: fadeUp .9s var(--ease-out) 1.45s forwards; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 13.5px; letter-spacing: .1em; text-transform: uppercase; padding: 16px 30px; border-radius: 2px; transition: transform .3s var(--ease-out), background .3s, color .3s, box-shadow .3s; position: relative; overflow: hidden; }
+.btn-copper { background: var(--copper); color: var(--night); box-shadow: 0 10px 34px rgba(197,106,43,.35); }
+.btn-copper:hover { background: var(--copper-2); transform: translateY(-3px); box-shadow: 0 16px 44px rgba(218,138,71,.45); }
+.btn-ghost { border: 1px solid rgba(240,235,221,.28); color: var(--bone); }
+.btn-ghost:hover { border-color: var(--verd); color: var(--verd); transform: translateY(-3px); }
+.btn .arr { transition: transform .3s var(--ease-out); }
+.btn:hover .arr { transform: translateX(5px); }
+
+.hero-figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: rgba(240,235,221,.14); border: 1px solid rgba(240,235,221,.14); margin-top: 66px; max-width: 780px; opacity: 0; animation: fadeUp 1s var(--ease-out) 1.6s forwards; }
+.hero-figures .fig { background: rgba(10,20,18,.72); backdrop-filter: blur(6px); padding: 20px 22px; }
+.fig-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(24px, 3vw, 34px); color: var(--ember); line-height: 1; }
+.fig-lbl { font-family: 'Space Mono', monospace; font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--ash-dim); margin-top: 8px; }
+
+.hero-scroll { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .4em; color: var(--ash-dim); opacity: 0; animation: fadeUp 1s 2s forwards; }
+.hero-scroll i { width: 1px; height: 44px; background: linear-gradient(180deg, var(--verd), transparent); position: relative; overflow: hidden; }
+.hero-scroll i::after { content: ''; position: absolute; top: -50%; left: 0; width: 100%; height: 50%; background: var(--ember); animation: scrollDrop 1.8s var(--ease-io) infinite; }
+@keyframes scrollDrop { to { top: 110%; } }
+
+/* ============ TICKER ============ */
+.ticker { position: relative; z-index: 3; background: var(--copper); color: var(--night); overflow: hidden; padding: 14px 0; transform: rotate(0.001deg); }
+.ticker-track { display: flex; width: max-content; animation: tickerRun 30s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-item { display: inline-flex; align-items: center; gap: 14px; padding: 0 28px; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12.5px; letter-spacing: .18em; white-space: nowrap; text-transform: uppercase; }
+.ticker-item i { font-style: normal; color: var(--pine); }
+@keyframes tickerRun { to { transform: translateX(-50%); } }
+
+/* ============ IMPERATIV (statement) ============ */
+.statement { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(40px, 6vw, 90px); align-items: center; }
+.statement-copy p { margin-top: 26px; font-size: 16.5px; color: var(--ash); max-width: 56ch; }
+.statement-copy p b { color: var(--bone); }
+.sig { margin-top: 34px; display: flex; align-items: center; gap: 16px; }
+.sig-line { width: 54px; height: 1px; background: var(--copper); }
+.sig span { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .26em; color: var(--verd); }
+
+.plate-wrap { position: relative; perspective: 1100px; }
+.plate { position: relative; border-radius: 6px; overflow: hidden; transform-style: preserve-3d; transition: transform .2s ease-out; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+.plate img { width: 100%; height: auto; }
+.plate-veil { position: absolute; inset: 0; background: linear-gradient(115deg, rgba(240,235,221,.16) 0%, transparent 28%, transparent 72%, rgba(10,20,18,.4) 100%); mix-blend-mode: screen; pointer-events: none; }
+.plate-tag { position: absolute; left: 18px; bottom: 18px; background: rgba(10,20,18,.85); border: 1px solid rgba(111,194,168,.4); border-radius: 3px; padding: 10px 14px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--mint); backdrop-filter: blur(6px); transform: translateZ(46px); }
+.plate-tag b { color: var(--ember); }
+.plate-ring { position: absolute; inset: -14px; border: 1px dashed rgba(111,194,168,.4); border-radius: 10px; pointer-events: none; animation: ringSpin 40s linear infinite; }
+@keyframes ringSpin { to { transform: rotate(3deg) scale(1.015); } }
+
+/* ============ RESERVE (stats + probe disc) ============ */
+.reserve-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(44px, 7vw, 100px); align-items: center; }
+
+.disc-wrap { display: grid; place-items: center; }
+.disc { position: relative; width: min(400px, 78vw); aspect-ratio: 1; }
+.disc-rotor { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 1px solid rgba(240,235,221,.2); box-shadow: 0 0 0 10px rgba(18,52,48,.55), 0 34px 80px rgba(0,0,0,.55); animation: discSpin 46s linear infinite; }
+.disc-rotor img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes discSpin { to { transform: rotate(360deg); } }
+.disc-ring { position: absolute; inset: -26px; border-radius: 50%; border: 1px dashed rgba(111,194,168,.45); animation: discSpin 90s linear infinite reverse; }
+.disc-ring i { position: absolute; top: -5px; left: 50%; width: 9px; height: 9px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 14px var(--ember); }
+.disc-core { position: absolute; inset: 0; display: grid; place-items: center; }
+.disc-core-in { width: 41%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 28%, var(--pine-2), var(--night) 76%); border: 1px solid rgba(240,235,221,.22); display: grid; place-items: center; text-align: center; padding: 12px; box-shadow: inset 0 0 40px rgba(0,0,0,.6); }
+.disc-core-in b { display: block; font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(30px, 4.6vw, 44px); color: var(--ember); line-height: 1; }
+.disc-core-in span { display: block; font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: .3em; color: var(--mint); margin-top: 6px; }
+
+.reserve-list { margin-top: 10px; }
+.reserve-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 20px; align-items: baseline; padding: 22px 4px; border-bottom: 1px solid rgba(240,235,221,.12); transition: background .3s, padding-left .3s; }
+.reserve-row:first-child { border-top: 1px solid rgba(240,235,221,.12); }
+.reserve-row:hover { background: rgba(46,125,107,.1); padding-left: 14px; }
+.reserve-row .idx { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--copper-2); }
+.reserve-row .val { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(24px, 3vw, 34px); color: var(--bone); }
+.reserve-row .val small { font-size: .5em; color: var(--verd); margin-left: 6px; font-family: 'Space Mono', monospace; font-weight: 400; letter-spacing: .14em; }
+.reserve-row .lbl { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ash-dim); text-align: right; }
+
+/* ============ BARREN (offerten) ============ */
+.bars-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap; margin-bottom: 56px; }
+.bars-head p { max-width: 46ch; color: #55625B; }
+.bar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px; }
+.bar-card { position: relative; background: #FFFDF6; border: 1px solid #E2D9C4; border-top: 4px solid var(--copper); border-radius: 4px; padding: 30px 26px 26px; display: flex; flex-direction: column; transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); overflow: hidden; }
+.bar-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(26,36,32,.14); }
+.bar-card .sheen { position: absolute; top: 0; left: -80%; width: 55%; height: 100%; background: linear-gradient(100deg, transparent, rgba(197,106,43,.14), transparent); transform: skewX(-18deg); transition: left .7s var(--ease-out); pointer-events: none; }
+.bar-card:hover .sheen { left: 130%; }
+.bar-card .stamp { position: absolute; top: 16px; right: -30px; transform: rotate(38deg); background: var(--pine-2); color: var(--bone); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .24em; padding: 5px 36px; }
+.bar-card .mass { font-family: 'Fraunces', serif; font-weight: 900; font-size: 44px; color: #1B2420; line-height: 1; }
+.bar-card .mass small { font-size: 20px; color: #B05A1D; }
+.bar-card .fineness { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .22em; color: #1E6B57; margin-top: 10px; }
+.bar-card hr { border: 0; border-top: 1px dashed #D8CDB2; margin: 18px 0; }
+.bar-card ul { list-style: none; display: grid; gap: 9px; font-size: 13.5px; color: #55625B; }
+.bar-card ul li { display: flex; gap: 10px; align-items: baseline; }
+.bar-card ul li::before { content: '◆'; color: var(--copper); font-size: 9px; }
+.bar-card .bar-cta { margin-top: 22px; display: inline-flex; justify-content: center; align-items: center; gap: 8px; background: #1B2420; color: var(--paper); font-weight: 700; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; padding: 14px 18px; border-radius: 2px; transition: background .3s, gap .3s; }
+.bar-card .bar-cta:hover { background: var(--copper); color: var(--night); gap: 13px; }
+.bars-foot { margin-top: 26px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #7A857D; }
+
+/* ============ HERKUNFT (timeline diagonal) ============ */
+.timeline { position: relative; margin-top: 30px; padding-left: 34px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, var(--copper), var(--patina) 60%, rgba(111,194,168,.15)); }
+.tl-item { position: relative; padding: 0 0 42px 26px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before { content: ''; position: absolute; left: -34px; top: 5px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--copper); background: var(--night-2); transition: background .3s, box-shadow .3s; }
+.tl-item:hover::before { background: var(--copper); box-shadow: 0 0 18px rgba(232,164,92,.5); }
+.tl-item .tl-step { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .3em; color: var(--verd); }
+.tl-item h3 { font-size: clamp(22px, 2.6vw, 30px); color: var(--bone); margin: 8px 0 10px; }
+.tl-item p { color: var(--ash); max-width: 62ch; font-size: 15.5px; }
+.tl-item p b { color: var(--ember); font-weight: 600; }
+.tl-visual { position: sticky; top: 110px; }
+.tl-visual .frame { border: 1px solid rgba(240,235,221,.16); border-radius: 6px; overflow: hidden; box-shadow: 0 34px 80px rgba(0,0,0,.45); }
+.tl-visual img { width: 100%; height: auto; }
+.tl-visual .cap { display: flex; justify-content: space-between; gap: 14px; padding: 12px 16px; background: var(--night); border-top: 1px solid rgba(240,235,221,.12); font-family: 'Space Mono', monospace; font-size: 9.5px; letter-spacing: .18em; color: var(--ash-dim); text-transform: uppercase; }
+.tl-visual .cap b { color: var(--copper-2); }
+.origin-cols { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(44px, 6vw, 90px); align-items: start; }
+
+/* ============ FAQ ============ */
+.faq { max-width: 860px; margin: 0 auto; }
+.faq details { border-bottom: 1px solid rgba(240,235,221,.12); }
+.faq details:first-of-type { border-top: 1px solid rgba(240,235,221,.12); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 6px; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(17px, 2vw, 21px); color: var(--bone); transition: color .25s, padding-left .3s; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .pm { flex: 0 0 auto; width: 30px; height: 30px; border: 1px solid rgba(111,194,168,.5); border-radius: 50%; display: grid; place-items: center; color: var(--verd); font-family: 'Space Mono', monospace; font-size: 15px; transition: transform .35s var(--ease-out), background .3s, color .3s; }
+.faq details[open] summary { color: var(--ember); padding-left: 12px; }
+.faq details[open] summary .pm { transform: rotate(45deg); background: var(--verd); color: var(--night); border-color: var(--verd); }
+.faq .faq-a { padding: 0 6px 26px; max-width: 68ch; color: var(--ash); }
+.faq .faq-a a { color: var(--copper-2); border-bottom: 1px solid var(--copper-2); }
+
+/* ============ CTA FINAL ============ */
+.final { position: relative; overflow: hidden; text-align: center; }
+.final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(90% 120% at 50% 118%, rgba(197,106,43,.34), transparent 60%), radial-gradient(70% 90% at 50% -20%, rgba(46,125,107,.3), transparent 60%); }
+.final .wrap { position: relative; }
+.final .title-xl { margin-bottom: 22px; }
+.final p.lead { max-width: 60ch; margin: 0 auto 40px; color: var(--ash); font-size: 16.5px; }
+.final .btn-copper { font-size: 15px; padding: 19px 42px; }
+.final-note { margin-top: 26px; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .22em; color: var(--ash-dim); text-transform: uppercase; }
+
+/* ============ FOOTER ============ */
+.footer { position: relative; z-index: 2; background: #070F0D; border-top: 1px solid rgba(240,235,221,.08); padding: 64px clamp(20px, 6vw, 90px) 34px; }
+.footer-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 44px; }
+.footer .brand-name { font-size: 22px; }
+.footer p { margin-top: 16px; max-width: 40ch; font-size: 14px; color: var(--ash-dim); }
+.footer h4 { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--verd); margin-bottom: 18px; font-weight: 400; }
+.footer ul { list-style: none; display: grid; gap: 11px; }
+.footer ul a { font-size: 14px; color: var(--ash); transition: color .25s, padding-left .25s; }
+.footer ul a:hover { color: var(--ember); padding-left: 6px; }
+.footer-bottom { max-width: 1240px; margin: 52px auto 0; padding-top: 24px; border-top: 1px solid rgba(240,235,221,.08); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .16em; color: var(--ash-dim); }
+.footer-bottom a { color: var(--ash); border-bottom: 1px solid rgba(240,235,221,.25); transition: color .25s; }
+.footer-bottom a:hover { color: var(--ember); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1023px) {
+  .nav { display: none; }
+  .burger { display: block; }
+  .gauge { right: 10px; }
+  .gauge-track { height: 150px; }
+  .statement, .reserve-grid, .origin-cols { grid-template-columns: 1fr; }
+  .tl-visual { position: static; margin-top: 10px; }
+  .reserve-row { grid-template-columns: 46px 1fr; }
+  .reserve-row .lbl { grid-column: 2; text-align: left; }
+}
+@media (max-width: 768px) {
+  .sec-clip-a, .sec-clip-b { clip-path: polygon(0 0, 100% 4vw, 100% 100%, 0 calc(100% - 4vw)); margin-top: -3vw; padding-top: calc(clamp(70px, 12vw, 150px) + 2.5vw); }
+  .hero-inner { padding-top: 130px; }
+  .hero-h1 { font-size: clamp(44px, 13vw, 72px); }
+  .hero-figures { grid-template-columns: 1fr; max-width: 460px; }
+  .hero-scroll { display: none; }
+  .bar-card .mass { font-size: 38px; }
+  .disc { width: min(300px, 72vw); }
+  .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- crest reveal -->
+<div class="crest-veil" id="veil" aria-hidden="true">
+  <svg viewBox="0 0 120 140">
+    <path class="crest-path" d="M60 6 112 30v40c0 32-22 50-52 62C30 120 8 102 8 70V30Z"/>
+    <path class="crest-fill" d="M60 16 102 35v34c0 26-18 41-42 51-24-10-42-25-42-51V35Z"/>
+    <text class="crest-word" x="60" y="76" text-anchor="middle">WOLFCREST</text>
+  </svg>
+</div>
+
+<!-- ambient embers -->
+<canvas id="embers" aria-hidden="true"></canvas>
+
+<!-- smelt gauge -->
+<div class="gauge" aria-hidden="true">
+  <span class="gauge-label">SCHMELZE</span>
+  <div class="gauge-track"><div class="gauge-fill" id="gaugeFill"></div></div>
+  <span class="gauge-num" id="gaugeNum">000%</span>
+</div>
+
+<header class="header" id="header">
+  <a class="brand" href="#top" aria-label="WOLFCREST Startseite">
+    <svg viewBox="0 0 64 72" aria-hidden="true">
+      <path d="M32 2 60 15v22c0 18-12 28-28 33C16 65 4 55 4 37V15Z" fill="#123430"/>
+      <path d="M32 8 54 18v18c0 14-9.5 22-22 26-12.5-4-22-12-22-26V18Z" fill="#C56A2B"/>
+      <path d="M32 20c4.6 0 7.6 3.2 7.6 7.8 0 4-2.5 6.5-5.1 8.4l1.3 6.8h-3.2l-1.1-5.7h-1l-1.1 5.7h-3.2l1.3-6.8c-2.6-1.9-5.1-4.4-5.1-8.4 0-4.6 3-7.8 7.6-7.8Zm0 4.1c-2.4 0-4 1.5-4 3.7 0 2.1 1.3 3.4 2.8 4.5l1.2.9 1.2-.9c1.5-1.1 2.8-2.4 2.8-4.5 0-2.2-1.6-3.7-4-3.7Z" fill="#F0EBDD"/>
+    </svg>
+    <span>
+      <span class="brand-name">WOLFCREST</span><br>
+      <span class="brand-sub">COPPER&nbsp;RESERVE</span>
+    </span>
+  </a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="#reserve">Reserve</a>
+    <a href="#barren">Barren</a>
+    <a href="#herkunft">Herkunft</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://ebay.de" target="_blank" rel="noopener" class="nav-cta">Auf eBay kaufen</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="drawer" id="drawer">
+  <a href="#reserve">Reserve</a>
+  <a href="#barren">Barren</a>
+  <a href="#herkunft">Herkunft</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://ebay.de" target="_blank" rel="noopener" class="drawer-cta">Auf eBay kaufen →</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="images/hero-smelt.jpg" alt="Kupferbarren, gehämmert, in Stahlform" fetchpriority="high">
+    </div>
+    <div class="hero-inner">
+      <span class="hero-badge"><i></i>RESERVE · GEPRÜFT · NUMMERNIERT</span>
+      <h1 class="hero-h1">
+        <span class="wl"><span>WO</span></span><span class="wl"><span>LFCREST</span></span><br>
+        <span class="wl"><span class="molten">COPPER</span></span> <span class="wl"><span>RESERVE</span></span>
+      </h1>
+      <p class="hero-sub">
+        Kupfer ist nicht nur Metall. Es ist <b>gedeckte Substanz</b> — geleitet, gewogen und
+        versiegelt. WOLFCREST verwahrt Reinkupfer <b>99,9&nbsp;%</b> als physische Reserve:
+        Barren mit Stempel, Seriennummer und Prüfprotokoll.
+      </p>
+      <div class="hero-actions">
+        <a href="https://ebay.de" target="_blank" rel="noopener" class="btn btn-copper">Reserve erwerben <span class="arr">→</span></a>
+        <a href="#barren" class="btn btn-ghost">Barren ansehen</a>
+      </div>
+      <div class="hero-figures">
+        <div class="fig"><div class="fig-num">99,9</div><div class="fig-lbl">Reinheit in %</div></div>
+        <div class="fig"><div class="fig-num">3</div><div class="fig-lbl">Barren-Größen</div></div>
+        <div class="fig"><div class="fig-num">Cu&nbsp;29</div><div class="fig-lbl">Ordnungszahl</div></div>
+      </div>
+    </div>
+    <div class="hero-scroll">SCROLL<i></i></div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">REINKUPFER 99,9 % <i>◆</i></span>
+      <span class="ticker-item">GEWOGEN &amp; STEMPELVERSIEGELT <i>◆</i></span>
+      <span class="ticker-item">ELEKTROLYTISCH RAFFINIERT <i>◆</i></span>
+      <span class="ticker-item">SERIEN-NUMMERIERT <i>◆</i></span>
+      <span class="ticker-item">VERKAUF ÜBER EBAY <i>◆</i></span>
+    </div>
+  </div>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="sec sec-clip-a sec-dark" id="gedanke">
+    <div class="wrap statement">
+      <div class="statement-copy">
+        <span class="kicker rise">DER GEDANKE</span>
+        <h2 class="title-xl reveal-lines" style="margin-top:18px">
+          <span class="ln"><span>Substanz,</span></span>
+          <span class="ln"><span>die man <em>halten</em></span></span>
+          <span class="ln"><span>kann.</span></span>
+        </h2>
+        <p class="rise d1">Papier verspricht Wert. <b>Kupfer ist Wert</b> — ein Leitmetall der Zivilisation:
+        in jeder Maschine, jedem Gebäude, jedem Stromkreis. WOLFCREST verwandelt dieses Vertrauen
+        in handfeste Barren: <b>gewogen, geprüft, nummeriert</b> und dauerhaft dem Reservebestand
+        zugeordnet.</p>
+        <p class="rise d2">Kein Konto, keine Aussetzung, keine Drittverwahrung. <b>Die Barren liegen
+        physisch vor</b> und wechseln den Besitzer mit der Lieferung.</p>
+        <div class="sig rise d3"><span class="sig-line"></span><span>WOLFCREST · KUPFER-RESERVE</span></div>
+      </div>
+      <div class="plate-wrap rise d1" id="plateWrap">
+        <figure class="plate" id="plate">
+          <img src="images/specimen.jpg" alt="Natürliche Kupfer-Stufe, poliert" loading="lazy">
+          <div class="plate-veil"></div>
+          <figcaption class="plate-tag">STUFE <b>Nr. 29-CR</b> · Cu 99,9 %</figcaption>
+        </figure>
+        <div class="plate-ring"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESERVE ============ -->
+  <section class="sec sec-clip-b sec-pine" id="reserve">
+    <div class="wrap reserve-grid">
+      <div class="disc-wrap rise">
+        <div class="disc">
+          <div class="disc-ring"><i></i></div>
+          <div class="disc-rotor"><img src="images/ingots.jpg" alt="Historische Kupferbarren" loading="lazy"></div>
+          <div class="disc-core"><div class="disc-core-in"><b>29</b><span>CU · REINHEIT 99,9</span></div></div>
+        </div>
+      </div>
+      <div>
+        <span class="kicker rise">DIE RESERVE</span>
+        <h2 class="title-xl reveal-lines" style="margin:18px 0 30px">
+          <span class="ln"><span>Bestand,</span></span>
+          <span class="ln"><span>klar <em>vermessen.</em></span></span>
+        </h2>
+        <div class="reserve-list rise d1">
+          <div class="reserve-row"><span class="idx">R-01</span><span class="val">99,9<small>%</small></span><span class="lbl">Reinheit Cu-ETP</span></div>
+          <div class="reserve-row"><span class="idx">R-02</span><span class="val">8,96<small>g/cm³</small></span><span class="lbl">Dichte bei 20 °C</span></div>
+          <div class="reserve-row"><span class="idx">R-03</span><span class="val">1.084<small>°C</small></span><span class="lbl">Schmelzpunkt</span></div>
+          <div class="reserve-row"><span class="idx">R-04</span><span class="val">100<small>%</small></span><span class="lbl">Recycelbar</span></div>
+        </div>
+        <p class="rise d2" style="margin-top:26px;max-width:52ch">Jede Lieferung wird vor Versand gewogen und der
+        Seriennummer zugeordnet. <b style="color:var(--bone)">Was auf dem Papier steht, ist im Barren.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BARREN ============ -->
+  <section class="sec sec-clip-a sec-paper" id="barren">
+    <div class="wrap">
+      <div class="bars-head">
+        <div>
+          <span class="kicker rise">DIE OFFERTEN</span>
+          <h2 class="title-xl reveal-lines" style="margin-top:18px">
+            <span class="ln"><span>Drei Größen.</span></span>
+            <span class="ln"><span>Ein <em>Standard.</em></span></span>
+          </h2>
+        </div>
+        <p class="rise d1">Jeder Barren verlässt das Haus mit Stempel, Seriennummer und Gewichtsprotokoll.
+        Erhältlich über unser eBay-Angebot — mit Käuferschutz.</p>
+      </div>
+      <div class="bar-grid">
+        <article class="bar-card rise">
+          <div class="sheen"></div>
+          <div class="stamp">Serie A</div>
+          <div class="mass">250 <small>g</small></div>
+          <div class="fineness">CU 99,9 % · ETP</div>
+          <hr>
+          <ul>
+            <li>Gehämmertes Finish</li>
+            <li>Stempel &amp; Seriennummer</li>
+            <li>Einstieg in die Reserve</li>
+          </ul>
+          <a class="bar-cta" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen <span>→</span></a>
+        </article>
+        <article class="bar-card rise d1">
+          <div class="sheen"></div>
+          <div class="stamp">Serie B</div>
+          <div class="mass">500 <small>g</small></div>
+          <div class="fineness">CU 99,9 % · ETP</div>
+          <hr>
+          <ul>
+            <li>Der Kernbestand</li>
+            <li>Gewichtsprotokoll beiliegend</li>
+            <li>Handliche Reserveeinheit</li>
+          </ul>
+          <a class="bar-cta" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen <span>→</span></a>
+        </article>
+        <article class="bar-card rise d2">
+          <div class="sheen"></div>
+          <div class="stamp">Serie C</div>
+          <div class="mass">1.000 <small>g</small></div>
+          <div class="fineness">CU 99,9 % · ETP</div>
+          <hr>
+          <ul>
+            <li>Das Schwergewicht</li>
+            <li>Nummerierte Großeinheit</li>
+            <li>Für die beständige Reserve</li>
+          </ul>
+          <a class="bar-cta" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay ansehen <span>→</span></a>
+        </article>
+      </div>
+      <p class="bars-foot rise">* Preise &amp; Verfügbarkeit stets im aktuellen eBay-Angebot · inkl. gesetzl. MwSt.</p>
+    </div>
+  </section>
+
+  <!-- ============ HERKUNFT ============ -->
+  <section class="sec sec-clip-b sec-dark" id="herkunft">
+    <div class="wrap origin-cols">
+      <div>
+        <span class="kicker rise">HERKUNFT &amp; PRÜFUNG</span>
+        <h2 class="title-xl reveal-lines" style="margin:18px 0 40px">
+          <span class="ln"><span>Vom Erz</span></span>
+          <span class="ln"><span>zum <em>Siegel.</em></span></span>
+        </h2>
+        <div class="timeline">
+          <div class="tl-item rise">
+            <span class="tl-step">SCHRITT 01 — GEWINNUNG</span>
+            <h3>Erz &amp; Konzentrat</h3>
+            <p>Kupferkies und Gediegen Kupfer aus geprüften Lagerstätten. <b>Chalkopyrit</b> — das
+            eisenhaltige Erz, aus dem der Kreislauf beginnt.</p>
+          </div>
+          <div class="tl-item rise">
+            <span class="tl-step">SCHRITT 02 — RAFFINATION</span>
+            <h3>Elektrolytisch auf 99,9 %</h3>
+            <p>Im Elektrolytkupfer-Verfahren (Cu-ETP) wird das Metall auf <b>Reinheit 99,9&nbsp;%</b> gebracht —
+            leitfähig, dicht, beständig.</p>
+          </div>
+          <div class="tl-item rise">
+            <span class="tl-step">SCHRITT 03 — Guss &amp; HAMMER</span>
+            <h3>Barren in Form</h3>
+            <p>Gegossen, gehämmert, gekürzt. Jede Oberfläche trägt die Handschrift der Fertigung —
+            <b>kein Barren gleicht dem anderen</b>.</p>
+          </div>
+          <div class="tl-item rise">
+            <span class="tl-step">SCHRITT 04 — SIEGEL</span>
+            <h3>Stempel &amp; Nummer</h3>
+            <p>Gewicht, Reinheit und Seriennummer werden <b>eingeprägt und protokolliert</b>. Erst dann
+            tritt ein Barren in die Reserve ein.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tl-visual rise d1">
+        <div class="frame">
+          <img src="images/ore.jpg" alt="Chalkopyrit — Kupferkies, hochgradiges Kupfererz" loading="lazy">
+          <div class="cap"><span>CHALKOPYRIT CuFeS₂</span><b>STUFE 01</b></div>
+        </div>
+        <div class="frame" style="margin-top:22px">
+          <img src="images/patina.jpg" alt="Patinierte Kupferfassade in verdigris" loading="lazy">
+          <div class="cap"><span>VERDIGRIS · Cu₂(OH)₃Ac</span><b>NACH JAHREN</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="sec sec-clip-a sec-pine" id="faq">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:50px">
+        <span class="kicker rise">FRAGEN &amp; ANTWORTEN</span>
+        <h2 class="title-xl reveal-lines" style="margin-top:18px">
+          <span class="ln"><span>Was man</span></span>
+          <span class="ln"><span><em> wissen will.</em></span></span>
+        </h2>
+      </div>
+      <div class="faq rise d1">
+        <details>
+          <summary>Wie kaufe ich einen WOLFCREST-Barren?<span class="pm">+</span></summary>
+          <div class="faq-a">Der Verkauf läuft über unsere Angebote auf <a href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a> —
+          mit Käuferschutz und Versand aus Deutschland. Dort finden Sie aktuelle Preise und verfügbare Seriennummern.</div>
+        </details>
+        <details>
+          <summary>Wie rein ist das Kupfer wirklich?<span class="pm">+</span></summary>
+          <div class="faq-a">Elektrolytisch raffiniertes Kupfer (Cu-ETP) mit <b>99,9&nbsp;% Reinheit</b>. Dichte 8,96 g/cm³,
+          Schmelzpunkt 1.084 °C — die Werte stehen für jeden Barren im Protokoll.</div>
+        </details>
+        <details>
+          <summary>Warum patiniert Kupfer grün?<span class="pm">+</span></summary>
+          <div class="faq-a">An Luft reagiert Kupfer mit Sauerstoff und Feuchtigkeit zu <b>Verdigris</b> — der typischen
+          grünen Patina (Kupferacetat/-carbonat). Sie ist ein <b>Echtheitsmerkmal</b>: Sie zeigt, dass es echtes Kupfer ist.
+          Die Oberfläche bleibt darunter intakt.</div>
+        </details>
+        <details>
+          <summary>Wird meine Nummer protokolliert?<span class="pm">+</span></summary>
+          <div class="faq-a">Ja. Jeder ausgelieferte Barren wird mit Seriennummer und Gewicht dem Reservebestand zugeordnet.
+          Die Nummer ist <b>eingestanzt</b> — nicht aufgedruckt.</div>
+        </details>
+        <details>
+          <summary>Kann ich größere Mengen anfragen?<span class="pm">+</span></summary>
+          <div class="faq-a">Mehrfachbarren und Reservestrukturen richten wir gern individuell ein — Anfrage bevorzugt über
+          die eBay-Artikelseite oder die Kontaktangaben im Impressum.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="sec final sec-dark">
+    <div class="wrap">
+      <span class="kicker rise">DIE RESERVE ÖFFNET</span>
+      <h2 class="title-xl reveal-lines" style="margin-top:18px">
+        <span class="ln"><span>Sichern Sie</span></span>
+        <span class="ln"><span>Ihre <em>Substanz.</em></span></span>
+      </h2>
+      <p class="lead rise d1">Drei Größen, ein Standard, volle Rückverfolgbarkeit. Der Weg in die
+      WOLFCREST-Reserve führt über eBay — schnell, geschützt, direkt.</p>
+      <a href="https://ebay.de" target="_blank" rel="noopener" class="btn btn-copper rise d2">Jetzt Reserve erwerben <span class="arr">→</span></a>
+      <div class="final-note rise d3">CU 29 · 99,9 % · GEWOGEN · GEPRÜFT · NUMMERNIERT</div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <span class="brand-name">WOLFCREST</span><br>
+      <span class="brand-sub">COPPER&nbsp;RESERVE</span>
+      <p>Physische Kupfer-Reserve: Barren aus Reinkupfer 99,9 % — gewogen, geprüft, nummeriert. Verkauf über eBay.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#gedanke">Der Gedanke</a></li>
+        <li><a href="#reserve">Die Reserve</a></li>
+        <li><a href="#barren">Barren &amp; Offerten</a></li>
+        <li><a href="#herkunft">Herkunft &amp; Prüfung</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Erwerb &amp; Recht</h4>
+      <ul>
+        <li><a href="https://ebay.de" target="_blank" rel="noopener">eBay-Angebot</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="#top">Nach oben</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year">2026</span> WOLFCREST COPPER RESERVE</span>
+    <span>BILDER: WIKIMEDIA COMMONS · <a href="images/CREDITS.txt" target="_blank" rel="noopener">QUELLEN</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- crest veil ---------- */
+  var veil = document.getElementById('veil');
+  window.addEventListener('load', function () { setTimeout(function () { veil.classList.add('gone'); }, 1150); });
+  setTimeout(function () { veil.classList.add('gone'); }, 2600); // safety
+
+  /* ---------- header state ---------- */
+  var header = document.getElementById('header');
+  function onScrollHeader() { header.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+
+  /* ---------- drawer ---------- */
+  var burger = document.getElementById('burger');
+  var drawer = document.getElementById('drawer');
+  burger.addEventListener('click', function () {
+    var open = drawer.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { drawer.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); });
+  });
+
+  /* ---------- smelt gauge ---------- */
+  var gaugeFill = document.getElementById('gaugeFill');
+  var gaugeNum  = document.getElementById('gaugeNum');
+  function onGauge() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    gaugeFill.style.height = (p * 100).toFixed(1) + '%';
+    gaugeNum.textContent = String(Math.round(p * 100)).padStart(3, '0') + '%';
+  }
+  window.addEventListener('scroll', onGauge, { passive: true });
+  window.addEventListener('resize', onGauge);
+  onGauge();
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.rise, .reveal-lines').forEach(function (el) { io.observe(el); });
+
+  /* ---------- 3D plate tilt ---------- */
+  var wrap = document.getElementById('plateWrap');
+  var plate = document.getElementById('plate');
+  if (wrap && plate && window.matchMedia('(pointer:fine)').matches) {
+    wrap.addEventListener('mousemove', function (ev) {
+      var r = wrap.getBoundingClientRect();
+      var dx = (ev.clientX - r.left) / r.width - 0.5;
+      var dy = (ev.clientY - r.top) / r.height - 0.5;
+      plate.style.transform = 'rotateY(' + (dx * 10).toFixed(2) + 'deg) rotateX(' + (-dy * 8).toFixed(2) + 'deg)';
+    });
+    wrap.addEventListener('mouseleave', function () { plate.style.transform = ''; });
+  }
+
+  /* ---------- ember particles ---------- */
+  var canvas = document.getElementById('embers');
+  var ctx = canvas.getContext('2d');
+  var embers = [];
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  function sizeCanvas() {
+    canvas.width = window.innerWidth * DPR;
+    canvas.height = window.innerHeight * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  function spawn() {
+    return {
+      x: Math.random() * window.innerWidth,
+      y: window.innerHeight + 20,
+      r: 0.7 + Math.random() * 1.9,
+      vy: 0.25 + Math.random() * 0.75,
+      vx: (Math.random() - 0.5) * 0.35,
+      life: 0,
+      max: 420 + Math.random() * 260,
+      hot: Math.random() > 0.55
+    };
+  }
+  function tick() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    if (embers.length < 46 && Math.random() < 0.35) embers.push(spawn());
+    ctx.globalCompositeOperation = 'lighter';
+    for (var i = embers.length - 1; i >= 0; i--) {
+      var p = embers[i];
+      p.life++; p.x += p.vx + Math.sin((p.life + p.max) * 0.012) * 0.22; p.y -= p.vy;
+      var t = p.life / p.max;
+      var a = t < 0.15 ? t / 0.15 : 1 - (t - 0.15) / 0.85;
+      if (t >= 1 || p.y < -30) { embers.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.fillStyle = p.hot ? 'rgba(232,164,92,' + (a * 0.5).toFixed(3) + ')'
+                            : 'rgba(111,194,168,' + (a * 0.32).toFixed(3) + ')';
+      ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(tick);
+  }
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) tick();
+
+  /* ---------- ticker duplicate for seamless loop ---------- */
+  var track = document.getElementById('tickerTrack');
+  track.innerHTML += track.innerHTML;
+
+  /* ---------- year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

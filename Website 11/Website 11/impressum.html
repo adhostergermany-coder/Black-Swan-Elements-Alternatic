@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum | WOLFCREST COPPER RESERVE</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4 56 16v18c0 14-10 22-24 26C18 56 8 48 8 34V16Z' fill='%2312433B'/%3E%3Cpath d='M32 12 48 20v13c0 10-7 16-16 19-9-3-16-9-16-19V20Z' fill='%23C56A2B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Archivo:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* WOLFCREST COPPER RESERVE — Impressum ("OXIDIZED VAULT" document variant) */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --night:    #0A1412;
+  --night-2:  #0E1B18;
+  --pine:     #123430;
+  --patina:   #2E7D6B;
+  --verd:     #6FC2A8;
+  --mint:     #9FDCC6;
+  --ash:      #B9C9C0;
+  --ash-dim:  #7E948A;
+  --bone:     #F0EBDD;
+  --copper:   #C56A2B;
+  --copper-2: #DA8A47;
+  --ember:    #E8A45C;
+  --rustdeep: #8A4718;
+  --line:     rgba(240,235,221,.12);
+}
+
+body {
+  font-family: 'Archivo', 'Segoe UI', sans-serif;
+  background: var(--night);
+  color: var(--ash);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--copper); color: var(--night); }
+a { color: inherit; }
+.mono { font-family: 'Space Mono', monospace; }
+
+/* patina edge */
+.patina-edge { position: fixed; top: 0; left: 0; bottom: 0; width: 12px; background: linear-gradient(180deg, var(--copper) 0%, var(--patina) 45%, var(--pine) 100%); z-index: 50; }
+
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(10,20,18,.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand svg { width: 34px; height: 38px; }
+.brand-name { font-family: 'Fraunces', serif; font-weight: 900; font-size: 17px; letter-spacing: .16em; color: var(--bone); line-height: 1; }
+.brand-sub { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: .34em; color: var(--verd); margin-top: 3px; }
+.back-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ash); border: 1px solid var(--line); border-radius: 2px; padding: 10px 16px;
+  text-decoration: none; transition: color .3s, border-color .3s, transform .3s;
+}
+.back-link:hover { color: var(--ember); border-color: var(--copper); transform: translateX(-3px); }
+
+.page { max-width: 860px; margin: 0 auto; padding: 150px 26px 80px 48px; }
+
+.kick { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--verd); display: inline-flex; align-items: center; gap: 12px; }
+.kick::before { content: ''; width: 30px; height: 1px; background: var(--copper); }
+
+h1 {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(46px, 8vw, 92px); line-height: 1; letter-spacing: -0.015em;
+  color: var(--bone); margin: 18px 0 14px;
+}
+h1 em { font-style: italic; font-weight: 300; color: var(--copper-2); }
+.doc-no { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .26em; color: var(--ash-dim); margin-bottom: 54px; }
+
+h2 {
+  font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+  letter-spacing: .26em; text-transform: uppercase; color: var(--copper-2);
+  margin: 46px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+p, li { font-size: 15px; color: var(--ash); margin-bottom: 12px; }
+b { color: var(--bone); font-weight: 600; }
+
+.addr {
+  font-family: 'Space Mono', monospace; font-size: 13.5px; color: var(--bone);
+  border-left: 3px solid var(--copper); background: var(--night-2);
+  padding: 16px 24px; margin: 16px 0;
+}
+a.u { color: var(--copper-2); border-bottom: 1px solid var(--rustdeep); text-decoration: none; transition: color .25s; }
+a.u:hover { color: var(--bone); }
+
+.credits { margin-top: 18px; border: 1px solid var(--line); background: var(--night-2); border-radius: 3px; overflow: hidden; }
+.cr-row { display: grid; grid-template-columns: 1fr auto; gap: 14px; padding: 13px 18px; border-bottom: 1px dashed var(--line); font-family: 'Space Mono', monospace; font-size: 11px; }
+.cr-row:last-child { border-bottom: none; }
+.cr-row span { color: var(--ash); }
+.cr-row em { font-style: normal; color: var(--verd); white-space: nowrap; }
+.credits a { color: var(--copper-2); text-decoration: none; }
+.credits a:hover { text-decoration: underline; }
+
+.footer-mini {
+  border-top: 1px solid var(--line);
+  padding: 26px 40px 26px 48px;
+  display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .18em; color: var(--ash-dim);
+}
+.footer-mini a { color: var(--bone); border-bottom: 1px solid var(--rustdeep); text-decoration: none; transition: color .25s; }
+.footer-mini a:hover { color: var(--ember); }
+
+@media (max-width: 700px) {
+  .patina-edge { display: none; }
+  .header { padding: 14px 18px; }
+  .back-link { padding: 8px 12px; letter-spacing: .1em; }
+  .page { padding: 120px 20px 60px; }
+  .footer-mini { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .cr-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="patina-edge" aria-hidden="true"></div>
+
+<header class="header">
+  <a class="brand" href="index.html">
+    <svg viewBox="0 0 64 72" aria-hidden="true">
+      <path d="M32 2 60 15v22c0 18-12 28-28 33C16 65 4 55 4 37V15Z" fill="#123430"/>
+      <path d="M32 8 54 18v18c0 14-9.5 22-22 26-12.5-4-22-12-22-26V18Z" fill="#C56A2B"/>
+      <path d="M32 20c4.6 0 7.6 3.2 7.6 7.8 0 4-2.5 6.5-5.1 8.4l1.3 6.8h-3.2l-1.1-5.7h-1l-1.1 5.7h-3.2l1.3-6.8c-2.6-1.9-5.1-4.4-5.1-8.4 0-4.6 3-7.8 7.6-7.8Zm0 4.1c-2.4 0-4 1.5-4 3.7 0 2.1 1.3 3.4 2.8 4.5l1.2.9 1.2-.9c1.5-1.1 2.8-2.4 2.8-4.5 0-2.2-1.6-3.7-4-3.7Z" fill="#F0EBDD"/>
+    </svg>
+    <span>
+      <span class="brand-name">WOLFCREST</span><br>
+      <span class="brand-sub">COPPER&nbsp;RESERVE</span>
+    </span>
+  </a>
+  <a class="back-link" href="index.html">← Zur Startseite</a>
+</header>
+
+<main class="page">
+  <span class="kick">DOKUMENT — RECHTLICHER RAHMEN</span>
+  <h1>Impressum</h1>
+  <div class="doc-no">WCR-IMP · CU 29 · REV. 2026</div>
+
+  <h2>Angaben gemäß § 5 TMG</h2>
+  <div class="addr">
+    WOLFCREST COPPER RESERVE<br>
+    Wullenweverstraße 14<br>
+    24103 Kiel<br>
+    Deutschland
+  </div>
+
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: +49 (0) 431 654321<br>
+    E-Mail: <a class="u" href="mailto:reserve@wolfcrest-cu.de">reserve@wolfcrest-cu.de</a>
+  </p>
+
+  <h2>Umsatzsteuer-ID</h2>
+  <p>
+    Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+    DE 342 876 510
+  </p>
+
+  <h2>Verkauf über eBay</h2>
+  <p>
+    Unsere Angebote finden Sie auf <a class="u" href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a>.
+    Dort gelten zusätzlich die eBay-AGB und der eBay-Käuferschutz.
+  </p>
+
+  <h2>Streitschlichtung</h2>
+  <p>
+    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+    <a class="u" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+  </p>
+  <p>
+    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+    Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
+    nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht
+    verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
+    Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Unser Angebot enthält Links zu externen Websites Dritter (u. a. ebay.de), auf deren Inhalte
+    wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+    Anbieter oder Betreiber verantwortlich.
+  </p>
+
+  <h2>Urheberrecht &amp; Bildquellen</h2>
+  <p>
+    Die Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+    Die verwendeten Fotografien stammen aus <b>Wikimedia Commons</b> und werden unter den
+    folgenden freien Lizenzen verwendet:
+  </p>
+  <div class="credits">
+    <div class="cr-row">
+      <span>Kupferbarren, gehämmert (Hamburg-Wittenbergen) — <a href="https://commons.wikimedia.org/wiki/File:Kupferbarren_Hamburg-Wittenbergen.jpg" target="_blank" rel="noopener">Bullenwächter</a>, CC BY-SA 3.0</span>
+      <em>HERO</em>
+    </div>
+    <div class="cr-row">
+      <span>Gediegen Kupfer, polierte Stufe — <a href="https://commons.wikimedia.org/wiki/File:1115M-copper1.jpg" target="_blank" rel="noopener">CarlesMillàn</a>, CC BY-SA 3.0</span>
+      <em>STUFE</em>
+    </div>
+    <div class="cr-row">
+      <span>Chalkopyrit, Hochgradiges Kupfererz — <a href="https://commons.wikimedia.org/wiki/File:Chalcopyrite,_a_high-grade_copper_ore,_USA_-_Natural_History_Museum,_London_-_DSC05261.jpg" target="_blank" rel="noopener">Daderot</a>, CC0</span>
+      <em>ERZ</em>
+    </div>
+    <div class="cr-row">
+      <span>Kupferbarren, Encampment (Wyoming, 1910) — Stimson, J. E., Public Domain</span>
+      <em>ARCHIV</em>
+    </div>
+    <div class="cr-row">
+      <span>Patinierte Kupferfassade (RuhrCongress Bochum) — <a href="https://commons.wikimedia.org/wiki/File:Bochum_-_Stadionring_-_RuhrCongress_08_ies.jpg" target="_blank" rel="noopener">Frank Vincentz</a>, CC BY-SA 3.0</span>
+      <em>PATINA</em>
+    </div>
+    <div class="cr-row">
+      <span>Kupfer-Silber &quot;Halfbreed&quot;, Keweenaw (Michigan) — <a href="https://commons.wikimedia.org/wiki/File:Copper-silver_%22halfbreed%22_(Mesoproterozoic,_1.05-1.06_Ga;_Keweenaw_Peninsula,_northern_Michigan,_USA)_(16691554394).jpg" target="_blank" rel="noopener">James St. John</a>, CC BY 2.0</span>
+      <em>RESERVE</em>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-mini">
+  <span>© <span id="year">2026</span> WOLFCREST COPPER RESERVE</span>
+  <span><a href="index.html">STARTSEITE</a> · <a href="https://ebay.de" target="_blank" rel="noopener">EBAY.DE</a></span>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
