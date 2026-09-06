@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | IMPERAL</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23B4552D'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%2314100E' text-anchor='middle'%3ECu%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #14100E;
+            --ink-2: #1C1613;
+            --paper: #F1EDE2;
+            --bone: #E9E1D1;
+            --rust: #B4552D;
+            --rust-hot: #D96C41;
+            --rust-deep: #8A3F20;
+            --olive: #6E6A57;
+            --line-d: rgba(233, 225, 209, 0.14);
+            --line-l: rgba(20, 16, 14, 0.16);
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+            background: var(--ink);
+            color: var(--bone);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--rust); color: var(--ink); }
+        a { color: inherit; }
+
+        /* mini vertical rail accent */
+        .accent-rail {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: 14px;
+            background: var(--ink-2);
+            border-right: 1px solid var(--line-d);
+            z-index: 100;
+        }
+        .accent-rail::after {
+            content: 'CU 29 — 99,99';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg);
+            writing-mode: vertical-rl;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: var(--rust-hot);
+            white-space: nowrap;
+        }
+
+        .header {
+            position: fixed;
+            top: 0; left: 14px; right: 0;
+            z-index: 90;
+            background: rgba(20, 16, 14, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line-d);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 74px;
+        }
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 6px;
+            text-decoration: none;
+        }
+        .logo b { color: var(--rust-hot); }
+        .back-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--olive);
+            text-decoration: none;
+            border: 1px solid var(--line-d);
+            padding: 10px 16px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .back-link:hover { color: var(--rust-hot); border-color: var(--rust); }
+
+        .page-content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 150px 40px 90px;
+        }
+        .file-kick {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--rust-hot);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .file-kick::before { content: '■ '; font-size: 8px; vertical-align: 2px; }
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: clamp(46px, 7vw, 84px);
+            line-height: 0.95;
+            letter-spacing: 2px;
+            margin-bottom: 54px;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--bone);
+        }
+        h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rust-hot);
+            margin: 44px 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line-d);
+        }
+        p, li {
+            font-size: 15px;
+            color: #B7AC97;
+            margin-bottom: 12px;
+        }
+        b { color: var(--bone); font-weight: 500; }
+        .addr {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: var(--bone);
+            border-left: 3px solid var(--rust);
+            padding: 14px 22px;
+            background: var(--ink-2);
+            margin: 16px 0;
+        }
+        a.u { color: var(--rust-hot); border-bottom: 1px solid var(--rust-deep); text-decoration: none; }
+        a.u:hover { color: var(--bone); }
+
+        .credits {
+            margin-top: 20px;
+            border: 1px solid var(--line-d);
+            background: var(--ink-2);
+        }
+        .credits .cr-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            padding: 12px 18px;
+            border-bottom: 1px dashed var(--line-d);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            letter-spacing: 0.5px;
+        }
+        .credits .cr-row:last-child { border-bottom: none; }
+        .credits .cr-row span { color: #B7AC97; }
+        .credits .cr-row em { font-style: normal; color: var(--rust-hot); white-space: nowrap; }
+        .credits a { color: var(--rust-hot); text-decoration: none; }
+        .credits a:hover { text-decoration: underline; }
+
+        .footer-mini {
+            border-top: 1px solid var(--line-d);
+            padding: 28px 40px 28px 54px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--olive);
+        }
+        .footer-mini a { color: var(--bone); border-bottom: 1px solid var(--rust-deep); text-decoration: none; }
+        .footer-mini a:hover { color: var(--rust-hot); }
+
+        @media (max-width: 700px) {
+            .accent-rail { display: none; }
+            .header { left: 0; padding: 0 20px; height: 64px; }
+            .page-content { padding: 120px 22px 60px; }
+            .footer-mini { padding: 20px; flex-direction: column; }
+            .credits .cr-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="accent-rail" aria-hidden="true"></div>
+
+    <header class="header">
+        <a href="index.html" class="logo">IMP<b>E</b>RAL</a>
+        <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <span class="file-kick">DOKUMENT — RECHTLICHER RAHMEN</span>
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <div class="addr">
+            IMPERAL<br>
+            Musterstraße 10<br>
+            24103 Kiel<br>
+            Deutschland
+        </div>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0) 431 123456<br>
+            E-Mail: <a class="u" href="mailto:info@imperial-cu.de">info@imperial-cu.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 321 654 987
+        </p>
+
+        <h2>Verkauf über eBay</h2>
+        <p>
+            Unsere Angebote finden Sie auf <a class="u" href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a>.
+            Dort gelten zusätzlich die eBay-AGB und der eBay-Käuferschutz.
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a class="u" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht
+            verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
+            Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter (u. a. ebay.de), auf deren Inhalte
+            wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+            Anbieter oder Betreiber verantwortlich.
+        </p>
+
+        <h2>Urheberrecht &amp; Bildquellen</h2>
+        <p>
+            Die Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Die auf dieser Seite verwendeten Fotografien stammen aus Wikimedia Commons und werden
+            unter den folgenden freien Lizenzen verwendet:
+        </p>
+        <div class="credits">
+            <div class="cr-row">
+                <span>Kupferscheibe (Strangguss, geätzt) — <a href="https://commons.wikimedia.org/wiki/File:Cu-Scheibe.JPG" target="_blank" rel="noopener">Alchemist-hp</a>, CC BY-SA 3.0 DE</span>
+                <em>HERO / PROBE 01</em>
+            </div>
+            <div class="cr-row">
+                <span>Gediegenes Kupfer (Makro) — <a href="https://commons.wikimedia.org/wiki/File:NatCopper.jpg" target="_blank" rel="noopener">Jonathan Zander</a>, CC BY-SA 3.0</span>
+                <em>MATERIAL / PROBE 04</em>
+            </div>
+            <div class="cr-row">
+                <span>Kupfer-Sammelschienen — <a href="https://commons.wikimedia.org/wiki/File:Busbars.jpg" target="_blank" rel="noopener">Wikipedia Commons</a></span>
+                <em>PROBE 03</em>
+            </div>
+            <div class="cr-row">
+                <span>Minoischer Kupferbarren, Zakros — <a href="https://commons.wikimedia.org/wiki/File:Minoan_copper_ingot_from_Zakros,_Crete.jpg" target="_blank" rel="noopener">Wikipedia Commons</a></span>
+                <em>HERKUNFT / PROBE 02</em>
+            </div>
+            <div class="cr-row">
+                <span>Tagebau Chuquicamata — <a href="https://commons.wikimedia.org/wiki/File:Chuquicamata-002.jpg" target="_blank" rel="noopener">Wikipedia Commons</a></span>
+                <em>PROZESS-BAND</em>
+            </div>
+            <div class="cr-row">
+                <span>Kupferhaltiger Bachlauf, Anglesey — <a href="https://commons.wikimedia.org/wiki/File:AngleseyCopperStream.jpg" target="_blank" rel="noopener">Wikipedia Commons</a></span>
+                <em>HERKUNFT</em>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-mini">
+        <span>© <span id="year">2026</span> IMPERAL</span>
+        <span><a href="index.html">STARTSEITE</a> · <a href="https://ebay.de" target="_blank" rel="noopener">EBAY.DE</a></span>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

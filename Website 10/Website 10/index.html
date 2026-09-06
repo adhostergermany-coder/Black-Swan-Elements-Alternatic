@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPERAL | Reines Kupfer 99,99 — Barren &amp; Serien</title>
+    <meta name="description" content="IMPERAL — Barren aus elektrolytisch raffiniertem Reinkupfer 99,99 %. Gewichtet, geprüft, nummeriert. Verkauf über eBay.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23B4552D'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%2314100E' text-anchor='middle'%3ECu%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/hero.jpg">
+    <style>
+        /* ============================================================
+           IMPERAL — DARK-RUST BRUTALIST EDITORIAL
+           Vertical rail · mono dossier · grain · wipe reveals
+        ============================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #14100E;         /* deep brown-black */
+            --ink-2: #1C1613;
+            --ink-3: #261E19;
+            --paper: #F1EDE2;
+            --paper-2: #E7E1D2;
+            --bone: #E9E1D1;
+            --rust: #B4552D;
+            --rust-hot: #D96C41;
+            --rust-deep: #8A3F20;
+            --olive: #6E6A57;
+            --line-d: rgba(233, 225, 209, 0.14);
+            --line-l: rgba(20, 16, 14, 0.16);
+            --rail-w: 84px;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+            background: var(--ink);
+            color: var(--bone);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--rust); color: var(--ink); }
+
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; font-weight: 700; line-height: 0.95; text-transform: uppercase; }
+        .mono { font-family: 'IBM Plex Mono', monospace; }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+
+        /* film grain */
+        .grain {
+            position: fixed; inset: -50%;
+            width: 200%; height: 200%;
+            pointer-events: none;
+            z-index: 2000;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+            animation: grainShift 0.9s steps(3) infinite;
+        }
+        @keyframes grainShift {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-2%, 1.4%); }
+            66% { transform: translate(1.6%, -1%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* cursor follower */
+        .cursor-dot, .cursor-ring {
+            position: fixed; top: 0; left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2100;
+            display: none;
+        }
+        .cursor-dot { width: 5px; height: 5px; background: var(--rust-hot); }
+        .cursor-ring {
+            width: 34px; height: 34px;
+            border: 1.5px solid var(--rust);
+            transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
+                        border-color 0.25s, opacity 0.25s;
+            opacity: 0;
+        }
+        body.cursor-on { cursor: crosshair; }
+        body.cursor-on .cursor-dot, body.cursor-on .cursor-ring { display: block; }
+        body.cursor-hover .cursor-ring {
+            width: 58px; height: 58px;
+            border-color: var(--rust-hot);
+            background: rgba(180, 85, 45, 0.08);
+        }
+
+        /* ============ VERTICAL LEFT RAIL ============ */
+        .rail {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: var(--rail-w);
+            background: var(--ink);
+            border-right: 1px solid var(--line-d);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 0;
+        }
+        .rail-logo {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            letter-spacing: 10px;
+            color: var(--bone);
+            line-height: 1;
+        }
+        .rail-logo b { color: var(--rust-hot); font-weight: 700; }
+        .rail-mid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 22px 0;
+        }
+        .rail-mid span {
+            display: block;
+            width: 34px; height: 1px;
+            background: var(--line-d);
+        }
+        .rail-mid em {
+            writing-mode: vertical-rl;
+            font-family: 'IBM Plex Mono', monospace;
+            font-style: normal;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--olive);
+        }
+        .rail-cu {
+            width: 44px; height: 44px;
+            border: 1px solid var(--rust);
+            display: grid;
+            place-items: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--rust-hot);
+            transform: rotate(45deg);
+        }
+        .rail-cu i { transform: rotate(-45deg); font-style: normal; }
+
+        /* ============ RIGHT SECTION INDEX ============ */
+        .waypoints {
+            position: fixed;
+            right: 22px; top: 50%;
+            transform: translateY(-50%);
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .waypoints a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--olive);
+            transition: color 0.3s;
+        }
+        .waypoints a i {
+            width: 8px; height: 8px;
+            border: 1px solid var(--olive);
+            transform: rotate(45deg);
+            transition: all 0.3s var(--ease-out);
+            flex: 0 0 auto;
+        }
+        .waypoints a span {
+            opacity: 0;
+            transform: translateX(6px);
+            transition: all 0.3s var(--ease-out);
+        }
+        .waypoints a:hover span { opacity: 1; transform: none; }
+        .waypoints a.on { color: var(--rust-hot); }
+        .waypoints a.on i { background: var(--rust); border-color: var(--rust); transform: rotate(225deg) scale(1.2); }
+
+        /* ============ MOBILE TOP BAR + DRAWER ============ */
+        .mobilebar {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            height: 62px;
+            background: rgba(20, 16, 14, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line-d);
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .mobilebar .mlogo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: 6px; }
+        .mobilebar .mlogo b { color: var(--rust-hot); }
+        .burger {
+            background: none; border: 1px solid var(--line-d);
+            width: 44px; height: 44px;
+            display: grid; place-items: center; gap: 0;
+            cursor: pointer;
+        }
+        .burger span { display: block; width: 20px; height: 2px; background: var(--bone); margin: 2.5px 0; transition: 0.3s; }
+
+        .drawer {
+            position: fixed; inset: 0;
+            z-index: 1500;
+            pointer-events: none;
+        }
+        .drawer::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(10, 8, 7, 0.6);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .drawer-panel {
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: min(400px, 88vw);
+            background: var(--ink-2);
+            border-left: 1px solid var(--line-d);
+            transform: translateX(102%);
+            transition: transform 0.5s var(--ease-io);
+            padding: 100px 36px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .drawer.open { pointer-events: auto; }
+        .drawer.open::before { opacity: 1; }
+        .drawer.open .drawer-panel { transform: none; }
+        .drawer-panel a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bone);
+            padding: 13px 0;
+            border-bottom: 1px solid var(--line-d);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .drawer-panel a small { color: var(--rust-hot); font-size: 10px; }
+        .drawer-panel a:hover { color: var(--rust-hot); }
+        .drawer-cta {
+            margin-top: 28px;
+            background: var(--rust);
+            color: var(--ink);
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 3px;
+            padding: 16px;
+            text-transform: uppercase;
+        }
+        .drawer-close {
+            position: absolute;
+            top: 16px; right: 20px;
+            width: 44px; height: 44px;
+            background: none; border: 1px solid var(--line-d);
+            color: var(--bone);
+            font-size: 22px;
+            font-family: 'IBM Plex Mono', monospace;
+            cursor: pointer;
+        }
+
+        /* ============ PAGE SHELL ============ */
+        .page { margin-left: var(--rail-w); }
+
+        .wrap { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
+
+        /* reveal system */
+        .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+        .rv.in { opacity: 1; transform: none; }
+        .rv-r { opacity: 0; clip-path: inset(0 100% 0 0); transition: opacity 1s var(--ease-out), clip-path 1.1s var(--ease-io); }
+        .rv-r.in { opacity: 1; clip-path: inset(0 0 0 0); }
+
+        /* section head pattern */
+        .shead { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 64px; }
+        .shead .kick {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--rust-hot);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 18px;
+        }
+        .shead .kick::before { content: '■ '; font-size: 8px; vertical-align: 2px; }
+        .shead h2 { font-size: clamp(42px, 5.6vw, 84px); letter-spacing: 1px; }
+        .shead .code {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--olive);
+            letter-spacing: 2px;
+            text-align: right;
+            white-space: nowrap;
+            padding-bottom: 10px;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            overflow: hidden;
+            background:
+                radial-gradient(1100px 600px at 85% 110%, rgba(180, 85, 45, 0.16), transparent 60%),
+                linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+        }
+        .hero-grid-bg {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(var(--line-d) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line-d) 1px, transparent 1px);
+            background-size: 120px 120px;
+            opacity: 0.5;
+            mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 75%, transparent 100%);
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 75%, transparent 100%);
+        }
+        .hero-mark {
+            position: absolute;
+            right: -4%; top: 6%;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: clamp(200px, 26vw, 420px);
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(233, 225, 209, 0.06);
+            letter-spacing: -10px;
+            user-select: none;
+            pointer-events: none;
+        }
+        .hero-main {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 130px 20px 150px 64px;
+        }
+        .hero-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            width: fit-content;
+            border: 1px solid var(--line-d);
+            padding: 9px 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--rust-hot);
+            text-transform: uppercase;
+            margin-bottom: 38px;
+            transform: rotate(-1deg);
+            background: rgba(180, 85, 45, 0.06);
+        }
+        .hero-stamp i {
+            width: 7px; height: 7px;
+            background: var(--rust-hot);
+            border-radius: 50%;
+            animation: blink 2.2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+        .hero h1 { font-size: clamp(72px, 10.5vw, 168px); letter-spacing: 2px; }
+        .hero h1 .l1 { display: block; color: var(--bone); }
+        .hero h1 .l2 {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--rust-hot);
+            margin-left: 0.35em;
+        }
+        .hero h1 .l3 { display: block; color: var(--rust); margin-left: 0.7em; }
+
+        .hero-sub {
+            max-width: 520px;
+            margin: 34px 0 44px;
+            color: #B7AC97;
+            font-size: 16.5px;
+            line-height: 1.85;
+        }
+        .hero-sub b { color: var(--bone); font-weight: 500; }
+
+        .hero-cta { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 17px 34px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: color 0.3s, background 0.3s, border-color 0.3s;
+            will-change: transform;
+        }
+        .btn-solid { background: var(--rust); color: var(--ink); }
+        .btn-solid:hover { background: var(--rust-hot); }
+        .btn-ghost { border-color: var(--line-d); color: var(--bone); font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 500; }
+        .btn-ghost:hover { border-color: var(--rust); color: var(--rust-hot); }
+        .btn .arr { transition: transform 0.3s var(--ease-out); }
+        .btn:hover .arr { transform: translateX(5px); }
+
+        .hero-media {
+            position: relative;
+            z-index: 2;
+            padding: 130px 64px 150px 20px;
+            display: flex;
+            align-items: center;
+        }
+        .hero-frame {
+            position: relative;
+            width: 100%;
+            transform: rotate(1.6deg);
+        }
+        .hero-frame::before {
+            content: '';
+            position: absolute;
+            inset: -14px 14px 14px -14px;
+            border: 1px solid var(--rust);
+            z-index: 0;
+        }
+        .hero-frame::after {
+            content: 'PROBE Nr. 29 — REINKUPFER, GEÄTZT';
+            position: absolute;
+            left: 14px; bottom: -34px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            color: var(--olive);
+            white-space: nowrap;
+        }
+        .hero-imgwrap {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border: 1px solid var(--line-d);
+            aspect-ratio: 4 / 5;
+            background: var(--ink-3);
+        }
+        .hero-imgwrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: saturate(1.08) contrast(1.04);
+            transform: scale(1.08);
+            transition: transform 8s var(--ease-io);
+        }
+        .hero-media:hover .hero-imgwrap img { transform: scale(1.14); }
+        .hero-imgwrap::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(200deg, rgba(180,85,45,0.12), transparent 45%, rgba(20,16,14,0.35));
+            mix-blend-mode: multiply;
+        }
+        .hero-chip {
+            position: absolute;
+            z-index: 4;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'IBM Plex Mono', monospace;
+            padding: 12px 16px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            box-shadow: 6px 6px 0 var(--rust);
+        }
+        .hero-chip b { display: block; font-size: 20px; letter-spacing: 0; }
+        .chip-a { top: 12%; left: -26px; transform: rotate(-2deg); }
+        .chip-b { bottom: 14%; right: 18px; transform: rotate(1.4deg); }
+
+        .hero-strip {
+            position: absolute;
+            z-index: 5;
+            left: 0; right: 0; bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--line-d);
+            background: rgba(20, 16, 14, 0.82);
+            backdrop-filter: blur(10px);
+        }
+        .hero-strip div {
+            padding: 20px 26px;
+            border-right: 1px solid var(--line-d);
+        }
+        .hero-strip div:last-child { border-right: none; }
+        .hero-strip b {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--rust-hot);
+        }
+        .hero-strip span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--olive);
+            text-transform: uppercase;
+        }
+
+        /* ============ TICKER ============ */
+        .ticker-band {
+            background: var(--rust);
+            transform: rotate(-1.2deg) scale(1.02);
+            margin: -14px 0 0;
+            position: relative;
+            z-index: 20;
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+            overflow: hidden;
+        }
+        .ticker {
+            display: flex;
+            width: max-content;
+            animation: tick 26s linear infinite reverse;
+        }
+        .ticker span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: var(--ink);
+            padding: 13px 0;
+            white-space: nowrap;
+        }
+        @keyframes tick { to { transform: translateX(-50%); } }
+
+        /* ============ MATERIAL (paper) ============ */
+        .material {
+            background: var(--paper);
+            color: var(--ink);
+            padding: 140px 0 120px;
+            position: relative;
+        }
+        .material .shead .code { color: var(--olive); }
+        .material-grid {
+            display: grid;
+            grid-template-columns: 6fr 7fr;
+            gap: 64px;
+            align-items: start;
+        }
+        .mat-figure {
+            position: relative;
+            transform: rotate(-1.4deg);
+            transition: transform 0.6s var(--ease-out);
+        }
+        .mat-figure:hover { transform: rotate(-0.2deg); }
+        .mat-figure .ph {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--ink);
+            background: var(--paper-2);
+            box-shadow: 16px 16px 0 var(--rust);
+        }
+        .mat-figure .ph img {
+            width: 100%;
+            aspect-ratio: 4 / 4.6;
+            object-fit: cover;
+            filter: saturate(1.08) contrast(1.04);
+            transition: transform 1.2s var(--ease-out);
+        }
+        .mat-figure:hover .ph img { transform: scale(1.05); }
+        .fig-chip {
+            position: absolute;
+            top: 14px; left: 14px;
+            z-index: 2;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 12px;
+            box-shadow: 5px 5px 0 var(--rust);
+        }
+        .mat-inset {
+            position: absolute;
+            right: -22px; bottom: 30px;
+            width: 44%;
+            z-index: 2;
+            border: 2px solid var(--ink);
+            background: var(--paper-2);
+            box-shadow: 10px 10px 0 var(--ink);
+            transform: rotate(1.8deg);
+            transition: transform 0.6s var(--ease-out);
+        }
+        .mat-figure:hover .mat-inset { transform: rotate(0.4deg); }
+        .mat-inset img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            filter: saturate(1.05);
+        }
+        .mat-inset::after {
+            content: 'VERGR. ×3';
+            position: absolute;
+            left: 0; bottom: 0;
+            background: var(--ink);
+            color: var(--bone);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            padding: 5px 9px;
+        }
+        .mat-figure figcaption {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 1.5px;
+            color: var(--olive);
+            margin-top: 18px;
+            text-transform: uppercase;
+        }
+        .mat-copy .lead {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: clamp(21px, 2.2vw, 28px);
+            line-height: 1.35;
+            text-transform: none;
+            letter-spacing: 0.2px;
+            margin-bottom: 26px;
+        }
+        .mat-copy p.body { color: #4C463C; margin-bottom: 20px; max-width: 640px; }
+        .mat-copy p.body b { color: var(--rust-deep); font-weight: 600; }
+
+        .datalog {
+            margin-top: 40px;
+            border-top: 2px solid var(--ink);
+        }
+        .datalog .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 13px 4px;
+            border-bottom: 1px solid var(--line-l);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            letter-spacing: 1px;
+        }
+        .datalog .row:hover { background: rgba(180, 85, 45, 0.06); }
+        .datalog .row span { color: var(--olive); text-transform: uppercase; font-size: 10.5px; letter-spacing: 2px; padding-top: 2px; }
+        .datalog .row b { font-weight: 600; text-align: right; }
+        .datalog .row b i { font-style: normal; color: var(--rust); }
+
+        .counters {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 90px;
+            background: var(--ink);
+            border: 2px solid var(--ink);
+        }
+        .counters .cell {
+            background: var(--paper);
+            padding: 34px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.35s, color 0.35s;
+        }
+        .counters .cell:hover { background: var(--ink); color: var(--bone); }
+        .counters .cell:hover .cnum { color: var(--rust-hot); }
+        .cnum {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: clamp(38px, 4vw, 56px);
+            line-height: 1;
+            color: var(--ink);
+            transition: color 0.35s;
+        }
+        .cnum small { font-size: 0.42em; font-weight: 600; letter-spacing: 1px; color: var(--rust); }
+        .clabel {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--olive);
+            margin-top: 12px;
+        }
+        .counters .cell:hover .clabel { color: #8B8371; }
+
+        /* ============ SERIE / specimen list ============ */
+        .serie {
+            background: var(--ink);
+            padding: 140px 0;
+            position: relative;
+            border-top: 1px solid var(--line-d);
+        }
+        .serie-grid {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .spec-list { border-top: 2px solid var(--bone); }
+        .spec-row {
+            display: grid;
+            grid-template-columns: 84px 1fr auto;
+            gap: 24px;
+            align-items: center;
+            padding: 30px 8px;
+            border-bottom: 1px solid var(--line-d);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s, padding-left 0.35s var(--ease-out);
+        }
+        .spec-row:hover, .spec-row.on { background: rgba(233, 225, 209, 0.03); padding-left: 20px; }
+        .spec-row::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--rust);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.35s var(--ease-io);
+        }
+        .spec-row:hover::before, .spec-row.on::before { transform: scaleY(1); }
+        .spec-idx {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--olive);
+            letter-spacing: 2px;
+        }
+        .spec-name h3 { font-size: clamp(26px, 3vw, 40px); letter-spacing: 1px; transition: color 0.3s; }
+        .spec-row:hover .spec-name h3, .spec-row.on .spec-name h3 { color: var(--rust-hot); }
+        .spec-name p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--olive);
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+        .spec-meta { text-align: right; }
+        .spec-price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--bone);
+        }
+        .spec-price small { font-size: 10.5px; color: var(--olive); display: block; letter-spacing: 1.5px; }
+        .spec-buy {
+            display: inline-block;
+            margin-top: 9px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--rust-hot);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .spec-row:hover .spec-buy, .spec-row.on .spec-buy { border-color: var(--rust); }
+        .serie-note {
+            margin-top: 30px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            letter-spacing: 1px;
+            color: var(--olive);
+            max-width: 560px;
+            line-height: 1.9;
+        }
+        .serie-note a { color: var(--rust-hot); border-bottom: 1px solid var(--rust-deep); }
+
+        .specimen {
+            position: sticky;
+            top: 90px;
+            aspect-ratio: 4 / 4.6;
+            border: 1px solid var(--line-d);
+            background: var(--ink-2);
+            overflow: hidden;
+        }
+        .specimen img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.12) rotate(1.2deg);
+            transition: opacity 0.7s var(--ease-out), transform 1.1s var(--ease-out);
+            filter: saturate(1.05) contrast(1.03);
+        }
+        .specimen img.show { opacity: 1; transform: scale(1) rotate(0); }
+        .specimen::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(20,16,14,0.55));
+            pointer-events: none;
+        }
+        .spec-tag {
+            position: absolute;
+            left: 18px; bottom: 16px;
+            z-index: 3;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 2px;
+            color: var(--bone);
+            text-transform: uppercase;
+            background: rgba(20,16,14,0.72);
+            border: 1px solid var(--line-d);
+            padding: 8px 12px;
+        }
+        .spec-corner {
+            position: absolute;
+            top: 14px; right: 14px;
+            z-index: 3;
+            width: 30px; height: 30px;
+            border-top: 2px solid var(--rust-hot);
+            border-right: 2px solid var(--rust-hot);
+        }
+
+        /* ============ PROZESS (duotone band) ============ */
+        .prozess {
+            position: relative;
+            padding: 150px 0 130px;
+            background:
+                linear-gradient(180deg, rgba(20,16,14,0.96), rgba(28,22,19,0.9)),
+                url('images/mine.jpg') center/cover fixed;
+            border-top: 1px solid var(--line-d);
+        }
+        .prozess .shead h2 { color: var(--bone); }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--line-d);
+            border: 1px solid var(--line-d);
+        }
+        .step {
+            background: var(--ink);
+            padding: 40px 30px 46px;
+            position: relative;
+            transition: background 0.35s;
+            overflow: hidden;
+        }
+        .step:hover { background: var(--ink-3); }
+        .step-n {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--rust-hot);
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 60px;
+        }
+        .step h3 { font-size: 23px; letter-spacing: 2px; margin-bottom: 16px; }
+        .step p { font-size: 13.5px; color: #A2987F; line-height: 1.75; }
+        .step::after {
+            content: '';
+            position: absolute;
+            left: 30px; bottom: 26px;
+            width: 34px; height: 3px;
+            background: var(--rust);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--ease-out);
+        }
+        .step:hover::after { transform: scaleX(1); }
+
+        .prozess-quote {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .prozess-quote blockquote {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: clamp(22px, 2.6vw, 34px);
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--bone);
+            border-left: 4px solid var(--rust);
+            padding-left: 28px;
+        }
+        .prozess-quote p { color: #A2987F; font-size: 14.5px; max-width: 460px; }
+
+        /* ============ HERKUNFT (paper) ============ */
+        .herkunft {
+            background: var(--paper);
+            color: var(--ink);
+            padding: 140px 0;
+        }
+        .herk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 80px;
+            border: 2px solid var(--ink);
+        }
+        .herk-cell { position: relative; overflow: hidden; background: var(--paper-2); }
+        .herk-cell img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            filter: grayscale(0.35) sepia(0.28) saturate(1.25);
+            transition: filter 0.6s, transform 1s var(--ease-out);
+        }
+        .herk-cell:hover img { filter: grayscale(0) sepia(0) saturate(1.05); transform: scale(1.04); }
+        .herk-cell figcaption {
+            position: absolute;
+            left: 0; bottom: 0;
+            background: var(--ink);
+            color: var(--bone);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 2px;
+            padding: 10px 16px;
+            text-transform: uppercase;
+        }
+        .herk-low {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 70px;
+        }
+        .herk-low p.body { color: #4C463C; margin-bottom: 18px; max-width: 620px; }
+        .herk-low p.body b { color: var(--rust-deep); font-weight: 600; }
+        .cert {
+            border: 1px solid var(--ink);
+            background: #FBF9F3;
+            box-shadow: 10px 10px 0 var(--rust);
+            padding: 34px 32px;
+        }
+        .cert h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rust-deep);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .cert h4::after { content: ''; flex: 1; height: 1px; background: var(--line-l); }
+        .cert ul { list-style: none; }
+        .cert li {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            letter-spacing: 0.5px;
+            padding: 11px 0;
+            border-bottom: 1px dashed var(--line-l);
+            display: flex;
+            gap: 12px;
+        }
+        .cert li::before { content: '■'; color: var(--rust); font-size: 8px; line-height: 2.4; }
+        .cert li:last-child { border-bottom: none; }
+
+        /* ============ FAQ ============ */
+        .faq {
+            background: var(--ink);
+            padding: 130px 0 150px;
+            border-top: 1px solid var(--line-d);
+        }
+        .faq-grid { display: grid; grid-template-columns: 4fr 8fr; gap: 70px; align-items: start; }
+        .faq-grid .shead { margin-bottom: 0; display: block; }
+        .faq-list { border-top: 2px solid var(--bone); }
+        .faq-item { border-bottom: 1px solid var(--line-d); }
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 24px 6px;
+            transition: padding-left 0.3s var(--ease-out), color 0.3s;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { padding-left: 16px; color: var(--rust-hot); }
+        .faq-item summary .q-idx { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--rust-hot); letter-spacing: 2px; }
+        .faq-item summary h3 { font-size: 19px; letter-spacing: 1.5px; flex: 1; }
+        .faq-item summary .pm {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            color: var(--olive);
+            transition: transform 0.3s var(--ease-out), color 0.3s;
+        }
+        .faq-item[open] summary .pm { transform: rotate(45deg); color: var(--rust-hot); }
+        .faq-item .a {
+            padding: 0 6px 26px 54px;
+            color: #A2987F;
+            font-size: 14.5px;
+            max-width: 700px;
+        }
+        .faq-item .a a { color: var(--rust-hot); border-bottom: 1px solid var(--rust-deep); }
+
+        /* ============ CTA + FOOTER ============ */
+        .cta {
+            background: var(--rust);
+            color: var(--ink);
+            padding: 110px 0;
+            border-top: 3px solid var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-grid { display: grid; grid-template-columns: 8fr 4fr; gap: 50px; align-items: center; }
+        .cta h2 { font-size: clamp(44px, 6vw, 92px); letter-spacing: 2px; }
+        .cta p { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 1px; margin-top: 18px; max-width: 560px; }
+        .cta .btn-dark {
+            background: var(--ink);
+            color: var(--bone);
+            justify-self: end;
+        }
+        .cta .btn-dark:hover { background: var(--bone); color: var(--ink); }
+
+        footer {
+            background: var(--ink);
+            padding: 90px 0 40px;
+            border-top: 1px solid var(--line-d);
+        }
+        .foot-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+        .foot-brand p { color: #8B8371; font-size: 13.5px; max-width: 320px; margin-top: 14px; }
+        .foot-cols { display: flex; gap: 80px; flex-wrap: wrap; }
+        .foot-cols h5 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 3px;
+            color: var(--olive);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .foot-cols a {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            color: var(--bone);
+            padding: 5px 0;
+            transition: color 0.3s, padding-left 0.3s;
+        }
+        .foot-cols a:hover { color: var(--rust-hot); padding-left: 6px; }
+        .foot-giant {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: clamp(70px, 13.5vw, 230px);
+            line-height: 0.9;
+            letter-spacing: 6px;
+            text-align: center;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(233, 225, 209, 0.14);
+            user-select: none;
+            transition: -webkit-text-stroke-color 0.5s, color 0.6s;
+        }
+        .foot-giant:hover { -webkit-text-stroke-color: var(--rust); color: rgba(180, 85, 45, 0.08); }
+        .foot-legal {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line-d);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--olive);
+        }
+        .foot-legal a { color: var(--bone); border-bottom: 1px solid var(--rust-deep); }
+        .foot-legal a:hover { color: var(--rust-hot); }
+
+        /* back to top */
+        .totop {
+            position: fixed;
+            right: 26px; bottom: 26px;
+            z-index: 950;
+            width: 50px; height: 50px;
+            background: var(--rust);
+            color: var(--ink);
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 0.35s, transform 0.35s, background 0.3s;
+        }
+        .totop.show { opacity: 1; transform: none; pointer-events: auto; }
+        .totop:hover { background: var(--rust-hot); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1240px) {
+            .wrap { padding: 0 40px; }
+            .waypoints { display: none; }
+        }
+        @media (max-width: 1080px) {
+            .hero { grid-template-columns: 1fr; min-height: 0; }
+            .hero-main { padding: 150px 40px 40px 44px; }
+            .hero-media { padding: 30px 40px 140px 44px; }
+            .hero-frame { max-width: 560px; }
+            .hero-strip { position: static; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line-d); }
+            .hero-strip div { border-bottom: 1px solid var(--line-d); }
+            .material-grid, .serie-grid, .herk-low, .faq-grid, .cta-grid, .prozess-quote { grid-template-columns: 1fr; gap: 50px; }
+            .mat-figure { max-width: 640px; }
+            .specimen { position: relative; top: 0; aspect-ratio: 4/3; order: -1; }
+            .counters { grid-template-columns: repeat(2, 1fr); }
+            .steps { grid-template-columns: repeat(2, 1fr); }
+            .cta .btn-dark { justify-self: start; }
+        }
+        @media (max-width: 860px) {
+            :root { --rail-w: 0px; }
+            .rail { display: none; }
+            .page { margin-left: 0; }
+            .mobilebar { display: flex; }
+            .wrap { padding: 0 22px; }
+            .hero-main { padding: 120px 22px 30px; }
+            .hero-media { padding: 26px 22px 60px; }
+            .hero h1 { font-size: clamp(64px, 17vw, 110px); }
+            .hero-chip { display: none; }
+            .shead { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 44px; }
+            .shead .code { text-align: left; padding-bottom: 0; }
+            .material, .serie, .prozess, .herkunft, .faq { padding-top: 90px; padding-bottom: 90px; }
+            .prozess { background-attachment: scroll; }
+            .steps { grid-template-columns: 1fr; }
+            .herk-grid { grid-template-columns: 1fr; }
+            .herk-cell img { height: 260px; }
+            .mat-figure .ph { box-shadow: 10px 10px 0 var(--rust); }
+            .mat-inset { right: -6px; bottom: 18px; width: 46%; box-shadow: 7px 7px 0 var(--ink); }
+            .counters { grid-template-columns: 1fr 1fr; }
+            .spec-row { grid-template-columns: 1fr auto; }
+            .spec-idx { display: none; }
+            .foot-cols { gap: 44px; }
+            .ticker-band { transform: rotate(-1.2deg) scale(1.06); }
+        }
+
+        /* reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+            .rv, .rv-r { opacity: 1; transform: none; clip-path: none; }
+            .grain { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    <!-- ===== VERTICAL RAIL ===== -->
+    <aside class="rail">
+        <a href="#start" class="rail-logo" aria-label="IMPERAL — zum Anfang">IMP<b>E</b>RAL</a>
+        <div class="rail-mid" aria-hidden="true">
+            <span></span>
+            <em>CU&thinsp;29</em>
+            <span></span>
+            <em>99,99</em>
+            <span></span>
+        </div>
+        <div class="rail-cu" aria-hidden="true"><i>Cu</i></div>
+    </aside>
+
+    <!-- ===== MOBILE BAR + DRAWER ===== -->
+    <div class="mobilebar">
+        <a href="#start" class="mlogo">IMP<b>E</b>RAL</a>
+        <button class="burger" id="burger" aria-label="Menü öffnen">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav class="drawer" id="drawer" aria-label="Mobiles Menü">
+        <div class="drawer-panel">
+            <button class="drawer-close" id="drawerClose" aria-label="Menü schließen">×</button>
+            <a href="#material"><span>Material</span><small>01</small></a>
+            <a href="#serie"><span>Die Serie</span><small>02</small></a>
+            <a href="#prozess"><span>Prozess</span><small>03</small></a>
+            <a href="#herkunft"><span>Herkunft</span><small>04</small></a>
+            <a href="#faq"><span>FAQ</span><small>05</small></a>
+            <a href="#kontakt"><span>Kontakt</span><small>06</small></a>
+            <a href="https://ebay.de" target="_blank" rel="noopener" class="drawer-cta">Auf eBay kaufen →</a>
+        </div>
+    </nav>
+
+    <!-- ===== RIGHT SECTION INDEX ===== -->
+    <nav class="waypoints" aria-label="Abschnitte">
+        <a href="#material"><i></i><span>MATERIAL</span></a>
+        <a href="#serie"><i></i><span>SERIE</span></a>
+        <a href="#prozess"><i></i><span>PROZESS</span></a>
+        <a href="#herkunft"><i></i><span>HERKUNFT</span></a>
+        <a href="#faq"><i></i><span>FAQ</span></a>
+        <a href="#kontakt"><i></i><span>KONTAKT</span></a>
+    </nav>
+
+    <main class="page" id="start">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="hero-grid-bg" aria-hidden="true"></div>
+            <div class="hero-mark" aria-hidden="true">29</div>
+
+            <div class="hero-main">
+                <div class="hero-stamp rv in"><i></i> REINHEIT 99,99 % · ELEKTROLYTKUPFER</div>
+                <h1>
+                    <span class="l1 rv in">IMPERAL</span>
+                    <span class="l2 rv in">99,99</span>
+                    <span class="l3 rv in">KUPFER</span>
+                </h1>
+                <p class="hero-sub rv in">
+                    Barren aus <b>elektrolytisch raffiniertem Reinkupfer</b> — gewichtet,
+                    spektrometrisch geprüft und einzeln nummeriert. Ein Rohstoff,
+                    der sich weigert, Vergangenheit zu werden.
+                </p>
+                <div class="hero-cta rv in">
+                    <a href="#serie" class="btn btn-solid mag">Die Serie ansehen <span class="arr">→</span></a>
+                    <a href="https://ebay.de" target="_blank" rel="noopener" class="btn btn-ghost mag">Auf eBay kaufen</a>
+                </div>
+            </div>
+
+            <div class="hero-media">
+                <figure class="hero-frame">
+                    <div class="hero-imgwrap" id="heroImg">
+                        <img src="images/hero.jpg" alt="Geätzte Reinkupferscheibe, 99,95 % rein — Strangguss, Makro-Ätzung" width="800" height="1000">
+                    </div>
+                    <div class="hero-chip chip-a"><b>8,96</b> g/cm³</div>
+                    <div class="hero-chip chip-b"><b>Cu&nbsp;29</b> ORDNUNGSZAHL</div>
+                </figure>
+            </div>
+
+            <div class="hero-strip">
+                <div><b>1084,62&nbsp;°C</b><span>Schmelzpunkt</span></div>
+                <div><b>58&nbsp;MS/m</b><span>Leitfähigkeit</span></div>
+                <div><b>EN&nbsp;1652</b><span>Werkstandard Cu-ETP</span></div>
+                <div><b>100&nbsp;%</b><span>Rezyklierbar</span></div>
+            </div>
+        </section>
+
+        <!-- ===== TICKER ===== -->
+        <div class="ticker-band" aria-hidden="true">
+            <div class="ticker" id="ticker">
+                <span>IMPERAL&nbsp;·&nbsp;REINKUPFER&nbsp;99,99&nbsp;·&nbsp;CU&nbsp;29&nbsp;·&nbsp;GEPRÜFT&nbsp;·&nbsp;NUMMERIERT&nbsp;·&nbsp;GEWICHTET&nbsp;·&nbsp;AUS&nbsp;EINER&nbsp;HAND&nbsp;·&nbsp;</span>
+                <span>IMPERAL&nbsp;·&nbsp;REINKUPFER&nbsp;99,99&nbsp;·&nbsp;CU&nbsp;29&nbsp;·&nbsp;GEPRÜFT&nbsp;·&nbsp;NUMMERIERT&nbsp;·&nbsp;GEWICHTET&nbsp;·&nbsp;AUS&nbsp;EINER&nbsp;HAND&nbsp;·&nbsp;</span>
+            </div>
+        </div>
+
+        <!-- ===== MATERIAL ===== -->
+        <section class="material" id="material">
+            <div class="wrap">
+                <div class="shead rv">
+                    <div>
+                        <span class="kick">01 — Das Material</span>
+                        <h2>Element,<br>kein Produkt.</h2>
+                    </div>
+                    <div class="code">FILE: CU-BASICS<br>STAND: 2026</div>
+                </div>
+
+                <div class="material-grid">
+                    <figure class="mat-figure rv-r">
+                        <div class="ph">
+                            <img src="images/native-copper.jpg" alt="Natürliches gediegenes Kupfer, Makroaufnahme" width="1100" height="1041">
+                            <span class="fig-chip">FIG. 01 — GEDIEGENKUPFER</span>
+                        </div>
+                        <div class="mat-inset" aria-hidden="true">
+                            <img src="images/hero.jpg" alt="">
+                        </div>
+                        <figcaption><span>Natürlicher Gediegen-Kupfer</span><span>PROBE ≈ 4 CM</span></figcaption>
+                    </figure>
+
+                    <div class="mat-copy">
+                        <p class="lead rv">
+                            Kupfer war das erste Metall, das der Mensch beherrschte —
+                            und es ist das einzige, das Strom, Zeit und Bakterien
+                            gleichermaßen unterwirft.
+                        </p>
+                        <p class="body rv">
+                            IMPERAL-Barren bestehen aus <b>Cu-ETP</b> (Elektrolytkupfer nach EN 1652),
+                            raffiniert auf eine Reinheit von 99,99&nbsp;%. Keine Legierung, keine Beschichtung,
+                            keine Kompromisse: Die rötliche Oberfläche ist reines Element —
+                            <b>leitfähiger als jedes andere Gebrauchsmetall</b>, natürlich antimikrobiell
+                            und vollständig rezyklierbar ohne Qualitätsverlust.
+                        </p>
+                        <p class="body rv">
+                            An der Luft entwickelt Kupfer seine charakteristische Patina —
+                            eine dichte Oxidschicht, die den Kern für Jahrhunderte konserviert.
+                            Wer will, poliert zurück auf Glanz. Wer wartet, besitzt ein Stück
+                            Material, das altern statt verfallen.
+                        </p>
+
+                        <div class="datalog rv">
+                            <div class="row"><span>Symbol / Ordnungszahl</span><b>Cu / <i>29</i></b></div>
+                            <div class="row"><span>Dichte bei 20&nbsp;°C</span><b>8,96 <i>g/cm³</i></b></div>
+                            <div class="row"><span>Schmelzpunkt</span><b>1084,62 <i>°C</i></b></div>
+                            <div class="row"><span>Elektr. Leitfähigkeit</span><b>58 <i>MS/m</i></b></div>
+                            <div class="row"><span>Härte (Mohs)</span><b>3,0</b></div>
+                            <div class="row"><span>Werkstoff</span><b>Cu-ETP · EN 1652</b></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="counters rv">
+                    <div class="cell">
+                        <div class="cnum"><span data-count="99.99" data-dec="2">0</span><small>&nbsp;%</small></div>
+                        <div class="clabel">Reinheit Cu-ETP</div>
+                    </div>
+                    <div class="cell">
+                        <div class="cnum"><span data-count="8.96" data-dec="2">0</span><small>&nbsp;g/cm³</small></div>
+                        <div class="clabel">Dichte</div>
+                    </div>
+                    <div class="cell">
+                        <div class="cnum"><span data-count="1084.62" data-dec="2">0</span><small>&nbsp;°C</small></div>
+                        <div class="clabel">Schmelzpunkt</div>
+                    </div>
+                    <div class="cell">
+                        <div class="cnum"><span data-count="29" data-dec="0">0</span><small>&nbsp;—</small></div>
+                        <div class="clabel">Ordnungszahl</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERIE ===== -->
+        <section class="serie" id="serie">
+            <div class="wrap">
+                <div class="shead rv">
+                    <div>
+                        <span class="kick">02 — Die Serie</span>
+                        <h2>Vier Gewichte.<br>Ein Standard.</h2>
+                    </div>
+                    <div class="code">SERIE: IMP-I<br>JE BARREN EINZELN NUMMERIERT</div>
+                </div>
+
+                <div class="serie-grid">
+                    <div>
+                        <div class="spec-list" id="specList">
+                            <div class="spec-row on" data-img="0" data-cap="PROBE 01 — 500 G · STRANGGUSS">
+                                <span class="spec-idx">IMP-01</span>
+                                <div class="spec-name">
+                                    <h3>500&nbsp;g Barren</h3>
+                                    <p>Der Einstieg · handlich · geätzt</p>
+                                </div>
+                                <div class="spec-meta">
+                                    <div class="spec-price">39&nbsp;€<small>inkl. MwSt.</small></div>
+                                    <a class="spec-buy" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay →</a>
+                                </div>
+                            </div>
+                            <div class="spec-row" data-img="1" data-cap="PROBE 02 — 1 KG · STRANGGUSS">
+                                <span class="spec-idx">IMP-02</span>
+                                <div class="spec-name">
+                                    <h3>1&nbsp;kg Barren</h3>
+                                    <p>Der Klassiker · Trapez · gestanzt</p>
+                                </div>
+                                <div class="spec-meta">
+                                    <div class="spec-price">74&nbsp;€<small>inkl. MwSt.</small></div>
+                                    <a class="spec-buy" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay →</a>
+                                </div>
+                            </div>
+                            <div class="spec-row" data-img="2" data-cap="PROBE 03 — 5 KG · INDUSTRIEFORMAT">
+                                <span class="spec-idx">IMP-03</span>
+                                <div class="spec-name">
+                                    <h3>5&nbsp;kg Barren</h3>
+                                    <p>Das Fundament · Speicherformat</p>
+                                </div>
+                                <div class="spec-meta">
+                                    <div class="spec-price">349&nbsp;€<small>inkl. MwSt.</small></div>
+                                    <a class="spec-buy" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay →</a>
+                                </div>
+                            </div>
+                            <div class="spec-row" data-img="3" data-cap="PROBE 04 — 12,5 KG · SCHWENKBARREN">
+                                <span class="spec-idx">IMP-04</span>
+                                <div class="spec-name">
+                                    <h3>12,5&nbsp;kg Barren</h3>
+                                    <p>Das Monument ·Henkelguß · geprüft</p>
+                                </div>
+                                <div class="spec-meta">
+                                    <div class="spec-price">849&nbsp;€<small>inkl. MwSt.</small></div>
+                                    <a class="spec-buy" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="serie-note">
+                            Alle Barren werden <a href="https://ebay.de" target="_blank" rel="noopener">über ebay.de</a>
+                            verkauft — mit Käuferschutz. Jede Lieferung enthält Analyseschein
+                            und Nummernkarte. Versand 1–2 Werktage, neutral &amp; versichert.
+                        </p>
+                    </div>
+
+                    <div class="specimen" aria-hidden="true">
+                        <img src="images/hero.jpg" class="show" alt="">
+                        <img src="images/ingot.jpg" alt="">
+                        <img src="images/busbars.jpg" alt="">
+                        <img src="images/native-copper.jpg" alt="">
+                        <div class="spec-corner"></div>
+                        <div class="spec-tag" id="specTag">PROBE 01 — 500 G · STRANGGUSS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROZESS ===== -->
+        <section class="prozess" id="prozess">
+            <div class="wrap">
+                <div class="shead rv">
+                    <div>
+                        <span class="kick">03 — Der Prozess</span>
+                        <h2>Vom Bergwerk<br>zum Barren.</h2>
+                    </div>
+                    <div class="code">ROUTE: MINE → MELT<br>4 STATIONEN</div>
+                </div>
+
+                <div class="steps">
+                    <div class="step rv">
+                        <span class="step-n">STATION 01</span>
+                        <h3>Bergbau</h3>
+                        <p>Kupferkonzentrat aus großen, geprüften Tagebauen — Herkunft lückenlos dokumentiert, Abraum und Wasser enthalten.</p>
+                    </div>
+                    <div class="step rv">
+                        <span class="step-n">STATION 02</span>
+                        <h3>Raffination</h3>
+                        <p>Elektrolytische Reinigung zu Kathoden von 99,99&nbsp;%. Zwei Stromflüsse trennen Kupfer von Begleitmetall — physikalisch, ohne Chemie-Kompromiss.</p>
+                    </div>
+                    <div class="step rv">
+                        <span class="step-n">STATION 03</span>
+                        <h3>Gießerei</h3>
+                        <p>Kathoden schmelzen bei 1084,62&nbsp;°C und laufen im Stranggussverfahren zur Barrenform. Jedes Gewicht eigene Kokille, eigene Form.</p>
+                    </div>
+                    <div class="step rv">
+                        <span class="step-n">STATION 04</span>
+                        <h3>Prüfung &amp; Signatur</h3>
+                        <p>Spektrometrische Analyse, Gewichtskontrolle auf 0,1&nbsp;g, Prägung von Serie und Einzelnummer — erst dann verlässt ein Barren das Haus.</p>
+                    </div>
+                </div>
+
+                <div class="prozess-quote">
+                    <blockquote class="rv">«Metalle lügen nicht.<br>Sie wiegen, was sie sind.»</blockquote>
+                    <p class="rv">Deshalb messen wir, bevor wir versprechen: Jeder IMPERAL-Barren trägt sein Gewicht
+                    in der Prägung und seinen Analyseschein in der Lieferung. Kein Kleingedrucktes — nur Metall.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HERKUNFT ===== -->
+        <section class="herkunft" id="herkunft">
+            <div class="wrap">
+                <div class="shead rv">
+                    <div>
+                        <span class="kick">04 — Herkunft &amp; Reinheit</span>
+                        <h2>Nachvollziehbar<br>bis zur Quelle.</h2>
+                    </div>
+                    <div class="code">AUDIT: JÄHRLICH<br>CHAIN OF CUSTODY</div>
+                </div>
+
+                <div class="herk-grid rv-r">
+                    <figure class="herk-cell">
+                        <img src="images/stream.jpg" alt="Kupferhaltiges Bachwasser am Parys Mountain, Anglesey" width="492" height="656">
+                        <figcaption>WASSERLÄUFE — GEOCHEMISCHE SPUR</figcaption>
+                    </figure>
+                    <figure class="herk-cell">
+                        <img src="images/ingot.jpg" alt="Antiker Minoischer Kupferbarren aus Zakros, Kreta" width="1264" height="803">
+                        <figcaption>GUSSTradITION — MINOISCHE BIS 1200 V. CHR.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="herk-low">
+                    <div>
+                        <p class="body rv">
+                            Kupfer abbauen bedeutet, ein Element zu bewegen, das die Erde selbst
+                            an die Oberfläche drückt. Unsere Rohstoffe stammen ausschließlich aus
+                            <b>geprüften Bergbaubetrieben mit dokumentierter Herkunft</b> —
+                            ergänzt durch Rezyklat-Kupfer, das nach Raffination analytisch nicht mehr
+                            von Primärmaterial zu unterscheiden ist.
+                        </p>
+                        <p class="body rv">
+                            Reinheit ist bei uns kein Marketingwort, sondern ein Messwert:
+                            Jede Charge wird <b>spektrometrisch analysiert</b>, jedes Ergebnis
+                            dem Barren zugeordnet. Wer den Beilegeraum kennt, kennt den Barren —
+                            und wer den Barren kennt, hält ihn gern lange.
+                        </p>
+                    </div>
+
+                    <aside class="cert rv">
+                        <h4>Analyseschein · je Barren</h4>
+                        <ul>
+                            <li>Werkstoff Cu-ETP nach EN 1652</li>
+                            <li>Reinheit 99,99 % (spektrometrisch)</li>
+                            <li>Gewicht kalibriert auf ± 0,1 g</li>
+                            <li>Serien- &amp; Einzelnummer geprägt</li>
+                            <li>Nummernkarte &amp; Siegel in Lieferung</li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="faq" id="faq">
+            <div class="wrap">
+                <div class="faq-grid">
+                    <div class="shead rv">
+                        <div>
+                            <span class="kick">05 — FAQ</span>
+                            <h2>Kurz<br>gefragt.</h2>
+                        </div>
+                    </div>
+
+                    <div class="faq-list rv">
+                        <details class="faq-item">
+                            <summary><span class="q-idx">Q1</span><h3>Wo kaufe ich IMPERAL-Barren?</h3><span class="pm">+</span></summary>
+                            <p class="a">Direkt über unsere Angebote auf <a href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a> —
+                            dort gilt der eBay-Käuferschutz. Einzelfarren sofort lieferbar, größere Formate auf Anfrage.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span class="q-idx">Q2</span><h3>Wie wird verpackt und versendet?</h3><span class="pm">+</span></summary>
+                            <p class="a">Neutral in luftdichtem Schutzbeutel mit Nummernkarte und Analyseschein.
+                            Versand mit DHL, versichert, 1–2 Werktage. Keine Rückschlüsse auf den Inhalt.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span class="q-idx">Q3</span><h3>Warum Kupfer statt Gold?</h3><span class="pm">+</span></summary>
+                            <p class="a">Kupfer ist Industrie in Reinform: Leitfähigkeit, Machbarkeit, Masse.
+                            Man hält kein Versprechen — man hält Metall, das man in der Hand wiegen kann.
+                            Und: Es ist das am vollständigsten rezyklierbare Wertmetall überhaupt.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span class="q-idx">Q4</span><h3>Wie pflege ich die Oberfläche?</h3><span class="pm">+</span></summary>
+                            <p class="a">Gar nicht — die Patina ist Teil des Materials und schützt den Kern.
+                            Wer Glanz möchte: Zitronensäure-Bad, trocknen, fertig. Danach darf sie wieder wachsen.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span class="q-idx">Q5</span><h3>Gibt es Rückgabe oder Umtausch?</h3><span class="pm">+</span></summary>
+                            <p class="a">Über eBay gelten die gesetzlichen Gewährleistungsregeln plus
+                            eBay-Käuferschutz. Unbeschädigte, versiegelte Barren nehmen wir innerhalb
+                            von 14 Tagen zurück.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="cta" id="kontakt">
+            <div class="wrap">
+                <div class="cta-grid">
+                    <div class="rv">
+                        <h2>Hold it.<br>Once.</h2>
+                        <p>EIN KILO KUPFER WIEGT EIN KILO — FÜR IMMER. AKTUELLE ANGEBOTE FINDEN SIE AUF UNSERER EBAY-SEITE.</p>
+                    </div>
+                    <a href="https://ebay.de" target="_blank" rel="noopener" class="btn btn-dark mag">Zum eBay-Angebot <span class="arr">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div class="wrap">
+                <div class="foot-grid">
+                    <div class="foot-brand">
+                        <a href="#start" class="mlogo" style="font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:6px;">IMP<b style="color:var(--rust-hot)">E</b>RAL</a>
+                        <p>Barren aus elektrolytisch raffiniertem Reinkupfer 99,99&nbsp;%. Gewichtet, geprüft, nummeriert — aus Leidenschaft für das Element 29.</p>
+                    </div>
+                    <div class="foot-cols">
+                        <div>
+                            <h5>Kaufen</h5>
+                            <a href="https://ebay.de" target="_blank" rel="noopener">eBay-Shop</a>
+                            <a href="#serie">Die Serie</a>
+                            <a href="#faq">FAQ</a>
+                        </div>
+                        <div>
+                            <h5>Material</h5>
+                            <a href="#material">Das Element</a>
+                            <a href="#prozess">Der Prozess</a>
+                            <a href="#herkunft">Herkunft</a>
+                        </div>
+                        <div>
+                            <h5>Rechtliches</h5>
+                            <a href="impressum.html">Impressum</a>
+                            <a href="https://ebay.de" target="_blank" rel="noopener">eBay-AGB</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="foot-giant" aria-hidden="true">IMPERAL</div>
+
+                <div class="foot-legal">
+                    <span>© <span id="year">2026</span> IMPERAL — ALLE RECHTE VORBEHALTEN</span>
+                    <span><a href="impressum.html">IMPRESSUM</a> &nbsp;·&nbsp; <a href="#start">NACH OBEN ↑</a></span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <button class="totop" id="totop" aria-label="Nach oben">↑</button>
+
+    <script>
+    (function () {
+        'use strict';
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var finePointer = window.matchMedia('(pointer: fine)').matches;
+
+        /* year */
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        /* drawer */
+        var drawer = document.getElementById('drawer');
+        var burger = document.getElementById('burger');
+        var dClose = document.getElementById('drawerClose');
+        function openD() { drawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function closeD() { drawer.classList.remove('open'); document.body.style.overflow = ''; }
+        burger.addEventListener('click', openD);
+        dClose.addEventListener('click', closeD);
+        drawer.addEventListener('click', function (e) {
+            if (e.target === drawer || e.target.tagName === 'A') closeD();
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeD(); });
+
+        /* ticker: duplicate content until >= 2x viewport for seamless loop */
+        var ticker = document.getElementById('ticker');
+        if (ticker) {
+            var base = ticker.children.length;
+            var unit = ticker.children[0].outerHTML;
+            while (ticker.scrollWidth < window.innerWidth * 2.4) {
+                ticker.insertAdjacentHTML('beforeend', unit);
+            }
+        }
+
+        /* reveals */
+        var revealEls = document.querySelectorAll('.rv, .rv-r');
+        if ('IntersectionObserver' in window && !reduce) {
+            var ro = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) { en.target.classList.add('in'); ro.unobserve(en.target); }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealEls.forEach(function (el) { ro.observe(el); });
+        } else {
+            revealEls.forEach(function (el) { el.classList.add('in'); });
+        }
+
+        /* counters */
+        var counters = document.querySelectorAll('[data-count]');
+        function fmt(v, dec) {
+            return v.toFixed(dec).replace('.', ',');
+        }
+        function runCounter(el) {
+            var target = parseFloat(el.getAttribute('data-count'));
+            var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+            if (reduce) { el.textContent = fmt(target, dec); return; }
+            var t0 = null, dur = 1600;
+            function frame(t) {
+                if (!t0) t0 = t;
+                var p = Math.min((t - t0) / dur, 1);
+                var e = 1 - Math.pow(1 - p, 3);
+                el.textContent = fmt(target * e, dec);
+                if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+        if ('IntersectionObserver' in window) {
+            var co = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) { runCounter(en.target); co.unobserve(en.target); }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(function (c) { co.observe(c); });
+        } else {
+            counters.forEach(runCounter);
+        }
+
+        /* scroll spy */
+        var secs = document.querySelectorAll('section[id]');
+        var wps = document.querySelectorAll('.waypoints a');
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                    var id = en.target.getAttribute('id');
+                    wps.forEach(function (w) {
+                        w.classList.toggle('on', w.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        secs.forEach(function (s) { spy.observe(s); });
+
+        /* specimen swap */
+        var rows = document.querySelectorAll('.spec-row');
+        var imgs = document.querySelectorAll('.specimen img');
+        var tag = document.getElementById('specTag');
+        rows.forEach(function (row) {
+            row.addEventListener('mouseenter', function () {
+                rows.forEach(function (r) { r.classList.remove('on'); });
+                row.classList.add('on');
+                var i = parseInt(row.getAttribute('data-img'), 10);
+                imgs.forEach(function (im, k) { im.classList.toggle('show', k === i); });
+                tag.textContent = row.getAttribute('data-cap');
+            });
+        });
+
+        /* hero parallax */
+        var heroImg = document.getElementById('heroImg');
+        var heroMark = document.querySelector('.hero-mark');
+        var hero = document.querySelector('.hero');
+        if (!reduce) {
+            var ticking = false;
+            window.addEventListener('scroll', function () {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function () {
+                    var y = window.scrollY;
+                    if (y < window.innerHeight * 1.2) {
+                        if (heroImg) heroImg.style.transform = 'translateY(' + (y * 0.1) + 'px)';
+                        if (heroMark) heroMark.style.transform = 'translateY(' + (y * -0.06) + 'px)';
+                    }
+                    ticking = false;
+                });
+            }, { passive: true });
+        }
+
+        /* to top */
+        var totop = document.getElementById('totop');
+        window.addEventListener('scroll', function () {
+            totop.classList.toggle('show', window.scrollY > 700);
+        }, { passive: true });
+        totop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        });
+
+        /* cursor follower + magnetic (fine pointers only) */
+        if (finePointer && !reduce) {
+            document.body.classList.add('cursor-on');
+            var dot = document.querySelector('.cursor-dot');
+            var ring = document.querySelector('.cursor-ring');
+            var mx = -100, my = -100, rx = -100, ry = -100;
+            document.addEventListener('mousemove', function (e) {
+                mx = e.clientX; my = e.clientY;
+                ring.style.opacity = 1;
+            });
+            (function loop() {
+                rx += (mx - rx) * 0.16;
+                ry += (my - ry) * 0.16;
+                dot.style.transform = 'translate(' + (mx - 2.5) + 'px,' + (my - 2.5) + 'px)';
+                ring.style.transform = 'translate(' + (rx - ring.offsetWidth / 2) + 'px,' + (ry - ring.offsetHeight / 2) + 'px)';
+                requestAnimationFrame(loop);
+            })();
+            var hoverSel = 'a, button, summary, .spec-row';
+            document.addEventListener('mouseover', function (e) {
+                if (e.target.closest(hoverSel)) document.body.classList.add('cursor-hover');
+            });
+            document.addEventListener('mouseout', function (e) {
+                if (e.target.closest(hoverSel)) document.body.classList.remove('cursor-hover');
+            });
+
+            /* magnetic buttons */
+            document.querySelectorAll('.mag').forEach(function (btn) {
+                btn.addEventListener('mousemove', function (e) {
+                    var r = btn.getBoundingClientRect();
+                    var dx = e.clientX - (r.left + r.width / 2);
+                    var dy = e.clientY - (r.top + r.height / 2);
+                    btn.style.transform = 'translate(' + dx * 0.18 + 'px,' + dy * 0.22 + 'px)';
+                });
+                btn.addEventListener('mouseleave', function () {
+                    btn.style.transform = '';
+                });
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
