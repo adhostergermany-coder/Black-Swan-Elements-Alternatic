@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAWKING COPPER BARS | Kupferbarren aus Kathoden-Kupfer 99,99 %</title>
+    <meta name="description" content="HAWKING COPPER BARS — Feinkupfer-Barren aus elektrolytisch raffiniertem Kathoden-Kupfer 99,99 %. Vom Katoden-Yard zum 1000-g-Barren. Verkauf über eBay.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2307090F'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23E8833A' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FFC07A'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800&family=Outfit:wght@300;400;500&family=Chivo+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================================
+           HAWKING COPPER BARS — "EVENT HORIZON"
+           Kosmisch-industrielles System: Void-Schwarz, Sternlicht,
+           glühendes Kupfer. Sternenfeld, Orbit-Ringe, Parallax, HUD-Rahmen.
+           ================================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root{
+            --void:#07090F; --void2:#0B0F18; --void3:#111624;
+            --star:#EDE6D8; --dim:#8E99AD; --faint:rgba(237,230,216,.5);
+            --cu:#E8833A; --cu-hot:#FFC07A; --cu-deep:#8F4A1B;
+            --line:rgba(237,230,216,.13); --line-cu:rgba(232,131,58,.45);
+            --fd:'Unbounded', sans-serif;
+            --fb:'Outfit', sans-serif;
+            --fm:'Chivo Mono', monospace;
+        }
+
+        html{ scroll-behavior:smooth; }
+        body{
+            background:var(--void); color:var(--star);
+            font-family:var(--fb); font-weight:300; line-height:1.65;
+            overflow-x:hidden; -webkit-font-smoothing:antialiased;
+        }
+        ::selection{ background:var(--cu); color:var(--void); }
+        ::-webkit-scrollbar{ width:10px; }
+        ::-webkit-scrollbar-track{ background:var(--void); }
+        ::-webkit-scrollbar-thumb{ background:#242B3B; border-radius:6px; }
+        ::-webkit-scrollbar-thumb:hover{ background:var(--cu-deep); }
+        a{ color:inherit; } img{ max-width:100%; }
+        section{ scroll-margin-top:86px; }
+
+        #stars{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+        .wrap{ width:min(1240px, 92vw); margin:0 auto; position:relative; z-index:2; }
+
+        /* ---------- HUD-Rahmen ---------- */
+        .corner{ position:fixed; width:26px; height:26px; z-index:300; pointer-events:none; }
+        .corner.tl{ top:16px; left:16px; border-top:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .corner.tr{ top:16px; right:16px; border-top:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .corner.bl{ bottom:16px; left:16px; border-bottom:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .corner.br{ bottom:16px; right:16px; border-bottom:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .rail-l{
+            position:fixed; left:28px; top:50%; transform:translateY(-50%);
+            writing-mode:vertical-rl; font-family:var(--fm); font-size:10px;
+            letter-spacing:.42em; color:var(--dim); z-index:150; pointer-events:none;
+            text-transform:uppercase; white-space:nowrap;
+        }
+        .rail-l b{ color:var(--cu); font-weight:400; }
+        .rail-r{
+            position:fixed; right:32px; top:50%; transform:translateY(-50%);
+            width:2px; height:32vh; background:var(--line); z-index:150; pointer-events:none;
+        }
+        .rail-r b{
+            position:absolute; top:0; left:0; width:100%; height:100%; display:block;
+            background:linear-gradient(180deg, var(--cu-hot), var(--cu));
+            transform:scaleY(0); transform-origin:top;
+        }
+        #depth{
+            position:fixed; right:52px; bottom:20px; z-index:150; pointer-events:none;
+            font-family:var(--fm); font-size:10px; letter-spacing:.3em; color:var(--dim);
+        }
+        #secname{
+            position:fixed; left:52px; bottom:20px; z-index:150; pointer-events:none;
+            font-family:var(--fm); font-size:10px; letter-spacing:.3em; color:var(--cu);
+            text-transform:uppercase;
+        }
+        #secname::before{ content:'▸ '; color:var(--cu-hot); }
+        
+        /* ---------- Navigation ---------- */
+        #topnav{
+            position:fixed; top:0; left:0; right:0; z-index:200;
+            display:flex; align-items:center; justify-content:space-between;
+            padding:20px 40px;
+            transition:padding .35s ease, background .35s ease, border-color .35s ease;
+            border-bottom:1px solid transparent;
+        }
+        #topnav.scrolled{
+            padding:12px 40px;
+            background:rgba(7,9,15,.82);
+            backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+            border-bottom-color:var(--line);
+        }
+        .brand{
+            font-family:var(--fd); font-weight:600; font-size:15px;
+            letter-spacing:.14em; text-decoration:none; color:var(--star); line-height:1.1;
+        }
+        .brand em{ font-style:normal; color:var(--cu); }
+        .brand small{
+            display:block; margin-top:3px;
+            font-family:var(--fm); font-weight:400; font-size:9px; letter-spacing:.4em; color:var(--dim);
+        }
+        .navlinks{ display:flex; gap:30px; align-items:center; }
+        .navlinks a{
+            font-family:var(--fm); font-size:11px; letter-spacing:.26em; text-transform:uppercase;
+            color:var(--dim); text-decoration:none; padding-bottom:4px;
+            background:linear-gradient(var(--cu), var(--cu)) left bottom / 0 1px no-repeat;
+            transition:color .3s, background-size .35s;
+        }
+        .navlinks a:hover{ color:var(--star); background-size:100% 1px; }
+        .navcta{
+            font-family:var(--fm); font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+            color:var(--cu); border:1px solid var(--line-cu);
+            padding:9px 16px; text-decoration:none; transition:.3s;
+        }
+        .navcta:hover{ background:var(--cu); color:var(--void); }
+        @media (max-width:900px){ .navlinks{ display:none; } #topnav{ padding:16px 22px; } }
+        
+        /* ---------- Hero / Singularität ---------- */
+        .hero{
+            position:relative; z-index:1; min-height:100svh;
+            display:grid; place-items:center; overflow:hidden; padding:130px 0 90px;
+        }
+        .horizon{
+            position:absolute; left:50%; top:50%;
+            width:min(80vmin, 660px); aspect-ratio:1;
+            transform:translate(-50%,-50%); border-radius:50%;
+            box-shadow:0 0 140px 8px rgba(232,131,58,.22);
+            will-change:transform, opacity;
+        }
+        .horizon .disc{ position:absolute; inset:0; border-radius:50%; overflow:hidden; border:1px solid var(--line-cu); }
+        .horizon .disc img{
+            width:100%; height:100%; object-fit:cover;
+            filter:saturate(.85) contrast(1.06) brightness(.8);
+        }
+        .horizon .disc::after{
+            content:''; position:absolute; inset:0; border-radius:50%;
+            background:radial-gradient(circle at 50% 50%,
+                rgba(7,9,15,.95) 0%, rgba(7,9,15,.6) 42%, rgba(7,9,15,0) 72%);
+        }
+        #rings{ position:absolute; inset:0; will-change:transform; }
+        #rings i{ position:absolute; border-radius:50%; display:block; }
+        #rings .r1{ inset:-56px; border:1px dashed rgba(232,131,58,.4); animation:spin 60s linear infinite; }
+        #rings .r2{ inset:-116px; border:1px dashed rgba(237,230,216,.16); animation:spin 110s linear infinite reverse; }
+        #rings .r3{ inset:-178px; border:1px solid rgba(237,230,216,.08); }
+        @keyframes spin{ to{ transform:rotate(360deg); } }
+        .otext{
+            position:absolute; left:50%; top:50%; width:min(88vmin,740px); aspect-ratio:1;
+            transform:translate(-50%,-50%); animation:spin 46s linear infinite;
+            opacity:.85; pointer-events:none;
+        }
+        .otext text{ font-family:var(--fm); font-size:3.1px; letter-spacing:.6em; fill:var(--dim); text-transform:uppercase; }
+        .otext .o2{ fill:var(--cu); }
+        
+        .hero-inner{
+            position:relative; z-index:2; text-align:center;
+            display:grid; justify-items:center; gap:26px; padding:0 4vw;
+        }
+        .kick{
+            font-family:var(--fm); font-size:11px; letter-spacing:.4em;
+            text-transform:uppercase; color:var(--cu-hot);
+        }
+        .kick::before, .kick::after{ content:'◆'; font-size:7px; vertical-align:2px; color:var(--cu); margin:0 14px; }
+        h1{ font-family:var(--fd); line-height:.98; letter-spacing:-.01em; }
+        h1 .l1{ display:block; font-weight:800; font-size:clamp(2.5rem, 8.4vw, 6.8rem); color:var(--star); }
+        h1 .l2{
+            display:block; font-weight:300; font-size:clamp(1.1rem, 3.6vw, 2.9rem);
+            letter-spacing:.34em; margin-top:14px;
+            color:transparent; -webkit-text-stroke:1.3px rgba(237,230,216,.85);
+        }
+        h1 .ch{ display:inline-block; opacity:0; transform:translateY(44px); white-space:pre; }
+        body.go h1 .ch{
+            opacity:1; transform:none;
+            transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.28,1);
+            transition-delay:calc(var(--i) * 45ms + 150ms);
+        }
+        .hero-sub{ max-width:600px; color:var(--dim); font-size:clamp(1rem, 1.4vw, 1.18rem); }
+        .hero-sub b{ color:var(--star); font-weight:400; }
+        .cta-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+        .btn{
+            font-family:var(--fm); font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+            padding:17px 28px; text-decoration:none; border:1px solid;
+            position:relative; overflow:hidden; display:inline-block;
+            transition:color .35s, border-color .35s, background .35s, box-shadow .35s;
+        }
+        .btn-cu{ background:var(--cu); border-color:var(--cu); color:var(--void); font-weight:500; }
+        .btn-cu:hover{ background:var(--cu-hot); border-color:var(--cu-hot); box-shadow:0 8px 40px rgba(232,131,58,.35); }
+        .btn-ghost{ border-color:var(--line); color:var(--star); background:transparent; }
+        .btn-ghost:hover{ border-color:var(--cu); color:var(--cu); }
+
+        .scrollcue{
+            position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+            display:grid; justify-items:center; gap:12px; z-index:2;
+            font-family:var(--fm); font-size:9px; letter-spacing:.42em; color:var(--dim);
+        }
+        .scrollcue i{ width:1px; height:58px; background:var(--line); position:relative; overflow:hidden; display:block; }
+        .scrollcue i::after{
+            content:''; position:absolute; left:0; top:-40%; width:100%; height:40%;
+            background:var(--cu); animation:drop 1.8s ease-in-out infinite;
+        }
+        @keyframes drop{ 0%{ top:-40%; } 100%{ top:110%; } }
+        .hero-fig{
+            position:absolute; right:44px; bottom:26px; z-index:2;
+            font-family:var(--fm); font-size:9.5px; letter-spacing:.24em; color:var(--faint);
+        }
+        @media (max-width:760px){
+            .hero-fig, .rail-l, .rail-r, #depth, #secname{ display:none; }
+            .scrollcue i{ height:40px; }
+        }
+        
+        /* ---------- Ticker ---------- */
+        .ticker{
+            position:relative; z-index:2; overflow:hidden;
+            border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+            background:var(--void2); padding:15px 0;
+        }
+        .tk{ display:flex; width:max-content; animation:mq 30s linear infinite; }
+        .ticker:hover .tk{ animation-play-state:paused; }
+        .tk span{
+            font-family:var(--fm); font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+            color:var(--dim); padding:0 26px; white-space:nowrap;
+        }
+        .tk span b{ color:var(--cu-hot); font-weight:400; }
+        .tk span::after{ content:'◆'; font-size:7px; color:var(--cu); margin-left:52px; vertical-align:2px; }
+        @keyframes mq{ to{ transform:translateX(-50%); } }
+
+        /* ---------- Sektionen: Basis ---------- */
+        .sec{ position:relative; z-index:2; padding:clamp(90px,13vh,160px) 0; }
+        .sec-head{ display:grid; gap:18px; margin-bottom:clamp(44px,6vh,72px); }
+        .slab{
+            font-family:var(--fm); font-size:11px; letter-spacing:.36em;
+            text-transform:uppercase; color:var(--cu);
+            display:flex; align-items:center; gap:16px;
+        }
+        .slab::before{ content:''; width:38px; height:1px; background:var(--cu); }
+        .d2{
+            font-family:var(--fd); font-weight:600; line-height:1.06; letter-spacing:-.01em;
+            font-size:clamp(1.9rem, 4.6vw, 3.4rem); max-width:20ch;
+        }
+        .d2 em{ font-style:normal; color:var(--cu-hot); }
+
+        .rv{ opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.28,1); }
+        .rv.in{ opacity:1; transform:none; }
+
+        /* ---------- 02 Das Element ---------- */
+        .el-grid{
+            display:grid; grid-template-columns:380px 1fr;
+            gap:clamp(44px,6vw,90px); align-items:start;
+        }
+        .tile{
+            position:sticky; top:110px;
+            border:1px solid var(--line-cu); padding:30px 28px;
+            background:linear-gradient(160deg, var(--void3), var(--void2));
+            display:flex; flex-direction:column; gap:8px; min-height:420px;
+            will-change:transform;
+        }
+        .tile::before, .tile::after{ content:''; position:absolute; width:18px; height:18px; }
+        .tile::before{ top:-1px; right:-1px; border-top:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .tile::after{ bottom:-1px; left:-1px; border-bottom:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .tile .tnum{ font-family:var(--fd); font-weight:300; font-size:15px; color:var(--dim); letter-spacing:.2em; }
+        .tile .tsym{
+            font-family:var(--fd); font-weight:800; font-size:clamp(88px,10vw,128px);
+            line-height:1; color:var(--star); margin:auto 0 0;
+            text-shadow:0 0 60px rgba(232,131,58,.35);
+        }
+        .tile .tname{ font-family:var(--fd); font-weight:400; font-size:15px; letter-spacing:.3em; color:var(--cu-hot); text-transform:uppercase; }
+        .tile .tmeta{
+            border-top:1px solid var(--line); margin-top:18px; padding-top:14px;
+            font-family:var(--fm); font-size:10.5px; letter-spacing:.22em; color:var(--dim);
+            display:flex; justify-content:space-between;
+        }
+        .el-copy .lead{ font-size:clamp(1.08rem,1.5vw,1.28rem); color:var(--star); max-width:58ch; }
+        .el-copy .lead b{ color:var(--cu-hot); font-weight:400; }
+        .el-copy p + p{ margin-top:20px; }
+        .dim{ color:var(--dim); max-width:62ch; }
+
+        .stats{
+            display:grid; grid-template-columns:repeat(4,1fr);
+            gap:1px; background:var(--line);
+            border:1px solid var(--line); margin-top:56px;
+        }
+        .stat{ background:var(--void); padding:26px 22px; }
+        .stat b{
+            display:block; font-family:var(--fd); font-weight:600;
+            font-size:clamp(1.45rem, 2.6vw, 2.15rem); color:var(--cu-hot); line-height:1.1;
+        }
+        .stat small{
+            display:block; margin-top:10px;
+            font-family:var(--fm); font-size:9.5px; letter-spacing:.26em;
+            text-transform:uppercase; color:var(--dim);
+        }
+        .stat i{ font-style:normal; font-size:.55em; color:var(--dim); margin-left:4px; font-family:var(--fm); }
+        @media (max-width:980px){
+            .el-grid{ grid-template-columns:1fr; }
+            .tile{ position:relative; top:0; max-width:420px; min-height:340px; }
+            .stats{ grid-template-columns:repeat(2,1fr); }
+        }
+        
+        /* ---------- 03 Die Kathode ---------- */
+        .kt-grid{
+            display:grid; grid-template-columns:1.05fr .95fr;
+            gap:clamp(44px,6vw,90px); align-items:center;
+        }
+        .specimen{ position:relative; padding:30px; }
+        .specimen .ph{
+            position:relative; overflow:hidden;
+            border:1px solid var(--line-cu); aspect-ratio:4/5;
+        }
+        .specimen .ph img{
+            width:100%; height:100%; object-fit:cover; display:block;
+            transform:scale(1.08); transition:transform 1.4s cubic-bezier(.16,.84,.28,1);
+            filter:saturate(.95) contrast(1.03);
+        }
+        .specimen.in .ph img{ transform:scale(1); }
+        .specimen .tick{ position:absolute; width:16px; height:16px; }
+        .specimen .tick.a{ top:0; left:0; border-top:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .specimen .tick.b{ top:0; right:0; border-top:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .specimen .tick.c{ bottom:0; left:0; border-bottom:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .specimen .tick.d{ bottom:0; right:0; border-bottom:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .co{
+            position:absolute; font-family:var(--fm); font-size:10px; letter-spacing:.18em;
+            color:var(--cu-hot); text-transform:uppercase; white-space:nowrap;
+            display:flex; align-items:center; gap:8px;
+        }
+        .co::before{ content:''; width:7px; height:7px; border-radius:50%; border:1px solid var(--cu); background:var(--void); flex:0 0 auto; }
+        .co i{ font-style:normal; height:1px; background:var(--line-cu); flex:0 0 auto; }
+        .co1{ top:6%; left:-2%; } .co1 i{ width:34px; }
+        .co2{ top:26%; right:-3%; } .co2 i{ width:26px; }
+        .co3{ bottom:34%; right:-1%; } .co3 i{ width:22px; }
+        .co4{ bottom:5%; left:4%; } .co4 i{ width:30px; }
+        @media (max-width:640px){ .co{ font-size:8.5px; } .co i{ width:14px !important; } }
+
+        .spec-rows{ border-top:1px solid var(--line); margin-top:40px; }
+        .srow{
+            display:grid; grid-template-columns:170px 1fr; gap:18px;
+            padding:16px 0; border-bottom:1px solid var(--line);
+        }
+        .srow b{
+            font-family:var(--fm); font-size:10.5px; font-weight:500;
+            letter-spacing:.22em; text-transform:uppercase; color:var(--cu); padding-top:4px;
+        }
+        .srow span{ color:#C9CFDA; font-weight:300; font-size:.98rem; }
+
+        /* ---------- 04 Galerie ---------- */
+        .gal{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.4vw,30px); }
+        .gal figure{ position:relative; margin:0; }
+        .gal img{
+            width:100%; height:100%; object-fit:cover; display:block;
+            filter:saturate(.92) contrast(1.04) brightness(.96);
+            transition:filter .5s;
+        }
+        .gal figure:hover img{ filter:saturate(1.05) contrast(1.06) brightness(1.04); }
+        .gal figcaption{
+            margin-top:12px; font-family:var(--fm); font-size:10px;
+            letter-spacing:.26em; color:var(--dim); text-transform:uppercase;
+            display:flex; justify-content:space-between; gap:10px;
+        }
+        .gal figure:hover figcaption b{ color:var(--cu); }
+        .gal figcaption b{ color:var(--cu-hot); font-weight:400; transition:color .3s; }
+        .f1{ grid-column:1/8; aspect-ratio:16/10; will-change:transform; }
+        .f2{ grid-column:9/13; aspect-ratio:3/4; margin-top:90px; will-change:transform; }
+        .f3{ grid-column:2/6; aspect-ratio:3/4; margin-top:-30px; will-change:transform; }
+        .f4{ grid-column:7/13; aspect-ratio:16/9; margin-top:60px; will-change:transform; }
+        @media (max-width:860px){
+            .f1,.f2,.f3,.f4{ grid-column:1/13; margin-top:0; }
+            .f2{ margin-top:0; }
+            .f1{ aspect-ratio:16/10; } .f2,.f3{ aspect-ratio:4/3; } .f4{ aspect-ratio:16/9; }
+        }
+        
+        /* ---------- 05 Prozess (horizontaler Sticky-Scroll) ---------- */
+        #prozess .hwrap{ height:340vh; position:relative; }
+        #prozess .hstick{
+            position:sticky; top:0; height:100vh; overflow:hidden;
+            display:flex; align-items:center;
+        }
+        .hhead{
+            position:absolute; top:96px; left:4vw; right:4vw; z-index:3;
+            display:flex; justify-content:space-between; align-items:flex-end; gap:20px;
+        }
+        .hhead .slab{ margin-bottom:12px; }
+        #pcount{ font-family:var(--fm); font-size:12px; letter-spacing:.3em; color:var(--cu-hot); white-space:nowrap; }
+        #htrack{
+            display:flex; gap:clamp(24px,3vw,48px);
+            padding:0 6vw; will-change:transform;
+        }
+        .panel{
+            flex:0 0 min(72vw, 860px);
+            border:1px solid var(--line); background:var(--void2);
+            display:grid; grid-template-rows:56% 1fr; height:min(62vh,560px); min-height:420px;
+        }
+        .panel .pimg{ position:relative; overflow:hidden; }
+        .panel .pimg img{
+            width:100%; height:100%; object-fit:cover; display:block;
+            filter:saturate(.95) contrast(1.05) brightness(.9);
+        }
+        .panel .pimg::after{
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(180deg, transparent 55%, rgba(11,15,24,.9));
+        }
+        .panel .pbody{ padding:clamp(20px,3vw,34px); display:grid; gap:12px; align-content:start; }
+        .pnum{ font-family:var(--fm); font-size:11px; letter-spacing:.34em; color:var(--cu); text-transform:uppercase; }
+        .panel h3{ font-family:var(--fd); font-weight:600; font-size:clamp(1.15rem,2vw,1.6rem); color:var(--star); }
+        .panel p{ color:var(--dim); font-weight:300; font-size:.97rem; max-width:56ch; }
+        .hprog{
+            position:absolute; bottom:44px; left:6vw; right:6vw;
+            height:1px; background:var(--line); z-index:3;
+        }
+        .hprog b{ display:block; height:100%; background:var(--cu); transform:scaleX(0); transform-origin:left; }
+
+        @media (max-width:900px), (prefers-reduced-motion: reduce){
+            #prozess .hwrap{ height:auto; }
+            #prozess .hstick{
+                position:static; height:auto; overflow-x:auto; overflow-y:hidden;
+                display:block; padding:0 5vw 34px; scroll-snap-type:x mandatory;
+                -webkit-overflow-scrolling:touch;
+            }
+            #htrack{ transform:none !important; width:max-content; padding:0 0 10px; }
+            .panel{ flex:0 0 82vw; height:auto; min-height:0; grid-template-rows:auto; scroll-snap-align:center; }
+            .panel .pimg{ aspect-ratio:16/10; height:auto; }
+            .hprog, #pcount{ display:none; }
+        }
+
+        /* ---------- 06 Erwerb ---------- */
+        .buy{ position:relative; overflow:hidden; }
+        .buy::before{
+            content:''; position:absolute; left:50%; top:50%; width:1200px; height:1200px;
+            transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
+            background:radial-gradient(circle, rgba(232,131,58,.12) 0%, transparent 60%);
+        }
+        .buy-grid{
+            display:grid; grid-template-columns:1fr 320px;
+            gap:clamp(44px,6vw,90px); align-items:center;
+        }
+        .buy .d2{ max-width:16ch; }
+        .trust{
+            display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:30px;
+            font-family:var(--fm); font-size:10.5px; letter-spacing:.22em;
+            text-transform:uppercase; color:var(--dim);
+        }
+        .trust span{ display:flex; align-items:center; gap:10px; }
+        .trust span::before{ content:'◆'; font-size:6px; color:var(--cu); }
+        .buy .btn-cu{ margin-top:36px; padding:21px 36px; font-size:13px; }
+        .tower{ position:relative; border:1px solid var(--line-cu); will-change:transform; }
+        .tower img{
+            display:block; width:100%; aspect-ratio:3/4; object-fit:cover; object-position:50% 14%;
+            filter:saturate(1.02) contrast(1.05);
+        }
+        .tower figcaption{
+            padding:12px 14px; font-family:var(--fm); font-size:9.5px;
+            letter-spacing:.24em; color:var(--dim); text-transform:uppercase;
+            border-top:1px solid var(--line);
+        }
+        @media (max-width:980px){
+            .buy-grid{ grid-template-columns:1fr; }
+            .tower{ max-width:380px; }
+        }
+
+        /* ---------- Footer ---------- */
+        footer{
+            border-top:1px solid var(--line); padding:54px 0 120px;
+            position:relative; z-index:2; background:var(--void);
+        }
+        .foot{ display:flex; justify-content:space-between; align-items:center; gap:22px; flex-wrap:wrap; }
+        .foot .fbrand{ font-family:var(--fd); font-weight:600; font-size:13px; letter-spacing:.16em; }
+        .foot .fbrand em{ font-style:normal; color:var(--cu); }
+        .flinks{ display:flex; gap:26px; flex-wrap:wrap; }
+        .flinks a{
+            font-family:var(--fm); font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+            color:var(--dim); text-decoration:none; transition:color .3s;
+        }
+        .flinks a:hover{ color:var(--cu); }
+        .fnote{ margin-top:18px; font-family:var(--fm); font-size:9.5px; letter-spacing:.2em; color:var(--faint); text-transform:uppercase; }
+    </style>
+</head>
+<body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <div class="corner tl" aria-hidden="true"></div>
+    <div class="corner tr" aria-hidden="true"></div>
+    <div class="corner bl" aria-hidden="true"></div>
+    <div class="corner br" aria-hidden="true"></div>
+    <div class="rail-l" aria-hidden="true">HAWKING <b>◆</b> CU 29 <b>◆</b> REINES KUPFER 99,99&nbsp;%</div>
+    <div class="rail-r" aria-hidden="true"><b id="railfill"></b></div>
+    <div id="secname" aria-hidden="true">01 — SINGULARITÄT</div>
+    <div id="depth" aria-hidden="true">TIEFE 0000 M</div>
+
+    <nav id="topnav">
+        <a class="brand" href="#top">HAWKING<em>◆</em>COPPER&nbsp;BARS
+            <small>ELEKTROLYTKUPFER · 99,99&nbsp;%</small>
+        </a>
+        <div class="navlinks">
+            <a href="#element">Element</a>
+            <a href="#kathode">Kathode</a>
+            <a href="#galerie">Galerie</a>
+            <a href="#prozess">Prozess</a>
+            <a href="#erwerb">Erwerb</a>
+        </div>
+        <a class="navcta" href="https://ebay.de" target="_blank" rel="noopener">Kaufen ↗</a>
+    </nav>
+
+    <header class="hero" id="top" data-sec="01 — SINGULARITÄT">
+        <div class="horizon" id="horizon" aria-hidden="true">
+            <div class="disc"><img src="images/copper-slab-texture.jpg" alt=""></div>
+        </div>
+        <div id="rings" aria-hidden="true"><i class="r1"></i><i class="r2"></i><i class="r3"></i></div>
+        <svg class="otext" viewBox="0 0 100 100" aria-hidden="true">
+            <defs><path id="tp" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
+            <text><textPath href="#tp">HAWKING COPPER BARS · CU 29 · EVENT HORIZON ·</textPath></text>
+            <text class="o2" dy="3.6"><textPath href="#tp" startOffset="50%">REINES KUPFER 99,99 · VOM ERZ ZUM BARREN ·</textPath></text>
+        </svg>
+
+        <div class="hero-inner">
+            <p class="kick">Elektrolytkupfer · Kathodenqualität</p>
+            <h1>
+                <span class="l1" id="hw">HAWKING</span>
+                <span class="l2">COPPER BARS</span>
+            </h1>
+            <p class="hero-sub">Barren aus elektrolytisch raffiniertem Kathoden-Kupfer —
+                <b>rein bis auf 0,01&nbsp;%</b>. Aus der Schmelze der Sterne,
+                gegossen, gestrichen und nummeriert für Handwerk, Anlage und Sammlung.</p>
+            <div class="cta-row">
+                <a class="btn btn-cu" href="https://ebay.de" target="_blank" rel="noopener">Zu eBay kaufen ↗</a>
+                <a class="btn btn-ghost" href="#kathode">Die Spezifikation ↓</a>
+            </div>
+        </div>
+
+        <div class="scrollcue" aria-hidden="true"><span>SCROLL</span><i></i></div>
+        <div class="hero-fig" aria-hidden="true">FIG. 00 — ROHKUPFER-OBERFLÄCHE, GEÄTZT</div>
+    </header>
+
+    <div class="ticker" aria-hidden="true">
+        <div class="tk" id="tk">
+            <span><b>Reines Kupfer</b> 99,99&nbsp;%</span>
+            <span>Schmelzpunkt <b>1084,62&nbsp;°C</b></span>
+            <span>Ordnungszahl <b>29</b></span>
+            <span>Dichte <b>8,96&nbsp;g/cm³</b></span>
+            <span>Leitfähigkeit <b>58&nbsp;MS/m</b></span>
+            <span>Wärmeleitfähigkeit <b>401&nbsp;W/mK</b></span>
+            <span>Kathode <b>CU-CATH-1</b></span>
+        </div>
+    </div>
+
+    <main>
+        <!-- 02 DAS ELEMENT -->
+        <section class="sec" id="element" data-sec="02 — DAS ELEMENT">
+            <div class="wrap">
+                <div class="sec-head">
+                    <p class="slab rv">02 — Das Element</p>
+                    <h2 class="d2 rv" data-d="80">Geschmiedet in <em>Sternexplosionen.</em></h2>
+                </div>
+                <div class="el-grid">
+                    <div class="tile rv" data-para="0.05">
+                        <span class="tnum">ORDNUNG·29</span>
+                        <span class="tnum" style="letter-spacing:.06em">63,546 u</span>
+                        <span class="tsym">Cu</span>
+                        <span class="tname">Cuprum</span>
+                        <div class="tmeta"><span>I·B — METALLE</span><span>Kz · 29</span></div>
+                    </div>
+                    <div class="el-copy">
+                        <p class="lead rv">Kupfer entstand nicht auf der Erde. Es wurde in den
+                            <b>Schmelzen sterbender Sterne</b> gebildet — jedes Barrenstück trägt
+                            wörtlich stellare Geschichte in sich. Auf der Erde angekommen, ist es
+                            der zuverlässigste Leiter, den die Technik kennt.</p>
+                        <p class="dim rv" data-d="90">Elektrolytisch raffiniertes Kathoden-Kupfer ist der Standard,
+                            aus dem Elektrotechnik und Feinmechanik ihre Ansprüche speisen: leitfähig, dicht,
+                            antimikrobiell und zu 100&nbsp;% ohne Qualitätsverlust rezyklierbar. Aus dieser
+                            Basis werden unsere Barren gegossen.</p>
+                        <div class="stats rv" data-d="140">
+                            <div class="stat"><b class="cnt" data-val="29" data-dec="0">0</b><small>Ordnungszahl</small></div>
+                            <div class="stat"><b><span class="cnt" data-val="99.99" data-dec="2">0</span><i>%</i></b><small>Reinheit Cu</small></div>
+                            <div class="stat"><b class="cnt" data-val="1084.62" data-dec="2">0</b><small>Schmelzpunkt °C</small></div>
+                            <div class="stat"><b><span class="cnt" data-val="58" data-dec="0">0</span><i>MS/m</i></b><small>Leitfähigkeit</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 DIE KATHODE -->
+        <section class="sec" id="kathode" data-sec="03 — DIE KATHODE">
+            <div class="wrap">
+                <div class="sec-head">
+                    <p class="slab rv">03 — Die Kathode</p>
+                    <h2 class="d2 rv" data-d="80">Erst die Kathode. <em>Dann der Barren.</em></h2>
+                </div>
+                <div class="kt-grid">
+                    <figure class="specimen rv" id="specimen">
+                        <div class="ph">
+                            <img src="images/cathode-stack.jpg" alt="Kupferkathode mit Etikett: Charge, Lot und Nettogewicht">
+                        </div>
+                        <span class="tick a"></span><span class="tick b"></span>
+                        <span class="tick c"></span><span class="tick d"></span>
+                        <span class="co co1"><i></i>CU-CATH · GOST 546-2001</span>
+                        <span class="co co2"><i></i>CHARGE 41990 / 52</span>
+                        <span class="co co3"><i></i>NETTO 2.858 KG</span>
+                        <span class="co co4"><i></i>107 × 100 × 37 CM</span>
+                    </figure>
+                    <div>
+                        <p class="lead rv">Jede Kathode trägt ihr Dossier: <b>Charge, Lot, Gewicht, Norm.</b>
+                            Aus Bündeln von rund 2,86&nbsp;Tonnen entstehen nach dem Einschmelzen
+                            die Feinkupfer-Barren — mit lückenlos nachvollziehbarer Herkunft.</p>
+                        <p class="dim rv" data-d="90">Die charakteristische Gussstruktur der Kathodenoberfläche
+                            bleibt als Fingerabdruck der Elektrolyse erhalten. Sie bezeugt die Reinheit
+                            genauso wie das Etikett, das jede Bewegung im Werk dokumentiert.</p>
+                        <div class="spec-rows rv" data-d="140">
+                            <div class="srow"><b>Basis</b><span>Kathoden-Kupfer, elektrolytisch raffiniert (Cu-CATH-1)</span></div>
+                            <div class="srow"><b>Oberfläche</b><span>Geätzte Gussstruktur, charakteristisch für Elektrolysekupfer</span></div>
+                            <div class="srow"><b>Bündel</b><span>ca. 107 × 100 × 37 cm, ca. 2.858 kg netto je Bündel</span></div>
+                            <div class="srow"><b>Verarbeitung</b><span>Einschmelzen · Stranggießen · Streichen · Nummerierung</span></div>
+                            <div class="srow"><b>Rückverfolgbarkeit</b><span>Charge &amp; Lot auf dem Bündel-Etikett je Kathode</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 GALERIE -->
+        <section class="sec" id="galerie" data-sec="04 — FELDAUFNAHMEN">
+            <div class="wrap">
+                <div class="sec-head">
+                    <p class="slab rv">04 — Feldaufnahmen</p>
+                    <h2 class="d2 rv" data-d="80">Das Material <em>im Feld.</em></h2>
+                </div>
+                <div class="gal">
+                    <figure class="f1 rv" data-para="0.05">
+                        <img src="images/bundles-cathode.png" alt="Kathoden-Bündel im Freilager vor Bergkulisse">
+                        <figcaption><span>FIG. 01 — KATODEN-YARD</span><b>LAGER · FREILUFT</b></figcaption>
+                    </figure>
+                    <figure class="f2 rv" data-d="90" data-para="0.12">
+                        <img src="images/molten-copper-pour.jpg" alt="Glühender Kupferabguss im Schmelzofenwerk">
+                        <figcaption><span>FIG. 02 — ABGUSS</span><b>1084,62 °C</b></figcaption>
+                    </figure>
+                    <figure class="f3 rv" data-para="0.09">
+                        <img src="images/copper-bars-wall.jpg" alt="Historische Kupfer- und Bronzegießlinge in einem Museumskasten">
+                        <figcaption><span>FIG. 03 — HISTORISCHE GUSSE</span><b>MUSEUM</b></figcaption>
+                    </figure>
+                    <figure class="f4 rv" data-d="90" data-para="0.06">
+                        <img src="images/copper-bars-row.jpg" alt="Feinkupfer-Barren 999,9 mit 1000 g Prägung">
+                        <figcaption><span>FIG. 04 — FEINKUPFER 999,9</span><b>1000 G</b></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 PROZESS -->
+        <section class="sec" id="prozess" data-sec="05 — PROZESS" style="padding-bottom:0">
+            <div class="hwrap" id="hwrap">
+                <div class="hstick">
+                    <div class="hhead">
+                        <div>
+                            <p class="slab">05 — Prozess</p>
+                            <h2 class="d2">Vom Erz <em>zum Barren.</em></h2>
+                        </div>
+                        <div id="pcount">01 / 04</div>
+                    </div>
+                    <div id="htrack">
+                        <article class="panel">
+                            <div class="pimg"><img src="images/copper-bars-stack.jpg" alt="Oxidierte Rohkupfer-Platte mit Patina"></div>
+                            <div class="pbody">
+                                <span class="pnum">01 · Herkunft</span>
+                                <h3>Das Ausgangsmaterial</h3>
+                                <p>Rohkupfer-Platten mit charakteristischer Oxidation: Hier beginnt jede
+                                    Charge — dokumentiert, gewogen und auf Reinheit geprüft, bevor sie
+                                    in die Schmelze geht.</p>
+                            </div>
+                        </article>
+                        <article class="panel">
+                            <div class="pimg"><img src="images/molten-copper-pour.jpg" alt="Flüssiges Kupfer läuft im Gießereiwerk in eine Form"></div>
+                            <div class="pbody">
+                                <span class="pnum">02 · Schmelze</span>
+                                <h3>1084,62 °C</h3>
+                                <p>Bei exakt 1084,62&nbsp;°C wird das Kathoden-Kupfer flüssig. Die Schmelze
+                                    entscheidet über Dichte und Gefüge — zwei Größen, die man im fertigen
+                                    Barren noch Jahrhunderte später nachmessen kann.</p>
+                            </div>
+                        </article>
+                        <article class="panel">
+                            <div class="pimg"><img src="images/stamping-die.jpg" alt="Eingestanzte Marke auf einer Kupferoberfläche"></div>
+                            <div class="pbody">
+                                <span class="pnum">03 · Marke</span>
+                                <h3>Gestrichen &amp; nummeriert</h3>
+                                <p>Werkzeugmarke, Feingehalt und laufende Nummer werden tief in die
+                                    Oberfläche gebracht — jede Einheit ist damit ein Unikat
+                                    mit prüfbarem Ursprung.</p>
+                            </div>
+                        </article>
+                        <article class="panel">
+                            <div class="pimg"><img src="images/hero-copper-bar.jpg" alt="Seitenansicht eines Feinkupfer-Barrens, 999 Feingehalt"></div>
+                            <div class="pbody">
+                                <span class="pnum">04 · Barren</span>
+                                <h3>Fertig zur Übergabe</h3>
+                                <p>1.000&nbsp;g Feinkupfer, kantengegossen und geprüft. Verpackt und
+                                    versendet wird ausschließlich über eBay — mit Rechnung
+                                    und Nachverfolgung.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="hprog" aria-hidden="true"><b id="hbar"></b></div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- 06 ERWERB -->
+        <section class="sec buy" id="erwerb" data-sec="06 — ERWERB">
+            <div class="wrap buy-grid">
+                <div>
+                    <p class="slab rv">06 — Erwerb</p>
+                    <h2 class="d2 rv" data-d="80" style="margin-top:18px">Das Angebot <em>liegt auf eBay.</em></h2>
+                    <p class="dim rv" data-d="120" style="margin-top:24px">Verkauf und komplette Kaufabwicklung
+                        laufen sicher über eBay: aktuelle Stückzahlen, Versandzeit und Preis finden Sie
+                        direkt im Angebot. Fragen zum Material beantworten wir dort ebenfalls.</p>
+                    <div class="trust rv" data-d="160">
+                        <span>Versand 24–48 h</span>
+                        <span>Sichere Verpackung</span>
+                        <span>Rechnung</span>
+                        <span>Geprüfte Nummer</span>
+                    </div>
+                    <a class="btn btn-cu rv" data-d="200" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay kaufen ↗</a>
+                </div>
+                <figure class="tower rv" data-d="120" data-para="0.08">
+                    <img src="images/copper-bar-side.jpg" alt="Feinkupfer-Barren von der Seite, 999 Feingehalt">
+                    <figcaption>FIG. 05 — FEINKUPFER-BARREN · SEITENANSICHT</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <span class="fbrand">HAWKING<em>◆</em>COPPER BARS</span>
+                <div class="flinks">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="https://ebay.de" target="_blank" rel="noopener">eBay.de</a>
+                    <a href="#top">Nach oben ↑</a>
+                </div>
+            </div>
+            <p class="fnote">© <span class="yr">2026</span> HAWKING COPPER BARS · Kupfer Cu 99,99 % · Verkauf über eBay</p>
+        </div>
+    </footer>
+
+    <script>
+    (function(){
+        'use strict';
+        var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+        /* Jahr */
+        $$('.yr').forEach(function(e){ e.textContent = new Date().getFullYear(); });
+
+        /* Hero-Titel: Buchstaben-Stagger */
+        var hw = document.getElementById('hw');
+        if (hw){
+            var t = hw.textContent; hw.textContent = '';
+            Array.prototype.forEach.call(t, function(c, i){
+                var s = document.createElement('span');
+                s.className = 'ch'; s.style.setProperty('--i', i); s.textContent = c;
+                hw.appendChild(s);
+            });
+        }
+        requestAnimationFrame(function(){ document.body.classList.add('go'); });
+
+        /* Reveal + Callout-Skalierung + Zähler per IntersectionObserver */
+        var io = new IntersectionObserver(function(es){
+            es.forEach(function(e){
+                if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.16 });
+        $$('.rv, .specimen').forEach(function(el){ io.observe(el); });
+
+        function fmt(v, d){
+            var s = v.toFixed(d);
+            if (d > 0){ s = s.replace('.', ','); }
+            if (v >= 1000){
+                var p = s.split(',');
+                p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                s = p.join(',');
+            }
+            return s;
+        }
+        var cio = new IntersectionObserver(function(es){
+            es.forEach(function(e){
+                if (!e.isIntersecting) return;
+                cio.unobserve(e.target);
+                var el = e.target,
+                    v  = parseFloat(el.getAttribute('data-val')),
+                    d  = parseInt(el.getAttribute('data-dec') || '0', 10);
+                if (RM){ el.textContent = fmt(v, d); return; }
+                var t0 = performance.now(), dur = 1500;
+                (function step(t){
+                    var p = Math.min(1, (t - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+                    el.textContent = fmt(v * k, d);
+                    if (p < 1) requestAnimationFrame(step);
+                })(t0);
+            });
+        }, { threshold: 0.5 });
+        $$('.cnt').forEach(function(el){ cio.observe(el); });
+
+        /* Sektionsanzeige im HUD */
+        var ind = document.getElementById('secname');
+        var sio = new IntersectionObserver(function(es){
+            es.forEach(function(e){
+                if (e.isIntersecting && ind) ind.textContent = e.target.getAttribute('data-sec');
+            });
+        }, { rootMargin: '-42% 0px -52% 0px' });
+        $$('[data-sec]').forEach(function(s){ sio.observe(s); });
+
+        /* Sternenfeld */
+        var cv = document.getElementById('stars');
+        if (cv && cv.getContext){
+            var cx = cv.getContext('2d'), W, H, stars = [];
+            function rs(){
+                W = cv.width  = window.innerWidth;
+                H = cv.height = window.innerHeight;
+                stars = [];
+                var n = Math.min(190, Math.round(W / 7));
+                for (var i = 0; i < n; i++){
+                    stars.push({
+                        x: Math.random() * W,
+                        y: Math.random() * H * 1.4,
+                        r: Math.random() * 1.3 + 0.3,
+                        a: Math.random() * 6.28,
+                        tw: Math.random() * 0.02 + 0.004
+                    });
+                }
+            }
+            rs();
+            window.addEventListener('resize', rs);
+            function draw(sy){
+                cx.clearRect(0, 0, W, H);
+                for (var i = 0; i < stars.length; i++){
+                    var st = stars[i];
+                    var span = H * 1.4;
+                    var yy = ((st.y - sy * 0.12) % span + span) % span - H * 0.2;
+                    st.a += st.tw;
+                    cx.globalAlpha = 0.22 + Math.abs(Math.sin(st.a)) * 0.55;
+                    cx.fillStyle = st.r > 1.1 ? '#FFC07A' : '#EDE6D8';
+                    cx.beginPath(); cx.arc(st.x, yy, st.r, 0, 6.29); cx.fill();
+                }
+                cx.globalAlpha = 1;
+            }
+            if (RM){ draw(0); }
+            else { (function loop(t){ draw(window.scrollY || 0); requestAnimationFrame(loop); })(); }
+        }
+
+        /* Scroll-Engine: HUD, Parallax, horizontales Band */
+        var nav    = document.getElementById('topnav'),
+            rail   = document.getElementById('railfill'),
+            depth  = document.getElementById('depth'),
+            hor    = document.getElementById('horizon'),
+            rings  = document.getElementById('rings'),
+            hwrap  = document.getElementById('hwrap'),
+            htrack = document.getElementById('htrack'),
+            hbar   = document.getElementById('hbar'),
+            pcount = document.getElementById('pcount'),
+            paras  = $$('[data-para]');
+
+        function narrow(){ return window.matchMedia('(max-width: 900px)').matches; }
+
+        function onScroll(){
+            var y  = window.scrollY || window.pageYOffset || 0;
+            var vh = window.innerHeight;
+            if (nav) nav.classList.toggle('scrolled', y > 30);
+            if (rail){
+                var max = document.documentElement.scrollHeight - vh;
+                rail.style.transform = 'scaleY(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+            }
+            if (depth) depth.textContent = 'TIEFE ' + String(Math.round(y / 10)).padStart(4, '0') + ' M';
+            if (hor && !RM){
+                var p = Math.min(1, y / vh);
+                hor.style.transform = 'translate(-50%,-50%) scale(' + (1 + p * 0.28) + ')';
+                hor.style.opacity = String(Math.max(0, 1 - p * 0.9));
+                if (rings) rings.style.transform = 'rotate(' + (y * 0.03) + 'deg)';
+            }
+            if (!RM){
+                for (var i = 0; i < paras.length; i++){
+                    var el = paras[i], r = el.getBoundingClientRect();
+                    if (r.bottom < -80 || r.top > vh + 80) continue;
+                    var c  = r.top + r.height / 2 - vh / 2;
+                    var sp = parseFloat(el.getAttribute('data-para')) || 0;
+                    el.style.transform = 'translate3d(0,' + (-c * sp).toFixed(1) + 'px,0)';
+                }
+            }
+            if (hwrap && htrack && !narrow() && !RM){
+                var hr = hwrap.getBoundingClientRect();
+                var total = hr.height - vh;
+                if (total > 0){
+                    var pp = Math.max(0, Math.min(1, -hr.top / total));
+                    var mx = Math.max(0, htrack.scrollWidth - window.innerWidth);
+                    htrack.style.transform = 'translate3d(' + (-pp * mx).toFixed(1) + 'px,0,0)';
+                    if (hbar) hbar.style.transform = 'scaleX(' + pp + ')';
+                    if (pcount) pcount.textContent = '0' + Math.min(4, 1 + Math.floor(pp * 3.999)) + ' / 04';
+                }
+            }
+        }
+        if (RM){ onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); }
+        else { (function tick(){ onScroll(); requestAnimationFrame(tick); })(); }
+        window.addEventListener('resize', onScroll);
+    })();
+    </script>
+</body>
+</html>

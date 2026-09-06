@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | HAWKING COPPER BARS</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2307090F'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23E8833A' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FFC07A'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Outfit:wght@300;400&family=Chivo+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root{
+            --void:#07090F; --void2:#0B0F18; --void3:#111624;
+            --star:#EDE6D8; --dim:#8E99AD; --faint:rgba(237,230,216,.5);
+            --cu:#E8833A; --cu-hot:#FFC07A; --cu-deep:#8F4A1B;
+            --line:rgba(237,230,216,.13); --line-cu:rgba(232,131,58,.45);
+            --fd:'Unbounded', sans-serif; --fb:'Outfit', sans-serif; --fm:'Chivo Mono', monospace;
+        }
+        html{ scroll-behavior:smooth; }
+        body{
+            background:var(--void); color:var(--star);
+            font-family:var(--fb); font-weight:300; line-height:1.75;
+            -webkit-font-smoothing:antialiased;
+        }
+        ::selection{ background:var(--cu); color:var(--void); }
+        a{ color:inherit; }
+
+        .corner{ position:fixed; width:22px; height:22px; z-index:300; pointer-events:none; }
+        .corner.tl{ top:14px; left:14px; border-top:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .corner.tr{ top:14px; right:14px; border-top:2px solid var(--cu); border-right:2px solid var(--cu); }
+        .corner.bl{ bottom:14px; left:14px; border-bottom:2px solid var(--cu); border-left:2px solid var(--cu); }
+        .corner.br{ bottom:14px; right:14px; border-bottom:2px solid var(--cu); border-right:2px solid var(--cu); }
+
+        .rlabel{
+            position:fixed; right:26px; top:50%; transform:translateY(-50%);
+            writing-mode:vertical-rl; font-family:var(--fm); font-size:9.5px;
+            letter-spacing:.42em; color:var(--dim); text-transform:uppercase;
+            z-index:150; pointer-events:none; white-space:nowrap;
+        }
+        .rlabel b{ color:var(--cu); font-weight:400; }
+        @media (max-width:760px){ .rlabel{ display:none; } }
+
+        .phead{
+            position:sticky; top:0; z-index:200;
+            background:rgba(7,9,15,.85); backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            border-bottom:1px solid var(--line);
+            display:flex; justify-content:space-between; align-items:center;
+            padding:16px 34px;
+        }
+        .phead .brand{ font-family:var(--fd); font-weight:600; font-size:13.5px; letter-spacing:.14em; text-decoration:none; }
+        .phead .brand em{ font-style:normal; color:var(--cu); }
+        .phead a.back{
+            font-family:var(--fm); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
+            color:var(--dim); text-decoration:none; border:1px solid var(--line);
+            padding:8px 14px; transition:.3s;
+        }
+        .phead a.back:hover{ color:var(--cu); border-color:var(--line-cu); }
+
+        main{ width:min(820px, 90vw); margin:0 auto; padding:90px 0 60px; }
+        .doc-kick{
+            font-family:var(--fm); font-size:11px; letter-spacing:.4em;
+            text-transform:uppercase; color:var(--cu);
+        }
+        .doc-kick::after{ content:''; display:block; width:60px; height:1px; background:var(--cu); margin-top:14px; }
+        h1{
+            font-family:var(--fd); font-weight:600; letter-spacing:-.01em;
+            font-size:clamp(2rem,5vw,3rem); margin:22px 0 40px;
+        }
+        h2{
+            font-family:var(--fm); font-weight:400; font-size:12px;
+            letter-spacing:.3em; text-transform:uppercase; color:var(--cu-hot);
+            margin:42px 0 14px;
+        }
+        p{ color:#C9CFDA; }
+        p b{ color:var(--star); font-weight:400; }
+        .addr{ margin-top:12px; color:var(--dim); }
+        .u{ color:var(--cu-hot); text-decoration:none; border-bottom:1px solid var(--line-cu); transition:.3s; }
+        .u:hover{ color:var(--cu); border-color:var(--cu); }
+
+        .credits{ margin-top:14px; border-top:1px solid var(--line); }
+        .cr-row{
+            display:flex; justify-content:space-between; gap:18px;
+            padding:12px 0; border-bottom:1px solid var(--line);
+            font-size:.9rem; color:var(--dim);
+        }
+        .cr-row em{
+            font-style:normal; font-family:var(--fm); font-size:9px;
+            letter-spacing:.24em; color:var(--faint); text-transform:uppercase;
+            text-align:right; flex:0 0 auto; padding-top:5px;
+        }
+        .credits + p{ margin-top:16px; font-size:.85rem; color:var(--dim); }
+
+        .ffoot{
+            border-top:1px solid var(--line); padding:30px 34px 44px;
+            display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+            font-family:var(--fm); font-size:10px; letter-spacing:.24em;
+            text-transform:uppercase; color:var(--dim);
+        }
+        .ffoot a{ text-decoration:none; transition:color .3s; }
+        .ffoot a:hover{ color:var(--cu); }
+    </style>
+</head>
+<body>
+    <div class="corner tl"></div><div class="corner tr"></div>
+    <div class="corner bl"></div><div class="corner br"></div>
+    <div class="rlabel">HAWKING <b>◆</b> CU 29 <b>◆</b> IMPRESSUM</div>
+
+    <header class="phead">
+        <a class="brand" href="index.html">HAWKING<em>◆</em>COPPER BARS</a>
+        <a class="back" href="index.html">← Startseite</a>
+    </header>
+
+    <main>
+        <p class="doc-kick">Rechtliches · § 5 TMG</p>
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p class="addr">
+            <b>HAWKING COPPER BARS</b><br>
+            [Straße und Hausnummer]<br>
+            [PLZ Ort]<br>
+            Deutschland
+        </p>
+
+        <h2>Vertreten durch</h2>
+        <p class="addr">[Vorname Nachname]</p>
+
+        <h2>Kontakt</h2>
+        <p class="addr">
+            Telefon: [Telefonnummer]<br>
+            E-Mail: [E-Mail-Adresse]
+        </p>
+
+        <h2>Registereintrag</h2>
+        <p class="addr">
+            Eintragung im Handelsregister<br>
+            Registergericht: [Registergericht]<br>
+            Registernummer: [Registernummer]
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p class="addr">
+            Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>
+            [DE-Nummer]
+        </p>
+
+        <h2>Verkauf über eBay</h2>
+        <p>
+            Unsere aktuellen Angebote finden Sie auf
+            <a class="u" href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a>.
+            Verkauf, Kaufabwicklung und Versandabwicklung erfolgen vollständig über eBay.
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a class="u" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht
+            verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
+            Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter (u. a. ebay.de), auf deren Inhalte
+            wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+            Anbieter oder Betreiber verantwortlich.
+        </p>
+
+        <h2>Urheberrecht &amp; Bildquellen</h2>
+        <p>
+            Die Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Die verwendeten Fotografien stammen aus Wikimedia Commons und werden unter
+            freien Lizenzen bzw. gemeinfrei verwendet, u. a.:
+        </p>
+        <div class="credits">
+            <div class="cr-row">
+                <span>Rohe Kupferkathoden-Platte, Oberfläche geätzt — <a class="u" href="https://commons.wikimedia.org/wiki/File:DETAIL_OF_RAW_COPPER_SLAB_SURFACE._PURE_COPPER_THIS_FORM_IS_DENOMINATED_%22CATHODE.%22_-_American_Brass_Foundry,_70_Sayre_Street,_Buffalo,_Erie_County,_NY_HAER_NY,15-BUF,25-2.tif" target="_blank" rel="noopener">HAER NY-15-BUF-2</a>, Library of Congress, gemeinfrei</span>
+                <em>Hero / Fig. 00</em>
+            </div>
+            <div class="cr-row">
+                <span>Kupferkathode mit Chargen-Etikett (Uralelektromed) — Wikimedia Commons, Angaben zu Urheber/Lizenz in der Dateibeschreibung</span>
+                <em>Fig. Kathode</em>
+            </div>
+            <div class="cr-row">
+                <span>Kathoden-Bündel im Freilager — Wikimedia Commons, Angaben zu Urheber/Lizenz in der Dateibeschreibung</span>
+                <em>Fig. 01</em>
+            </div>
+            <div class="cr-row">
+                <span>Schmelzofen-Abguss — Wikimedia Commons, Angaben zu Urheber/Lizenz in der Dateibeschreibung</span>
+                <em>Fig. 02</em>
+            </div>
+            <div class="cr-row">
+                <span>Barren-Fotografien (Degussa / Leipziger Edelmetallverein) — Wikimedia Commons, Angaben zu Urheber/Lizenz in den Dateibeschreibungen</span>
+                <em>Fig. 04–05</em>
+            </div>
+            <div class="cr-row">
+                <span>Historische Gusslinge &amp; Werkzeugmarke — Wikimedia Commons, Angaben zu Urheber/Lizenz in den Dateibeschreibungen</span>
+                <em>Fig. 03 / 01·Prozess</em>
+            </div>
+        </div>
+        <p>Die Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts
+            bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+    </main>
+
+    <footer class="ffoot">
+        <span>© <span class="yr">2026</span> HAWKING COPPER BARS</span>
+        <span><a href="index.html">STARTSEITE</a> · <a href="https://ebay.de" target="_blank" rel="noopener">EBAY.DE</a></span>
+    </footer>
+
+    <script>
+        document.querySelector('.yr').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
