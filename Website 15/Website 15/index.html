@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAXONIA · Bimetall-Kontor — Kupfer 99,99 % &amp; Feinsilber 999</title>
+<meta name="description" content="SAXONIA Bimetall-Kontor — Zwei Metalle, ein Kontor. Elektrolyt-Kupfer 99,99 % und Feinsilber 999 aus sächsischer Handelstradition. Verkauf über eBay.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23120F0D'/%3E%3Cpath d='M32 5 59 18v28L32 59 5 46V18Z' fill='none' stroke='%23B0653A' stroke-width='3'/%3E%3Cpath d='M32 15v34M22 25l20 14M42 25 22 39' stroke='%23C9CDD4' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Sora:wght@100;200;300;400;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   SAXONIA · BIMETALL-KONTOR — "ZWEI METALLE, EIN KONTOR"
+   Eigenständiges System: Graphit-Tinte statt Schwarz, Bimetall-Spaltung
+   Kupfer (warm) ↔ Silber (kühl). Bodoni Moda / Sora / JetBrains Mono.
+   Diagonal-Splits, vertikale Parallaxe, Reveal-Motion, Mess-skala-UI.
+   ================================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --ink:#131110;            /* Graphit, nicht reines Schwarz */
+  --ink-2:#1C1917;
+  --ink-3:#262220;
+  --bone:#EAE5DC;
+  --bone-dim:#B4AEA3;
+  --bone-faint:rgba(234,229,220,.42);
+  --cu:#B0653A;             /* gedämpftes Kupferrot */
+  --cu-hot:#E09B62;
+  --cu-deep:#7A4526;
+  --ag:#C9CDD4;             /* Silber */
+  --ag-hot:#F2F4F7;
+  --ag-deep:#8B929C;
+  --line:rgba(234,229,220,.14);
+  --line-cu:rgba(176,101,58,.5);
+  --line-ag:rgba(201,205,212,.4);
+  --fd:'Bodoni Moda',Georgia,serif;
+  --fb:'Sora',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--bone);
+  font-family:var(--fb);font-weight:300;line-height:1.7;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--cu);color:#fff}
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:#332E2A;border:2px solid var(--ink)}
+::-webkit-scrollbar-thumb:hover{background:var(--cu)}
+a{color:inherit}
+img{max-width:100%;display:block}
+section{scroll-margin-top:84px;position:relative}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+
+/* ---------- Reveal-Motion ---------- */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+
+/* ---------- Header: geteiltes Bimetall-Band ---------- */
+.hd{
+  position:fixed;top:0;left:0;right:0;z-index:400;height:74px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4.5vw;transition:background .35s,border-color .35s,height .35s;
+  border-bottom:1px solid transparent;
+}
+.hd.solid{background:rgba(19,17,16,.92);backdrop-filter:blur(12px);border-bottom-color:var(--line);height:64px}
+.hd::after{ /* Bimetall-Unterkante: links Kupfer, rechts Silber */
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:linear-gradient(90deg,var(--cu) 0%,var(--cu) 46%,transparent 46%,transparent 54%,var(--ag) 54%,var(--ag) 100%);
+  opacity:0;transition:opacity .35s;
+}
+.hd.solid::after{opacity:.85}
+.brand{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.brand-mark{width:34px;height:34px;position:relative;flex:0 0 auto}
+.brand-mark::before{content:"";position:absolute;inset:0;border:1.5px solid var(--cu);transform:rotate(45deg)}
+.brand-mark::after{content:"";position:absolute;inset:7px;border:1.5px solid var(--ag);transform:rotate(45deg)}
+.brand-name{font-family:var(--fd);font-size:1.22rem;letter-spacing:.34em;color:var(--bone)}
+.brand-name b{font-weight:600;color:var(--cu-hot)}
+.nav{display:flex;gap:2.2rem;align-items:center}
+.nav a{
+  font-family:var(--fm);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
+  text-decoration:none;color:var(--bone-dim);position:relative;padding:.4rem 0;transition:color .25s;
+}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--cu-hot);transition:width .3s}
+.nav a:hover{color:var(--bone)}
+.nav a:hover::after{width:100%}
+.nav a.nav-cta{color:var(--bone);border:1px solid var(--line);padding:.55rem 1.1rem}
+.nav a.nav-cta:hover{border-color:var(--cu);color:var(--cu-hot)}
+.burger{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;cursor:pointer;position:relative;z-index:460}
+.burger span{position:absolute;left:10px;right:10px;height:1.5px;background:var(--bone);transition:.3s}
+.burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
+.burger.open span:nth-child(1){top:20px;transform:rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){top:20px;transform:rotate(-45deg)}
+.drawer{
+  position:fixed;inset:0;z-index:450;background:rgba(19,17,16,.98);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.4rem;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+.drawer.open{opacity:1;pointer-events:auto}
+.drawer a{font-family:var(--fd);font-size:1.6rem;letter-spacing:.2em;text-decoration:none;color:var(--bone-dim);transition:color .25s}
+.drawer a:hover{color:var(--cu-hot)}
+
+/* ---------- Hero: Diagonal-Bimetall ---------- */
+.hero{
+  min-height:100vh;position:relative;display:flex;align-items:center;
+  overflow:hidden;padding:120px 0 90px;
+}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media img{
+  width:100%;height:118%;object-fit:cover;object-position:center 30%;
+  filter:grayscale(.9) contrast(1.06) brightness(.5);
+  will-change:transform;
+}
+.hero-media::before{ /* warme Kupferseite */
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(112deg,rgba(176,101,58,.5) 0%,rgba(176,101,58,.12) 44%,transparent 55%);
+  mix-blend-mode:overlay;
+}
+.hero-media::after{ /* kalte Silberseite */
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(292deg,rgba(201,205,212,.34) 0%,rgba(201,205,212,.08) 42%,transparent 55%);
+  mix-blend-mode:overlay;
+}
+.hero-veil{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(180deg,rgba(19,17,16,.72) 0%,rgba(19,17,16,.25) 42%,rgba(19,17,16,.94) 100%)}
+.hero-inner{position:relative;z-index:3;width:min(1180px,92vw);margin:0 auto}
+.kick{
+  display:inline-flex;align-items:center;gap:.9rem;
+  font-family:var(--fm);font-size:.66rem;letter-spacing:.4em;text-transform:uppercase;color:var(--bone-dim);
+}
+.kick::before{content:"";width:44px;height:1px;background:var(--cu-hot)}
+.kick i{font-style:normal;color:var(--cu-hot)}
+.hero h1{
+  font-family:var(--fd);font-weight:500;
+  font-size:clamp(3.2rem,10.5vw,9rem);line-height:.94;letter-spacing:.06em;
+  margin:1.4rem 0 0;color:var(--bone);
+}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:inline-block;transform:translateY(110%);animation:riseUp 1.1s cubic-bezier(.2,.75,.2,1) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.14s}
+@keyframes riseUp{to{transform:none}}
+.hero h1 em{font-style:italic;color:var(--cu-hot)}
+.hero h1 .ag-word{color:var(--ag)}
+.hero-sub{
+  max-width:520px;margin-top:2rem;color:var(--bone-dim);font-size:1.02rem;font-weight:200;
+}
+.hero-ctas{display:flex;gap:1rem;margin-top:2.6rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;
+  font-family:var(--fm);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+  padding:1rem 1.9rem;border:1px solid var(--line);color:var(--bone);
+  position:relative;overflow:hidden;transition:color .3s,border-color .3s;background:transparent;
+}
+.btn::before{content:"";position:absolute;inset:0;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1);z-index:-1}
+.btn:hover::before{transform:scaleX(1)}
+.btn-cu{border-color:var(--line-cu)}
+.btn-cu::before{background:var(--cu)}
+.btn-cu:hover{color:#fff;border-color:var(--cu)}
+.btn-ag{border-color:var(--line-ag)}
+.btn-ag::before{background:var(--ag)}
+.btn-ag:hover{color:var(--ink);border-color:var(--ag)}
+.hero-meta{
+  position:absolute;right:4.5vw;bottom:110px;z-index:3;text-align:right;
+  font-family:var(--fm);font-size:.62rem;letter-spacing:.3em;color:var(--bone-faint);
+  text-transform:uppercase;line-height:2.1;
+}
+.hero-meta b{color:var(--cu-hot);font-weight:400}
+/* Kurs-Band: zwei Gegenticker */
+.tape{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;
+  border-top:1px solid var(--line);background:rgba(19,17,16,.82);backdrop-filter:blur(8px);
+  display:flex;height:46px;
+}
+.tape-half{flex:1;display:flex;align-items:center;overflow:hidden;white-space:nowrap}
+.tape-half.ag{border-left:1px solid var(--line)}
+.tape-track{display:inline-flex;gap:3.2rem;padding-left:1.5rem;animation:slideL 38s linear infinite;font-family:var(--fm);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.tape-half.ag .tape-track{animation:slideR 38s linear infinite}
+.tape-track b{color:var(--cu-hot);font-weight:400}
+.tape-half.ag .tape-track b{color:var(--ag)}
+.tape-track i{font-style:normal;color:var(--bone-faint)}
+@keyframes slideL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes slideR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.scroll-cue{
+  position:absolute;left:50%;bottom:64px;transform:translateX(-50%);z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-family:var(--fm);font-size:.58rem;letter-spacing:.4em;color:var(--bone-faint);text-transform:uppercase;
+}
+.scroll-cue::after{content:"";width:1px;height:44px;background:linear-gradient(var(--cu-hot),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+/* ---------- Abschnitts-Köpfe: Assay-Stil ---------- */
+.sec{padding:110px 0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:2.2rem;align-items:end;margin-bottom:4rem}
+.sec-no{
+  font-family:var(--fm);font-size:.7rem;letter-spacing:.3em;color:var(--bone-faint);
+  writing-mode:vertical-rl;transform:rotate(180deg);padding-bottom:.35rem;
+  border-left:1px solid var(--line);padding-left:.9rem;
+}
+.sec-kick{font-family:var(--fm);font-size:.66rem;letter-spacing:.4em;text-transform:uppercase;color:var(--cu-hot)}
+.sec h2{
+  font-family:var(--fd);font-weight:500;font-size:clamp(2rem,4.6vw,3.4rem);
+  line-height:1.04;letter-spacing:.015em;margin-top:.8rem;
+}
+.sec h2 em{font-style:italic;color:var(--ag)}
+.sec-lead{max-width:560px;color:var(--bone-dim);margin-top:1.2rem;font-weight:200}
+
+/* ---------- Element-Band: Cu 29 / Ag 47 ---------- */
+.elements{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2)}
+.el-grid{display:grid;grid-template-columns:1fr 1fr}
+.el{
+  padding:5.2rem 4.5vw;display:grid;grid-template-columns:auto 1fr;gap:2.4rem;align-items:center;
+  position:relative;overflow:hidden;
+}
+.el:first-child{border-right:1px solid var(--line)}
+.el::before{
+  content:attr(data-sym);position:absolute;right:-1.2rem;bottom:-3.4rem;
+  font-family:var(--fd);font-size:clamp(9rem,17vw,15rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(234,229,220,.08);pointer-events:none;
+}
+.el-cu::before{-webkit-text-stroke-color:rgba(176,101,58,.22)}
+.el-ag::before{-webkit-text-stroke-color:rgba(201,205,212,.16)}
+.el-sym{
+  font-family:var(--fd);font-size:clamp(3.4rem,6vw,5.4rem);line-height:1;font-weight:500;
+}
+.el-cu .el-sym{color:var(--cu-hot)}
+.el-ag .el-sym{color:var(--ag)}
+.el-body h3{font-family:var(--fd);font-weight:500;font-size:1.5rem;letter-spacing:.04em;margin-bottom:.5rem}
+.el-body p{color:var(--bone-dim);font-size:.94rem;font-weight:200;max-width:400px}
+.el-facts{display:flex;gap:2.2rem;margin-top:1.4rem;flex-wrap:wrap}
+.el-facts div{font-family:var(--fm);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint)}
+.el-facts b{display:block;font-size:.95rem;letter-spacing:.1em;color:var(--bone);font-weight:400;margin-top:.3rem}
+.el-cu .el-facts b{color:var(--cu-hot)}
+.el-ag .el-facts b{color:var(--ag)}
+
+/* ---------- Duality: zwei Paneele ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.panel{
+  position:relative;overflow:hidden;border:1px solid var(--line);min-height:520px;
+  display:flex;align-items:flex-end;background:var(--ink-2);
+}
+.panel img{
+  position:absolute;inset:0;width:100%;height:112%;object-fit:cover;
+  will-change:transform;transition:filter .5s;
+}
+.panel-cu img{filter:sepia(.55) saturate(1.25) hue-rotate(-14deg) brightness(.62) contrast(1.05)}
+.panel-ag img{filter:grayscale(1) brightness(.82) contrast(1.05)}
+.panel::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 30%,rgba(19,17,16,.92) 88%);
+}
+.panel-tag{
+  position:absolute;top:1.4rem;left:1.4rem;z-index:2;
+  font-family:var(--fm);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
+  padding:.5rem .9rem;border:1px solid;
+}
+.panel-cu .panel-tag{color:var(--cu-hot);border-color:var(--line-cu)}
+.panel-ag .panel-tag{color:var(--ag);border-color:var(--line-ag)}
+.panel-body{position:relative;z-index:2;padding:2rem 2rem 2.2rem;width:100%}
+.panel-body h3{font-family:var(--fd);font-weight:500;font-size:1.7rem;letter-spacing:.03em;margin-bottom:.6rem}
+.panel-cu h3{color:var(--cu-hot)}
+.panel-ag h3{color:var(--ag)}
+.panel-body p{color:var(--bone-dim);font-size:.93rem;font-weight:200;max-width:420px}
+.panel-link{
+  display:inline-flex;align-items:center;gap:.6rem;margin-top:1.3rem;
+  font-family:var(--fm);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+  text-decoration:none;color:var(--bone);padding-bottom:.35rem;border-bottom:1px solid var(--line);
+  transition:border-color .3s,color .3s;
+}
+.panel-cu .panel-link:hover{color:var(--cu-hot);border-color:var(--cu)}
+.panel-ag .panel-link:hover{color:var(--ag);border-color:var(--ag)}
+
+/* ---------- Provenienz-Figuren ---------- */
+.duo-fig{
+  display:grid;grid-template-columns:1.15fr 1fr;margin-top:1.4rem;
+  border:1px solid var(--line);background:var(--ink-2);overflow:hidden;
+}
+.duo-fig img{
+  width:100%;height:100%;min-height:300px;object-fit:cover;
+  filter:grayscale(.35) sepia(.22) brightness(.78) contrast(1.04);
+  transition:filter .5s;
+}
+.duo-fig:hover img{filter:grayscale(.1) sepia(.12) brightness(.88)}
+.duo-fig figcaption{padding:2.2rem;display:flex;flex-direction:column;gap:.8rem;justify-content:center}
+.df-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cu-hot)}
+.duo-fig b{font-family:var(--fd);font-weight:500;font-size:1.35rem;letter-spacing:.03em;color:var(--bone)}
+.duo-fig p, .duo-fig figcaption{color:var(--bone-dim);font-size:.92rem;font-weight:200}
+.hist-fig img{filter:grayscale(1) brightness(.8) contrast(1.05)}
+.hist-fig:hover img{filter:grayscale(.5) brightness(.88)}
+
+/* ---------- Reinheit: Mess-Skalen ---------- */
+.assay{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.assay-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.meter{margin-bottom:2.2rem}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem}
+.meter-top .m-name{font-family:var(--fd);font-size:1.15rem;letter-spacing:.05em}
+.meter-top .m-val{font-family:var(--fm);font-size:.8rem;color:var(--cu-hot)}
+.meter.ag-side .meter-top .m-val{color:var(--ag)}
+.meter-bar{height:6px;background:var(--ink-3);position:relative;overflow:hidden}
+.meter-fill{
+  position:absolute;inset:0;transform-origin:left;transform:scaleX(0);
+  transition:transform 1.4s cubic-bezier(.2,.7,.2,1);
+}
+.meter-cu .meter-fill{background:linear-gradient(90deg,var(--cu-deep),var(--cu-hot))}
+.meter-ag .meter-fill{background:linear-gradient(90deg,var(--ag-deep),var(--ag-hot))}
+.meter.in .meter-fill{transform:scaleX(var(--w))}
+.meter-note{font-family:var(--fm);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-top:.55rem}
+.assay-side h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.assay-quote{
+  margin-top:2.4rem;padding-left:1.4rem;border-left:2px solid var(--cu);
+  font-family:var(--fd);font-style:italic;font-size:1.15rem;color:var(--bone-dim);line-height:1.6;
+}
+.assay-quote b{color:var(--bone);font-weight:500}
+
+/* ---------- Veredelung: nummerierte Schritte mit Bildern ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
+.step{
+  border:1px solid var(--line);background:var(--ink-2);padding:1.8rem 1.6rem 2rem;
+  position:relative;transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s;
+}
+.step:hover{transform:translateY(-8px);border-color:var(--line-cu)}
+.step-img{height:150px;overflow:hidden;margin:-1.8rem -1.6rem 1.5rem;border-bottom:1px solid var(--line)}
+.step-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.65) brightness(.72) sepia(.18);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .5s}
+.step:hover .step-img img{transform:scale(1.06);filter:grayscale(.2) brightness(.85) sepia(.1)}
+.step-no{
+  font-family:var(--fm);font-size:.62rem;letter-spacing:.3em;color:var(--cu-hot);
+}
+.step h3{font-family:var(--fd);font-weight:500;font-size:1.25rem;margin:.7rem 0 .6rem;letter-spacing:.03em}
+.step p{color:var(--bone-dim);font-size:.88rem;font-weight:200}
+
+/* ---------- Katalog: dual-tone Karten + Tabelle ---------- */
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem;margin-bottom:3rem}
+.card{
+  border:1px solid var(--line);background:var(--ink-2);overflow:hidden;position:relative;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s;
+}
+.card:hover{transform:translateY(-8px)}
+.card-cu:hover{border-color:var(--line-cu)}
+.card-ag:hover{border-color:var(--line-ag)}
+.card-img{height:210px;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .card-img img{transform:scale(1.07)}
+.card-cu .card-img img{filter:sepia(.5) saturate(1.2) hue-rotate(-12deg) brightness(.66)}
+.card-ag .card-img img{filter:grayscale(1) brightness(.8)}
+.card-no{
+  position:absolute;top:1rem;left:1rem;font-family:var(--fm);font-size:.6rem;
+  letter-spacing:.28em;padding:.4rem .7rem;background:rgba(19,17,16,.85);border:1px solid var(--line);
+}
+.card-cu .card-no{color:var(--cu-hot)}
+.card-ag .card-no{color:var(--ag)}
+.card-body{padding:1.5rem 1.5rem 1.7rem}
+.card-body h3{font-family:var(--fd);font-weight:500;font-size:1.3rem;letter-spacing:.03em}
+.card-body .sub{font-family:var(--fm);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bone-faint);margin:.35rem 0 .9rem}
+.card-body p{color:var(--bone-dim);font-size:.88rem;font-weight:200;margin-bottom:1.2rem}
+.card-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:1rem}
+.card-row .spec{font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;color:var(--bone-dim)}
+.card-cu .spec b{color:var(--cu-hot);font-weight:400}
+.card-ag .spec b{color:var(--ag);font-weight:400}
+.ebay-btn{
+  font-family:var(--fm);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:none;color:var(--bone);border:1px solid var(--line);padding:.55rem .95rem;
+  transition:.3s;
+}
+.ebay-btn:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.spec-table{width:100%;border-collapse:collapse;border:1px solid var(--line)}
+.spec-table caption{
+  caption-side:top;text-align:left;font-family:var(--fm);font-size:.64rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--bone-faint);padding-bottom:.9rem;
+}
+.spec-table th,.spec-table td{
+  padding:.9rem 1.1rem;border-bottom:1px solid var(--line);text-align:left;
+  font-size:.88rem;font-weight:300;
+}
+.spec-table th{font-family:var(--fm);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bone-faint);font-weight:400;background:var(--ink-2)}
+.spec-table td b{font-family:var(--fm);font-weight:500;font-size:.8rem}
+.spec-table tr:hover td{background:rgba(234,229,220,.03)}
+.t-cu{color:var(--cu-hot)}.t-ag{color:var(--ag)}
+
+/* ---------- Historie: Jahresband ---------- */
+.timeline{position:relative;margin-top:1rem}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(var(--line-cu),var(--line-ag));
+}
+.tl-item{
+  width:50%;padding:0 3.2rem 3.4rem;position:relative;
+}
+.tl-item:nth-child(odd){left:0;text-align:right}
+.tl-item:nth-child(even){left:50%;text-align:left}
+.tl-item::before{
+  content:"";position:absolute;top:.45rem;width:9px;height:9px;transform:rotate(45deg);
+  background:var(--ink);border:1.5px solid var(--cu-hot);
+}
+.tl-item:nth-child(odd)::before{right:-5.5px}
+.tl-item:nth-child(even)::before{left:-5.5px}
+.tl-item:nth-child(even)::before{border-color:var(--ag)}
+.tl-year{font-family:var(--fm);font-size:.72rem;letter-spacing:.3em;color:var(--cu-hot)}
+.tl-item:nth-child(even) .tl-year{color:var(--ag)}
+.tl-item h3{font-family:var(--fd);font-weight:500;font-size:1.35rem;margin:.5rem 0 .5rem;letter-spacing:.03em}
+.tl-item p{color:var(--bone-dim);font-size:.9rem;font-weight:200}
+
+/* ---------- Parallaxe-Zitat ---------- */
+.quote-band{
+  min-height:78vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.quote-band .qb-img{position:absolute;inset:0;overflow:hidden}
+.quote-band .qb-img img{
+  width:100%;height:130%;object-fit:cover;object-position:center 38%;
+  filter:sepia(.4) saturate(1.15) hue-rotate(-10deg) brightness(.5) contrast(1.08);
+  will-change:transform;
+}
+.quote-band .qb-veil{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(19,17,16,.25),rgba(19,17,16,.9))}
+.quote-inner{position:relative;z-index:2;text-align:center;padding:0 6vw;max-width:900px}
+.quote-inner .q-kick{font-family:var(--fm);font-size:.62rem;letter-spacing:.44em;text-transform:uppercase;color:var(--cu-hot)}
+.quote-inner blockquote{
+  font-family:var(--fd);font-weight:500;font-style:italic;
+  font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.3;margin:1.6rem 0;
+}
+.quote-inner blockquote .hl-cu{color:var(--cu-hot);font-style:normal}
+.quote-inner blockquote .hl-ag{color:var(--ag);font-style:normal}
+.quote-inner cite{font-family:var(--fm);font-style:normal;font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-faint)}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:860px;margin:0 auto}
+.faq-item{border:1px solid var(--line);border-bottom:none;background:var(--ink-2)}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-item summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:1.4rem;padding:1.4rem 1.6rem;transition:background .3s;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{background:rgba(234,229,220,.03)}
+.faq-q{display:flex;align-items:baseline;gap:1.2rem}
+.faq-q .q-idx{font-family:var(--fm);font-size:.62rem;color:var(--cu-hot);letter-spacing:.2em}
+.faq-q h3{font-family:var(--fd);font-weight:500;font-size:1.12rem;letter-spacing:.02em}
+.faq-x{
+  font-family:var(--fm);font-size:1.2rem;color:var(--bone-dim);flex:0 0 auto;
+  transition:transform .3s,color .3s;
+}
+.faq-item[open] .faq-x{transform:rotate(45deg);color:var(--cu-hot)}
+.faq-a{padding:0 1.6rem 1.5rem;color:var(--bone-dim);font-size:.92rem;font-weight:200;max-width:640px}
+.faq-a b{color:var(--bone);font-weight:400}
+
+/* ---------- Kontakt ---------- */
+.contact{background:var(--ink-2);border-top:1px solid var(--line)}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:start}
+.c-item{display:flex;gap:1.4rem;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.c-item:first-child{border-top:1px solid var(--line)}
+.c-idx{font-family:var(--fm);font-size:.62rem;letter-spacing:.2em;color:var(--bone-faint);padding-top:.4rem}
+.c-item h3{font-family:var(--fd);font-weight:500;font-size:1.2rem;letter-spacing:.03em;margin-bottom:.3rem}
+.c-item p{color:var(--bone-dim);font-size:.92rem;font-weight:200}
+.c-item a{color:var(--cu-hot);text-decoration:none;border-bottom:1px solid var(--line-cu);transition:.3s}
+.c-item a:hover{color:var(--bone);border-color:var(--bone)}
+.c-card{
+  border:1px solid var(--line);padding:2.4rem;background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.c-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--cu) 0 50%,var(--ag) 50% 100%);
+}
+.c-card h3{font-family:var(--fd);font-weight:500;font-size:1.6rem;margin-bottom:.8rem;letter-spacing:.03em}
+.c-card p{color:var(--bone-dim);font-size:.92rem;font-weight:200;margin-bottom:1.6rem}
+.c-card .btn{width:100%;justify-content:center}
+.c-note{font-family:var(--fm);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-top:1.2rem;text-align:center}
+
+/* ---------- Footer ---------- */
+footer.site{
+  background:var(--ink);border-top:1px solid var(--line);
+  padding:3.2rem 4.5vw 2.6rem;
+}
+.f-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;margin-bottom:2.4rem}
+.f-brand{display:flex;align-items:center;gap:.85rem}
+.f-cols{display:flex;gap:4rem;flex-wrap:wrap}
+.f-col h4{font-family:var(--fm);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:1rem;font-weight:400}
+.f-col a{display:block;font-size:.88rem;color:var(--bone-dim);text-decoration:none;padding:.28rem 0;transition:color .25s}
+.f-col a:hover{color:var(--cu-hot)}
+.f-bottom{
+  border-top:1px solid var(--line);padding-top:1.6rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:var(--fm);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);
+}
+.f-bottom em{font-style:normal;color:var(--cu-hot)}
+.f-bottom a{text-decoration:none;color:var(--bone-dim);transition:color .25s}
+.f-bottom a:hover{color:var(--cu-hot)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1020px){
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .assay-grid{grid-template-columns:1fr;gap:3rem}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+}
+@media (max-width:820px){
+  .nav{display:none}
+  .burger{display:block}
+  .sec{padding:84px 0}
+  .sec-head{grid-template-columns:1fr;gap:1rem}
+  .sec-no{writing-mode:horizontal-tb;transform:none;border-left:none;border-top:1px solid var(--line);padding:.9rem 0 0;width:44px}
+  .el-grid{grid-template-columns:1fr}
+  .el:first-child{border-right:none;border-bottom:1px solid var(--line)}
+  .duo,.duo-fig{grid-template-columns:1fr}
+  .panel{min-height:420px}
+  .timeline::before{left:9px}
+  .tl-item{width:100%;left:0!important;text-align:left!important;padding:0 0 2.6rem 2.4rem}
+  .tl-item::before{left:5px!important;right:auto!important}
+  .hero-meta{display:none}
+  .tape-half.ag{display:none}
+  .cat-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .spec-table{display:block;overflow-x:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="hd" id="hd">
+  <a class="brand" href="#top" aria-label="SAXONIA – Startseite">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">SAX<b>ON</b>IA</span>
+  </a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="#metalle">Metalle</a>
+    <a href="#reinheit">Reinheit</a>
+    <a href="#veredelung">Veredelung</a>
+    <a href="#katalog">Katalog</a>
+    <a href="#historie">Historie</a>
+    <a href="#kontakt" class="nav-cta">Anfrage</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="drawer" id="drawer">
+  <a href="#metalle">Metalle</a>
+  <a href="#reinheit">Reinheit</a>
+  <a href="#veredelung">Veredelung</a>
+  <a href="#katalog">Katalog</a>
+  <a href="#historie">Historie</a>
+  <a href="#kontakt">Anfrage</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="images/hero.jpg" alt="Tagebau-Kupfermine mit Aufbereitungsanlage" id="heroImg" fetchpriority="high">
+  </div>
+  <div class="hero-veil"></div>
+  <div class="hero-inner">
+    <p class="kick">Bimetall-Kontor <i>·</i> Freiberg <i>·</i> Sachsen</p>
+    <h1>
+      <span class="ln"><span>KUPFER</span></span>
+      <span class="ln"><span>&amp; <em class="ag-word">SILBER</em>.</span></span>
+    </h1>
+    <p class="hero-sub">Zwei Metalle, ein Kontor. SAXONIA handelt elektrolytisch raffiniertes
+    Kathoden-Kupfer 99,99&nbsp;% und Feinsilber 999 — verwurzelt in der sächsischen
+    Bergbautradition, verkauft über eBay.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-cu" href="#katalog"><span>Kupfer ansehen</span></a>
+      <a class="btn btn-ag" href="#kontakt"><span>Anfrage stellen</span></a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    CU 29 · 63,546 u<br>
+    AG 47 · 107,868 u<br>
+    <b>Geprüfte Reinheit</b>
+  </div>
+  <div class="scroll-cue">Scrollen</div>
+  <div class="tape" aria-hidden="true">
+    <div class="tape-half cu">
+      <div class="tape-track" id="tapeCu">
+        <span>Kathoden-Kupfer <b>99,99 %</b></span><i>◆</i>
+        <span>Handgegossen <b>1000 g</b></span><i>◆</i>
+        <span>Elektrolytisch <b>raffiniert</b></span><i>◆</i>
+        <span>Recycelbar <b>100 %</b></span><i>◆</i>
+        <span>Versand <b>EU-weit</b></span><i>◆</i>
+      </div>
+    </div>
+    <div class="tape-half ag">
+      <div class="tape-track" id="tapeAg">
+        <span>Feinsilber <b>999</b></span><i>◇</i>
+        <span>Ag 47 <b>107,868 u</b></span><i>◇</i>
+        <span>Beständig <b>gegen Anlaufen</b></span><i>◇</i>
+        <span>Kleinbankfähig <b>500 g</b></span><i>◇</i>
+        <span>Lieferschein <b>mit Assay</b></span><i>◇</i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ELEMENTE ===================== -->
+<section class="elements" id="metalle">
+  <div class="el-grid">
+    <article class="el el-cu rv" data-sym="Cu">
+      <div class="el-sym">Cu</div>
+      <div class="el-body">
+        <h3>Kupfer — das warme Metall</h3>
+        <p>Ordnungsnummer 29. Träger von Strom, Wärme und Wert seit
+        fünftausend Jahren. Unser Kathoden-Kupfer wird elektrolytisch
+        auf 99,99&nbsp;% raffiniert und in Barren gegossen.</p>
+        <div class="el-facts">
+          <div>Reinheit<b>99,99 %</b></div>
+          <div>Dichte<b>8,96 g/cm³</b></div>
+          <div>Schmelzpunkt<b>1084,6 °C</b></div>
+        </div>
+      </div>
+    </article>
+    <article class="el el-ag rv d1" data-sym="Ag">
+      <div class="el-sym">Ag</div>
+      <div class="el-body">
+        <h3>Silber — das helle Metall</h3>
+        <p>Ordnungsnummer 47. Glanz, Duktilität und Beständigkeit:
+        unser Feinsilber 999 kommt als Barren und Granulat —
+        kleinbankfähig und mit Assay-Lieferschein.</p>
+        <div class="el-facts">
+          <div>Feingehalt<b>999</b></div>
+          <div>Dichte<b>10,49 g/cm³</b></div>
+          <div>Schmelzpunkt<b>961,8 °C</b></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== DUALITÄT ===================== -->
+<section class="sec" id="duality">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">01 — Zwei Metalle</span>
+      <div>
+        <p class="sec-kick rv">Die Dualität</p>
+        <h2 class="rv d1">Wärme trifft <em>Licht</em>.</h2>
+        <p class="sec-lead rv d2">Kupfer lebt vom warmen Schein, Silber vom kalten Glanz.
+        SAXONIA führt beide unter einem Dach — getrennt geführt, gemeinsam gehandelt.</p>
+      </div>
+    </div>
+    <div class="duo">
+      <article class="panel panel-cu rv">
+        <img src="images/copper-crystals.jpg" alt="Natürliche Kupferkristalle" data-plx="0.10" loading="lazy">
+        <span class="panel-tag">Cu 29 · 99,99 %</span>
+        <div class="panel-body">
+          <h3>Kupfer-Linie</h3>
+          <p>Kathoden-Kupfer, gegossen zu Barren zu 500&nbsp;g und 1000&nbsp;g.
+          Oberfläche rotbraun, Kanten scharf, jeder Barren handverlesen.</p>
+          <a class="panel-link" href="#katalog">Zur Kupfer-Linie →</a>
+        </div>
+      </article>
+      <article class="panel panel-ag rv d1">
+        <img src="images/wire-silver.jpg" alt="Drahtsilber-Stufe aus Cobalt, Ontario" data-plx="0.10" loading="lazy">
+        <span class="panel-tag">Ag 47 · 999</span>
+        <div class="panel-body">
+          <h3>Silber-Linie</h3>
+          <p>Feinsilber 999 als Barren und Granulat. Jede Charge mit
+          Assay-Lieferschein — dokumentiert, kleinbankfähig, lagerfähig.</p>
+          <a class="panel-link" href="#katalog">Zur Silber-Linie →</a>
+        </div>
+      </article>
+    </div>
+    <figure class="duo-fig rv">
+      <img src="images/halfbreed.jpg" alt="Silber-Kupfer-Halbblut-Stufe aus Keweenaw, Michigan" loading="lazy">
+      <figcaption>
+        <span class="df-tag">Provenienz</span>
+        <b>Die Halbblut-Stufe.</b>
+        <p>Natürliche Verbindung von Silber und Kupfer — Keweenaw County, Michigan.
+        Zwei Metalle in einem Stück: die Idee des Kontors, in Erz formuliert.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== REINHEIT ===================== -->
+<section class="sec assay" id="reinheit">
+  <div class="wrap">
+    <div class="assay-grid">
+      <div>
+        <p class="sec-kick rv">Reinheits-Skala</p>
+        <h2 class="rv d1">Gemessen, nicht <em>behauptet</em>.</h2>
+        <p class="sec-lead rv d2">Jede Charge wird vor Auslieferung analysiert.
+        Die Werte stehen auf dem Lieferschein — keine Ausnahme, kein Ausgleich.</p>
+        <blockquote class="assay-quote rv d3">
+          „Reinheit ist kein Werbeversprechen.<br><b>Sie ist eine Messung.</b>“
+        </blockquote>
+      </div>
+      <div>
+        <div class="meter meter-cu" data-w=".9999">
+          <div class="meter-top"><span class="m-name">Kathoden-Kupfer</span><span class="m-val">99,99 % Cu</span></div>
+          <div class="meter-bar"><span class="meter-fill"></span></div>
+          <p class="meter-note">Elektrolytisch raffiniert · EN 1978</p>
+        </div>
+        <div class="meter meter-cu" data-w=".995">
+          <div class="meter-top"><span class="m-name">Barren Cu-D2</span><span class="m-val">99,5 % min.</span></div>
+          <div class="meter-bar"><span class="meter-fill"></span></div>
+          <p class="meter-note">Gegossen · handverlesen</p>
+        </div>
+        <div class="meter meter-ag" data-w=".999">
+          <div class="meter-top"><span class="m-name">Feinsilber-Barren</span><span class="m-val">999 / 1000</span></div>
+          <div class="meter-bar"><span class="meter-fill"></span></div>
+          <p class="meter-note">Assay-Lieferschein · kleinbankfähig</p>
+        </div>
+        <div class="meter meter-ag" data-w=".925">
+          <div class="meter-top"><span class="m-name">Sterling-Zubehör</span><span class="m-val">925 / 1000</span></div>
+          <div class="meter-bar"><span class="meter-fill"></span></div>
+          <p class="meter-note">Nur Zusatzartikel · klar deklariert</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VEREDELUNG ===================== -->
+<section class="sec" id="veredelung">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">02 — Vom Erz zum Barren</span>
+      <div>
+        <p class="sec-kick rv">Die Veredelung</p>
+        <h2 class="rv d1">Vier Feuer, <em>ein Standard</em>.</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <article class="step rv">
+        <div class="step-img"><img src="images/hero.jpg" alt="Kupfererz-Gewinnung im Tagebau" loading="lazy"></div>
+        <span class="step-no">STUFE 01</span>
+        <h3>Gewinnung</h3>
+        <p>Kupfererz aus selektivem Abbau. Der Ausbringungsgrad entscheidet
+        über alles, was danach kommt.</p>
+      </article>
+      <article class="step rv d1">
+        <div class="step-img"><img src="images/molten.jpg" alt="Abstich geschmolzenen Kupfers, historische Aufnahme" loading="lazy"></div>
+        <span class="step-no">STUFE 02</span>
+        <h3>Schmelze</h3>
+        <p>Rohkupfer fließt bei über 1080&nbsp;°C. Schlacken werden abgezogen,
+        das Metall läuft klar.</p>
+      </article>
+      <article class="step rv d2">
+        <div class="step-img"><img src="images/nugget-minong.jpg" alt="Natürlicher Kupfernugget" loading="lazy"></div>
+        <span class="step-no">STUFE 03</span>
+        <h3>Raffination</h3>
+        <p>Elektrolytische Raffination auf Kathoden-Kupfer 99,99&nbsp;% —
+        Silber wird im Anodenschlamm gefasst.</p>
+      </article>
+      <article class="step rv d3">
+        <div class="step-img"><img src="images/silver-bars.jpg" alt="Gussoberfläche eines Feinsilber-Barrens" loading="lazy"></div>
+        <span class="step-no">STUFE 04</span>
+        <h3>Guss &amp; Assay</h3>
+        <p>Barrenguss von Hand, Prägung, Probe. Erst der Assay-Schein
+        macht einen Barren zum SAXONIA-Stück.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KATALOG ===================== -->
+<section class="sec" id="katalog" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">03 — Der Katalog</span>
+      <div>
+        <p class="sec-kick rv">Aktuelle Stücke</p>
+        <h2 class="rv d1">Barren in <em>beiden Metallen</em>.</h2>
+        <p class="sec-lead rv d2">Verkauf ausschließlich über eBay — Kaufabwicklung,
+        Versand und Käuferschutz laufen dort vollständig ab.</p>
+      </div>
+    </div>
+    <div class="cat-grid">
+      <article class="card card-cu rv">
+        <div class="card-img">
+          <img src="images/copper-crystals.jpg" alt="Kathoden-Kupfer, kristalline Oberfläche" loading="lazy">
+          <span class="card-no">SX-CU-1000</span>
+        </div>
+        <div class="card-body">
+          <h3>Kathoden-Barren 1000 g</h3>
+          <p class="sub">Cu 29 · 99,99 % · gegossen</p>
+          <p>Der Referenzbarren: ein Kilogramm elektrolytisch raffiniertes
+          Kathoden-Kupfer, handgegossen und nummeriert.</p>
+          <div class="card-row">
+            <span class="spec">Cu <b>99,99 %</b> · 1000 g</span>
+            <a class="ebay-btn" href="https://ebay.de" target="_blank" rel="noopener">Bei eBay →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card card-cu rv d1">
+        <div class="card-img">
+          <img src="images/nugget-cashin.jpg" alt="Silber-Kupfer-Halbblut-Nugget, Cashin Mine" loading="lazy">
+          <span class="card-no">SX-CU-500</span>
+        </div>
+        <div class="card-body">
+          <h3>Barren 500 g</h3>
+          <p class="sub">Cu 29 · 99,99 % · handverlesen</p>
+          <p>Kompakte Größe für den Einstieg: gleiche Reinheit,
+          gleicher Gussstandard, halbes Gewicht.</p>
+          <div class="card-row">
+            <span class="spec">Cu <b>99,99 %</b> · 500 g</span>
+            <a class="ebay-btn" href="https://ebay.de" target="_blank" rel="noopener">Bei eBay →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card card-ag rv d2">
+        <div class="card-img">
+          <img src="images/silver-bars.jpg" alt="Feinsilber-Barren, Gusshaut" loading="lazy">
+          <span class="card-no">SX-AG-500</span>
+        </div>
+        <div class="card-body">
+          <h3>Feinsilber-Barren 500 g</h3>
+          <p class="sub">Ag 47 · 999 · kleinbankfähig</p>
+          <p>Feinsilber 999 mit Gusshaut und geprägtem Kontor-Zeichen.
+          Assay-Lieferschein liegt jeder Lieferung bei.</p>
+          <div class="card-row">
+            <span class="spec">Ag <b>999</b> · 500 g</span>
+            <a class="ebay-btn" href="https://ebay.de" target="_blank" rel="noopener">Bei eBay →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card card-ag rv d3">
+        <div class="card-img">
+          <img src="images/wire-silver-2.jpg" alt="Drahtsilber, Silver Islet Mine, Ontario" loading="lazy">
+          <span class="card-no">SX-AG-GR</span>
+        </div>
+        <div class="card-body">
+          <h3>Feinsilber-Granulat 250 g</h3>
+          <p class="sub">Ag 47 · 999 · körnung 2–5 mm</p>
+          <p>Feinsilber in Granulatform — ideal für Schmelzversuche,
+          Uhrenbau und kleine Mengen. Mit Assay-Schein.</p>
+          <div class="card-row">
+            <span class="spec">Ag <b>999</b> · 250 g</span>
+            <a class="ebay-btn" href="https://ebay.de" target="_blank" rel="noopener">Bei eBay →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <table class="spec-table rv">
+      <caption>Technische Übersicht — Stand 2026</caption>
+      <thead>
+        <tr><th>Artikel</th><th>Metall</th><th>Feingehalt</th><th>Masse</th><th>Oberfläche</th><th>Dokument</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SX-CU-1000</td><td class="t-cu">Kupfer</td><td><b>99,99 %</b></td><td>1000 g</td><td>Guss, rotbraun</td><td>Lieferschein</td></tr>
+        <tr><td>SX-CU-500</td><td class="t-cu">Kupfer</td><td><b>99,99 %</b></td><td>500 g</td><td>Guss, rotbraun</td><td>Lieferschein</td></tr>
+        <tr><td>SX-AG-500</td><td class="t-ag">Silber</td><td><b>999/1000</b></td><td>500 g</td><td>Gusshaut, geprägt</td><td>Assay-Schein</td></tr>
+        <tr><td>SX-AG-GR</td><td class="t-ag">Silber</td><td><b>999/1000</b></td><td>250 g</td><td>Granulat</td><td>Assay-Schein</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== HISTORIE ===================== -->
+<section class="sec" id="historie">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">04 — Das Kontor</span>
+      <div>
+        <p class="sec-kick rv">Historie</p>
+        <h2 class="rv d1">Aus Sachsen, <em>für Sammler</em>.</h2>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item rv">
+        <span class="tl-year">1168</span>
+        <h3>Silberfunde am Schreckenberg</h3>
+        <p>Der Freiberger Bergbau beginnt. Sachsen wird zum
+        Silberland — der Name SAXONIA steht für diese Wurzel.</p>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-year">1470</span>
+        <h3>Der Saigerhandel</h3>
+        <p>Kupfer und Silber werden gemeinsam verhüttet:
+        Saigerhandel macht Erzgebirgsmetall europaweit begehrt.</p>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-year">1765</span>
+        <h3>Bergakademie Freiberg</h3>
+        <p>Die älteste Bergbauschule der Welt gründet —
+        Messtechnik und Assaying werden zur Disziplin.</p>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-year">2026</span>
+        <h3>SAXONIA Bimetall-Kontor</h3>
+        <p>Zwei Metalle, ein Standard: geprüfte Reinheit,
+        handverlesene Stücke, Verkauf über eBay.</p>
+      </div>
+    </div>
+    <figure class="duo-fig hist-fig rv">
+      <img src="images/wharf.jpg" alt="Silberbarren am Kai von Townsville, 1948" loading="lazy">
+      <figcaption>
+        <span class="df-tag">Handelstradition</span>
+        <b>Barren am Kai, 1948.</b>
+        <p>Metallhandel heißt: wiegen, prüfen, versenden.
+        Diese Disziplin führt das Kontor bis heute fort — nur das Kai-Panorama hat gewechselt.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== PARALLAX-ZITAT ===================== -->
+<section class="quote-band">
+  <div class="qb-img"><img src="images/molten.jpg" alt="Kupferguss, historische Aufnahme" id="qbImg" loading="lazy"></div>
+  <div class="qb-veil"></div>
+  <div class="quote-inner">
+    <p class="q-kick rv">Kontor-Grundsatz</p>
+    <blockquote class="rv d1">„Kupfer trägt den Strom. <span class="hl-ag">Silber</span>
+    trägt den <span class="hl-cu">Glanz</span>. Wir tragen für beide die Verantwortung.“</blockquote>
+    <cite class="rv d2">— SAXONIA Bimetall-Kontor, Freiberg</cite>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">05 — Fragen &amp; Antworten</span>
+      <div>
+        <p class="sec-kick rv">FAQ</p>
+        <h2 class="rv d1">Bevor Sie <em>kaufen</em>.</h2>
+      </div>
+    </div>
+    <div class="faq">
+      <details class="faq-item rv" open>
+        <summary>
+          <span class="faq-q"><span class="q-idx">F·1</span><h3>Wo kann ich SAXONIA-Stücke kaufen?</h3></span>
+          <span class="faq-x">+</span>
+        </summary>
+        <div class="faq-a"><p>Der Verkauf läuft vollständig über
+        <b><a href="https://ebay.de" target="_blank" rel="noopener" style="color:var(--cu-hot);text-decoration:none">ebay.de</a></b>.
+        Kaufabwicklung, Käuferschutz und Versandabwicklung erfolgen dort.
+        Aktuelle Angebote finden Sie über unseren Kontor-Namen in der Suche.</p></div>
+      </details>
+      <details class="faq-item rv">
+        <summary>
+          <span class="faq-q"><span class="q-idx">F·2</span><h3>Wie wird die Reinheit nachgewiesen?</h3></span>
+          <span class="faq-x">+</span>
+        </summary>
+        <div class="faq-a"><p>Jede Charge wird analysiert. Kupfer-Lieferungen erhalten
+        einen <b>Lieferschein mit Reinheitsangabe (99,99&nbsp;% Cu)</b>, Silber-Lieferungen einen
+        <b>Assay-Schein (999/1000)</b>. Die Werte stehen auf dem Dokument, nicht nur auf der Produktseite.</p></div>
+      </details>
+      <details class="faq-item rv">
+        <summary>
+          <span class="faq-q"><span class="q-idx">F·3</span><h3>Wie läuft der Versand ab?</h3></span>
+          <span class="faq-x">+</span>
+        </summary>
+        <div class="faq-a"><p>Versand <b>EU-weit</b>, versichert und nachverfolgbar.
+        Barren werden stoßgedämpft und luftdicht verpackt — Kupfer patiniert
+        natürlich, Silber wird in Schutzhülle geliefert.</p></div>
+      </details>
+      <details class="faq-item rv">
+        <summary>
+          <span class="faq-q"><span class="q-idx">F·4</span><h3>Läuft Kupfer an — und was bedeutet das?</h3></span>
+          <span class="faq-x">+</span>
+        </summary>
+        <div class="faq-a"><p>Ja. Kupfer bildet mit der Zeit eine natürliche <b>Patina</b> —
+        von rotbraun zu dunklem Braun. Das ist ein Qualitätsmerkmal des Metalls,
+        kein Mangel. Silber läuft schwach an und lässt sich polieren.</p></div>
+      </details>
+      <details class="faq-item rv">
+        <summary>
+          <span class="faq-q"><span class="q-idx">F·5</span><h3>Nehmen Sie Altmetall in Zahlung?</h3></span>
+          <span class="faq-x">+</span>
+        </summary>
+        <div class="faq-a"><p>Nein. SAXONIA verkauft ausschließlich eigene, geprüfte Stücke.
+        Ankauf und Vermittlung gehören nicht zum Kontor-Geschäft.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KONTAKT ===================== -->
+<section class="sec contact" id="kontakt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">06 — Anfrage</span>
+      <div>
+        <p class="sec-kick rv">Kontakt</p>
+        <h2 class="rv d1">Sprechen Sie das <em>Kontor</em> an.</h2>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="c-item rv">
+          <span class="c-idx">K·1</span>
+          <div>
+            <h3>Kauf &amp; Verfügbarkeit</h3>
+            <p>Alle aktuellen Stücke finden Sie auf
+            <a href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a> —
+            inklusive Kaufabwicklung und Käuferschutz.</p>
+          </div>
+        </div>
+        <div class="c-item rv d1">
+          <span class="c-idx">K·2</span>
+          <div>
+            <h3>Fragen vor dem Kauf</h3>
+            <p>Über die eBay-Nachrichtenfunktion erreichen Sie uns direkt —
+            Antwort in der Regel innerhalb eines Werktags.</p>
+          </div>
+        </div>
+        <div class="c-item rv d2">
+          <span class="c-idx">K·3</span>
+          <div>
+            <h3>Assay-Unterlagen</h3>
+            <p>Benötigen Sie Unterlagen zu einer bestimmten Charge?
+            Nennen Sie uns die Barren-Nummer, wir stellen das Dokument bereit.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="c-card rv d1">
+        <h3>Reserve anfragen.</h3>
+        <p>Nennen Sie Stückzahl und Metall — wir melden uns mit Verfügbarkeit
+        und aktuellem Kurs.</p>
+        <a class="btn btn-cu" href="https://ebay.de" target="_blank" rel="noopener"><span>Zu eBay →</span></a>
+        <p class="c-note">Verkauf · Kaufabwicklung · Versand via eBay</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="f-top">
+    <a class="brand f-brand" href="#top" aria-label="SAXONIA – nach oben">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name" style="font-size:1rem">SAX<b>ON</b>IA</span>
+    </a>
+    <div class="f-cols">
+      <div class="f-col">
+        <h4>Kontor</h4>
+        <a href="#metalle">Metalle</a>
+        <a href="#katalog">Katalog</a>
+        <a href="#historie">Historie</a>
+      </div>
+      <div class="f-col">
+        <h4>Service</h4>
+        <a href="#reinheit">Reinheit</a>
+        <a href="#faq">FAQ</a>
+        <a href="impressum.html">Impressum</a>
+      </div>
+      <div class="f-col">
+        <h4>Handel</h4>
+        <a href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a>
+        <a href="#kontakt">Anfrage</a>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© <span id="yr">2026</span> SAXONIA · Bimetall-Kontor</span>
+    <span><em>CU 29 · AG 47</em> · <a href="impressum.html">IMPRESSUM</a> · <a href="https://ebay.de" target="_blank" rel="noopener">EBAY.DE</a></span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Header-Zustand ---------- */
+const hd = document.getElementById('hd');
+const onScrollHead = () => hd.classList.toggle('solid', window.scrollY > 40);
+onScrollHead();
+addEventListener('scroll', onScrollHead, {passive:true});
+
+/* ---------- Mobile Drawer ---------- */
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  drawer.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}));
+
+/* ---------- Reveal-Motion ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv, .meter').forEach(el => io.observe(el));
+
+/* ---------- Parallaxe (rAF, transform-only) ---------- */
+const plxEls = [...document.querySelectorAll('[data-plx]')];
+const heroImg = document.getElementById('heroImg');
+const qbImg = document.getElementById('qbImg');
+let ticking = false;
+function parallax(){
+  const vh = innerHeight;
+  plxEls.forEach(el => {
+    const r = el.parentElement.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > vh) return;
+    const p = (r.top + r.height/2 - vh/2) / vh;          // -0.5 .. 0.5
+    el.style.transform = `translateY(${(-p * parseFloat(el.dataset.plx) * 100).toFixed(2)}%)`;
+  });
+  const hr = heroImg.parentElement.getBoundingClientRect();
+  if (hr.bottom > 0) {
+    const p = Math.min(1, Math.max(0, -hr.top / hr.height));
+    heroImg.style.transform = `translateY(${(p * 14).toFixed(2)}%)`;
+  }
+  const qr = qbImg.parentElement.getBoundingClientRect();
+  if (qr.bottom > 0 && qr.top < vh) {
+    const p = (qr.top + qr.height/2 - vh/2) / vh;
+    qbImg.style.transform = `translateY(${(-p * 9).toFixed(2)}%)`;
+  }
+  ticking = false;
+}
+addEventListener('scroll', () => {
+  if (!ticking) { requestAnimationFrame(parallax); ticking = true; }
+}, {passive:true});
+parallax();
+
+/* ---------- Kursbänder: Inhalt verdoppeln für Endlosschleife ---------- */
+['tapeCu','tapeAg'].forEach(id => {
+  const t = document.getElementById(id);
+  t.innerHTML += t.innerHTML;
+});
+</script>
+</body>
+</html>
