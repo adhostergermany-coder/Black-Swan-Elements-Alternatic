@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRACONIA METALS - Premium Copper & Silver</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald-deep: #071a14;
+            --emerald-dark: #0d2e22;
+            --emerald-mid: #143d2e;
+            --emerald-light: #1a5240;
+            --gold: #c9a84c;
+            --gold-bright: #e8d48b;
+            --gold-dim: rgba(201,168,76,0.15);
+            --copper: #b87333;
+            --silver: #c0c0c0;
+            --bone: #f0ece3;
+            --bone-dim: rgba(240,236,227,0.6);
+            --ink: #0a1a13;
+            --line: rgba(201,168,76,0.18);
+            --radius: 10px;
+            --radius-lg: 18px;
+            --ease: cubic-bezier(0.4,0,0.2,1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--emerald-deep); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--emerald-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--ink);
+            color: var(--bone);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--gold); color: var(--ink); }
+
+        /* ─── SIDEBAR RAIL ─── */
+        .rail {
+            position: fixed; left: 0; top: 0; width: 72px; height: 100vh;
+            background: var(--emerald-deep);
+            border-right: 1px solid var(--line);
+            z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            padding: 28px 0;
+        }
+        .rail-logo {
+            writing-mode: vertical-rl; transform: rotate(180deg);
+            font-family: 'Cinzel', serif; font-weight: 900; font-size: 0.7rem;
+            letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase;
+        }
+        .rail-line { width: 1px; height: 40px; background: var(--line); }
+        .rail-element {
+            width: 36px; height: 36px; border: 1.5px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700;
+            color: var(--gold); transform: rotate(45deg);
+        }
+        .rail-element span { transform: rotate(-45deg); }
+        .rail-nav { display: flex; flex-direction: column; gap: 18px; }
+        .rail-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(201,168,76,0.3); cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+        .rail-dot:hover, .rail-dot.active { background: var(--gold); transform: scale(1.5); }
+
+        /* ─── WAYPOINT NAV ─── */
+        .waypoint-nav {
+            position: fixed; right: 28px; top: 50%; transform: translateY(-50%);
+            z-index: 1000; display: flex; flex-direction: column; gap: 22px; align-items: flex-end;
+        }
+        .wp-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .wp-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: rgba(240,236,227,0.3); transition: all 0.3s var(--ease);
+            opacity: 0; transform: translateX(8px);
+        }
+        .wp-item:hover .wp-label, .wp-item.active .wp-label {
+            opacity: 1; transform: translateX(0); color: var(--gold);
+        }
+        .wp-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            border: 1.5px solid rgba(201,168,76,0.4); background: transparent;
+            transition: all 0.3s var(--ease); flex-shrink: 0;
+        }
+        .wp-item:hover .wp-dot, .wp-item.active .wp-dot {
+            background: var(--gold); border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201,168,76,0.5);
+        }
+
+        /* ─── MAIN CONTENT ─── */
+        .main { margin-left: 72px; }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+            position: relative; overflow: hidden;
+        }
+        .hero-left {
+            background: linear-gradient(160deg, var(--emerald-deep) 0%, var(--emerald-dark) 60%, var(--emerald-mid) 100%);
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 80px 60px 80px 80px; position: relative; z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 32px;
+        }
+        .hero-badge::before {
+            content: ''; width: 28px; height: 1px; background: var(--gold);
+        }
+        .hero h1 {
+            font-family: 'Cinzel', serif; font-weight: 900;
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            line-height: 1.05; color: var(--bone);
+            margin-bottom: 24px;
+        }
+        .hero h1 .gold { color: var(--gold); }
+        .hero h1 .outline {
+            -webkit-text-stroke: 1.5px var(--gold);
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc {
+            font-size: 1rem; line-height: 1.75; color: var(--bone-dim);
+            max-width: 480px; margin-bottom: 40px;
+        }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 32px; background: var(--gold); color: var(--ink);
+            font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.8rem;
+            letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+            border: none; cursor: pointer; position: relative; overflow: hidden;
+            transition: all 0.4s var(--ease);
+        }
+        .btn-primary:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+        .btn-primary::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        .btn-primary:hover::after { left: 100%; }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 32px; background: transparent; color: var(--gold);
+            font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.8rem;
+            letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+            border: 1.5px solid var(--gold); cursor: pointer;
+            transition: all 0.4s var(--ease);
+        }
+        .btn-secondary:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+
+        .hero-right {
+            position: relative; overflow: hidden;
+        }
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.1); transition: transform 0.3s;
+        }
+        .hero-right::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(7,26,20,0.7) 0%, transparent 50%, rgba(201,168,76,0.15) 100%);
+        }
+        .hero-stats {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--line);
+            backdrop-filter: blur(16px); background: rgba(7,26,20,0.7);
+        }
+        .hero-stat {
+            padding: 24px 20px; border-right: 1px solid var(--line);
+            text-align: center;
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat-num {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700;
+            color: var(--gold); margin-bottom: 4px;
+        }
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--bone-dim);
+        }
+
+        /* ─── DIAGONAL CUT OVERLAY ─── */
+        .diagonal-cut {
+            position: absolute; top: 0; right: -1px; width: 120px; height: 100%;
+            background: linear-gradient(160deg, var(--emerald-deep) 0%, var(--emerald-dark) 60%, var(--emerald-mid) 100%);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            z-index: 3;
+        }
+
+        /* ─── TICKER ─── */
+        .ticker-wrap {
+            background: var(--emerald-deep); border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line); overflow: hidden; padding: 14px 0;
+            position: relative;
+        }
+        .ticker {
+            display: flex; width: max-content;
+            animation: tickerScroll 40s linear infinite;
+        }
+        .ticker-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 0 40px; white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+            letter-spacing: 0.1em; text-transform: uppercase;
+        }
+        .ticker-item .sym { color: var(--gold); font-weight: 600; }
+        .ticker-item .price { color: var(--bone); }
+        .ticker-item .change { font-size: 0.65rem; }
+        .ticker-item .change.up { color: #4ade80; }
+        .ticker-item .change.down { color: #f87171; }
+        .ticker-sep { color: var(--line); font-size: 0.5rem; }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ─── SECTION UTILITIES ─── */
+        .section-dark { background: var(--emerald-deep); }
+        .section-darker { background: var(--ink); }
+        .section-light { background: linear-gradient(180deg, #f5f2eb 0%, #eae5dc 100%); color: var(--ink); }
+        .section-emerald { background: linear-gradient(160deg, var(--emerald-dark) 0%, var(--emerald-mid) 100%); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .section-pad { padding: 120px 0; }
+        .section-pad-lg { padding: 160px 0; }
+
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 20px;
+        }
+        .section-tag::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+        .section-title {
+            font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            line-height: 1.15; margin-bottom: 20px;
+        }
+        .section-subtitle {
+            font-size: 1rem; line-height: 1.75; color: var(--bone-dim);
+            max-width: 540px;
+        }
+        .section-light .section-subtitle { color: rgba(10,26,19,0.6); }
+
+        /* ─── MATERIAL SPLIT ─── */
+        .material-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
+        .material-panel {
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 60px; cursor: pointer;
+        }
+        .material-panel img {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s var(--ease);
+        }
+        .material-panel:hover img { transform: scale(1.06); }
+        .material-panel::after {
+            content: ''; position: absolute; inset: 0;
+            transition: opacity 0.5s var(--ease);
+        }
+        .panel-copper::after {
+            background: linear-gradient(180deg, rgba(184,115,51,0.1) 0%, rgba(7,26,20,0.92) 70%);
+        }
+        .panel-copper:hover::after { background: linear-gradient(180deg, rgba(184,115,51,0.15) 0%, rgba(7,26,20,0.88) 70%); }
+        .panel-silver::after {
+            background: linear-gradient(180deg, rgba(192,192,192,0.1) 0%, rgba(7,26,20,0.92) 70%);
+        }
+        .panel-silver:hover::after { background: linear-gradient(180deg, rgba(192,192,192,0.15) 0%, rgba(7,26,20,0.88) 70%); }
+        .material-content { position: relative; z-index: 2; }
+        .material-content .element-num {
+            font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 900;
+            line-height: 1; margin-bottom: 8px; opacity: 0.12;
+            position: absolute; bottom: 60px; right: 60px;
+        }
+        .panel-copper .element-num { color: var(--copper); }
+        .panel-silver .element-num { color: var(--silver); }
+        .material-content h3 {
+            font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: 2rem; margin-bottom: 8px;
+        }
+        .panel-copper h3 { color: var(--copper); }
+        .panel-silver h3 { color: var(--silver); }
+        .material-content p {
+            font-size: 0.9rem; color: var(--bone-dim); max-width: 320px; line-height: 1.65;
+        }
+        .material-divider {
+            position: absolute; left: 50%; top: 0; width: 1px; height: 100%;
+            background: var(--line); z-index: 5;
+        }
+
+        /* ─── PRODUCTS BENTO ─── */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .bento-card {
+            background: rgba(201,168,76,0.04);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            position: relative; overflow: hidden;
+            transition: all 0.5s var(--ease);
+        }
+        .bento-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transform: scaleX(0); transition: transform 0.5s var(--ease);
+        }
+        .bento-card:hover::before { transform: scaleX(1); }
+        .bento-card:hover {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .bento-card.span-8 { grid-column: span 8; }
+        .bento-card.span-4 { grid-column: span 4; }
+        .bento-card.span-6 { grid-column: span 6; }
+        .bento-card.span-12 { grid-column: span 12; }
+
+        .bento-card .card-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 16px;
+        }
+        .bento-card h3 {
+            font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: 1.4rem; margin-bottom: 12px;
+        }
+        .bento-card p { font-size: 0.88rem; line-height: 1.7; color: var(--bone-dim); }
+        .bento-card .card-img {
+            width: 100%; border-radius: var(--radius); margin-top: 20px;
+            aspect-ratio: 16/10; object-fit: cover;
+        }
+        .bento-card .card-stat {
+            display: flex; align-items: baseline; gap: 8px; margin-top: 20px;
+        }
+        .bento-card .card-stat .num {
+            font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--gold);
+        }
+        .bento-card .card-stat .unit {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+            color: var(--bone-dim); text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        /* ─── PARALLAX QUOTE ─── */
+        .parallax-quote {
+            height: 70vh; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .parallax-quote img {
+            position: absolute; inset: 0; width: 100%; height: 120%;
+            object-fit: cover; top: -10%;
+        }
+        .parallax-quote::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(7,26,20,0.88) 0%, rgba(20,61,46,0.75) 50%, rgba(7,26,20,0.88) 100%);
+        }
+        .parallax-quote blockquote {
+            position: relative; z-index: 2; text-align: center;
+            max-width: 800px; padding: 0 40px;
+        }
+        .parallax-quote .q-mark {
+            font-family: 'Cinzel', serif; font-size: 6rem; color: var(--gold);
+            line-height: 0.5; opacity: 0.3; margin-bottom: 20px;
+        }
+        .parallax-quote blockquote p {
+            font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+            font-weight: 400; line-height: 1.5; font-style: italic; color: var(--bone);
+        }
+        .parallax-quote cite {
+            display: block; margin-top: 24px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); font-style: normal;
+        }
+
+        /* ─── PROCESS STEPS ─── */
+        .process-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+            margin-top: 60px;
+        }
+        .process-step {
+            background: rgba(201,168,76,0.03);
+            padding: 48px 32px; text-align: center;
+            position: relative; transition: all 0.4s var(--ease);
+        }
+        .process-step:hover { background: rgba(201,168,76,0.08); }
+        .process-step .step-num {
+            font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 900;
+            color: rgba(201,168,76,0.12); margin-bottom: 20px;
+            transition: color 0.4s var(--ease);
+        }
+        .process-step:hover .step-num { color: var(--gold); }
+        .process-step h4 {
+            font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: 1rem; margin-bottom: 12px; color: var(--bone);
+        }
+        .process-step p {
+            font-size: 0.82rem; line-height: 1.65; color: var(--bone-dim);
+        }
+        .process-connector {
+            position: absolute; top: 50%; right: -1px;
+            width: 10px; height: 10px; border-radius: 50%;
+            border: 1.5px solid var(--gold); background: var(--emerald-deep);
+            transform: translateY(-50%); z-index: 2;
+        }
+
+        /* ─── SPECS TABLE ─── */
+        .specs-table {
+            width: 100%; border-collapse: collapse; margin-top: 40px;
+        }
+        .specs-table thead th {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); text-align: left;
+            padding: 14px 20px; border-bottom: 1px solid var(--line);
+        }
+        .specs-table tbody td {
+            padding: 16px 20px; font-size: 0.88rem;
+            border-bottom: 1px solid rgba(201,168,76,0.06);
+            color: var(--bone);
+        }
+        .specs-table tbody tr:hover { background: rgba(201,168,76,0.04); }
+        .specs-table .metal-tag {
+            display: inline-block; padding: 3px 10px; border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+            letter-spacing: 0.1em;
+        }
+        .tag-cu { background: rgba(184,115,51,0.2); color: var(--copper); }
+        .tag-ag { background: rgba(192,192,192,0.2); color: var(--silver); }
+
+        /* ─── CERTIFICATES / TRUST ─── */
+        .trust-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            align-items: center; margin-top: 60px;
+        }
+        .trust-img {
+            width: 100%; border-radius: var(--radius-lg);
+            aspect-ratio: 4/3; object-fit: cover;
+            border: 1px solid var(--line);
+        }
+        .trust-list { display: flex; flex-direction: column; gap: 24px; }
+        .trust-item {
+            display: flex; gap: 16px; align-items: flex-start;
+            padding: 20px; border-radius: var(--radius);
+            border: 1px solid transparent;
+            transition: all 0.4s var(--ease);
+        }
+        .trust-item:hover {
+            border-color: var(--line);
+            background: rgba(201,168,76,0.03);
+        }
+        .trust-icon {
+            width: 40px; height: 40px; flex-shrink: 0;
+            border: 1px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+        }
+        .trust-item h4 {
+            font-family: 'Cinzel', serif; font-weight: 700;
+            font-size: 0.9rem; margin-bottom: 4px;
+        }
+        .trust-item p { font-size: 0.82rem; color: var(--bone-dim); line-height: 1.6; }
+
+        /* ─── CTA SECTION ─── */
+        .cta-section {
+            background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--emerald-mid) 50%, var(--emerald-light) 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                45deg, transparent, transparent 40px,
+                rgba(201,168,76,0.03) 40px, rgba(201,168,76,0.03) 80px
+            );
+        }
+        .cta-inner {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            align-items: center; position: relative; z-index: 2;
+        }
+        .cta-form {
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .cta-form input, .cta-form textarea {
+            background: rgba(0,0,0,0.3); border: 1px solid var(--line);
+            padding: 14px 18px; font-family: 'Inter', sans-serif;
+            font-size: 0.88rem; color: var(--bone); border-radius: var(--radius);
+            transition: border-color 0.3s var(--ease);
+        }
+        .cta-form input::placeholder, .cta-form textarea::placeholder {
+            color: rgba(240,236,227,0.3);
+        }
+        .cta-form input:focus, .cta-form textarea:focus {
+            outline: none; border-color: var(--gold);
+        }
+        .cta-form textarea { resize: vertical; min-height: 120px; }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            background: var(--ink); border-top: 1px solid var(--line);
+            padding: 80px 0 40px; position: relative;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-brand .f-logo {
+            font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 900;
+            color: var(--gold); letter-spacing: 0.1em; margin-bottom: 16px;
+        }
+        .footer-brand p { font-size: 0.85rem; line-height: 1.7; color: var(--bone-dim); max-width: 300px; }
+        .footer-col h4 {
+            font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block; font-size: 0.82rem; color: var(--bone-dim);
+            text-decoration: none; padding: 6px 0;
+            transition: color 0.3s var(--ease);
+        }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 30px; border-top: 1px solid var(--line);
+        }
+        .footer-bottom p {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--bone-dim);
+        }
+
+        /* ─── WATERMARK ─── */
+        .watermark {
+            position: absolute; font-family: 'Cinzel', serif;
+            font-size: clamp(6rem, 14vw, 14rem); font-weight: 900;
+            color: rgba(201,168,76,0.04); pointer-events: none;
+            user-select: none; white-space: nowrap;
+        }
+
+        /* ─── NOISE OVERLAY ─── */
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: 9999;
+            pointer-events: none; opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+        }
+
+        /* ─── SCROLL PROGRESS ─── */
+        .scroll-progress {
+            position: fixed; top: 0; left: 72px; right: 0; height: 3px;
+            background: rgba(201,168,76,0.1); z-index: 1001;
+        }
+        .scroll-progress-bar {
+            height: 100%; width: 0;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            transition: width 0.1s;
+        }
+
+        /* ─── REVEAL ANIMATIONS ─── */
+        .rv { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--ease); }
+        .rv.visible { opacity: 1; transform: translateY(0); }
+        .rv-r { opacity: 0; clip-path: inset(0 100% 0 0); transition: all 0.8s var(--ease); }
+        .rv-r.visible { opacity: 1; clip-path: inset(0 0 0 0); }
+        .rv-d1 { transition-delay: 0.1s; }
+        .rv-d2 { transition-delay: 0.2s; }
+        .rv-d3 { transition-delay: 0.3s; }
+        .rv-d4 { transition-delay: 0.4s; }
+
+        /* ─── FLOATING ELEMENTS ─── */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-slow { animation: floatSlow 8s ease-in-out infinite; }
+
+        /* ─── ACCORDION FAQ ─── */
+        .faq-list { margin-top: 50px; }
+        .faq-item {
+            border-bottom: 1px solid var(--line);
+        }
+        .faq-item summary {
+            padding: 22px 0; cursor: pointer;
+            font-family: 'Cinzel', serif; font-weight: 600;
+            font-size: 1rem; color: var(--bone);
+            list-style: none; display: flex; justify-content: space-between; align-items: center;
+            transition: color 0.3s var(--ease);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+'; font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem; color: var(--gold);
+            transition: transform 0.3s var(--ease);
+        }
+        .faq-item[open] summary::after { transform: rotate(45deg); }
+        .faq-item[open] summary { color: var(--gold); }
+        .faq-item .faq-answer {
+            padding: 0 0 22px; font-size: 0.88rem;
+            line-height: 1.75; color: var(--bone-dim);
+        }
+
+        /* ─── BACK TO TOP ─── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px;
+            background: var(--gold); color: var(--ink); border: none; cursor: pointer;
+            font-size: 1.2rem; border-radius: 50%; z-index: 1000;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.4s var(--ease);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .back-to-top.show { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { background: var(--gold-bright); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+
+        /* ─── COUNTER ANIMATION ─── */
+        .counter-row {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+            margin-top: 60px;
+        }
+        .counter-item {
+            background: rgba(201,168,76,0.03); padding: 40px 24px; text-align: center;
+            border: 1px solid var(--line);
+        }
+        .counter-num {
+            font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 900;
+            color: var(--gold); margin-bottom: 8px;
+        }
+        .counter-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--bone-dim);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1050px) {
+            .rail { display: none; }
+            .waypoint-nav { display: none; }
+            .main { margin-left: 0; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { display: none; }
+            .hero-left { padding: 80px 32px; }
+            .diagonal-cut { display: none; }
+            .material-split { grid-template-columns: 1fr; min-height: auto; }
+            .material-panel { min-height: 50vh; }
+            .material-divider { display: none; }
+            .bento-card.span-8, .bento-card.span-4, .bento-card.span-6 { grid-column: span 12; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .trust-grid { grid-template-columns: 1fr; }
+            .cta-inner { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .counter-row { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 0 20px; }
+            .section-pad { padding: 80px 0; }
+            .hero-left { padding: 60px 20px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+            .hero-stat { padding: 16px 12px; }
+            .process-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .counter-row { grid-template-columns: 1fr 1fr; }
+            .scroll-progress { left: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .ticker { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
+
+    <!-- SIDEBAR RAIL -->
+    <nav class="rail">
+        <div class="rail-logo">DRACONIA</div>
+        <div class="rail-line"></div>
+        <div class="rail-element"><span>Cu</span></div>
+        <div class="rail-nav">
+            <div class="rail-dot active" data-section="hero"></div>
+            <div class="rail-dot" data-section="material"></div>
+            <div class="rail-dot" data-section="products"></div>
+            <div class="rail-dot" data-section="process"></div>
+            <div class="rail-dot" data-section="specs"></div>
+            <div class="rail-dot" data-section="contact"></div>
+        </div>
+        <div class="rail-line"></div>
+    </nav>
+
+    <!-- WAYPOINT NAV -->
+    <nav class="waypoint-nav" id="waypointNav">
+        <div class="wp-item active" data-section="hero">
+            <span class="wp-label">Start</span>
+            <span class="wp-dot"></span>
+        </div>
+        <div class="wp-item" data-section="material">
+            <span class="wp-label">Metalle</span>
+            <span class="wp-dot"></span>
+        </div>
+        <div class="wp-item" data-section="products">
+            <span class="wp-label">Produkte</span>
+            <span class="wp-dot"></span>
+        </div>
+        <div class="wp-item" data-section="process">
+            <span class="wp-label">Prozess</span>
+            <span class="wp-dot"></span>
+        </div>
+        <div class="wp-item" data-section="specs">
+            <span class="wp-label">Spezifikation</span>
+            <span class="wp-dot"></span>
+        </div>
+        <div class="wp-item" data-section="contact">
+            <span class="wp-label">Kontakt</span>
+            <span class="wp-dot"></span>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero-left">
+                <div class="hero-badge">Premium Metalle Seit 1997</div>
+                <h1>
+                    <span class="outline">DRACONIA</span><br>
+                    <span class="gold">METALS</span>
+                </h1>
+                <p class="hero-desc">
+                    Exzellenz in Kupfer und Silber. Wir verbinden jahrhundertealte Handwerkskunst mit modernster Verarbeitungstechnologie für die anspruchsvollsten Anwendungen.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#products" class="btn-primary">Produkte entdecken</a>
+                    <a href="#contact" class="btn-secondary">Anfrage senden</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <img src="images/copper-hero.webp" alt="Premium Kupfer" class="hero-img" id="heroImg">
+                <div class="diagonal-cut"></div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num" data-count="27">0</div>
+                        <div class="hero-stat-label">Jahre Erfahrung</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num" data-count="99.9">0</div>
+                        <div class="hero-stat-label">% Reinheit</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num" data-count="48">0</div>
+                        <div class="hero-stat-label">Länder</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num" data-count="1500">0</div>
+                        <div class="hero-stat-label">Tonnen/Jahr</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="ticker-wrap">
+            <div class="ticker" id="ticker">
+                <div class="ticker-item"><span class="sym">Cu</span> <span class="price">8.942 USD/t</span> <span class="change up">+2.4%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Ag</span> <span class="price">31.28 USD/oz</span> <span class="change up">+1.1%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Au</span> <span class="price">2.348 USD/oz</span> <span class="change down">-0.3%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Pt</span> <span class="price">1.024 USD/oz</span> <span class="change up">+0.8%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Pd</span> <span class="price">1.156 USD/oz</span> <span class="change down">-1.2%</span></div>
+                <span class="ticker-sep">|</span>
+                <!-- Duplicate for seamless loop -->
+                <div class="ticker-item"><span class="sym">Cu</span> <span class="price">8.942 USD/t</span> <span class="change up">+2.4%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Ag</span> <span class="price">31.28 USD/oz</span> <span class="change up">+1.1%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Au</span> <span class="price">2.348 USD/oz</span> <span class="change down">-0.3%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Pt</span> <span class="price">1.024 USD/oz</span> <span class="change up">+0.8%</span></div>
+                <span class="ticker-sep">|</span>
+                <div class="ticker-item"><span class="sym">Pd</span> <span class="price">1.156 USD/oz</span> <span class="change down">-1.2%</span></div>
+                <span class="ticker-sep">|</span>
+            </div>
+        </div>
+
+        <!-- MATERIAL SPLIT -->
+        <section class="material-split" id="material">
+            <div class="material-panel panel-copper">
+                <img src="images/copper-bars.webp" alt="Kupfer" data-parallax="0.15">
+                <div class="material-content">
+                    <h3>Kupfer</h3>
+                    <p>Hochreines Kupfer für industrielle Anwendungen, Elektrotechnik und Kunsthandwerk. Überlegene Leitfähigkeit und Verarbeitbarkeit.</p>
+                </div>
+                <div class="element-num">29</div>
+            </div>
+            <div class="material-panel panel-silver">
+                <img src="images/silver-bars.webp" alt="Silber" data-parallax="0.15">
+                <div class="material-content">
+                    <h3>Silber</h3>
+                    <p>Investitionsqualität und technische Anwendungen. Höchste Reinheitsgrade für Labore, Elektronik und Anlagezwecke.</p>
+                </div>
+                <div class="element-num">47</div>
+            </div>
+            <div class="material-divider"></div>
+        </section>
+
+        <!-- PRODUCTS BENTO -->
+        <section class="section-dark section-pad" id="products">
+            <div class="container">
+                <div class="section-tag rv">Produkte</div>
+                <h2 class="section-title rv rv-d1">Unser<br>Kupfer- & Silber-Sortiment</h2>
+                <p class="section-subtitle rv rv-d2">Von Rohbarren bis hin zu maßgefertigten Halbprodukten – wir bieten die vollständige Palette premium Metallprodukte.</p>
+
+                <div class="bento-grid" style="margin-top: 60px;">
+                    <div class="bento-card span-8 rv">
+                        <div class="card-tag">Kupferbarren</div>
+                        <h3>LC Copper Bars</h3>
+                        <p>Low-Grade-Kupferbarren in verschiedenen Größen und Gewichten. Ideal für Industrieproduktion und Investition.</p>
+                        <img src="images/copper-bars.webp" alt="Kupferbarren" class="card-img">
+                        <div class="card-stat">
+                            <span class="num">99.9%</span>
+                            <span class="unit">Reinheit Cu</span>
+                        </div>
+                    </div>
+
+                    <div class="bento-card span-4 rv rv-d1">
+                        <div class="card-tag">Silberbarren</div>
+                        <h3>Silver Investment Bars</h3>
+                        <p>LBMA-zertifizierte Silberbarren von 1oz bis 1000oz.</p>
+                        <div class="card-stat">
+                            <span class="num">99.99%</span>
+                            <span class="unit">Reinheit Ag</span>
+                        </div>
+                    </div>
+
+                    <div class="bento-card span-4 rv rv-d2">
+                        <div class="card-tag">Kupferdrähte</div>
+                        <h3>Copper Wire Rods</h3>
+                        <p>Hochleistungs-Kupferdrähte für die Elektroindustrie.</p>
+                        <img src="images/copper-coils.webp" alt="Kupferdraht" class="card-img">
+                    </div>
+
+                    <div class="bento-card span-8 rv rv-d1">
+                        <div class="card-tag">Sonderformen</div>
+                        <h3>Custom Copper & Silver Products</h3>
+                        <p>Maßgefertigte Formen, Platten und Spezialanfertigungen nach Kundenwunsch. Modernste Fertigungstechnologie für höchste Präzision.</p>
+                        <img src="images/metal-work.webp" alt="Metallverarbeitung" class="card-img">
+                    </div>
+
+                    <div class="bento-card span-12 rv">
+                        <div class="card-tag">Lagerbestand</div>
+                        <h3>Verfügbare Mengen & Lieferzeiten</h3>
+                        <p>Unser globales Netzwerk ermöglicht kurze Lieferzeiten und flexible Mengenlösungen – von Einzelstücken bis hin zu Großmengen.</p>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(184,115,51,0.08); border-radius: var(--radius);">
+                                <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--copper);">500t</div>
+                                <div style="font-size: 0.7rem; color: var(--bone-dim); margin-top: 4px;">Kupfer Lager</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(192,192,192,0.08); border-radius: var(--radius);">
+                                <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--silver);">50t</div>
+                                <div style="font-size: 0.7rem; color: var(--bone-dim); margin-top: 4px;">Silber Lager</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(201,168,76,0.08); border-radius: var(--radius);">
+                                <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold);">14 Tage</div>
+                                <div style="font-size: 0.7rem; color: var(--bone-dim); margin-top: 4px;">Lieferzeit</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(201,168,76,0.08); border-radius: var(--radius);">
+                                <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold);">24/7</div>
+                                <div style="font-size: 0.7rem; color: var(--bone-dim); margin-top: 4px;">Support</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARALLAX QUOTE -->
+        <section class="parallax-quote">
+            <img src="images/industrial.webp" alt="Industrie" data-plx="0.2">
+            <blockquote class="rv">
+                <div class="q-mark">&ldquo;</div>
+                <p>Qualität ist kein Zufall – sie ist das Ergebnis höchster Präzision, jahrzehntelanger Erfahrung und dem unerschütterlichen Willen zur Exzellenz.</p>
+                <cite>-- DRACONIA METALS Grundungsprinzip</cite>
+            </blockquote>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="section-darker section-pad" id="process">
+            <div class="container">
+                <div class="section-tag rv">Unser Prozess</div>
+                <h2 class="section-title rv rv-d1">Von der Quelle<br>bis zur Lieferung</h2>
+                <p class="section-subtitle rv rv-d2">Jeder Schritt wird von strengen Qualitätskontrollen und modernster Technologie begleitet.</p>
+
+                <div class="process-grid">
+                    <div class="process-step rv">
+                        <div class="step-num">01</div>
+                        <h4>Rohstoffbeschaffung</h4>
+                        <p>Strategische Partnerschaften mit zertifizierten Minen weltweit für nachhaltige Beschaffung.</p>
+                        <div class="process-connector"></div>
+                    </div>
+                    <div class="process-step rv rv-d1">
+                        <div class="step-num">02</div>
+                        <h4>Verarbeitung</h4>
+                        <p>Modernste Schmelz- und Raffinationsanlagen für höchste Reinheitsgrade.</p>
+                        <div class="process-connector"></div>
+                    </div>
+                    <div class="process-step rv rv-d2">
+                        <div class="step-num">03</div>
+                        <h4>Qualitätskontrolle</h4>
+                        <p>Jede Charge wird mittels Spektrometrie und chemischer Analyse geprüft.</p>
+                        <div class="process-connector"></div>
+                    </div>
+                    <div class="process-step rv rv-d3">
+                        <div class="step-num">04</div>
+                        <h4>Lieferung</h4>
+                        <p>Sichere Verpackung und weltweiter Versand mit Echtzeit-Tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECS TABLE -->
+        <section class="section-dark section-pad" id="specs">
+            <div class="container">
+                <div class="section-tag rv">Spezifikationen</div>
+                <h2 class="section-title rv rv-d1">Technische<br>Details</h2>
+                <p class="section-subtitle rv rv-d2">Transparente Produktdaten für fundierte Entscheidungen.</p>
+
+                <table class="specs-table rv rv-d3">
+                    <thead>
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Metall</th>
+                            <th>Reinheit</th>
+                            <th>Gewicht</th>
+                            <th>Form</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LC Bar 1kg</td>
+                            <td><span class="metal-tag tag-cu">Cu</span></td>
+                            <td>99.9%</td>
+                            <td>1 kg</td>
+                            <td>Barren</td>
+                        </tr>
+                        <tr>
+                            <td>LC Bar 5kg</td>
+                            <td><span class="metal-tag tag-cu">Cu</span></td>
+                            <td>99.9%</td>
+                            <td>5 kg</td>
+                            <td>Barren</td>
+                        </tr>
+                        <tr>
+                            <td>LC Bar 15kg</td>
+                            <td><span class="metal-tag tag-cu">Cu</span></td>
+                            <td>99.9%</td>
+                            <td>15 kg</td>
+                            <td>Barren</td>
+                        </tr>
+                        <tr>
+                            <td>Cathode</td>
+                            <td><span class="metal-tag tag-cu">Cu</span></td>
+                            <td>99.99%</td>
+                            <td>100-200 kg</td>
+                            <td>Kathode</td>
+                        </tr>
+                        <tr>
+                            <td>Wire Rod</td>
+                            <td><span class="metal-tag tag-cu">Cu</span></td>
+                            <td>99.95%</td>
+                            <td> variabel</td>
+                            <td>Draht</td>
+                        </tr>
+                        <tr>
+                            <td>Silver Bar 1oz</td>
+                            <td><span class="metal-tag tag-ag">Ag</span></td>
+                            <td>99.99%</td>
+                            <td>31.1 g</td>
+                            <td>Barren</td>
+                        </tr>
+                        <tr>
+                            <td>Silver Bar 100oz</td>
+                            <td><span class="metal-tag tag-ag">Ag</span></td>
+                            <td>99.99%</td>
+                            <td>3.11 kg</td>
+                            <td>Barren</td>
+                        </tr>
+                        <tr>
+                            <td>Silver Bar 1kg</td>
+                            <td><span class="metal-tag tag-ag">Ag</span></td>
+                            <td>99.99%</td>
+                            <td>1 kg</td>
+                            <td>Barren</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TRUST / CERTIFICATES -->
+        <section class="section-emerald section-pad">
+            <div class="container">
+                <div class="trust-grid">
+                    <div class="rv">
+                        <img src="images/warehouse.webp" alt="Lager" class="trust-img">
+                    </div>
+                    <div class="rv rv-d1">
+                        <div class="section-tag">Vertrauen & Zertifizierungen</div>
+                        <h2 class="section-title" style="font-size: 2.2rem;">Geprüfte<br>Qualitätsstandards</h2>
+                        <p class="section-subtitle">Unsere Zertifikate und Partnerschaften garantieren höchste Transparenz und Produktsicherheit.</p>
+                        <div class="trust-list">
+                            <div class="trust-item">
+                                <div class="trust-icon">&#9670;</div>
+                                <div>
+                                    <h4>LBMA Zertifizierung</h4>
+                                    <p>London Bullion Market Association – internationaler Standard für Edelmetalle.</p>
+                                </div>
+                            </div>
+                            <div class="trust-item">
+                                <div class="trust-icon">&#9670;</div>
+                                <div>
+                                    <h4>ISO 9001:2015</h4>
+                                    <p>Zertifiziertes Qualitätsmanagementsystem für konstante Produktqualität.</p>
+                                </div>
+                            </div>
+                            <div class="trust-item">
+                                <div class="trust-icon">&#9670;</div>
+                                <div>
+                                    <h4>Responsible Minerals</h4>
+                                    <p>Nachhaltige und ethische Beschaffung entlierer gesamten Lieferkette.</p>
+                                </div>
+                            </div>
+                            <div class="trust-item">
+                                <div class="trust-icon">&#9670;</div>
+                                <div>
+                                    <h4>Comex & LME Gelistet</h4>
+                                    <p>Handel an den weltweit führenden Metallbörsen.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUNTERS -->
+        <section class="section-dark section-pad">
+            <div class="container">
+                <div class="counter-row">
+                    <div class="counter-item rv">
+                        <div class="counter-num" data-count="27">0</div>
+                        <div class="counter-label">Jahre am Markt</div>
+                    </div>
+                    <div class="counter-item rv rv-d1">
+                        <div class="counter-num" data-count="1500">0</div>
+                        <div class="counter-label">Tonnen / Jahr</div>
+                    </div>
+                    <div class="counter-item rv rv-d2">
+                        <div class="counter-num" data-count="48">0</div>
+                        <div class="counter-label">Länder beliefert</div>
+                    </div>
+                    <div class="counter-item rv rv-d3">
+                        <div class="counter-num" data-count="350">0</div>
+                        <div class="counter-label">Stammkunden</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-darker section-pad">
+            <div class="container">
+                <div class="section-tag rv">Häufige Fragen</div>
+                <h2 class="section-title rv rv-d1">FAQ</h2>
+
+                <div class="faq-list rv rv-d2">
+                    <details class="faq-item">
+                        <summary>Welche Mindestbestellmengen gelten?</summary>
+                        <div class="faq-answer">Minimum 1 kg für Kupferprodukte und 1 oz für Silberprodukte. Für Großmengen bieten wir individuelle Konditionen.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Wie wird die Reinheit der Metalle geprüft?</summary>
+                        <div class="faq-answer">Jede Charge wird mittels optischer Emissionsspektrometrie (OES) und chemischer Analyse in unseren internen Laboren geprüft. Zertifikate werden jeder Lieferung beigefügt.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Bieten Sie logistische Lösungen an?</summary>
+                        <div class="faq-answer">Ja, wir koordinieren den weltweiten Versand inklusive Versicherung, Zolldokumentation und Echtzeit-Tracking über unsere Logistikpartner.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Welche Zahlungsmodalitäten stehen zur Verfügung?</summary>
+                        <div class="faq-answer">Wir akzeptieren Überweisung, Letter of Credit (L/C), und bei Stammkunden auf Rechnung. Preise werden tagesaktuell in USD, EUR oder GBP kalkuliert.</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Ist ein Besuch Ihres Lagers möglich?</summary>
+                        <div class="faq-answer">Selbstverständlich. Vereinbaren Sie einen Termin für eine persönliche Besichtigung unserer Lager- und Verarbeitungsstätten.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section section-pad" id="contact">
+            <div class="container">
+                <div class="cta-inner">
+                    <div class="rv">
+                        <div class="section-tag">Kontakt</div>
+                        <h2 class="section-title" style="font-size: 2.4rem;">Lassen Sie uns<br>ins Gespräch kommen</h2>
+                        <p class="section-subtitle">Unser Expertenteam steht Ihnen für individuelle Beratung zur Verfügung. Fordern Sie noch heute ein Angebot an.</p>
+                    </div>
+                    <form class="cta-form rv rv-d1" onsubmit="event.preventDefault();">
+                        <input type="text" placeholder="Ihr Name" required>
+                        <input type="email" placeholder="E-Mail Adresse" required>
+                        <input type="text" placeholder="Unternehmen">
+                        <textarea placeholder="Ihre Nachricht..." rows="4"></textarea>
+                        <button type="submit" class="btn-primary" style="width: fit-content;">Nachricht senden &rarr;</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="f-logo">DRACONIA METALS</div>
+                        <p>Premium Kupfer- und Silberprodukte seit 1997. Qualität, Vertrauen, Exzellenz.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Produkte</h4>
+                        <a href="#">Kupferbarren</a>
+                        <a href="#">Silberbarren</a>
+                        <a href="#">Kupferdrähte</a>
+                        <a href="#">Sonderformen</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Unternehmen</h4>
+                        <a href="#">Über uns</a>
+                        <a href="#">Qualität</a>
+                        <a href="#">Nachhaltigkeit</a>
+                        <a href="#">Karriere</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Kontakt</h4>
+                        <a href="#">info@draconia-metals.com</a>
+                        <a href="#">+49 (0) 30 1234 5678</a>
+                        <a href="#">Berlin, Deutschland</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 DRACONIA METALS. Alle Rechte vorbehalten.</p>
+                    <p>Impressum | Datenschutz | AGB</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+    <script>
+    // ─── SCROLL PROGRESS ───
+    const scrollBar = document.getElementById('scrollBar');
+    window.addEventListener('scroll', () => {
+        const h = document.documentElement;
+        const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        scrollBar.style.width = pct + '%';
+    });
+
+    // ─── HERO PARALLAX ───
+    const heroImg = document.getElementById('heroImg');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+            heroImg.style.transform = `scale(1.1) translateY(${y * 0.15}px)`;
+        }
+    });
+
+    // ─── PARALLAX ELEMENTS ───
+    const plxElements = document.querySelectorAll('[data-plx]');
+    function updateParallax() {
+        plxElements.forEach(el => {
+            const speed = parseFloat(el.dataset.plx);
+            const rect = el.parentElement.getBoundingClientRect();
+            const visible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (visible) {
+                const offset = (rect.top - window.innerHeight / 2) * speed;
+                el.style.transform = `translateY(${offset}px)`;
+            }
+        });
+    }
+    window.addEventListener('scroll', updateParallax);
+
+    // ─── SCROLL REVEAL ───
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.rv, .rv-r').forEach(el => revealObserver.observe(el));
+
+    // ─── COUNTER ANIMATION ───
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseFloat(el.dataset.count);
+            const isFloat = target % 1 !== 0;
+            const duration = 2000;
+            const start = performance.now();
+            function tick(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                const val = target * ease;
+                el.textContent = isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString();
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            counterObserver.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // ─── WAYPOINT NAV SCROLL SPY ───
+    const sections = ['hero', 'material', 'products', 'process', 'specs', 'contact'];
+    const wpItems = document.querySelectorAll('.wp-item');
+    const railDots = document.querySelectorAll('.rail-dot');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const id = e.target.id;
+            wpItems.forEach(item => item.classList.toggle('active', item.dataset.section === id));
+            railDots.forEach(dot => dot.classList.toggle('active', dot.dataset.section === id));
+        });
+    }, { threshold: 0.3 });
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) sectionObserver.observe(el);
+    });
+
+    // Rail dot click
+    railDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const target = document.getElementById(dot.dataset.section);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // ─── BACK TO TOP ───
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        btt.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // ─── TICKER DUPLICATION ───
+    // Already duplicated in HTML for seamless loop
+    </script>
+</body>
+</html>
