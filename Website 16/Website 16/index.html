@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOMARIA COPPER BARS - Premium Kupfer & Silber Barren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2332;
+            --bg-elevated: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-teal: #14b8a6;
+            --accent-teal-dim: rgba(20, 184, 166, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --accent-copper: #d97706;
+            --accent-copper-dim: rgba(217, 119, 6, 0.12);
+            --border: rgba(148, 163, 184, 0.1);
+            --border-hover: rgba(20, 184, 166, 0.3);
+            --gradient-hero: linear-gradient(135deg, #0a0e17 0%, #0f172a 40%, #1e1b4b 100%);
+            --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            --shadow-glow: 0 0 60px rgba(20, 184, 166, 0.08);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --container: min(1380px, calc(100% - 48px));
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg-primary);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============ NOISE OVERLAY ============ */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .header.scrolled {
+            padding: 12px 0;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            width: var(--container);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-mark::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 8px;
+            background: var(--bg-primary);
+            z-index: 0;
+        }
+
+        .logo-mark span {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav a {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            border-radius: 8px;
+            background: var(--accent-teal);
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: #0d9488;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(20, 184, 166, 0.3);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 24px 60px;
+        }
+
+        /* Animated grid background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(20, 184, 166, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+            animation: gridShift 30s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Ambient glow orbs */
+        .hero-glow-1, .hero-glow-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .hero-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(20, 184, 166, 0.07);
+            top: -10%;
+            left: -5%;
+            animation: orbFloat1 12s ease-in-out infinite;
+        }
+
+        .hero-glow-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(59, 130, 246, 0.06);
+            bottom: -5%;
+            right: -5%;
+            animation: orbFloat2 15s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(40px, 30px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, -40px); }
+        }
+
+        /* Tiny top label */
+        .hero-top-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        .hero-top-label .line {
+            width: 40px;
+            height: 1px;
+            background: var(--text-muted);
+        }
+
+        /* Giant centered text */
+        .hero-giant {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .hero-giant-word {
+            font-family: var(--font-heading);
+            font-size: clamp(5rem, 14vw, 13rem);
+            font-weight: 700;
+            letter-spacing: -4px;
+            line-height: 0.88;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(148, 163, 184, 0.2);
+            user-select: none;
+            position: relative;
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+        }
+
+        .hero-giant-word .fill {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-teal) 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            clip-path: inset(0 100% 0 0);
+            animation: textFill 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+        }
+
+        @keyframes textFill {
+            to { clip-path: inset(0 0% 0 0); }
+        }
+
+        /* Copper bar strip across the hero */
+        .hero-bar-strip {
+            position: relative;
+            z-index: 3;
+            width: min(900px, 85vw);
+            height: 60px;
+            margin: -10px auto 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(20, 184, 166, 0.15);
+        }
+
+        .hero-bar-strip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-bar-strip::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(20, 184, 166, 0.15) 40%,
+                rgba(59, 130, 246, 0.15) 60%,
+                transparent 100%);
+            animation: shimmerBar 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmerBar {
+            0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(100%); }
+        }
+
+        .hero-sub {
+            font-family: var(--font-heading);
+            font-size: clamp(1rem, 2.2vw, 1.5rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 36px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s both;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            max-width: 520px;
+            text-align: center;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-teal), #0d9488);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0d9488, #0891b2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.35);
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-teal);
+            background: var(--accent-teal-dim);
+        }
+
+        /* Floating stat cards row */
+        .hero-stats-row {
+            display: flex;
+            gap: 2px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
+        }
+
+        .hero-stat-card {
+            padding: 28px 40px;
+            background: rgba(26, 35, 50, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            text-align: center;
+            min-width: 160px;
+            transition: all 0.3s;
+        }
+
+        .hero-stat-card:first-child {
+            border-radius: 14px 0 0 14px;
+        }
+
+        .hero-stat-card:last-child {
+            border-radius: 0 14px 14px 0;
+        }
+
+        .hero-stat-card:hover {
+            background: rgba(20, 184, 166, 0.06);
+            border-color: var(--border-hover);
+        }
+
+        .hero-stat-value {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ SCROLL REVEAL ============ */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ SECTION: PRODUCTS ============ */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .container {
+            width: var(--container);
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--accent-teal);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-top: 16px;
+        }
+
+        /* ============ BENTO GRID ============ */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            gap: 20px;
+        }
+
+        .bento-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .bento-card.span-8 { grid-column: span 8; }
+        .bento-card.span-4 { grid-column: span 4; }
+        .bento-card.span-6 { grid-column: span 6; }
+        .bento-card.span-5 { grid-column: span 5; }
+        .bento-card.span-7 { grid-column: span 7; }
+        .bento-card.span-12 { grid-column: span 12; }
+
+        .bento-card-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .bento-card.span-8 .bento-card-image {
+            height: 340px;
+        }
+
+        .bento-card-body {
+            padding: 32px;
+        }
+
+        .bento-card-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .tag-copper {
+            background: var(--accent-copper-dim);
+            color: var(--accent-copper);
+        }
+
+        .tag-silver {
+            background: rgba(148, 163, 184, 0.15);
+            color: #cbd5e1;
+        }
+
+        .tag-premium {
+            background: var(--accent-teal-dim);
+            color: var(--accent-teal);
+        }
+
+        .bento-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .bento-card-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .bento-card-price {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+        }
+
+        .price-unit {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ============ SPECIFICATIONS SECTION ============ */
+        .spec-section {
+            background: var(--bg-secondary);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .spec-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spec-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .spec-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .spec-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .spec-icon.teal {
+            background: var(--accent-teal-dim);
+            color: var(--accent-teal);
+        }
+
+        .spec-icon.blue {
+            background: var(--accent-blue-dim);
+            color: var(--accent-blue);
+        }
+
+        .spec-icon.copper {
+            background: var(--accent-copper-dim);
+            color: var(--accent-copper);
+        }
+
+        .spec-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .spec-card-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .spec-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-list li::before {
+            content: '→';
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        /* ============ PARALLAX SECTION ============ */
+        .parallax-section {
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            inset: -100px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: brightness(0.3) saturate(1.2);
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 0 24px;
+        }
+
+        .parallax-content h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .parallax-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 36px;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter-value {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            letter-spacing: -1px;
+        }
+
+        .counter-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        /* ============ PROCESS SECTION ============ */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 48px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-teal), var(--accent-blue), transparent);
+            opacity: 0.3;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s;
+        }
+
+        .process-step:hover .process-number {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 40px rgba(20, 184, 166, 0.2);
+            transform: scale(1.05);
+        }
+
+        .process-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .process-text {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============ TESTIMONIAL ============ */
+        .testimonial-section {
+            background: var(--bg-secondary);
+        }
+
+        .testimonial-card {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 60px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 4rem;
+            color: var(--accent-teal);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 32px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .testimonial-info {
+            text-align: left;
+        }
+
+        .testimonial-name {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            padding: 120px 0;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(59, 130, 246, 0.08));
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            border-radius: 24px;
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .cta-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .cta-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cta-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cta-input {
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .cta-input:focus {
+            border-color: var(--accent-teal);
+        }
+
+        .cta-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 6px 0;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-bottom p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .footer-socials a:hover {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+            background: var(--accent-teal-dim);
+        }
+
+        /* ============ MOBILE MENU ============ */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-content {
+                padding: 140px 0 60px;
+            }
+
+            .hero-visual {
+                height: 50vh;
+            }
+
+            .hero-stats {
+                right: 24px;
+                bottom: 24px;
+                left: 24px;
+            }
+
+            .bento-card.span-8,
+            .bento-card.span-4,
+            .bento-card.span-6,
+            .bento-card.span-5,
+            .bento-card.span-7 {
+                grid-column: span 12;
+            }
+
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid::before {
+                display: none;
+            }
+
+            .cta-card {
+                grid-template-columns: 1fr;
+                padding: 48px 32px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --container: min(1380px, calc(100% - 32px));
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-top-label {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+                margin-bottom: 28px;
+            }
+
+            .hero-giant-word {
+                font-size: clamp(3rem, 16vw, 6rem);
+                letter-spacing: -2px;
+            }
+
+            .hero-bar-strip {
+                height: 44px;
+                margin-bottom: 28px;
+            }
+
+            .hero-sub {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+                margin-bottom: 24px;
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+                margin-bottom: 32px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-stats-row {
+                flex-direction: column;
+                border-radius: 14px;
+            }
+
+            .hero-stat-card {
+                min-width: 0;
+                padding: 20px 24px;
+            }
+
+            .hero-stat-card:first-child {
+                border-radius: 14px 14px 0 0;
+            }
+
+            .hero-stat-card:last-child {
+                border-radius: 0 0 14px 14px;
+            }
+
+            .bento-grid {
+                gap: 16px;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        /* ============ SCROLL PROGRESS ============ */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+            z-index: 10000;
+            transition: width 0.1s;
+        }
+
+        /* ============ MAGNETIC BUTTON EFFECT ============ */
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-mark"><span>S</span></div>
+                <span class="logo-text">SOMARIA</span>
+            </a>
+            <nav class="nav">
+                <a href="#produkte">Produkte</a>
+                <a href="#spezifikationen">Spezifikationen</a>
+                <a href="#prozess">Prozess</a>
+                <a href="#uber-uns">Über uns</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+
+        <div class="hero-top-label">
+            <span class="line"></span>
+            Est. 1976 · Kupfer & Silber
+            <span class="line"></span>
+        </div>
+
+        <div class="hero-giant">
+            <div class="hero-giant-word">
+                SOMARIA
+                <span class="fill">SOMARIA</span>
+            </div>
+        </div>
+
+        <div class="hero-bar-strip">
+            <img src="images/copper-bars.jpg" alt="Kupferbarren">
+        </div>
+
+        <div class="hero-sub">Copper Bars</div>
+
+        <p class="hero-desc">
+            Höchste Reinheit. Maximale Leitfähigkeit. Kupfer- und Silberbarren nach den strengsten Qualitätsstandards – die erste Wahl für Industrie und Handwerk.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#produkte" class="btn-primary magnetic">
+                <span>Produkte entdecken</span>
+                <span>→</span>
+            </a>
+            <a href="#prozess" class="btn-secondary magnetic">
+                <span>Unser Prozess</span>
+            </a>
+        </div>
+
+        <div class="hero-stats-row">
+            <div class="hero-stat-card">
+                <div class="hero-stat-value">99.9%</div>
+                <div class="hero-stat-label">Reinheit</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-value">50+</div>
+                <div class="hero-stat-label">Jahre Erfahrung</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-value">ISO 9001</div>
+                <div class="hero-stat-label">Zertifiziert</div>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-value">24h</div>
+                <div class="hero-stat-label">Schnelllieferung</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS BENTO GRID -->
+    <section class="section" id="produkte">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Produktpalette</div>
+                <h2 class="section-title">Kupfer & Silber Barren</h2>
+                <p class="section-desc">
+                    Von der Rohcharge bis zum fertigen Barren – jedes Produkt durchläuft ein mehrstufiges Qualitätskontrollverfahren.
+                </p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Card -->
+                <div class="bento-card span-8 reveal">
+                    <img src="images/copper-bars.jpg" alt="Kupferbarren C11000" class="bento-card-image">
+                    <div class="bento-card-body">
+                        <span class="bento-card-tag tag-copper">Kupfer</span>
+                        <h3 class="bento-card-title">C11000 Elektrolytkupfer Barren</h3>
+                        <p class="bento-card-text">
+                            Hochreines Elektrolytkupfer mit 99.9% Reinheit. Ideal für elektrotechnische Anwendungen, Schweißtechnik und Hochleistungsdrähte. Exzellente elektrische und thermische Leitfähigkeit.
+                        </p>
+                        <div class="bento-card-price">
+                            <span class="price-value">ab €8.450</span>
+                            <span class="price-unit">/ Tonne</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Small Card -->
+                <div class="bento-card span-4 reveal">
+                    <img src="images/silver-bars.jpg" alt="Silberbarren" class="bento-card-image">
+                    <div class="bento-card-body">
+                        <span class="bento-card-tag tag-silver">Silber</span>
+                        <h3 class="bento-card-title">Silberbarren 999</h3>
+                        <p class="bento-card-text">
+                            Anlage-Qualität mit Zertifikat. Verdichtete Silberbarren in verschiedenen Größen.
+                        </p>
+                        <div class="bento-card-price">
+                            <span class="price-value">ab €28.500</span>
+                            <span class="price-unit">/ kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medium Cards Row -->
+                <div class="bento-card span-5 reveal">
+                    <img src="images/copper-ingots.jpg" alt="Kupfer-Ingots" class="bento-card-image">
+                    <div class="bento-card-body">
+                        <span class="bento-card-tag tag-premium">Premium</span>
+                        <h3 class="bento-card-title">C10200 OFHC Kupfer</h3>
+                        <p class="bento-card-text">
+                            Sauerstofffreies hochreines Kupfer für Vakuumtechnik, Halbleiter und Forschung. Überragende Warmleitfähigkeit.
+                        </p>
+                        <div class="bento-card-price">
+                            <span class="price-value">ab €9.200</span>
+                            <span class="price-unit">/ Tonne</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bento-card span-7 reveal">
+                    <img src="images/copper-manufacturing.jpg" alt="Kupferverarbeitung" class="bento-card-image">
+                    <div class="bento-card-body">
+                        <span class="bento-card-tag tag-copper">Kupfer</span>
+                        <h3 class="bento-card-title">C12200 Phosphor-Kupfer</h3>
+                        <p class="bento-card-text">
+                            Legiertes Kupfer mit optimalen Eigenschaften für Lackier- und Beschichtungsanwendungen. Höhere Festigkeit bei guter Kaltumformbarkeit. Perfekt für chemische Apparatebau.
+                        </p>
+                        <div class="bento-card-price">
+                            <span class="price-value">ab €8.800</span>
+                            <span class="price-unit">/ Tonne</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full Width Card -->
+                <div class="bento-card span-12 reveal">
+                    <div class="bento-card-body" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; padding: 48px;">
+                        <div>
+                            <span class="bento-card-tag tag-copper">Spezial</span>
+                            <h3 class="bento-card-title">Kupferplatten & Bleche</h3>
+                            <p class="bento-card-text">
+                                Maßgefertigte Kupferplatten in verschiedenen Dicken und Abmessungen. Für Architektur, Kunst und Industrie.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="bento-card-tag tag-premium">Maßanfertigung</span>
+                            <h3 class="bento-card-title">Kupferdrähte & Stäbe</h3>
+                            <p class="bento-card-text">
+                                Gezogene Kupferdrähte und gestreckte Stäbe in präzisen Toleranzen. Für CNC-Produktion und Feinmechanik.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="bento-card-tag tag-silver">Silber</span>
+                            <h3 class="bento-card-title">Silber-Lötmaterial</h3>
+                            <p class="bento-card-text">
+                                Hochwertiges Silber-Lot für professionelle Verbindungen in Elektronik und Industrieanlagen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX BREAK -->
+    <section class="parallax-section">
+        <div class="parallax-bg" style="background-image: url('images/industrial-bg.jpg');"></div>
+        <div class="parallax-content reveal">
+            <h2>Qualität, die überzeugt</h2>
+            <p>
+                Über 50 Jahre Erfahrung in der Kupferverarbeitung. Unsere Kunden vertrauen auf konstante Qualität und termingerechte Lieferung.
+            </p>
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <div class="counter-value" data-target="12500">0</div>
+                    <div class="counter-label">Tonnen / Jahr</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" data-target="340">0</div>
+                    <div class="counter-label">Kunden weltweit</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" data-target="99">0</div>
+                    <div class="counter-label">Prozent Reinheit</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" data-target="24">0</div>
+                    <div class="counter-label">Stunden Lieferung</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIFICATIONS -->
+    <section class="section spec-section" id="spezifikationen">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Spezifikationen</div>
+                <h2 class="section-title">Technische Daten</h2>
+                <p class="section-desc">
+                    Detaillierte Produktspezifikationen für unsere Kupfer- und Silberbarren nach internationale Normen.
+                </p>
+            </div>
+
+            <div class="spec-grid">
+                <div class="spec-card reveal">
+                    <div class="spec-icon teal">⚡</div>
+                    <h3 class="spec-card-title">Elektrische Leitfähigkeit</h3>
+                    <p class="spec-card-text">Höchste Leitwerte für anspruchsvolle Anwendungen</p>
+                    <ul class="spec-list">
+                        <li>C11000: 101% IACS</li>
+                        <li>C10200: 100% IACS</li>
+                        <li>C12200: 85% IACS</li>
+                        <li>Silber 999: 106% IACS</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card reveal">
+                    <div class="spec-icon blue">🔬</div>
+                    <h3 class="spec-card-title">Reinheitsgrade</h3>
+                    <p class="spec-card-text">Garantierte Mindestreinheit nach ASTM Normen</p>
+                    <ul class="spec-list">
+                        <li>Elektrolytkupfer: ≥ 99.9%</li>
+                        <li>OFHC Kupfer: ≥ 99.95%</li>
+                        <li>Anlagesilber: ≥ 99.99%</li>
+                        <li>Rohsilber: ≥ 99.9%</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card reveal">
+                    <div class="spec-icon copper">📐</div>
+                    <h3 class="spec-card-title">Verfügbare Formate</h3>
+                    <p class="spec-card-text">Flexible Maße für jede Anwendung</p>
+                    <ul class="spec-list">
+                        <li>Barren: 5–1.000 kg</li>
+                        <li>Platten: 0.5–200 mm</li>
+                        <li>Drähte: 0.1–16 mm ⌀</li>
+                        <li>Rohre: 8–300 mm ⌀</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" id="prozess">
+        <div class="container">
+            <div class="section-header reveal" style="text-align: center;">
+                <div class="section-label" style="justify-content: center;">Unser Prozess</div>
+                <h2 class="section-title">Vom Rohstoff zum fertigen Barren</h2>
+                <p class="section-desc" style="margin: 16px auto 0;">
+                    Vier Schritte zur perfekten Qualität – transparent und nachvollziehbar.
+                </p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <div class="process-number">01</div>
+                    <h3 class="process-title">Rohstoff-Auswahl</h3>
+                    <p class="process-text">Selektive Beschaffung von hochreinen Kupfer- und Silbererzen aus zertifizierten Minen.</p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-number">02</div>
+                    <h3 class="process-title">Schmelzung & Raffination</h3>
+                    <p class="process-text">Elektrolytische Reinigung bei über 1.000°C für maximale Reinheit und homogene Struktur.</p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-number">03</div>
+                    <h3 class="process-title">Gießen & Formung</h3>
+                    <p class="process-text">Präzises Gießen in kontrollierter Atmosphäre. Jeder Barren erhält eine eindeutige Chargennummer.</p>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-number">04</div>
+                    <h3 class="process-title">Qualitätskontrolle</h3>
+                    <p class="process-text">Spectrometrische Analyse, Gewichtskontrolle und Zertifizierung nach ISO 9001:2015.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="section testimonial-section" id="uber-uns">
+        <div class="container">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">
+                    Somaria liefert nicht nur Kupferbarren – sie liefern Vertrauen. Seit über 15 Jahren sind wir ein zuverlässiger Partner für unsere Produktion. Die Konstanz der Qualität hat uns überzeugt.
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MK</div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Marcus Keller</div>
+                        <div class="testimonial-role">Einkaufsleiter, Technikwerk GmbH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="kontakt">
+        <div class="container">
+            <div class="cta-card reveal">
+                <div>
+                    <div class="section-label">Kontakt aufnehmen</div>
+                    <h2 class="cta-title">Bereit für Ihre Bestellung?</h2>
+                    <p class="cta-text">
+                        Fordern Sie ein unverbindliches Angebot an oder kontaktieren Sie unser Vertriebsteam für individuelle Lösungen.
+                    </p>
+                </div>
+                <form class="cta-form" onsubmit="return false;">
+                    <input type="text" class="cta-input" placeholder="Ihr Name">
+                    <input type="email" class="cta-input" placeholder="E-Mail-Adresse">
+                    <input type="text" class="cta-input" placeholder="Unternehmen">
+                    <textarea class="cta-input" rows="4" placeholder="Ihre Nachricht..."></textarea>
+                    <button type="submit" class="btn-primary magnetic" style="width: fit-content;">
+                        <span>Nachricht senden</span>
+                        <span>→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark"><span>S</span></div>
+                        <span class="logo-text">SOMARIA</span>
+                    </a>
+                    <p>
+                        Ihr zuverlässiger Partner für Kupfer und Silber. Seit über 50 Jahren stehen wir für höchste Qualität und Kundenservice.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Produkte</h4>
+                    <a href="#">Kupferbarren</a>
+                    <a href="#">Silberbarren</a>
+                    <a href="#">Kupferplatten</a>
+                    <a href="#">Kupferdrähte</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Unternehmen</h4>
+                    <a href="#">Über uns</a>
+                    <a href="#">Qualität</a>
+                    <a href="#">Nachhaltigkeit</a>
+                    <a href="#">Karriere</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <a href="#">Vertrieb</a>
+                    <a href="#">Technischer Support</a>
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Somaria Copper Bars. Alle Rechte vorbehalten.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Twitter">X</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter-value');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 60;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            entry.target.textContent = target.toLocaleString();
+                            clearInterval(timer);
+                        } else {
+                            entry.target.textContent = Math.floor(current).toLocaleString();
+                        }
+                    }, 30);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Magnetic button effect
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.querySelector('.nav');
+        menuToggle.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            if (window.innerWidth <= 768) {
+                nav.style.position = 'absolute';
+                nav.style.top = '100%';
+                nav.style.left = '0';
+                nav.style.right = '0';
+                nav.style.flexDirection = 'column';
+                nav.style.padding = '24px';
+                nav.style.background = 'rgba(10, 14, 23, 0.95)';
+                nav.style.backdropFilter = 'blur(20px)';
+                nav.style.borderBottom = '1px solid var(--border)';
+            }
+        });
+    </script>
+</body>
+</html>
