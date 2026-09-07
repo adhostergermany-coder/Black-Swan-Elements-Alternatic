@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum | SIBERIAN COPPER</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2316202B'/%3E%3Cpath d='M8 8h48v30L40 56H8z' fill='%23B26221'/%3E%3Cpath d='M18 18h28v4H18zm0 10h20v4H18z' fill='%23F4F7FA'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Overpass:wght@200;300;400;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* SIBERIAN COPPER — Impressum (arktisch/industriell, eigenständig) */
+:root{
+  --ice-1:#F4F7FA; --ice-2:#E7EDF3;
+  --steel-ink:#16202B; --steel-mid:#4C5C6B; --steel-dim:#7D8C99;
+  --cu:#B26221; --cu-hot:#E08A3C; --cu-deep:#7E4318;
+  --line:#C9D4DD;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ice-1);color:var(--steel-ink);
+  font-family:'Overpass',system-ui,sans-serif;line-height:1.75;
+}
+::selection{background:var(--cu);color:#fff}
+a{color:inherit}
+
+/* Diagonale Kopfleiste */
+.phead{
+  position:sticky;top:0;z-index:100;
+  background:rgba(244,247,250,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 4.5vw;height:72px;
+}
+.phead .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.phead .brand-glyph{
+  width:38px;height:38px;background:var(--steel-ink);
+  clip-path:polygon(0 0,100% 0,100% 68%,68% 100%,0 100%);
+  display:grid;place-items:center;color:var(--cu-hot);
+  font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:1.05rem;
+}
+.phead .brand-name{font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.24em;font-size:.95rem}
+.phead .brand-name em{font-style:normal;color:var(--cu)}
+.phead a.back{
+  font-family:'Chakra Petch',sans-serif;font-size:.7rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--steel-mid);text-decoration:none;
+  border:2px solid var(--steel-ink);padding:.6rem 1.2rem;
+  transform:skewX(-12deg);transition:.25s;
+}
+.phead a.back>span{display:inline-block;transform:skewX(12deg)}
+.phead a.back:hover{background:var(--cu);border-color:var(--cu);color:#fff}
+
+main{width:min(860px,90vw);margin:0 auto;padding:90px 0 70px;position:relative}
+.kick{
+  font-family:'Chakra Petch',sans-serif;font-size:.72rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--cu);display:inline-flex;align-items:center;gap:.9rem;
+}
+.kick::before{content:"";width:34px;height:2px;background:var(--cu);transform:skewX(-18deg)}
+h1{
+  font-weight:900;text-transform:uppercase;line-height:1.02;
+  font-size:clamp(2.2rem,5.4vw,3.6rem);margin:1rem 0 3rem;letter-spacing:-.015em;
+}
+main section{padding:2.2rem 0 2rem;border-top:1px solid var(--line)}
+main h2{
+  font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:.8rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--cu);margin-bottom:1rem;
+}
+main p{color:var(--steel-mid);margin:.5rem 0}
+main p b{color:var(--steel-ink);font-weight:600}
+.addr{margin-top:.8rem}
+.u{
+  color:var(--cu);text-decoration:none;font-weight:600;
+  border-bottom:2px solid rgba(178,98,33,.35);transition:.25s;
+}
+.u:hover{color:var(--cu-deep);border-color:var(--cu)}
+
+/* Bildnachweise als technische Tabelle */
+.credits{margin-top:1rem;border:1px solid var(--line)}
+.cr-row{
+  display:flex;justify-content:space-between;gap:1.2rem;
+  padding:.85rem 1.1rem;border-bottom:1px solid var(--line);
+  font-size:.9rem;color:var(--steel-mid);background:var(--ice-2);
+}
+.cr-row:last-child{border-bottom:none}
+.cr-row em{
+  font-style:normal;font-family:'Chakra Petch',sans-serif;font-size:.62rem;
+  letter-spacing:.24em;color:var(--steel-dim);text-transform:uppercase;
+  text-align:right;flex:0 0 auto;padding-top:5px;
+}
+.credits+p{margin-top:1rem;font-size:.85rem}
+
+/* CTA-Band wie auf der Startseite */
+.cta-strip{
+  margin-top:4.5rem;background:linear-gradient(100deg,var(--cu-deep),var(--cu) 55%,var(--cu-hot));
+  padding:2.6rem 4.5vw;display:flex;justify-content:space-between;align-items:center;
+  gap:2rem;flex-wrap:wrap;clip-path:polygon(0 0,100% 4px,100% 100%,0 100%);
+}
+.cta-strip h3{color:#fff;text-transform:uppercase;font-weight:900;letter-spacing:.02em}
+.cta-strip a{
+  font-family:'Chakra Petch',sans-serif;font-size:.74rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;text-decoration:none;
+  background:#fff;color:var(--cu-deep);border:2px solid #fff;
+  padding:.9rem 1.9rem;transform:skewX(-12deg);transition:.25s;
+}
+.cta-strip a>span{display:inline-block;transform:skewX(12deg)}
+.cta-strip a:hover{background:var(--steel-ink);color:#fff;border-color:var(--steel-ink)}
+
+footer.site{
+  background:#0F1720;color:#8FA0AE;padding:34px 4.5vw;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:'Chakra Petch',sans-serif;font-size:.68rem;
+  letter-spacing:.22em;text-transform:uppercase;
+}
+footer.site em{font-style:normal;color:var(--cu-hot)}
+footer.site a{text-decoration:none;transition:color .2s}
+footer.site a:hover{color:var(--cu-hot)}
+
+@media (max-width:640px){
+  .phead{padding:0 5vw}
+  .phead .brand-name{display:none}
+  .cr-row{flex-direction:column;gap:.3rem}
+  .cr-row em{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<header class="phead">
+  <a class="brand" href="index.html" aria-label="SIBERIAN COPPER – Startseite">
+    <span class="brand-glyph">SC</span>
+    <span class="brand-name">SIBERIAN <em>COPPER</em></span>
+  </a>
+  <a class="back" href="index.html"><span>← Startseite</span></a>
+</header>
+
+<main>
+  <p class="kick">Rechtliches · § 5 TMG</p>
+  <h1>Impressum</h1>
+
+  <section>
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p class="addr">
+      <b>SIBERIAN COPPER · Arktische Metall-Reserve</b><br>
+      [Straße und Hausnummer]<br>
+      [PLZ Ort]<br>
+      Deutschland
+    </p>
+  </section>
+
+  <section>
+    <h2>Vertreten durch</h2>
+    <p class="addr">[Vorname Nachname]</p>
+  </section>
+
+  <section>
+    <h2>Kontakt</h2>
+    <p class="addr">
+      Telefon: [Telefonnummer]<br>
+      E-Mail: <a class="u" href="mailto:reserve@siberian-copper.example">reserve@siberian-copper.example</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Registereintrag</h2>
+    <p class="addr">
+      Eintragung im Handelsregister<br>
+      Registergericht: [Registergericht]<br>
+      Registernummer: [Registernummer]
+    </p>
+  </section>
+
+  <section>
+    <h2>Umsatzsteuer-ID</h2>
+    <p class="addr">
+      Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>
+      [DE-Nummer]
+    </p>
+  </section>
+
+  <section>
+    <h2>Verkauf über eBay</h2>
+    <p>
+      Unsere aktuellen Angebote finden Sie auf
+      <a class="u" href="https://ebay.de" target="_blank" rel="noopener">ebay.de</a>.
+      Verkauf, Kaufabwicklung und Versandabwicklung erfolgen vollständig über eBay.
+    </p>
+  </section>
+
+  <section>
+    <h2>Streitschlichtung</h2>
+    <p>
+      Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+      <a class="u" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+    </p>
+    <p>
+      Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+      Verbraucherschlichtungsstelle teilzunehmen.
+    </p>
+  </section>
+
+  <section>
+    <h2>Haftung für Inhalte</h2>
+    <p>
+      Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
+      nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht
+      verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
+      Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+    </p>
+  </section>
+
+  <section>
+    <h2>Haftung für Links</h2>
+    <p>
+      Unser Angebot enthält Links zu externen Websites Dritter (u. a. ebay.de), auf deren Inhalte
+      wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+      Anbieter oder Betreiber verantwortlich.
+    </p>
+  </section>
+
+  <section>
+    <h2>Urheberrecht &amp; Bildquellen</h2>
+    <p>
+      Die Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+      Die verwendeten Fotografien stammen aus Wikimedia Commons und werden unter
+      freien Lizenzen bzw. gemeinfrei verwendet:
+    </p>
+    <div class="credits">
+      <div class="cr-row">
+        <span>
+          „Lake Baikal in winter“ — Sergey Pesterev,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Lake_Baikal_in_winter.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          CC BY-SA 4.0
+        </span>
+        <em>Hero / Parallax</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Casting a billet from an electric furnace, Chase Brass and Copper Co., Euclid, Ohio“ —
+          Alfred T. Palmer, Library of Congress,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Casting_a_billet_from_an_electric_furnace,_Chase_Brass_and_Copper_Co.,_Euclid,_Ohio1a35074v.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          gemeinfrei
+        </span>
+        <em>Fig. Guss</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Rusty's Bullion Bar 8.23 (18)“ — Eric Golub,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Rusty%27s_Bullion_Bar_8.23_(18).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          CC BY 2.0
+        </span>
+        <em>Fig. Barren</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Johnson Matthey 500 grammes silver bullion“ — Kallemax,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Johnson_Matthey_500_grammes_silver_bullion.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          gemeinfrei
+        </span>
+        <em>Fig. Silber</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Native Silver filaments (cropped)“ — James St. John,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Native_Silver_filaments_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          CC BY 2.0
+        </span>
+        <em>Fig. Drahtsilber</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Bulldog Mountain Mine wire Silver“ — Robert M. Lavinsky, iRocks.com,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Bulldog_Mountain_Mine_wire_Silver-20872.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          CC BY-SA 3.0
+        </span>
+        <em>Fig. Herkunft</em>
+      </div>
+      <div class="cr-row">
+        <span>
+          „Baikal ice on sunset“ — Sergey Pesterev,
+          <a class="u" href="https://commons.wikimedia.org/wiki/File:Baikal_ice_on_sunset.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>,
+          CC BY-SA 4.0
+        </span>
+        <em>Fig. Interlude</em>
+      </div>
+    </div>
+    <p>
+      Die Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts
+      bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+    </p>
+  </section>
+
+  <div class="cta-strip">
+    <h3>Reserve anfragen.</h3>
+    <a href="index.html#kontakt"><span>Zur Anfrage →</span></a>
+  </div>
+</main>
+
+<footer class="site">
+  <span>© <span id="yr">2026</span> SIBERIAN COPPER · Arktische Metall-Reserve</span>
+  <span><em>SC·39</em> · <a href="index.html">STARTSEITE</a> · <a href="https://ebay.de" target="_blank" rel="noopener">EBAY.DE</a></span>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
