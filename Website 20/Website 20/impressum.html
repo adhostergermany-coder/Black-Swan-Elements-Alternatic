@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — CURICOR Werkstoffkontor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Schibsted+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --ink: #F7F9FB; --panel: #FFFFFF; --hair: #D9E1E9; --hair-soft: rgba(28, 39, 51, 0.09);
+    --volt: #B25E2A; --copper: #8F4D22;
+    --text: #1C2733; --mut: #5C6B7A;
+    --mono: 'Spline Sans Mono', monospace; --disp: 'Big Shoulders Display', sans-serif;
+}
+body { font-family: 'Schibsted Grotesk', sans-serif; background: var(--ink); color: var(--text); line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; }
+.bp-grid { background-image: linear-gradient(rgba(28, 39, 51, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(28, 39, 51, 0.05) 1px, transparent 1px); background-size: 54px 54px; }
+.wrap { max-width: 900px; width: 100%; margin: 0 auto; padding: 100px 26px 80px; flex: 1; }
+.tag { display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: var(--volt); text-transform: uppercase; margin-bottom: 20px; }
+.tag::before { content: ''; width: 34px; height: 1px; background: var(--volt); }
+h1 { font-family: var(--disp); font-weight: 800; font-size: clamp(64px, 9vw, 128px); text-transform: uppercase; letter-spacing: .02em; line-height: .95; }
+h1 em { font-style: normal; color: transparent; -webkit-text-stroke: 2px var(--volt); }
+.lede { font-family: var(--mono); font-size: 12px; letter-spacing: 2px; color: var(--mut); text-transform: uppercase; margin: 16px 0 46px; }
+.block { border-top: 1px solid var(--hair); padding: 30px 0 12px; }
+.block h2 { font-family: var(--disp); font-weight: 700; font-size: 28px; letter-spacing: .05em; text-transform: uppercase; color: var(--text); margin-bottom: 14px; }
+.block p { font-size: 15px; color: var(--mut); margin-bottom: 10px; }
+.block b { color: var(--text); font-weight: 600; }
+.block .k { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; color: var(--copper); text-transform: uppercase; display: block; margin: 18px 0 4px; }
+a { color: var(--volt); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.note { font-family: var(--mono); font-size: 11.5px; color: var(--mut); border: 1px dashed var(--hair); padding: 16px 20px; margin-top: 42px; background: var(--panel); }
+.note b { color: var(--volt); font-weight: 500; }
+.top { display: inline-block; margin-top: 46px; font-family: var(--mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #FFFFFF; background: var(--volt); padding: 13px 26px; text-decoration: none; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
+.top:hover { text-decoration: none; transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--copper); }
+.statusbar { border-top: 1px solid var(--hair); padding: 16px 26px; text-align: center; font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); background: var(--panel); }
+.statusbar a { color: var(--volt); }
+</style>
+</head>
+<body>
+<div class="wrap bp-grid" style="background-size:54px 54px;">
+    <span class="tag">Legal · Website 20</span>
+    <h1>Im<em>press</em>um</h1>
+    <p class="lede">Angaben gemäß § 5 TMG · CURICOR Werkstoffkontor</p>
+
+    <div class="block">
+        <h2>Anbieter</h2>
+        <p><b>CURICOR Werkstoffkontor GmbH</b><br>
+        Werkstraße 20 · 80331 München · Deutschland</p>
+        <span class="k">Vertreten durch</span>
+        <p>Die Geschäftsführung — Fr. Dr.-Ing. C. Cora</p>
+    </div>
+
+    <div class="block">
+        <h2>Uplink / Kontakt</h2>
+        <p>Funk: <b>+49 89 200 20-20</b> · Fax: +49 89 200 20-29<br>
+        Leitung: <a href="mailto:uplink@curicor.de">uplink@curicor.de</a></p>
+    </div>
+
+    <div class="block">
+        <h2>Register &amp; Steuer</h2>
+        <p>Registergericht: <b>Amtsgericht München</b> · Registernummer: HRB 200020<br>
+        USt-IdNr. gemäß § 27 a UStG: DE 200 200 200</p>
+    </div>
+
+    <div class="block">
+        <h2>Inhalt &amp; Haftung</h2>
+        <p>Verantwortlich nach § 55 Abs. 2 RStV: Fr. Dr.-Ing. C. Cora, Anschrift wie oben.
+        Inhalte wurden mit Sorgfalt erstellt; Gewähr für Richtigkeit und Vollständigkeit wird nicht
+        übernommen. Für verlinkte externe Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+    </div>
+
+    <div class="note"><b>Hinweis:</b> Demo-Projekt (Website 20 — CURICOR). Alle Firmen-, Register- und
+    Adressangaben sind fiktiv. Bildmaterial: Wikimedia Commons (freie Lizenzen) — Kupfer- &amp; Silberfotografie.</div>
+
+    <a class="top" href="index.html">← Zurück zum Kontor</a>
+</div>
+<footer class="statusbar">© <span id="yr">2025</span> CURICOR Werkstoffkontor · <a href="index.html">index.html</a> · System nominal</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

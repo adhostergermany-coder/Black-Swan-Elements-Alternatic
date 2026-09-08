@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CURICOR — Leiterwerkstoffe · Kupfer 99,99 % &amp; Feinsilber 999</title>
+<meta name="description" content="CURICOR — Werkstoffkontor für Stromleitung: Kupferkathoden, Feinsilber 999, Drähte, Busbar und Halbzeuge. Geprüft, dokumentiert, geliefert.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --ink: #F7F9FB;
+    --panel: #FFFFFF;
+    --panel-2: #EDF2F6;
+    --hair: #D9E1E9;
+    --hair-soft: rgba(28, 39, 51, 0.09);
+    --volt: #B25E2A;
+    --volt-dim: #D08A55;
+    --copper: #8F4D22;
+    --copper-soft: #B25E2A;
+    --text: #1C2733;
+    --mut: #5C6B7A;
+    --hud-h: 56px;
+    --mono: 'Spline Sans Mono', 'Consolas', monospace;
+    --disp: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --body: 'Schibsted Grotesk', 'Segoe UI', sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--body);
+    background: var(--ink);
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--volt); color: #FFFFFF; }
+
+h1, h2, h3, .disp { font-family: var(--disp); font-weight: 700; line-height: 0.98; text-transform: uppercase; }
+
+/* blueprint grid utility */
+.bp-grid {
+    background-image:
+        linear-gradient(rgba(28, 39, 51, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 39, 51, 0.05) 1px, transparent 1px);
+    background-size: 54px 54px;
+}
+/* crosshair mark */
+.xh {
+    position: absolute; z-index: 3;
+    font-family: var(--mono);
+    font-size: 15px;
+    color: rgba(178, 94, 42, 0.45);
+    line-height: 1; user-select: none; pointer-events: none;
+}
+
+/* ===== HUD TOP BAR ===== */
+.hud {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--hud-h);
+    z-index: 90;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+    padding: 0 22px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hair);
+}
+.hud-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.hud-chip {
+    width: 26px; height: 26px;
+    background: linear-gradient(135deg, var(--volt), var(--copper-soft));
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 600; color: #FFFFFF;
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 72% 100%, 0 100%);
+}
+.hud-name { font-family: var(--disp); font-weight: 800; font-size: 20px; letter-spacing: 0.14em; color: var(--text); }
+.hud-name small { color: var(--volt); font-size: 20px; }
+
+.hud-live { display: flex; align-items: center; gap: 26px; font-family: var(--mono); font-size: 11px; color: var(--mut); }
+.hud-live b { color: var(--text); font-weight: 500; }
+.hud-live .dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--volt); margin-right: 8px;
+    box-shadow: 0 0 0 3px rgba(178, 94, 42, 0.18);
+    animation: blink 1.4s steps(2, start) infinite;
+}
+@keyframes blink { 50% { opacity: 0.25; } }
+
+.hud-nav { display: flex; gap: 24px; }
+.hud-nav a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+    color: var(--mut); text-decoration: none; text-transform: uppercase;
+    transition: color 0.3s;
+}
+.hud-nav a:hover { color: var(--volt); }
+
+.hud-progress { position: fixed; top: var(--hud-h); left: 0; height: 2px; width: 0%; z-index: 91; background: linear-gradient(90deg, var(--volt), var(--copper-soft)); }
+
+/* ===== CROSSHAIR CURSOR ===== */
+.xhair {
+    position: fixed; z-index: 99;
+    width: 34px; height: 34px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    will-change: transform;
+}
+.xhair::before, .xhair::after { content: ''; position: absolute; background: rgba(178, 94, 42, 0.55); }
+.xhair::before { left: 50%; top: 0; width: 1px; height: 100%; }
+.xhair::after { top: 50%; left: 0; height: 1px; width: 100%; }
+.xhair span {
+    position: absolute; left: 40px; top: 22px;
+    font-family: var(--mono); font-size: 10px; color: var(--mut);
+    white-space: nowrap; letter-spacing: 1px;
+}
+body.xh-on .xhair { opacity: 1; }
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 30px;
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--hair);
+    transition: 0.35s var(--ease);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.btn-volt { background: var(--volt); color: #FFFFFF; border-color: var(--volt); }
+.btn-volt:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--copper); }
+.btn-ghost { color: var(--text); background: rgba(255, 255, 255, 0.6); }
+.btn-ghost:hover { border-color: var(--volt); color: var(--volt); }
+
+/* ===== REVEALS ===== */
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+.rev-x { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--d, 0s); }
+.rev-x.in { opacity: 1; transform: none; }
+
+/* section frame */
+.sec { position: relative; padding: 110px 5vw; }
+.sec-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 3px;
+    color: var(--volt); text-transform: uppercase;
+    margin-bottom: 22px;
+}
+.sec-tag::before { content: ''; width: 34px; height: 1px; background: var(--volt); }
+.sec-title { font-size: clamp(46px, 6.4vw, 104px); letter-spacing: 0.02em; color: var(--text); }
+.sec-title em { font-style: normal; color: transparent; -webkit-text-stroke: 1.5px var(--volt-dim); }
+.sec-lede { color: var(--mut); max-width: 60ch; margin-top: 20px; font-size: 16.5px; }
+.sec-lede b { color: var(--text); font-weight: 600; }
+
+/* ===== HERO — ENGINEERING DATASHEET COVER ===== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    padding: calc(var(--hud-h) + 0px) 0 26px;
+    display: grid;
+    grid-template-columns: 72px 1.15fr 0.85fr;
+    align-items: stretch;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hair);
+}
+
+/* crop marks (print registration) */
+.crop { position: absolute; width: 22px; height: 22px; z-index: 3; pointer-events: none; }
+.crop::before, .crop::after { content: ''; position: absolute; background: var(--copper); opacity: .5; }
+.crop::before { width: 100%; height: 1px; }
+.crop::after { width: 1px; height: 100%; }
+.c-tl { top: calc(var(--hud-h) + 12px); left: 12px; }
+.c-tr { top: calc(var(--hud-h) + 12px); right: 12px; }
+.c-bl { bottom: 12px; left: 12px; }
+.c-br { bottom: 12px; right: 12px; }
+.c-tl::before, .c-tr::before, .c-bl::before, .c-br::before { width: 100%; height: 1px; top: 0; }
+.c-tl::after, .c-tr::after, .c-bl::after, .c-br::after { width: 1px; height: 100%; left: 0; }
+.c-tl::before, .c-tl::after { left: 0; top: 0; }
+.c-tr::before { right: 0; left: auto; } .c-tr::after { right: 0; left: auto; }
+.c-bl::before, .c-bl::after { bottom: 0; top: auto; }
+.c-br::before { bottom: 0; top: auto; right: 0; left: auto; } .c-br::after { bottom: 0; top: auto; right: 0; left: auto; }
+
+/* left document spine */
+.spine {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    padding: 14px 10px 20px;
+    border-right: 1px solid var(--hair);
+}
+.spine-brand {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family: var(--disp); font-weight: 800;
+    font-size: clamp(30px, 3.4vw, 46px); letter-spacing: .14em;
+    color: var(--text); text-transform: uppercase;
+}
+.spine-brand i { font-style: normal; color: var(--volt); }
+.spine-meta {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px;
+    color: var(--mut); text-transform: uppercase; line-height: 2.1;
+}
+.spine-arrow {
+    writing-mode: vertical-rl;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+    color: var(--volt); text-transform: uppercase;
+    animation: dip 1.7s ease-in-out infinite;
+}
+@keyframes dip { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(10px); opacity: .45; } }
+
+/* center: title with engineering callouts */
+.hero-core {
+    position: relative; z-index: 2;
+    padding: clamp(22px, 4.5vh, 60px) 0 26px 2.6vw;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.hero-kicker {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 4px;
+    color: var(--volt); text-transform: uppercase;
+    border: 1px dashed rgba(178, 94, 42, 0.45);
+    background: rgba(255, 255, 255, 0.65);
+    padding: 9px 16px;
+    margin-bottom: 30px;
+}
+.hero-title { font-size: clamp(60px, 9.6vw, 178px); font-weight: 800; letter-spacing: 0.015em; color: var(--text); margin-left: -0.04em; }
+.hero-title .ht-row { display: block; }
+.hero-title .v { color: transparent; -webkit-text-stroke: 2px var(--volt); }
+.hero-title .cu { color: var(--copper-soft); }
+.ht-sub {
+    display: block;
+    font-family: var(--mono); font-weight: 400;
+    font-size: clamp(11.5px, 1.2vw, 15.5px);
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--mut);
+    margin-top: 20px; line-height: 1.7;
+}
+.ht-sub b { color: var(--volt); font-weight: 500; }
+
+.callout {
+    position: absolute; z-index: 3;
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.5px;
+    color: var(--copper); text-transform: uppercase; line-height: 1.55;
+    white-space: nowrap;
+}
+.callout i { display: block; width: 58px; height: 1px; background: var(--copper); position: relative; flex: 0 0 auto; order: 2; }
+.callout i::before { content: ''; position: absolute; right: -4px; top: -2.5px; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); }
+.co-1 { top: 9%; right: 3%; }
+.co-2 { bottom: 20%; right: 14%; }
+
+.hero-sub { color: var(--mut); max-width: 46ch; font-size: 16.5px; margin-top: 26px; }
+.hero-sub b { color: var(--text); font-weight: 600; }
+.hero-ctas { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+
+/* right: measurement frames */
+.hero-vis { position: relative; z-index: 2; padding: clamp(18px, 4vh, 50px) 3vw 20px 0; }
+.mframe {
+    position: absolute;
+    border: 1px solid var(--hair);
+    background: #FFFFFF;
+    padding: 10px;
+    box-shadow: 0 26px 54px -26px rgba(28, 39, 51, 0.35);
+}
+.mframe img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.95) contrast(1.05); }
+.mframe.main { width: min(72%, 350px); height: min(64vh, 540px); right: 6%; top: 5%; }
+.mframe.small { width: min(40%, 205px); height: min(32vh, 265px); left: 2%; bottom: 7%; }
+.mframe-no { position: absolute; top: 10px; right: 12px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px; color: var(--mut); }
+
+.dim { position: absolute; display: flex; align-items: center; font-family: var(--mono); font-size: 10px; color: var(--copper); letter-spacing: 1.5px; }
+.dim b { background: #FFFFFF; font-weight: 500; }
+.dim-h { left: 8%; right: 8%; bottom: -28px; }
+.dim-h::before, .dim-h::after { content: ''; flex: 1; height: 1px; background: currentColor; }
+.dim-h b { padding: 0 9px; }
+.dim-v { top: 6%; bottom: 6%; left: -34px; flex-direction: column; }
+.dim-v::before, .dim-v::after { content: ''; flex: 1; width: 1px; background: currentColor; }
+.dim-v b { padding: 9px 0; writing-mode: vertical-rl; }
+
+/* rotating badge */
+.badge-spin {
+    position: absolute; z-index: 4;
+    left: -6px; top: 2%;
+    width: 116px; height: 116px;
+    animation: spin 22s linear infinite;
+    filter: drop-shadow(0 8px 18px rgba(28, 39, 51, 0.22));
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.badge-spin text { font-family: var(--mono); font-size: 10.5px; letter-spacing: 3.4px; fill: var(--mut); text-transform: uppercase; }
+.badge-spin .mid { font-family: var(--disp); font-size: 30px; font-weight: 800; fill: var(--volt); letter-spacing: 1px; }
+
+/* interactive conductivity probe */
+.probe {
+    position: absolute; z-index: 4;
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    pointer-events: none;
+    opacity: 0; transition: opacity 0.3s;
+    background: repeating-linear-gradient(180deg, var(--volt) 0 6px, transparent 6px 13px);
+}
+.probe.on { opacity: 0.85; }
+.probe-tag {
+    position: absolute; top: calc(var(--hud-h) + 14px); left: 8px;
+    background: var(--volt); color: #FFFFFF;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+    padding: 6px 10px; white-space: nowrap;
+}
+
+/* hero data strip + scale ruler */
+.data-strip {
+    position: relative;
+    grid-column: 2 / -1;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--hair);
+    border-bottom: 0;
+    background: #FFFFFF;
+    font-family: var(--mono);
+}
+.data-cell {
+    padding: 16px 20px;
+    border-right: 1px solid var(--hair);
+    font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mut);
+    position: relative;
+}
+.data-cell:last-child { border-right: 0; }
+.data-cell b { display: block; font-size: 24px; font-weight: 500; color: var(--text); letter-spacing: 0; margin-bottom: 2px; }
+.data-cell b i { font-style: normal; color: var(--volt); font-size: 14px; }
+.data-cell .up { color: var(--volt); font-size: 10px; }
+
+.ruler {
+    position: absolute; left: 0; right: 0; top: -16px; height: 15px;
+    border-top: 1px solid var(--hair);
+    background:
+        repeating-linear-gradient(90deg, rgba(28, 39, 51, 0.35) 0 1px, transparent 1px 10px) bottom / 100% 6px no-repeat,
+        repeating-linear-gradient(90deg, rgba(28, 39, 51, 0.5) 0 1px, transparent 1px 50px) bottom / 100% 13px no-repeat;
+}
+.ruler::after {
+    content: 'SKALA 1:1 · MM';
+    position: absolute; right: 2px; top: -16px;
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: 2px;
+    color: var(--mut);
+}
+
+/* ===== C-01 KONDUKTIVITÄT ===== */
+.kondo { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.kondo-left { position: sticky; top: calc(var(--hud-h) + 30px); }
+
+.iacs { border: 1px solid var(--hair); background: #FFFFFF; box-shadow: 0 18px 40px -30px rgba(28, 39, 51, 0.3); padding: 34px 34px 38px; }
+.iacs h3 { font-size: 22px; letter-spacing: 0.06em; color: var(--text); margin-bottom: 6px; }
+.iacs .iacs-sub { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; color: var(--mut); text-transform: uppercase; margin-bottom: 26px; }
+.iac-row { display: grid; grid-template-columns: 118px 1fr 64px; gap: 14px; align-items: center; margin-bottom: 20px; font-family: var(--mono); font-size: 12px; }
+.iac-row .m { color: var(--mut); letter-spacing: 1px; }
+.iac-track { height: 12px; background: var(--panel-2); border: 1px solid var(--hair); position: relative; overflow: hidden; }
+.iac-fill {
+    position: absolute; inset: 0 auto 0 0;
+    width: 0%;
+    background: repeating-linear-gradient(135deg, var(--volt) 0 8px, var(--volt-dim) 8px 16px);
+    transition: width 1.4s var(--ease);
+}
+.iac-row.top .iac-fill { background: repeating-linear-gradient(135deg, var(--copper-soft) 0 8px, var(--copper) 8px 16px); }
+.iac-row .pct { text-align: right; color: var(--text); }
+.iac-row.top .pct { color: var(--copper); }
+.iac-note { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--hair); font-size: 13px; color: var(--mut); }
+.iac-note b { color: var(--volt); font-weight: 600; }
+
+.molten-band { position: relative; overflow: hidden; border: 1px solid var(--hair); margin-top: 34px; height: 240px; background: #FFFFFF; }
+.molten-band img { position: absolute; inset: -14% 0; width: 100%; height: 128%; object-fit: cover; filter: saturate(1.02) contrast(1.04) brightness(0.96); will-change: transform; }
+.molten-band span {
+    position: absolute; z-index: 2; left: 16px; bottom: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+    color: var(--volt); background: rgba(255, 255, 255, 0.94); padding: 6px 10px;
+    border: 1px solid var(--hair);
+}
+
+/* ===== C-02 HORIZONTAL PANORAMA (scroll-driven) ===== */
+.hwrap { position: relative; }
+.hstage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+.htrack { display: flex; height: 100%; width: max-content; will-change: transform; }
+
+.hpanel {
+    width: 100vw; height: 100%;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5vw;
+    align-items: center;
+    padding: calc(var(--hud-h) + 40px) 5vw 70px;
+    position: relative;
+    border-right: 1px solid var(--hair);
+}
+.hpanel:nth-child(even) { background: #F0F4F8; }
+.hp-ghost {
+    position: absolute; top: 3%; right: 2%;
+    font-family: var(--disp); font-weight: 800;
+    font-size: clamp(140px, 22vw, 340px);
+    color: transparent; -webkit-text-stroke: 1px rgba(28, 39, 51, 0.1);
+    line-height: 1; pointer-events: none;
+}
+.hp-media { position: relative; overflow: hidden; border: 1px solid var(--hair); height: min(64vh, 560px); background: #FFFFFF; box-shadow: 0 24px 50px -30px rgba(28, 39, 51, 0.35); }
+.hp-media img { position: absolute; inset: -12% 0; width: 100%; height: 124%; object-fit: cover; filter: saturate(.95) contrast(1.06); will-change: transform; }
+.hp-media .hp-label {
+    position: absolute; z-index: 2; top: 14px; left: 14px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px;
+    color: #FFFFFF; background: var(--volt);
+    padding: 7px 12px;
+}
+.hp-media .hp-label.cu { background: var(--copper-soft); }
+.hp-body { position: relative; z-index: 2; }
+.hp-idx { font-family: var(--mono); font-size: 12px; color: var(--volt); letter-spacing: 3px; display: block; margin-bottom: 14px; }
+.hp-title { font-size: clamp(44px, 5.4vw, 88px); color: var(--text); }
+.hp-title em { font-style: normal; color: var(--copper); }
+.hp-text { color: var(--mut); margin-top: 18px; max-width: 48ch; font-size: 16px; }
+.hp-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.hp-chips span {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.5px;
+    color: var(--text); border: 1px solid var(--hair);
+    padding: 7px 12px; background: rgba(255, 255, 255, 0.85);
+}
+.hp-chips span.v { border-color: rgba(178, 94, 42, 0.55); color: var(--volt); }
+
+.hs-progress {
+    position: absolute; z-index: 5;
+    left: 5vw; right: 5vw; bottom: 26px;
+    display: flex; align-items: center; gap: 18px;
+    font-family: var(--mono); font-size: 11px; color: var(--mut); letter-spacing: 2px;
+}
+.hs-bar { flex: 1; height: 2px; background: var(--hair); position: relative; }
+.hs-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 25%; background: var(--volt); }
+
+/* ===== C-03 COMPARISON SLIDER Cu⇄Ag ===== */
+.cmp-sec { border-top: 1px solid var(--hair); }
+.cmp {
+    position: relative;
+    margin-top: 54px;
+    height: min(72vh, 620px);
+    overflow: hidden;
+    border: 1px solid var(--hair);
+    background: #FFFFFF;
+    box-shadow: 0 26px 54px -30px rgba(28, 39, 51, 0.35);
+    user-select: none;
+    touch-action: none;
+}
+.cmp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cmp .base { filter: saturate(1.05) contrast(1.05); }
+.cmp .top-layer {
+    position: absolute; inset: 0 auto 0 0;
+    width: 50%;
+    overflow: hidden;
+    border-right: 2px solid var(--volt);
+}
+.cmp .top-layer img { width: calc(100% / 0.5); max-width: none; }
+.cmp .lab {
+    position: absolute; z-index: 3;
+    top: 18px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 3px;
+    padding: 9px 16px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid var(--hair);
+}
+.cmp .lab.cu { left: 18px; color: var(--copper); }
+.cmp .lab.ag { right: 18px; color: var(--text); }
+.cmp .lab small { display: block; font-size: 9.5px; color: var(--mut); letter-spacing: 1.5px; }
+
+.cmp-handle {
+    position: absolute; z-index: 4;
+    top: 50%; left: 50%;
+    width: 46px; height: 46px;
+    transform: translate(-50%, -50%);
+    background: var(--volt);
+    color: #FFFFFF;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-weight: 600; font-size: 13px;
+    cursor: ew-resize;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+.cmp-read {
+    position: absolute; z-index: 3;
+    left: 50%; bottom: 16px; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px;
+    color: var(--mut);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px dashed var(--hair);
+    padding: 7px 12px;
+    white-space: nowrap;
+}
+.cmp-read b { color: var(--volt); }
+.cmp-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 5; }
+
+/* ===== C-04 DATENBLÄTTER (tech sheet cards) ===== */
+.sheets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; margin-top: 54px; perspective: 1400px; }
+.sheet {
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid var(--hair);
+    padding: 0 0 22px;
+    transform-style: preserve-3d;
+    transition: border-color 0.35s, box-shadow 0.35s;
+    box-shadow: 0 16px 36px -28px rgba(28, 39, 51, 0.35);
+    overflow: hidden;
+}
+.sheet:hover { border-color: rgba(178, 94, 42, 0.55); box-shadow: 0 30px 60px -28px rgba(28, 39, 51, 0.4); }
+.sheet::before {
+    content: '';
+    position: absolute; left: 0; right: 0; top: -40%;
+    height: 34%;
+    background: linear-gradient(180deg, transparent, rgba(178, 94, 42, 0.08), transparent);
+    transform: rotate(4deg);
+    transition: top 0.9s var(--ease);
+    pointer-events: none;
+}
+.sheet:hover::before { top: 130%; }
+
+.sheet-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px dashed var(--hair);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px;
+    color: var(--mut);
+}
+.sheet-head b { color: var(--volt); font-weight: 500; }
+.sheet-main { display: grid; grid-template-columns: 116px 1fr; gap: 18px; padding: 20px; align-items: start; }
+.sheet-swatch { width: 116px; height: 132px; object-fit: cover; border: 1px solid var(--hair); filter: saturate(.95); }
+.sheet h3 { font-size: 30px; letter-spacing: 0.04em; color: var(--text); }
+.sheet .sheet-desc { color: var(--mut); font-size: 13.5px; margin-top: 6px; }
+.spec { margin-top: 14px; font-family: var(--mono); font-size: 11.5px; }
+.spec div { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; border-bottom: 1px dashed var(--hair-soft); }
+.spec span { color: var(--mut); letter-spacing: 1px; }
+.spec b { color: var(--text); font-weight: 500; text-align: right; }
+.sheet-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px 0;
+}
+.sheet-price { font-family: var(--mono); font-size: 22px; color: var(--text); }
+.sheet-price small { font-size: 10.5px; color: var(--mut); display: block; letter-spacing: 1.5px; }
+.barcode {
+    height: 30px; width: 92px;
+    background: repeating-linear-gradient(90deg, var(--text) 0 2px, transparent 2px 5px, var(--text) 5px 6px, transparent 6px 11px, var(--text) 11px 12px, transparent 12px 15px);
+    opacity: 0.7;
+}
+.stamp {
+    position: absolute; top: 54px; right: 18px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+    color: var(--volt);
+    border: 2px solid var(--volt);
+    padding: 6px 10px;
+    transform: rotate(8deg);
+    opacity: 0.9;
+}
+
+/* ===== C-05 PROZESS — current flow ===== */
+.flow { position: relative; margin-top: 64px; }
+.flow-line { position: absolute; top: 27px; left: 0; right: 0; height: 2px; background: var(--hair); overflow: hidden; }
+.flow-line i {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, var(--volt) 0 14px, transparent 14px 26px);
+    animation: flowline 1.1s linear infinite;
+    opacity: 0; transition: opacity 0.6s;
+}
+.flow.in .flow-line i { opacity: 1; }
+@keyframes flowline { to { transform: translateX(26px); } }
+.flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; position: relative; }
+.fstep { padding-top: 56px; position: relative; }
+.fnode {
+    position: absolute; top: 0; left: 0;
+    width: 54px; height: 54px;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    background: #FFFFFF; border: 1px solid var(--hair);
+    color: var(--mut);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: 0.5s var(--ease);
+}
+.fstep.in .fnode { border-color: var(--volt); color: var(--volt); box-shadow: 0 0 0 5px rgba(178, 94, 42, 0.12); }
+.fstep h3 { font-size: 27px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 8px; }
+.fstep .fk { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; color: var(--copper); text-transform: uppercase; display: block; margin-bottom: 8px; }
+.fstep p { color: var(--mut); font-size: 14px; }
+
+/* ===== FIXED BAND (light editorial) ===== */
+.band {
+    position: relative;
+    min-height: 72vh;
+    display: grid; place-items: center;
+    text-align: center;
+    padding: 100px 7vw;
+    background-image: linear-gradient(rgba(247, 249, 251, 0.86), rgba(247, 249, 251, 0.94)), url('images/billet-cast.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+}
+.band .bk { font-family: var(--mono); font-size: 11px; letter-spacing: 5px; color: var(--copper); text-transform: uppercase; }
+.band h2 {
+    font-size: clamp(52px, 8vw, 132px);
+    color: var(--text);
+    margin: 18px 0 20px;
+}
+.band h2 em { font-style: normal; color: transparent; -webkit-text-stroke: 1.5px var(--volt); }
+.band p { font-family: var(--mono); font-size: 12px; letter-spacing: 2px; color: var(--mut); text-transform: uppercase; }
+
+/* ===== C-06 KONTAKT ===== */
+.kontakt { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: start; }
+.tele { margin-top: 40px; border-top: 1px solid var(--hair); }
+.tele-row {
+    display: grid; grid-template-columns: 150px 1fr; gap: 16px;
+    padding: 15px 2px;
+    border-bottom: 1px solid var(--hair);
+    font-family: var(--mono); font-size: 12px;
+}
+.tele-row span { color: var(--mut); letter-spacing: 2px; text-transform: uppercase; font-size: 10.5px; align-self: center; }
+.tele-row b { color: var(--text); font-weight: 500; }
+.tele-row b a { color: var(--volt); text-decoration: none; }
+.tele-row b a:hover { text-decoration: underline; }
+
+.txform { border: 1px solid var(--hair); background: #FFFFFF; box-shadow: 0 20px 44px -30px rgba(28, 39, 51, 0.35); padding: 30px; }
+.txform h3 { font-size: 24px; color: var(--text); letter-spacing: 0.05em; }
+.txform .tx-sub { font-family: var(--mono); font-size: 10.5px; color: var(--mut); letter-spacing: 2px; text-transform: uppercase; margin: 6px 0 24px; }
+.txform label { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--mut); text-transform: uppercase; margin: 0 0 7px; }
+.txform input, .txform textarea {
+    width: 100%;
+    background: #F2F6FA;
+    border: 1px solid var(--hair);
+    color: var(--text);
+    font-family: var(--mono); font-size: 13px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.txform input:focus, .txform textarea:focus { border-color: var(--volt); }
+.txform input::placeholder, .txform textarea::placeholder { color: #9AA8B5; }
+.txform textarea { min-height: 110px; resize: vertical; }
+.txform .btn { width: 100%; justify-content: center; }
+
+/* ===== FOOTER — status bar ===== */
+.footer { border-top: 1px solid var(--hair); background: #FFFFFF; }
+.footer-word {
+    font-family: var(--disp); font-weight: 800;
+    font-size: clamp(72px, 15vw, 250px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(28, 39, 51, 0.22);
+    text-align: center;
+    padding: 46px 4vw 30px;
+    user-select: none;
+    white-space: nowrap;
+    transition: -webkit-text-stroke-color .6s;
+}
+.footer-word:hover { -webkit-text-stroke-color: rgba(178, 94, 42, 0.65); }
+.statusbar {
+    display: flex; flex-wrap: wrap; gap: 14px 30px;
+    justify-content: space-between; align-items: center;
+    border-top: 1px dashed var(--hair);
+    padding: 18px 5vw 22px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.5px;
+    color: var(--mut);
+    text-transform: uppercase;
+}
+.statusbar a { color: var(--mut); text-decoration: none; }
+.statusbar a:hover { color: var(--volt); }
+.statusbar .ok { color: var(--volt); }
+.statusbar .ok::before { content: '● '; animation: blink 1.4s steps(2, start) infinite; }
+
+/* ===== SECTION IDENTITY RULERS ===== */
+.sec::before {
+    content: attr(data-idx);
+    position: absolute; top: 92px; left: 14px;
+    writing-mode: vertical-rl;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 3px;
+    color: var(--mut); text-transform: uppercase;
+    border-left: 1px solid var(--hair);
+    padding: 0 0 0 8px;
+}
+/* data-sheet binding holes */
+.sheet::after {
+    content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 8px;
+    background: radial-gradient(circle at 4px 50%, #EDF2F6 2.8px, rgba(28, 39, 51, 0.22) 3.1px, transparent 3.8px);
+    background-size: 8px 34px; background-repeat: repeat-y;
+}
+/* comparison corner bolts */
+.cmp::before, .cmp::after {
+    content: ''; position: absolute; width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFFFFF, #B7C4CF 72%);
+    border: 1px solid var(--hair); z-index: 6;
+}
+.cmp::before { top: 8px; left: 8px; }
+.cmp::after { bottom: 8px; right: 8px; }
+/* band scale strip */
+.band::before {
+    content: ''; position: absolute; top: 20px; left: 5vw; right: 5vw; height: 10px;
+    background: repeating-linear-gradient(90deg, rgba(28, 39, 51, 0.28) 0 1px, transparent 1px 40px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1060px) {
+    .hud-live .hide-m { display: none; }
+    .kondo { grid-template-columns: 1fr; gap: 40px; }
+    .kondo-left { position: static; }
+    .sheets { grid-template-columns: 1fr; }
+    .kontakt { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .spine { display: none; }
+    .probe, .ruler, .callout, .sec::before { display: none !important; }
+    .hero-core { padding: 40px 6vw 8px; }
+    .hero-title { font-size: clamp(60px, 16.5vw, 150px); }
+    .hero-vis { padding: 16px 6vw 26px; min-height: 54vh; }
+    .mframe.main { width: 74%; height: 56vh; right: 0; }
+    .mframe.small { width: 42%; height: 26vh; }
+    .dim-v { display: none; }
+    .data-strip { grid-column: 1 / -1; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--hair); }
+    .data-cell:nth-child(3) { border-right: 0; }
+    .data-cell:nth-child(2), .data-cell:nth-child(3) { border-bottom: 1px solid var(--hair); }
+
+    /* horizontal → vertical stack */
+    .hwrap { height: auto !important; }
+    .hstage { position: static; height: auto; overflow: visible; display: block; }
+    .htrack { display: block; width: auto; transform: none !important; }
+    .hpanel { width: 100%; height: auto; display: grid; grid-template-columns: 1fr; gap: 24px; padding: 70px 6vw; border-right: 0; border-bottom: 1px solid var(--hair); }
+    .hp-media { height: 300px; }
+    .hp-media img { position: absolute; inset: 0; height: 112%; }
+    .hs-progress { display: none; }
+    .flow-steps { grid-template-columns: 1fr; gap: 40px; }
+    .flow-line { display: none; }
+    .fstep { padding-top: 64px; }
+    .band { background-attachment: scroll; }
+}
+@media (max-width: 640px) {
+    .hud-nav { display: none; }
+    .hud-live { gap: 14px; }
+    .cmp .lab small { display: none; }
+    .sheet-main { grid-template-columns: 1fr; }
+    .sheet-swatch { width: 100%; height: 150px; }
+    .stamp { display: none; }
+    .sec { padding: 80px 6vw; }
+    .data-cell { padding: 14px 16px; }
+    .data-cell b { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal, .rev-x { opacity: 1; transform: none; transition: none; }
+    .circuit path, .badge-spin, .flow-line i, .hud-live .dot, .statusbar .ok::before { animation: none; }
+    .iac-fill { transition: none; }
+}
+</style>
+</head>
+<body>
+<!-- crosshair cursor -->
+<div class="xhair" id="xhair" aria-hidden="true"><span id="xhCoords">X:0000 · Y:0000</span></div>
+
+<!-- ===== HUD ===== -->
+<div class="hud-progress" id="hudProgress"></div>
+<header class="hud">
+    <a class="hud-brand" href="#top">
+        <span class="hud-chip">Cu</span>
+        <span class="hud-name">CURICOR<small>.</small></span>
+    </a>
+    <div class="hud-live">
+        <span class="hide-m"><span class="dot"></span>LIVE</span>
+        <span class="hide-m">CU-ETP <b id="liveCu">9 184 €/t</b></span>
+        <span class="hide-m">AG-999 <b id="liveAg">38,42 €/kg</b></span>
+        <span id="hudClock">00:00:00</span>
+    </div>
+    <nav class="hud-nav" aria-label="Hauptnavigation">
+        <a href="#material">Material</a>
+        <a href="#metalle">Panorama</a>
+        <a href="#datenblaetter">Datenblätter</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+</header>
+
+<div id="top"></div>
+
+<!-- ===== HERO — ENGINEERING DATASHEET COVER ===== -->
+<section class="hero bp-grid">
+    <span class="crop c-tl"></span><span class="crop c-tr"></span>
+    <span class="crop c-bl"></span><span class="crop c-br"></span>
+    <span class="xh" style="top:18%;left:10%;">+</span>
+    <span class="xh" style="top:64%;left:44%;">+</span>
+
+    <aside class="spine" aria-hidden="true">
+        <span class="spine-brand">CURI<i>C</i>OR</span>
+        <span class="spine-meta">DOC CU-2025-20<br>REV 04 · MMXXV<br>SHEET 1 / 1 · MASSSTAB 1:1</span>
+        <span class="spine-arrow">SCROLL ↓</span>
+    </aside>
+
+    <div class="hero-core">
+        <span class="hero-kicker reveal">Werkstoff-Datenblatt · Leiterwerkstoffe · Est. 2018</span>
+        <h1 class="hero-title reveal" style="--d:.08s">
+            <span class="ht-row">CURI<span class="v">C</span><span class="cu">O</span>R</span>
+            <span class="ht-sub">Kupfer &amp; Silber — <b>99,99 %</b> geprüfte Leiterwerkstoffe, chargen-dokumentiert</span>
+        </h1>
+
+        <div class="callout co-1 reveal" style="--d:.24s"><span>99,99 % CU-ETP<br>EN 1652 · 2.0060</span><i></i></div>
+        <div class="callout co-2 reveal" style="--d:.32s"><span>AG 999 · 105 % IACS<br>JEDE CHARGE GEPRÜFT</span><i></i></div>
+
+        <p class="hero-sub reveal" style="--d:.2s"><b>CURICOR</b> liefert Kathoden, Drähte, Busbar und
+        Feinsilber in Serienqualität — <b>analysiert, plombiert und binnen 48 Stunden</b> ab Lager.</p>
+
+        <div class="hero-ctas reveal" style="--d:.28s">
+            <a class="btn btn-volt" href="#datenblaetter">Datenblätter öffnen</a>
+            <a class="btn btn-ghost" href="#metalle">Material-Panorama</a>
+        </div>
+    </div>
+
+    <div class="hero-vis">
+        <div class="mframe main reveal" style="--d:.14s" data-plx="-0.05">
+            <img src="images/busbar.jpg" alt="2500-A-Kupfer-Sammelschiene (Busbar) im Schaltschrank" loading="eager">
+            <span class="mframe-no">FIG. 01</span>
+            <span class="dim dim-h"><b>2500 A · CU-ETP</b></span>
+            <span class="dim dim-v"><b>NENNSTROM 2500</b></span>
+        </div>
+        <div class="mframe small reveal" style="--d:.24s" data-plx="0.08">
+            <img src="images/wire-crystals.jpg" alt="Kupferdraht und Kristalle — Leitermaterial" loading="eager">
+            <span class="mframe-no">FIG. 02</span>
+        </div>
+
+        <svg class="badge-spin" viewBox="0 0 128 128" aria-hidden="true">
+            <defs><path id="circ" d="M64,64 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text><textPath href="#circ">CURICOR · MATERIALS · SEIT 2018 · CU AG ·</textPath></text>
+            <text class="mid" x="64" y="74" text-anchor="middle">19,9</text>
+        </svg>
+    </div>
+
+    <div class="data-strip reveal" style="--d:.34s">
+        <div class="ruler" aria-hidden="true"></div>
+        <div class="data-cell">Reinheit Cu<b><span data-count="9999" data-dec="2">0</span> <i>%</i></b><span class="up">▲ CU-ETP</span></div>
+        <div class="data-cell">Feinsilber<b><span data-count="999">0</span> <i>FEIN</i></b><span class="up">▲ GEPRÜFT</span></div>
+        <div class="data-cell">IACS Leitwert<b><span data-count="105">0</span> <i>%</i></b><span class="up">▲ AG-BASIS</span></div>
+        <div class="data-cell">Auslieferung<b><span data-count="48">0</span> <i>H</i></b><span class="up">▲ AB LAGER</span></div>
+    </div>
+
+    <div class="probe" id="probe" aria-hidden="true"><span class="probe-tag" id="probeTag">100 % IACS</span></div>
+</section>
+
+<!-- ===== C-01 KONDUKTIVITÄT ===== -->
+<section class="sec" id="material" data-idx="C-01 · Leitfähigkeit">
+    <div class="kondo">
+        <div class="kondo-left">
+            <span class="sec-tag reveal">C-01 · Leitfähigkeit</span>
+            <h2 class="sec-title reveal" style="--d:.06s">Warum <em>Kupfer</em><br>Strom liebt</h2>
+            <p class="sec-lede reveal" style="--d:.14s">Kein Gebrauchsmetall leitet besser als Silber —
+            keins ist <b>günstiger pro Siemens</b> als Kupfer. CURICOR beschafft beide: als Kathode,
+            als Draht, als Schiene. Gemessen wird in <b>% IACS</b> — dem internationalen
+            Standard gegen weiches Kupfer.</p>
+        </div>
+        <div>
+            <div class="iacs reveal">
+                <h3>Elektrische Leitfähigkeit</h3>
+                <div class="iacs-sub">% IACS · 20 °C · Referenz Cu 100</div>
+
+                <div class="iac-row top" data-iacs="105">
+                    <span class="m">Ag — Silber</span>
+                    <span class="iac-track"><span class="iac-fill"></span></span>
+                    <span class="pct">0 %</span>
+                </div>
+                <div class="iac-row" data-iacs="100">
+                    <span class="m">Cu — Kupfer</span>
+                    <span class="iac-track"><span class="iac-fill"></span></span>
+                    <span class="pct">0 %</span>
+                </div>
+                <div class="iac-row" data-iacs="70">
+                    <span class="m">Au — Gold</span>
+                    <span class="iac-track"><span class="iac-fill"></span></span>
+                    <span class="pct">0 %</span>
+                </div>
+                <div class="iac-row" data-iacs="61">
+                    <span class="m">Al — Aluminium</span>
+                    <span class="iac-track"><span class="iac-fill"></span></span>
+                    <span class="pct">0 %</span>
+                </div>
+
+                <p class="iac-note">Unser Standard: <b>Cu-ETP ≥ 100 % IACS</b> — jede Charge spektrometrisch
+                bestätigt, jeder Wert im Werkstoffpapier nachlesbar.</p>
+            </div>
+
+            <div class="molten-band reveal" style="--d:.1s">
+                <img src="images/molten-clouds.jpg" alt="Glühende Kupferwolken beim Guss" data-plx-inner="0.12" loading="lazy">
+                <span>GUESSCHMELZE · 1.084,6 °C · CHARGE #C-2018</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== C-02 MATERIAL-PANORAMA (horizontal, scroll-driven) ===== -->
+<section class="hwrap bp-grid" id="metalle">
+    <div class="hstage">
+        <div class="htrack" id="htrack">
+
+            <article class="hpanel">
+                <span class="hp-ghost">01</span>
+                <div class="hp-media">
+                    <span class="hp-label cu">CU · KATHODE</span>
+                    <img src="images/cathode-rack.jpg" alt="Rack mit Kupferkathoden-Starterblechen" data-plx-inner="0.1" loading="lazy">
+                </div>
+                <div class="hp-body">
+                    <span class="hp-idx">PANEL 01 / 04 — BASIS</span>
+                    <h3 class="hp-title">Kathoden<em>.</em></h3>
+                    <p class="hp-text">Elektrolytkupfer Cu-ETP, ≥ 99,99 %: die Rohform jeder Leitung.
+                    Geliefert als Bund, als Blechzuschnitt oder als Gussvormaterial — mit Chargenpass.</p>
+                    <div class="hp-chips">
+                        <span class="v">≥ 99,99 % Cu</span><span>EN 1652</span><span>2.0060</span><span>BUND À 2 t</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="hpanel">
+                <span class="hp-ghost">02</span>
+                <div class="hp-media">
+                    <span class="hp-label">AG · EINKRISTALL</span>
+                    <img src="images/silver-crystal.jpg" alt="Silber-Einkristall — dendritische Struktur" data-plx-inner="0.1" loading="lazy">
+                </div>
+                <div class="hp-body">
+                    <span class="hp-idx">PANEL 02 / 04 — EDEL</span>
+                    <h3 class="hp-title">Feinsilber<em> 999</em></h3>
+                    <p class="hp-text">Dendritische Kristalle, Granulat oder Barren: Silber in Reinform
+                    für Kontakt, Beschichtung und Depot. 105 % IACS — der Maßstab aller Leiter.</p>
+                    <div class="hp-chips">
+                        <span class="v">999 / 1000</span><span>105 % IACS</span><span>GRANULAT · BARGRAIN</span><span>SEALED</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="hpanel">
+                <span class="hp-ghost">03</span>
+                <div class="hp-media">
+                    <span class="hp-label cu">CU · HALBZEUG</span>
+                    <img src="images/wire-piles.jpg" alt="Regal mit gerolltem Kupferdraht" data-plx-inner="0.1" loading="lazy">
+                </div>
+                <div class="hp-body">
+                    <span class="hp-idx">PANEL 03 / 04 — FORM</span>
+                    <h3 class="hp-title">Draht &amp; <em>Schiene</em></h3>
+                    <p class="hp-text">Vom 8-mm-Kathodendraht bis zur 2500-A-Sammelschiene: Wir ziehen,
+                    walzen und kanten — auf Handelsmaß oder Zeichnung, halbhart oder weich.</p>
+                    <div class="hp-chips">
+                        <span class="v">8,0 mm DRAHT</span><span>Busbar 10×30–100×10</span><span>O60 · H14</span><span>AUF MASS</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="hpanel">
+                <span class="hp-ghost">04</span>
+                <div class="hp-media">
+                    <span class="hp-label">AG · TRESOR</span>
+                    <img src="images/silver-ingots.jpg" alt="Historische Silberbarren aus dem Erfurter Schatz" data-plx-inner="0.1" loading="lazy">
+                </div>
+                <div class="hp-body">
+                    <span class="hp-idx">PANEL 04 / 04 — SICHER</span>
+                    <h3 class="hp-title">Depot &amp; <em>Logistik</em></h3>
+                    <p class="hp-text">Versicherte Tresorlagerung, Seefest-Verpackung, JIT-Lieferung an
+                    die Fertigungslinie — oder direkter Versand an Ihr Depot. Dokumentiert bis zur Charge.</p>
+                    <div class="hp-chips">
+                        <span class="v">VERSICHERT</span><span>JIT · 48 H</span><span>SEEFEST</span><span>CHARGENPASS</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+        <div class="hs-progress">
+            <span id="hsIdx">01 / 04</span>
+            <span class="hs-bar"><i id="hsBar"></i></span>
+            <span>SCROLL → HORIZONTAL</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== C-03 COMPARISON Cu ⇄ Ag ===== -->
+<section class="sec cmp-sec" id="vergleich" data-idx="C-03 · Vergleich">
+    <span class="sec-tag reveal">C-03 · Materialvergleich</span>
+    <h2 class="sec-title reveal" style="--d:.06s">Kupfer <em>⇄</em> Silber</h2>
+    <p class="sec-lede reveal" style="--d:.14s">Zwei Leiter, ein Ziel. <b>Ziehen Sie den Regler</b> —
+    und vergleichen Sie die Rohformen direkt: Kathodenblech gegen Feinsilber-Depotware.</p>
+
+    <div class="cmp reveal" id="cmp" style="--d:.2s">
+        <img class="base" src="images/cathode-rack.jpg" alt="Kupferkathoden — Basis des Vergleichs">
+        <div class="top-layer" id="cmpTop">
+            <img src="images/silver-ingots.jpg" alt="Feinsilber-Barren — Vergleichsschicht">
+        </div>
+        <span class="lab cu">CU 99,99<small>KATHODEN-RACK</small></span>
+        <span class="lab ag">AG 999<small>FEINSILBER-BARREN</small></span>
+        <div class="cmp-handle" aria-hidden="true">◆</div>
+        <div class="cmp-read" id="cmpRead">SPLIT <b>50 : 50</b> — ZIEHEN</div>
+        <input class="cmp-range" id="cmpRange" type="range" min="0" max="100" value="50" aria-label="Vergleichsregler Kupfer zu Silber">
+    </div>
+</section>
+
+<!-- ===== C-04 DATENBLÄTTER ===== -->
+<section class="sec" id="datenblaetter" style="background:var(--panel);" data-idx="C-04 · Dokumente">
+    <span class="sec-tag reveal">C-04 · Dokumente</span>
+    <h2 class="sec-title reveal" style="--d:.06s">Daten<em>blätter</em></h2>
+    <p class="sec-lede reveal" style="--d:.14s">Vier Standardpositionen, sofort verfügbar.
+    Jede Position ein <b>Werkstoffpass</b>: Analyse, Norm, Härte, Preis — Erwerb über den Handelsplatz.</p>
+
+    <div class="sheets">
+        <article class="sheet reveal tilt">
+            <span class="stamp">GEPRÜFT</span>
+            <div class="sheet-head"><b>DOC CB-1000</b><span>REV 4 · MMXXV</span></div>
+            <div class="sheet-main">
+                <img class="sheet-swatch" src="images/cathode-rack.jpg" alt="Musterswatch Kathode">
+                <div>
+                    <h3>Kathoden-Bund</h3>
+                    <p class="sheet-desc">Elektrolytkupfer Cu-ETP, 2.000-kg-Bund, gestapelt &amp; umschnürt.</p>
+                    <div class="spec">
+                        <div><span>REINHEIT</span><b>≥ 99,99 % Cu</b></div>
+                        <div><span>NORM</span><b>EN 1652 · 2.0060</b></div>
+                        <div><span>LEITWERT</span><b>100 % IACS</b></div>
+                        <div><span>VERFÜGBAR</span><b>48 H AB LAGER</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-foot">
+                <div class="sheet-price">9 240 €<small>/ BUND · AB WERK</small></div>
+                <div class="barcode"></div>
+            </div>
+            <a class="btn btn-ghost" style="margin:16px 20px 0;" href="https://ebay.de" target="_blank" rel="noopener">Erwerben →</a>
+        </article>
+
+        <article class="sheet reveal tilt" style="--d:.08s">
+            <span class="stamp">GEPRÜFT</span>
+            <div class="sheet-head"><b>DOC CW-080</b><span>REV 2 · MMXXV</span></div>
+            <div class="sheet-main">
+                <img class="sheet-swatch" src="images/wire-crystals.jpg" alt="Musterswatch Draht">
+                <div>
+                    <h3>Kathoden-Draht 8,0</h3>
+                    <p class="sheet-desc">8,0 mm Kupferdraht, weich gezogen, auf Trommel 80 kg.</p>
+                    <div class="spec">
+                        <div><span>DURCHMESSER</span><b>8,0 mm ± 0,1</b></div>
+                        <div><span>ZUSTAND</span><b>O60 — WEICH</b></div>
+                        <div><span>LEITWERT</span><b>≥ 100 % IACS</b></div>
+                        <div><span>TROMMEL</span><b>80 KG · SEEFEST</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-foot">
+                <div class="sheet-price">612 €<small>/ TROMMEL</small></div>
+                <div class="barcode"></div>
+            </div>
+            <a class="btn btn-ghost" style="margin:16px 20px 0;" href="https://ebay.de" target="_blank" rel="noopener">Erwerben →</a>
+        </article>
+
+        <article class="sheet reveal tilt" style="--d:.16s">
+            <span class="stamp">999 FEIN</span>
+            <div class="sheet-head"><b>DOC SB-500</b><span>REV 3 · MMXXV</span></div>
+            <div class="sheet-main">
+                <img class="sheet-swatch" src="images/silver-ingots.jpg" alt="Musterswatch Silberbarren">
+                <div>
+                    <h3>Feinsilber-Barren</h3>
+                    <p class="sheet-desc">500 g Gußbarren, 999/1000, gestempelt &amp; versiegelt mit Zeugnis.</p>
+                    <div class="spec">
+                        <div><span>FEINHEIT</span><b>999 / 1000 Ag</b></div>
+                        <div><span>GEWICHT</span><b>500 g NOMINAL</b></div>
+                        <div><span>ZEUGNIS</span><b>ANALYSE + SIEGEL</b></div>
+                        <div><span>VERWAHRUNG</span><b>OPTIONAL TRESOR</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-foot">
+                <div class="sheet-price">519 €<small>/ STÜCK</small></div>
+                <div class="barcode"></div>
+            </div>
+            <a class="btn btn-ghost" style="margin:16px 20px 0;" href="https://ebay.de" target="_blank" rel="noopener">Erwerben →</a>
+        </article>
+
+        <article class="sheet reveal tilt" style="--d:.24s">
+            <span class="stamp">999 FEIN</span>
+            <div class="sheet-head"><b>DOC SG-250</b><span>REV 1 · MMXXV</span></div>
+            <div class="sheet-main">
+                <img class="sheet-swatch" src="images/silver-crystal.jpg" alt="Musterswatch Silberkristall">
+                <div>
+                    <h3>Silber-Kristallgranulat</h3>
+                    <p class="sheet-desc">Dendritisches Granulat 999 für Galvanik &amp; Kontaktwerkstoffe.</p>
+                    <div class="spec">
+                        <div><span>KÖRNUNG</span><b>2–6 mm DENDRIT</b></div>
+                        <div><span>FEINHEIT</span><b>999 / 1000</b></div>
+                        <div><span>LEITWERT</span><b>105 % IACS</b></div>
+                        <div><span>GEBINDE</span><b>5 KG · PE-SEALED</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-foot">
+                <div class="sheet-price">4 690 €<small>/ GEBINDE</small></div>
+                <div class="barcode"></div>
+            </div>
+            <a class="btn btn-ghost" style="margin:16px 20px 0;" href="https://ebay.de" target="_blank" rel="noopener">Erwerben →</a>
+        </article>
+    </div>
+</section>
+
+<!-- ===== C-05 PROZESS ===== -->
+<section class="sec" id="prozess" data-idx="C-05 · Stromlauf">
+    <span class="sec-tag reveal">C-05 · Stromlauf</span>
+    <h2 class="sec-title reveal" style="--d:.06s">Vier Stationen,<br><em>ein Stromkreis</em></h2>
+
+    <div class="flow reveal" id="flow">
+        <div class="flow-line"><i></i></div>
+        <div class="flow-steps">
+            <div class="fstep reveal" style="--d:.05s">
+                <span class="fnode">C·1</span>
+                <span class="fk">Station Eins</span>
+                <h3>Beschaffung</h3>
+                <p>Kathoden &amp; Feinsilber aus auditierten EU-Raffinerien — mit Chargenpass ab Herstellung.</p>
+            </div>
+            <div class="fstep reveal" style="--d:.15s">
+                <span class="fnode">C·2</span>
+                <span class="fk">Station Zwei</span>
+                <h3>Formgebung</h3>
+                <p>Ziehen, Walzen, Kanten: Draht, Blech und Busbar auf Handelsmaß oder Zeichnung.</p>
+            </div>
+            <div class="fstep reveal" style="--d:.25s">
+                <span class="fnode">C·3</span>
+                <span class="fk">Station Drei</span>
+                <h3>Analyse</h3>
+                <p>Spektrometrie auf IACS, Reinheit und Härte — Werkstoffpapier je Charge, revisionssicher.</p>
+            </div>
+            <div class="fstep reveal" style="--d:.35s">
+                <span class="fnode">C·4</span>
+                <span class="fk">Station Vier</span>
+                <h3>Auslieferung</h3>
+                <p>JIT an die Linie, seefest ins Ausland oder versichert ins Depot — binnen 48 Stunden.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FIXED PARALLAX BAND ===== -->
+<section class="band">
+    <div>
+        <span class="bk reveal">MATTERNETT · SEIT 2018 · MÜNCHEN</span>
+        <h2 class="reveal" style="--d:.1s">Strom braucht <em>Material</em>.</h2>
+        <p class="reveal" style="--d:.2s">N 48°08′ E 011°34′ · CURICOR WERKSTOFFKONTOR · CU — AG — HALBZEUG</p>
+    </div>
+</section>
+
+<!-- ===== C-06 KONTAKT ===== -->
+<section class="sec" id="kontakt" data-idx="C-06 · Uplink">
+    <div class="kontakt">
+        <div>
+            <span class="sec-tag reveal">C-06 · Uplink</span>
+            <h2 class="sec-title reveal" style="--d:.06s">Anfrage<br><em>senden</em></h2>
+            <p class="sec-lede reveal" style="--d:.14s">Metall, Form, Menge — wir melden uns
+            <b>innerhalb eines Werktags</b> mit Angebot und Werkstoffpapieren.</p>
+
+            <div class="tele reveal" style="--d:.2s">
+                <div class="tele-row"><span>Leitung</span><b><a href="mailto:uplink@curicor.de">uplink@curicor.de</a></b></div>
+                <div class="tele-row"><span>Funk</span><b>+49 89 200 20-20 · Mo–Fr 8–18</b></div>
+                <div class="tele-row"><span>Standort</span><b>Werkstraße 20 · 80331 München</b></div>
+                <div class="tele-row"><span>Handel</span><b><a href="https://ebay.de" target="_blank" rel="noopener">ebay.de/curicor</a></b></div>
+            </div>
+        </div>
+
+        <form class="txform reveal" style="--d:.26s" action="mailto:uplink@curicor.de" method="post" enctype="text/plain">
+            <h3>Transmission</h3>
+            <div class="tx-sub">Antwort ≤ 24 h · verschlüsselt auf Anfrage</div>
+            <label for="txName">Firma / Name</label>
+            <input id="txName" name="name" type="text" required placeholder="z. B. Nordlicht Elektro GmbH">
+            <label for="txMail">E-Mail</label>
+            <input id="txMail" name="email" type="email" required placeholder="name@firma.de">
+            <label for="txMsg">Bedarf — Metall · Form · Menge</label>
+            <textarea id="txMsg" name="bedarf" placeholder="z. B. 500 kg Cu-Draht 8,0 mm weich, Lieferung KW 24"></textarea>
+            <button class="btn btn-volt" type="submit">Übertragen ↗</button>
+        </form>
+    </div>
+</section>
+
+<!-- ===== FOOTER STATUS BAR ===== -->
+<footer class="footer">
+    <div class="footer-word">CURICOR</div>
+    <div class="statusbar">
+        <span>© <span id="yr">2025</span> CURICOR Werkstoffkontor — Website 20</span>
+        <span class="ok">System nominal</span>
+        <span>CU 99,99 · AG 999 · 2.0060 · IACS 100+</span>
+        <span><a href="impressum.html">Impressum</a> · <a href="#top">Top ↑</a></span>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
+
+    /* ===== PROGRESS BAR ===== */
+    var prog = document.getElementById('hudProgress');
+
+    /* ===== VERTICAL PARALLAX ===== */
+    var plxEls = [].slice.call(document.querySelectorAll('[data-plx]'));
+    var plxImgs = [].slice.call(document.querySelectorAll('[data-plx-inner]'));
+    function parallax() {
+        var H = vh();
+        plxEls.forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            var mid = r.top + r.height / 2 - H / 2;
+            el.style.transform = 'translate3d(0,' + (mid * parseFloat(el.dataset.plx)).toFixed(1) + 'px,0)';
+        });
+        plxImgs.forEach(function (img) {
+            var r = img.parentElement.getBoundingClientRect();
+            if (r.bottom < -120 || r.top > H + 120) return;
+            var mid = r.top + r.height / 2 - H / 2;
+            img.style.transform = 'translate3d(0,' + (mid * parseFloat(img.dataset.plxInner)).toFixed(1) + 'px,0)';
+        });
+    }
+
+    /* ===== HORIZONTAL PANORAMA ===== */
+    var hwrap = document.getElementById('metalle');
+    var track = document.getElementById('htrack');
+    var hsBar = document.getElementById('hsBar');
+    var hsIdx = document.getElementById('hsIdx');
+    function hsSetup() {
+        if (!hwrap || !track) return;
+        if (window.innerWidth <= 900) { hwrap.style.height = ''; track.style.transform = ''; return; }
+        var dist = track.scrollWidth - window.innerWidth;
+        hwrap.style.height = (vh() + dist) + 'px';
+        hsUpdate();
+    }
+    function hsUpdate() {
+        if (!hwrap || window.innerWidth <= 900) return;
+        var r = hwrap.getBoundingClientRect();
+        var total = hwrap.offsetHeight - vh();
+        if (total <= 0) return;
+        var p = Math.min(Math.max(-r.top / total, 0), 1);
+        var dist = track.scrollWidth - window.innerWidth;
+        track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
+        if (hsBar) hsBar.style.width = (25 + p * 75).toFixed(2) + '%';
+        if (hsIdx) hsIdx.textContent = '0' + (Math.round(p * 3) + 1) + ' / 04';
+    }
+
+    /* ===== RAF LOOP ===== */
+    var ticking = false;
+    function tick() {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - vh();
+        var p = max > 0 ? Math.min(window.pageYOffset / max, 1) : 0;
+        if (prog) prog.style.width = (p * 100).toFixed(2) + '%';
+        if (!reduce) parallax();
+        hsUpdate();
+    }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(function () { tick(); ticking = false; }); }
+    }, { passive: true });
+    window.addEventListener('resize', function () { hsSetup(); tick(); });
+
+    /* ===== REVEALS ===== */
+    var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.14, rootMargin: '0px 0px -5% 0px' });
+    document.querySelectorAll('.reveal, .fstep').forEach(function (el) { io.observe(el); });
+
+    /* ===== COUNTERS (data-count, optional data-dec=2 → /100) ===== */
+    var cio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            var el = e.target, target = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || '0', 10);
+            var t0 = null, dur = 1500;
+            function fr(ts) {
+                if (!t0) t0 = ts;
+                var k = Math.min((ts - t0) / dur, 1), ease = 1 - Math.pow(1 - k, 3), val;
+                if (dec) { val = target * ease / 100; el.textContent = val.toLocaleString('de-DE', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+                else { el.textContent = Math.round(target * ease).toLocaleString('de-DE'); }
+                if (k < 1) requestAnimationFrame(fr);
+            }
+            requestAnimationFrame(fr);
+            cio.unobserve(el);
+        });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+
+    /* ===== IACS BARS ===== */
+    var iacsBox = document.querySelector('.iacs');
+    if (iacsBox) {
+        var iio = new IntersectionObserver(function (es) {
+            es.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                [].forEach.call(iacsBox.querySelectorAll('[data-iacs]'), function (row, i) {
+                    var pct = parseInt(row.dataset.iacs, 10);
+                    setTimeout(function () {
+                        row.querySelector('.iac-fill').style.width = Math.min(pct, 100) + '%';
+                        var t0 = null;
+                        function fr(ts) {
+                            if (!t0) t0 = ts;
+                            var k = Math.min((ts - t0) / 1300, 1);
+                            row.querySelector('.pct').textContent = Math.round(pct * (1 - Math.pow(1 - k, 3))) + ' %';
+                            if (k < 1) requestAnimationFrame(fr);
+                        }
+                        requestAnimationFrame(fr);
+                    }, i * 160);
+                });
+                iio.disconnect();
+            });
+        }, { threshold: 0.4 });
+        iio.observe(iacsBox);
+    }
+
+    /* ===== FLOW TRIGGER ===== */
+    var flow = document.getElementById('flow');
+    if (flow) {
+        var fio = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { flow.classList.add('in'); fio.disconnect(); } });
+        }, { threshold: 0.3 });
+        fio.observe(flow);
+    }
+
+    /* ===== COMPARISON SLIDER ===== */
+    var range = document.getElementById('cmpRange');
+    var cmpTop = document.getElementById('cmpTop');
+    var cmpRead = document.getElementById('cmpRead');
+    if (range && cmpTop) {
+        var handle = cmpTop.parentElement.querySelector('.cmp-handle');
+        var topImg = cmpTop.querySelector('img');
+        var cmpApply = function () {
+            var v = parseInt(range.value, 10);
+            cmpTop.style.width = v + '%';
+            topImg.style.width = (10000 / v) + '%';
+            if (handle) handle.style.left = v + '%';
+            if (cmpRead) cmpRead.innerHTML = 'SPLIT <b>' + v + ' : ' + (100 - v) + '</b> — ZIEHEN';
+        };
+        range.addEventListener('input', cmpApply);
+        cmpApply();
+    }
+
+    /* ===== LIVE HUD + CLOCK ===== */
+    var liveCu = document.getElementById('liveCu'), liveAg = document.getElementById('liveAg');
+    var cu = 9184, ag = 38.42;
+    setInterval(function () {
+        cu = Math.max(8900, Math.min(9500, cu + (Math.random() - 0.5) * 14));
+        ag = Math.max(37.5, Math.min(39.6, ag + (Math.random() - 0.5) * 0.08));
+        if (liveCu) liveCu.textContent = Math.round(cu).toLocaleString('de-DE') + ' €/t';
+        if (liveAg) liveAg.textContent = ag.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €/kg';
+    }, 1400);
+    var clock = document.getElementById('hudClock');
+    setInterval(function () {
+        if (clock) clock.textContent = new Date().toLocaleTimeString('de-DE');
+    }, 1000);
+
+    /* ===== CROSSHAIR CURSOR ===== */
+    var xh = document.getElementById('xhair'), coords = document.getElementById('xhCoords');
+    if (xh && window.matchMedia('(pointer: fine)').matches && !reduce) {
+        var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+        var loop = function () {
+            cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+            xh.style.transform = 'translate3d(' + (cx - 17) + 'px,' + (cy - 17) + 'px,0)';
+            raf = requestAnimationFrame(loop);
+        };
+        document.addEventListener('mousemove', function (ev) {
+            tx = ev.clientX; ty = ev.clientY;
+            document.body.classList.add('xh-on');
+            if (coords) coords.textContent = 'X:' + String(Math.round(tx)).padStart(4, '0') + ' · Y:' + String(Math.round(ty)).padStart(4, '0');
+            if (!raf) loop();
+        });
+    }
+
+    /* ===== CONDUCTIVITY PROBE (hero) ===== */
+    var heroEl = document.querySelector('.hero');
+    var probe = document.getElementById('probe');
+    var probeTag = document.getElementById('probeTag');
+    if (heroEl && probe && window.matchMedia('(pointer: fine)').matches && !reduce) {
+        heroEl.addEventListener('mousemove', function (ev) {
+            var r = heroEl.getBoundingClientRect();
+            var x = ev.clientX - r.left;
+            probe.style.left = x + 'px';
+            var pct = Math.round(61 + 44 * Math.min(Math.max(x / r.width, 0), 1));
+            probeTag.textContent = pct + ' % IACS';
+        });
+        heroEl.addEventListener('mouseenter', function () { probe.classList.add('on'); });
+        heroEl.addEventListener('mouseleave', function () { probe.classList.remove('on'); });
+    }
+
+    /* ===== YEAR ===== */
+    var yr = document.getElementById('yr');
+    if (yr) yr.textContent = new Date().getFullYear();
+
+    hsSetup();
+    tick();
+})();
+</script>
+</body>
+</html>
