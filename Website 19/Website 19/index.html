@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPERIAL TRUST — Edelmetall-Kontor · Kupfer 99,99 % &amp; Feinsilber 999</title>
+<meta name="description" content="IMPERIAL TRUST — Kontor für Edel- und Industriemetalle. Kupfer 99,99 %, Feinsilber 999 und geprüfte Halbzeuge in imperialer Güte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Baskervville:ital@0;1&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --noir: #0E0910;
+    --noir-2: #150E19;
+    --noir-3: #1C1322;
+    --noir-4: #241830;
+    --line: rgba(199, 205, 214, 0.13);
+    --line-soft: rgba(199, 205, 214, 0.07);
+    --silver: #C7CDD4;
+    --silver-bright: #EDF0F4;
+    --silver-dim: #8B93A0;
+    --copper: #C97E52;
+    --copper-soft: #E3A97F;
+    --porcelain: #ECEAE6;
+    --porcelain-2: #E2DFDA;
+    --ink: #17131A;
+    --rail-w: 78px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Nunito Sans', 'Segoe UI', sans-serif;
+    font-weight: 300;
+    background: var(--noir);
+    color: var(--silver);
+    line-height: 1.7;
+    overflow-x: hidden;
+    letter-spacing: 0.01em;
+}
+
+h1, h2, h3, .display { font-family: 'Italiana', 'Times New Roman', serif; font-weight: 400; line-height: 1.04; }
+em, .serif { font-family: 'Baskervville', Georgia, serif; }
+
+::selection { background: rgba(201, 126, 82, 0.35); color: #fff; }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* grain + vignette atmosphere */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    background:
+        radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0,0,0,0.42) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+}
+
+/* ===== VERTICAL RAIL (unique navigation) ===== */
+.rail {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--rail-w);
+    z-index: 50;
+    border-right: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--noir-2), var(--noir));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+}
+
+.rail-mono {
+    font-family: 'Italiana', serif;
+    font-size: 21px;
+    letter-spacing: 3px;
+    color: var(--silver-bright);
+    border: 1px solid var(--line);
+    width: 42px; height: 42px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.4s var(--ease);
+}
+.rail-mono:hover { border-color: var(--copper); color: var(--copper-soft); transform: rotate(8deg); }
+
+.rail-word {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 10px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: var(--silver-dim);
+    font-weight: 600;
+    display: flex; align-items: center; gap: 16px;
+}
+.rail-word::before, .rail-word::after {
+    content: '';
+    width: 1px; height: 54px;
+    background: linear-gradient(180deg, transparent, var(--copper), transparent);
+}
+
+.rail-dots { display: flex; flex-direction: column; gap: 18px; }
+.rail-dots a {
+    font-family: 'Baskervville', serif;
+    font-size: 13px;
+    color: var(--silver-dim);
+    text-decoration: none;
+    position: relative;
+    transition: 0.35s var(--ease);
+    text-align: center;
+    width: 26px;
+}
+.rail-dots a:hover, .rail-dots a.on { color: var(--copper-soft); transform: scale(1.25); }
+
+.rail-progress {
+    position: relative;
+    width: 1px; height: 110px;
+    background: var(--line);
+}
+.rail-progress span {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 0%;
+    background: linear-gradient(180deg, var(--copper-soft), var(--copper));
+    transition: height 0.12s linear;
+}
+.rail-pct {
+    font-size: 9px; letter-spacing: 2px;
+    color: var(--silver-dim);
+    font-weight: 600;
+}
+
+.page { margin-left: var(--rail-w); }
+
+/* ===== HERO ===== */
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.12fr 0.88fr;
+    align-items: center;
+    gap: 40px;
+    padding: 120px 6vw 90px calc(4vw + 10px);
+    overflow: hidden;
+    background:
+        radial-gradient(55% 45% at 82% 18%, rgba(201, 126, 82, 0.10), transparent 70%),
+        radial-gradient(40% 55% at 12% 80%, rgba(199, 205, 214, 0.05), transparent 70%),
+        var(--noir);
+}
+
+.hero-ghost {
+    position: absolute;
+    right: -2vw; top: 6vh;
+    font-family: 'Italiana', serif;
+    font-size: clamp(180px, 26vw, 420px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(199, 205, 214, 0.08);
+    user-select: none;
+    pointer-events: none;
+}
+
+.hero-copy { position: relative; z-index: 2; max-width: 640px; }
+
+.overline {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--copper-soft); font-weight: 600;
+    margin-bottom: 34px;
+}
+.overline::before { content: ''; width: 46px; height: 1px; background: var(--copper); }
+
+.hero-title {
+    font-size: clamp(64px, 9.2vw, 148px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: transparent;
+    background: linear-gradient(102deg, #F4F6F9 0%, #A9B2BD 34%, #EDF0F4 52%, #8E96A3 72%, #DDE2E9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.hero-title .row2 {
+    display: block;
+    color: transparent;
+    background: none;
+    -webkit-text-stroke: 1px rgba(201, 205, 214, 0.42);
+    letter-spacing: 0.09em;
+}
+
+.hero-sub {
+    margin-top: 30px;
+    font-family: 'Baskervville', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--silver);
+    max-width: 46ch;
+}
+.hero-sub b { color: var(--copper-soft); font-weight: 400; }
+
+.hero-ctas { display: flex; gap: 18px; margin-top: 44px; flex-wrap: wrap; }
+
+.btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 34px;
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    text-decoration: none; font-weight: 700;
+    transition: 0.45s var(--ease);
+    position: relative;
+}
+.btn-solid { background: linear-gradient(120deg, var(--copper-soft), var(--copper)); color: #241305; }
+.btn-solid:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -14px rgba(201, 126, 82, 0.55); }
+.btn-ghost { border: 1px solid var(--line); color: var(--silver-bright); overflow: hidden; }
+.btn-ghost::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(120deg, rgba(201,126,82,0.18), transparent);
+    transform: translateX(-101%); transition: 0.5s var(--ease);
+}
+.btn-ghost:hover { border-color: var(--copper); }
+.btn-ghost:hover::after { transform: translateX(0); }
+
+.hero-specs {
+    display: flex; gap: 34px; flex-wrap: wrap;
+    margin-top: 58px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+.hero-specs div { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--silver-dim); font-weight: 600; }
+.hero-specs strong { display: block; font-family: 'Italiana', serif; font-size: 26px; letter-spacing: 1px; color: var(--silver-bright); font-weight: 400; margin-bottom: 4px; }
+
+/* stacked parallax frames */
+.hero-visual { position: relative; z-index: 2; height: min(78vh, 720px); }
+
+.frame {
+    position: absolute;
+    border: 1px solid var(--line);
+    padding: 12px;
+    background: var(--noir-2);
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+}
+.frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.05); }
+
+.frame-main { right: 4%; top: 0; width: min(62%, 340px); height: 86%; z-index: 2; }
+.frame-behind { left: 0; bottom: 0; width: min(48%, 250px); height: 56%; z-index: 1; opacity: 0.94; }
+
+.frame-chip {
+    position: absolute; z-index: 3;
+    left: 8%; top: 6%;
+    background: rgba(14, 9, 16, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    padding: 14px 20px;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--silver); font-weight: 600;
+}
+.frame-chip strong {
+    display: block; font-family: 'Italiana', serif;
+    font-size: 24px; letter-spacing: 2px;
+    color: var(--copper-soft); font-weight: 400; margin-bottom: 2px;
+}
+
+.frame-rule {
+    position: absolute; z-index: 1;
+    right: 0; top: 46%; width: 38%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--copper), transparent);
+}
+
+/* ===== METAL TICKER ===== */
+.ticker {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--noir-2);
+    overflow: hidden;
+    padding: 16px 0;
+}
+.ticker-track { display: flex; width: max-content; animation: tick 30s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-group { display: flex; align-items: center; white-space: nowrap; }
+.ticker-group span {
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--silver-dim); font-weight: 600;
+    padding: 0 26px;
+    display: inline-flex; align-items: center; gap: 26px;
+}
+.ticker-group span i { font-style: normal; color: var(--copper-soft); font-family: 'Baskervville', serif; letter-spacing: 1px; }
+.ticker-group span::after { content: '✦'; font-size: 9px; color: var(--copper); }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* ===== CHAPTERS ===== */
+.chapter { padding: 130px 6vw 110px calc(4vw + 10px); position: relative; }
+.chapter.tint { background: linear-gradient(180deg, var(--noir), var(--noir-2)); }
+
+.ch-head { display: flex; align-items: baseline; gap: 26px; margin-bottom: 26px; }
+.ch-num {
+    font-family: 'Baskervville', serif;
+    font-size: 15px; color: var(--copper-soft);
+    border: 1px solid rgba(201, 126, 82, 0.4);
+    border-radius: 50%;
+    width: 46px; height: 46px;
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+}
+.ch-label { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--silver-dim); font-weight: 600; }
+
+.ch-title {
+    font-size: clamp(44px, 5.6vw, 88px);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--silver-bright);
+    margin-bottom: 18px;
+}
+.ch-title em { color: transparent; -webkit-text-stroke: 1px rgba(201, 205, 214, 0.45); font-size: 0.62em; letter-spacing: 0.08em; vertical-align: 12%; margin-left: 14px; }
+
+.ch-lede {
+    font-family: 'Baskervville', Georgia, serif; font-style: italic;
+    font-size: clamp(17px, 1.5vw, 21px);
+    color: var(--silver); max-width: 62ch;
+}
+.ch-lede b { color: var(--copper-soft); font-weight: 400; }
+
+/* reveal system */
+.reveal { opacity: 0; transform: translateY(46px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-wipe { clip-path: inset(0 100% 0 0); transition: clip-path 1.1s var(--ease); transition-delay: var(--d, 0s); }
+.reveal-wipe.in { clip-path: inset(0 0 0 0); }
+
+/* ===== METAL PLATES (alternating split panels) ===== */
+.plates { display: flex; flex-direction: column; gap: 0; margin-top: 70px; border-top: 1px solid var(--line); }
+
+.plate {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: stretch;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    min-height: 560px;
+}
+.plate-visual { grid-column: 1 / 6; position: relative; overflow: hidden; }
+.plate:nth-child(even) .plate-visual { grid-column: 8 / 13; order: 2; }
+.plate-body { grid-column: 6 / 13; padding: clamp(36px, 4.5vw, 70px); display: flex; flex-direction: column; justify-content: center; position: relative; }
+.plate:nth-child(even) .plate-body { grid-column: 1 / 8; order: 1; }
+
+.plate-visual img {
+    position: absolute; inset: -12% 0;
+    width: 100%; height: 124%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.06);
+    will-change: transform;
+}
+.plate-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 55%, var(--noir) 100%);
+}
+.plate:nth-child(even) .plate-visual::after { background: linear-gradient(270deg, transparent 55%, var(--noir-2) 100%); }
+
+.plate-ghost {
+    position: absolute; top: 4%; right: 3%;
+    font-family: 'Italiana', serif;
+    font-size: clamp(120px, 14vw, 220px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(199, 205, 214, 0.09);
+    line-height: 1; pointer-events: none;
+}
+
+.plate-tag { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--copper-soft); font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+.plate-tag::after { content: ''; flex: 0 0 60px; height: 1px; background: var(--copper); }
+.plate-title { font-size: clamp(38px, 3.6vw, 60px); color: var(--silver-bright); text-transform: uppercase; letter-spacing: 0.03em; }
+.plate-purity {
+    font-family: 'Baskervville', serif; font-style: italic;
+    font-size: 19px; color: var(--copper-soft); margin-top: 8px;
+}
+
+.spec-table { margin: 34px 0 38px; border-top: 1px solid var(--line-soft); }
+.spec-table div {
+    display: grid; grid-template-columns: 180px 1fr; gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px;
+}
+.spec-table dt { color: var(--silver-dim); text-transform: uppercase; letter-spacing: 2.5px; font-size: 10.5px; font-weight: 700; align-self: center; }
+.spec-table dd { color: var(--silver); }
+
+.plate .btn { align-self: flex-start; }
+
+/* ===== COLLECTION — editorial rows + cursor preview ===== */
+.rows { margin-top: 60px; border-top: 1px solid var(--line); }
+.row-item {
+    display: grid;
+    grid-template-columns: 70px 1.5fr 0.9fr 0.7fr auto;
+    gap: 24px; align-items: center;
+    padding: 30px 10px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    position: relative;
+    transition: 0.4s var(--ease);
+}
+.row-item::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(201, 126, 82, 0.10), transparent 55%);
+    opacity: 0; transition: 0.4s var(--ease);
+}
+.row-item:hover::before { opacity: 1; }
+.row-item:hover { padding-left: 26px; }
+
+.row-idx { font-family: 'Baskervville', serif; font-size: 15px; color: var(--silver-dim); }
+.row-name { font-family: 'Italiana', serif; font-size: clamp(22px, 2.2vw, 32px); color: var(--silver-bright); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.15; }
+.row-name small { display: block; font-family: 'Nunito Sans', sans-serif; font-size: 12px; letter-spacing: 2.5px; color: var(--silver-dim); text-transform: none; margin-top: 6px; }
+.row-metal { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+.row-metal.cu { color: var(--copper-soft); }
+.row-metal.ag { color: var(--silver-bright); }
+.row-price { font-family: 'Italiana', serif; font-size: 24px; color: var(--silver-bright); }
+.row-price small { font-size: 11px; color: var(--silver-dim); font-family: 'Nunito Sans', sans-serif; letter-spacing: 1px; }
+.row-buy {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
+    color: var(--copper-soft);
+    border: 1px solid rgba(201, 126, 82, 0.45);
+    padding: 12px 24px;
+    transition: 0.4s var(--ease);
+    position: relative; z-index: 1;
+}
+.row-item:hover .row-buy { background: var(--copper); color: #241305; border-color: var(--copper); }
+
+.cursor-view {
+    position: fixed; z-index: 60;
+    width: 240px; height: 300px;
+    pointer-events: none;
+    opacity: 0; transform: scale(0.86) rotate(-2deg);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    border: 1px solid var(--line);
+    padding: 8px; background: var(--noir-3);
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.9);
+}
+.cursor-view img { width: 100%; height: 100%; object-fit: cover; }
+.cursor-view.on { opacity: 1; transform: scale(1) rotate(-2deg); }
+
+/* ===== PORCELAIN STANDARDS (light inversion — unique in repo) ===== */
+.standards {
+    background:
+        linear-gradient(180deg, var(--porcelain) 0%, var(--porcelain-2) 100%);
+    color: var(--ink);
+    padding: 130px 6vw 120px calc(4vw + 10px);
+    position: relative;
+    overflow: hidden;
+}
+.standards::before {
+    content: 'STANDARDS';
+    position: absolute; left: -1%; bottom: -4%;
+    font-family: 'Italiana', serif;
+    font-size: clamp(120px, 18vw, 300px);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(23, 19, 26, 0.10);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+}
+.standards .ch-label { color: rgba(23, 19, 26, 0.55); }
+.standards .ch-num { color: #8A4D22; border-color: rgba(138, 77, 34, 0.5); }
+.standards .ch-title { color: var(--ink); }
+.standards .ch-title em { -webkit-text-stroke: 1px rgba(23, 19, 26, 0.4); }
+.standards .ch-lede { color: #3E3844; }
+
+.std-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(23, 19, 26, 0.14);
+    border: 1px solid rgba(23, 19, 26, 0.14);
+    margin-top: 70px;
+}
+.std-cell { background: var(--porcelain); padding: 44px 36px 50px; position: relative; transition: 0.45s var(--ease); }
+.std-cell:hover { background: #F4F2EE; transform: translateY(-6px); }
+.std-num {
+    font-family: 'Italiana', serif;
+    font-size: 58px; color: transparent;
+    -webkit-text-stroke: 1px #8A4D22;
+    line-height: 1;
+}
+.std-cell h3 { font-size: 26px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); margin: 22px 0 12px; }
+.std-cell p { font-size: 14.5px; color: #4A4450; }
+.std-cell::after {
+    content: ''; position: absolute; left: 36px; bottom: 30px;
+    width: 44px; height: 1px; background: #8A4D22;
+    transition: width 0.5s var(--ease);
+}
+.std-cell:hover::after { width: 90px; }
+
+/* vault parallax window */
+.vault-band {
+    position: relative;
+    height: 74vh;
+    overflow: hidden;
+    display: grid; place-items: center;
+    border-top: 1px solid rgba(23, 19, 26, 0.2);
+    border-bottom: 1px solid rgba(23, 19, 26, 0.2);
+}
+.vault-band img {
+    position: absolute; inset: -18% 0;
+    width: 100%; height: 136%;
+    object-fit: cover;
+    filter: grayscale(0.35) contrast(1.08) brightness(0.6);
+    will-change: transform;
+}
+.vault-quote {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 8vw;
+    color: #F2EFEA;
+}
+.vault-quote p {
+    font-family: 'Baskervville', Georgia, serif; font-style: italic;
+    font-size: clamp(24px, 3.4vw, 46px);
+    line-height: 1.35;
+    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+}
+.vault-quote cite {
+    display: block; margin-top: 26px;
+    font-style: normal;
+    font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--copper-soft); font-weight: 700;
+}
+
+/* ===== PROCESS TIMELINE ===== */
+.process { padding: 130px 6vw 120px calc(4vw + 10px); }
+.steps { margin-top: 70px; position: relative; max-width: 860px; }
+.steps::before {
+    content: ''; position: absolute;
+    left: 23px; top: 10px; bottom: 10px;
+    width: 1px; background: var(--line);
+}
+.steps::after {
+    content: ''; position: absolute;
+    left: 23px; top: 10px;
+    width: 1px; height: var(--line-fill, 0%);
+    background: linear-gradient(180deg, var(--copper-soft), var(--copper));
+    transition: height 0.2s linear;
+}
+.step {
+    display: grid; grid-template-columns: 48px 1fr;
+    gap: 30px; padding: 26px 0;
+    align-items: start;
+}
+.step-dot {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--noir-2);
+    display: grid; place-items: center;
+    font-family: 'Baskervville', serif;
+    font-size: 14px; color: var(--silver-dim);
+    transition: 0.5s var(--ease);
+    position: relative; z-index: 1;
+}
+.step.in .step-dot { border-color: var(--copper); color: var(--copper-soft); box-shadow: 0 0 0 6px rgba(201, 126, 82, 0.08); }
+.step h3 { font-size: 27px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--silver-bright); }
+.step p { color: var(--silver-dim); max-width: 56ch; margin-top: 8px; font-size: 15px; }
+.step .step-k {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--copper-soft); font-weight: 700;
+    display: block; margin-bottom: 6px;
+}
+
+/* ===== QUOTE BAND — molten copper, fixed parallax ===== */
+.ember {
+    position: relative;
+    min-height: 78vh;
+    display: grid; place-items: center;
+    background-image: linear-gradient(rgba(14, 9, 16, 0.55), rgba(14, 9, 16, 0.82)), url('images/molten-copper.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 110px 8vw;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+.ember .ember-kicker { font-size: 11px; letter-spacing: 7px; text-transform: uppercase; color: var(--copper-soft); font-weight: 700; }
+.ember h2 {
+    font-size: clamp(40px, 6vw, 96px);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: transparent;
+    background: linear-gradient(105deg, #F4F6F9, #A9B2BD 40%, #EDF0F4 60%, #9AA1AC 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin: 22px 0 26px;
+}
+.ember p { font-family: 'Baskervville', serif; font-style: italic; font-size: clamp(16px, 1.5vw, 20px); color: var(--silver); max-width: 60ch; margin: 0 auto; }
+
+/* ===== CONTACT + FOOTER ===== */
+.contact { padding: 140px 6vw 120px calc(4vw + 10px); text-align: center; position: relative; overflow: hidden; }
+.contact .overline { justify-content: center; }
+.contact .overline::after { content: ''; width: 46px; height: 1px; background: var(--copper); }
+.contact h2 { font-size: clamp(48px, 7vw, 118px); text-transform: uppercase; color: var(--silver-bright); letter-spacing: 0.03em; }
+.contact h2 em { color: transparent; -webkit-text-stroke: 1px rgba(201, 205, 214, 0.5); }
+.contact p { font-family: 'Baskervville', serif; font-style: italic; color: var(--silver-dim); margin: 24px auto 44px; max-width: 52ch; font-size: 18px; }
+.contact-meta {
+    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+    margin-top: 70px; padding-top: 34px;
+    border-top: 1px solid var(--line);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--silver-dim); font-weight: 600;
+}
+.contact-meta strong { display: block; font-family: 'Italiana', serif; font-size: 22px; letter-spacing: 2px; color: var(--silver-bright); font-weight: 400; margin-bottom: 4px; }
+
+.footer {
+    border-top: 1px solid var(--line);
+    padding: 60px 6vw 46px calc(4vw + 10px);
+    background: var(--noir-2);
+    overflow: hidden;
+}
+.footer-top { display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; margin-bottom: 46px; }
+.footer-nav { display: flex; gap: 34px; flex-wrap: wrap; }
+.footer-nav a {
+    font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+    color: var(--silver-dim); text-decoration: none; font-weight: 600;
+    transition: 0.3s var(--ease);
+}
+.footer-nav a:hover { color: var(--copper-soft); }
+.footer-word {
+    font-family: 'Italiana', serif;
+    font-size: clamp(64px, 12.5vw, 220px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(199, 205, 214, 0.16);
+    white-space: nowrap;
+    user-select: none;
+    transition: -webkit-text-stroke-color 0.6s var(--ease);
+}
+.footer-word:hover { -webkit-text-stroke-color: rgba(201, 126, 82, 0.55); }
+.footer-base {
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    margin-top: 40px; padding-top: 26px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 11px; letter-spacing: 2px; color: var(--silver-dim);
+}
+.footer-base a { color: var(--silver-dim); text-decoration: none; }
+.footer-base a:hover { color: var(--copper-soft); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1180px) {
+    .row-item { grid-template-columns: 44px 1.4fr 0.8fr auto; }
+    .row-metal { display: none; }
+    .plate { grid-template-columns: 1fr; min-height: 0; }
+    .plate-visual, .plate:nth-child(even) .plate-visual { grid-column: 1 / -1; order: 0; height: 320px; }
+    .plate-body, .plate:nth-child(even) .plate-body { grid-column: 1 / -1; order: 1; }
+    .plate-visual::after, .plate:nth-child(even) .plate-visual::after { background: linear-gradient(180deg, transparent 40%, var(--noir) 100%); }
+    .spec-table div { grid-template-columns: 140px 1fr; }
+}
+@media (max-width: 900px) {
+    :root { --rail-w: 0px; }
+    .rail { display: none; }
+    .page { margin-left: 0; }
+    .hero { grid-template-columns: 1fr; padding-top: 90px; min-height: auto; }
+    .hero-visual { height: 62vh; margin-top: 30px; }
+    .hero-ghost { font-size: 40vw; }
+    .std-grid { grid-template-columns: 1fr; }
+    .steps::before, .steps::after { left: 18px; }
+    .step { grid-template-columns: 38px 1fr; gap: 20px; }
+    .ember { background-attachment: scroll; }
+    .chapter, .standards, .process, .contact { padding-left: 6vw; padding-right: 6vw; }
+}
+@media (max-width: 640px) {
+    .row-item { grid-template-columns: 1fr auto; padding: 24px 4px; }
+    .row-idx { display: none; }
+    .row-name { grid-column: 1 / -1; }
+    .row-price { justify-self: start; }
+    .row-price small { display: block; }
+    .hero-specs { gap: 22px; }
+    .frame-main { width: 66%; }
+    .cursor-view { display: none; }
+    .spec-table div { grid-template-columns: 1fr; gap: 4px; }
+    .contact-meta { gap: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+    .reveal, .reveal-wipe { opacity: 1; transform: none; clip-path: none; transition: none; }
+    html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<!-- ===== VERTICAL RAIL ===== -->
+<nav class="rail" aria-label="Hauptnavigation">
+    <a class="rail-mono" href="#top">IT</a>
+    <div class="rail-word">Imperial&nbsp;Trust&nbsp;·&nbsp;MMXII</div>
+    <div class="rail-dots">
+        <a href="#kontor" title="Das Kontor">Ⅰ</a>
+        <a href="#metalle" title="Metalle">Ⅱ</a>
+        <a href="#kollektion" title="Kollektion">Ⅲ</a>
+        <a href="#prozess" title="Prozess">Ⅳ</a>
+        <a href="#kontakt" title="Kontakt">Ⅴ</a>
+    </div>
+    <div class="rail-progress"><span id="railFill"></span></div>
+    <div class="rail-pct" id="railPct">00</div>
+</nav>
+
+<div class="page" id="top">
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-ghost" data-plx="-0.05">XIX</div>
+
+    <div class="hero-copy">
+        <span class="overline reveal">Edelmetall-Kontor · Est. MMXII</span>
+        <h1 class="hero-title reveal" style="--d:.08s">Imperial<span class="row2">Trust</span></h1>
+        <p class="hero-sub reveal" style="--d:.18s">Ein Haus für <b>Kupfer 99,99 %</b> und <b>Feinsilber 999</b> —
+        geprüfte Materialien, dokumentierte Herkunft und eine Güte, die man der Tradition des Kontors vertraut.</p>
+
+        <div class="hero-ctas reveal" style="--d:.28s">
+            <a class="btn btn-solid" href="#kollektion">Kollektion ansehen</a>
+            <a class="btn btn-ghost" href="#metalle">Die Metalle</a>
+        </div>
+
+        <div class="hero-specs reveal" style="--d:.38s">
+            <div><strong id="cntPurity">99,99</strong>Reinheit&nbsp;%</div>
+            <div><strong id="cntAlloy">2</strong>Edel-Metalle</div>
+            <div><strong id="cntClients">640</strong>Kontor-Kunden</div>
+            <div><strong>DE</strong>Herkunft</div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="frame-rule"></div>
+        <div class="frame frame-behind" data-plx="0.10">
+            <img src="images/silver-ingot.jpg" alt="Feinsilber-Barren 999 aus dem Kontor-Bestand" loading="eager">
+        </div>
+        <div class="frame frame-main" data-plx="-0.06">
+            <img src="images/copper-bar.jpg" alt="1 Kilo Feinkupfer-Barren, 999 Feinheit" loading="eager">
+        </div>
+        <div class="frame-chip" data-plx="0.04">
+            <strong>Cu · Ag</strong>
+            Imperialer Standard
+        </div>
+    </div>
+</header>
+
+<!-- ===== METAL TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+        <div class="ticker-group">
+            <span>Cu 99,99 <i>Kupferkathode</i></span>
+            <span>Ag 999 <i>Feinsilber</i></span>
+            <span>Cu-ETP <i>Drähte &amp; Bleche</i></span>
+            <span>Ag-Granulat <i>999 fein</i></span>
+            <span>EN 1173 <i>Norm geprüft</i></span>
+            <span>Imperial Trust <i>Edelmetall-Kontor</i></span>
+        </div>
+        <div class="ticker-group">
+            <span>Cu 99,99 <i>Kupferkathode</i></span>
+            <span>Ag 999 <i>Feinsilber</i></span>
+            <span>Cu-ETP <i>Drähte &amp; Bleche</i></span>
+            <span>Ag-Granulat <i>999 fein</i></span>
+            <span>EN 1173 <i>Norm geprüft</i></span>
+            <span>Imperial Trust <i>Edelmetall-Kontor</i></span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== CHAPTER Ⅰ — DAS KONTOR ===== -->
+<section class="chapter" id="kontor">
+    <div class="ch-head reveal">
+        <span class="ch-num">Ⅰ</span>
+        <span class="ch-label">Kapitel Eins — Das Haus</span>
+    </div>
+    <h2 class="ch-title reveal-wipe">Das Kontor<em>seit 2012</em></h2>
+    <p class="ch-lede reveal" style="--d:.1s">IMPERIAL TRUST versteht sich als <b>Vertrauensanstalt für Metalle</b>:
+    zwischen Bergwerk und Werkstatt, zwischen Anlage und Anwendung. Wir beschaffen, prüfen und liefern
+    Kupfer und Silber in imperialer Güte — <b>diskret, dokumentiert und termintreu</b>.</p>
+
+    <div class="hero-specs" style="margin-top:64px; max-width:760px;">
+        <div class="reveal" style="--d:.05s"><strong><span data-count="12">0</span>+</strong>Jahre Kontor­tradition</div>
+        <div class="reveal" style="--d:.15s"><strong><span data-count="380">0</span>t</strong>geprüftes Jahressortiment</div>
+        <div class="reveal" style="--d:.25s"><strong><span data-count="99">0</span>,9&nbsp;%</strong>Liefertreue</div>
+        <div class="reveal" style="--d:.35s"><strong><span data-count="24">0</span>h</strong>Prüf­bericht nach Eingang</div>
+    </div>
+
+    <div class="plates">
+        <!-- intro plate with vault image -->
+        <div class="plate">
+            <div class="plate-visual">
+                <img src="images/vault-door.jpg" alt="Historisches Tresortor des Kontors" data-plx-inner="0.12" loading="lazy">
+            </div>
+            <div class="plate-body">
+                <span class="plate-ghost">Ⅰ</span>
+                <span class="plate-tag">Tresor &amp; Tradition</span>
+                <h3 class="plate-title">Gehalten, was zählt</h3>
+                <p class="plate-purity">Bestände unter Verschluss — Verfügbarkeit auf Abruf.</p>
+                <p style="color:var(--silver-dim); max-width:52ch; margin-top:18px;">
+                Unser Lagerhaus arbeitet wie ein Tresor: keine offenen Bestände, keine spekulativen Posten.
+                Jede Lieferung ruht versichert, inventarisiert und audit-fest — vom Kathodenblech bis zum
+                silbernen Granulat.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CHAPTER Ⅱ — METALLE ===== -->
+<section class="chapter tint" id="metalle">
+    <div class="ch-head reveal">
+        <span class="ch-num">Ⅱ</span>
+        <span class="ch-label">Kapitel Zwei — Die Metalle</span>
+    </div>
+    <h2 class="ch-title reveal-wipe">Kupfer &amp; Silber<em>99,99 · 999</em></h2>
+    <p class="ch-lede reveal" style="--d:.1s">Zwei Metalle, ein Standard: <b>elektrolytisch raffiniert</b>,
+    analysiert und plombiert. Ob Kathodenblech für die Industrie oder Barren für das Depot —
+    jedes Los trägt die Prüfsignatur des Kontors.</p>
+
+    <div class="plates">
+        <!-- COPPER PLATE -->
+        <div class="plate">
+            <div class="plate-visual">
+                <img src="images/copper-cathode.jpg" alt="Kupferkathoden — elektrolytisch raffiniert, 99,99 %" data-plx-inner="0.12" loading="lazy">
+            </div>
+            <div class="plate-body">
+                <span class="plate-ghost">Cu</span>
+                <span class="plate-tag">Metall Eins</span>
+                <h3 class="plate-title">Kupfer</h3>
+                <p class="plate-purity">99,99 % — Elektrolytkupfer Cu-ETP</p>
+                <dl class="spec-table">
+                    <div><dt>Reinheit</dt><dd>≥ 99,99 % (Kathodenbasis)</dd></div>
+                    <div><dt>Formen</dt><dd>Kathoden, Barren, Bleche, Drähte</dd></div>
+                    <div><dt>Norm</dt><dd>EN 1652 / Cu-ETP · Werkstoff-Nr. 2.0060</dd></div>
+                    <div><dt>Herkunft</dt><dd>EU-Raffinerien, Rückverfolgbarkeit dokumentiert</dd></div>
+                </dl>
+                <a class="btn btn-ghost" href="#kollektion">Kupfer-Sortiment</a>
+            </div>
+        </div>
+
+        <!-- SILVER PLATE -->
+        <div class="plate">
+            <div class="plate-visual">
+                <img src="images/silver-bars.jpg" alt="Feinsilber-Barren 999, gegossen und gestempelt" data-plx-inner="0.12" loading="lazy">
+            </div>
+            <div class="plate-body">
+                <span class="plate-ghost">Ag</span>
+                <span class="plate-tag">Metall Zwei</span>
+                <h3 class="plate-title">Silber</h3>
+                <p class="plate-purity">999 fein — gegossen &amp; gestempelt</p>
+                <dl class="spec-table">
+                    <div><dt>Feinheit</dt><dd>999 / 1000 Feinsilber</dd></div>
+                    <div><dt>Formen</dt><dd>Barren 100–1000 g, Granulat, Blech</dd></div>
+                    <div><dt>Prüfung</dt><dd>Jedes Los mit Analyse- &amp; Prägezeugnis</dd></div>
+                    <div><dt>Verwahrung</dt><dd>Versicherte Tresorlagerung auf Anfrage</dd></div>
+                </dl>
+                <a class="btn btn-ghost" href="#kollektion">Silber-Sortiment</a>
+            </div>
+        </div>
+
+        <!-- MILL PLATE (industrial capability) -->
+        <div class="plate">
+            <div class="plate-visual">
+                <img src="images/copper-mill.jpg" alt="Innenansicht eines Kupferrohrwerks — Halbzeugfertigung" data-plx-inner="0.12" loading="lazy">
+            </div>
+            <div class="plate-body">
+                <span class="plate-ghost">Ⅱ</span>
+                <span class="plate-tag">Halbzeug &amp; Werk</span>
+                <h3 class="plate-title">Material zur Form</h3>
+                <p class="plate-purity">Bleche, Drähte, Rohre — zugeschnitten auf Auftrag.</p>
+                <p style="color:var(--silver-dim); max-width:52ch; margin-top:18px;">
+                Über Partnerwerke liefern wir Halbzeuge in Handels- und Sondermaßen:
+                vom Kathodenblech bis zum gezogenen Rohr. Zuschnitte, Chargenprotokolle
+                und Werkstoffpapiere inklusive.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CHAPTER Ⅲ — KOLLEKTION ===== -->
+<section class="chapter" id="kollektion">
+    <div class="ch-head reveal">
+        <span class="ch-num">Ⅲ</span>
+        <span class="ch-label">Kapitel Drei — Die Kollektion</span>
+    </div>
+    <h2 class="ch-title reveal-wipe">Das Sortiment<em>Cu · Ag</em></h2>
+    <p class="ch-lede reveal" style="--d:.1s">Sechs Posten, zwei Metalle — <b>Preise tagesaktuell</b> über das Kontor.
+    Fahren Sie mit dem Zeiger über eine Position, um das Material zu sehen; der Erwerb erfolgt über unsere Handelsplätze.</p>
+
+    <div class="rows">
+        <a class="row-item reveal" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/copper-bar.jpg">
+            <span class="row-idx">01</span>
+            <span class="row-name">Imperial Barren<small>1 kg Feinkupfer, 999 — gestempelt &amp; plombiert</small></span>
+            <span class="row-metal cu">Cu 99,99</span>
+            <span class="row-price">ab €249<small>/ Stück</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+        <a class="row-item reveal" style="--d:.06s" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/copper-cathode.jpg">
+            <span class="row-idx">02</span>
+            <span class="row-name">Kathoden-Blech<small>Elektrolytkupfer Cu-ETP, Zuschnitt auf Maß</small></span>
+            <span class="row-metal cu">Cu-ETP</span>
+            <span class="row-price">ab €89<small>/ Platte</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+        <a class="row-item reveal" style="--d:.12s" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/copper-mill.jpg">
+            <span class="row-idx">03</span>
+            <span class="row-name">Kupfer-Draht &amp; Rohr<small>8,0 mm Draht · 22–54 mm Rohr, halbhart</small></span>
+            <span class="row-metal cu">Cu 2.0060</span>
+            <span class="row-price">ab €39<small>/ laufender m</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+        <a class="row-item reveal" style="--d:.18s" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/silver-bars.jpg">
+            <span class="row-idx">04</span>
+            <span class="row-name">Feinsilber-Barren<small>500 g, 999 fein — mit Prägezeugnis</small></span>
+            <span class="row-metal ag">Ag 999</span>
+            <span class="row-price">ab €519<small>/ Stück</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+        <a class="row-item reveal" style="--d:.24s" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/silver-ingot.jpg">
+            <span class="row-idx">05</span>
+            <span class="row-name">Silber-Kleinguss<small>100 g Gußbarren, ideal für Einsteiger</small></span>
+            <span class="row-metal ag">Ag 999</span>
+            <span class="row-price">ab €109<small>/ Stück</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+        <a class="row-item reveal" style="--d:.30s" href="https://ebay.de" target="_blank" rel="noopener"
+           data-view="images/investment.jpg">
+            <span class="row-idx">06</span>
+            <span class="row-name">Kontor-Depot<small>Mix aus Kupfer &amp; Silber, kuratiert je Quartal</small></span>
+            <span class="row-metal ag">Cu · Ag</span>
+            <span class="row-price">ab €990<small>/ Depot</small></span>
+            <span class="row-buy">Erwerben</span>
+        </a>
+    </div>
+</section>
+
+<!-- floating cursor preview -->
+<div class="cursor-view" id="cursorView" aria-hidden="true">
+    <img src="images/copper-bar.jpg" alt="" id="cursorImg">
+</div>
+
+<!-- ===== STANDARDS (PORCELAIN) ===== -->
+<section class="standards" id="standards">
+    <div class="ch-head reveal">
+        <span class="ch-num">✦</span>
+        <span class="ch-label">Zwischenkapitel — Die Güte</span>
+    </div>
+    <h2 class="ch-title reveal-wipe">Imperiale Standards<em>geprüft</em></h2>
+    <p class="ch-lede reveal" style="--d:.1s">Drei Zusicherungen, die jedes Los verlassen muss —
+    <b>bevor</b> es das Kontor verlässt.</p>
+
+    <div class="std-grid">
+        <div class="std-cell reveal" style="--d:.05s">
+            <div class="std-num">01</div>
+            <h3>Reinheit</h3>
+            <p>Kupfer ≥ 99,99 %, Silber 999/1000 — spektrometrisch geprüft, mit
+            chargenbezogenem Analysebericht.</p>
+        </div>
+        <div class="std-cell reveal" style="--d:.15s">
+            <div class="std-num">02</div>
+            <h3>Dokumentation</h3>
+            <p>Werkstoffpapiere, Herkunftsnachweis und Prüfsiegel zu jeder Position —
+            revisionssicher archiviert.</p>
+        </div>
+        <div class="std-cell reveal" style="--d:.25s">
+            <div class="std-num">03</div>
+            <h3>Herkunft</h3>
+            <p>Nur EU-Raffinerien mit auditierten Lieferketten. Rückverfolgbarkeit
+            bis zur Kathoden-Charge.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VAULT QUOTE BAND ===== -->
+<div class="vault-band">
+    <img src="images/vault-door.jpg" alt="" data-plx-inner="0.14" loading="lazy">
+    <div class="vault-quote">
+        <p>„Vertrauen ist das einzige Metall,<br>das nicht an der Börse notiert.“</p>
+        <cite>— Grundsatz des Hauses, MMXII</cite>
+    </div>
+</div>
+
+<!-- ===== CHAPTER Ⅳ — PROZESS ===== -->
+<section class="process" id="prozess">
+    <div class="ch-head reveal">
+        <span class="ch-num">Ⅳ</span>
+        <span class="ch-label">Kapitel Vier — Der Weg</span>
+    </div>
+    <h2 class="ch-title reveal-wipe">Vom Erz zum Eid<em>vier Akte</em></h2>
+
+    <div class="steps" id="steps">
+        <div class="step reveal">
+            <div class="step-dot">Ⅰ</div>
+            <div>
+                <span class="step-k">Akt Eins</span>
+                <h3>Beschaffung</h3>
+                <p>Kathoden und Feinsilber ausschließlich aus auditierten EU-Raffinerien —
+                mit Chargenpass und Herkunftsnachweis ab Herstellung.</p>
+            </div>
+        </div>
+        <div class="step reveal" style="--d:.08s">
+            <div class="step-dot">Ⅱ</div>
+            <div>
+                <span class="step-k">Akt Zwei</span>
+                <h3>Raffination &amp; Form</h3>
+                <p>Elektrolytische Feinraffination, Guss und Walzung in Partnerwerken —
+                Zuschnitte nach Handelsnorm oder Kundenzeichnung.</p>
+            </div>
+        </div>
+        <div class="step reveal" style="--d:.16s">
+            <div class="step-dot">Ⅲ</div>
+            <div>
+                <span class="step-k">Akt Drei</span>
+                <h3>Prüfung &amp; Plombe</h3>
+                <p>Spektrometrische Analyse, Stempelung und Plombierung jedes Loses.
+                Prüfbericht innerhalb von 24 Stunden nach Eingang.</p>
+            </div>
+        </div>
+        <div class="step reveal" style="--d:.24s">
+            <div class="step-dot">Ⅳ</div>
+            <div>
+                <span class="step-k">Akt Vier</span>
+                <h3>Auslieferung</h3>
+                <p>Versicherter Transport oder Tresorverwahrung — ausgeliefert
+                mit Werkstoffpapieren, termintreu und diskret.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EMBER QUOTE BAND (molten copper, fixed parallax) ===== -->
+<section class="ember">
+    <div>
+        <span class="ember-kicker reveal">Der Ofen kennt keine Kompromisse</span>
+        <h2 class="reveal" style="--d:.1s">Glut &amp; Güte</h2>
+        <p class="reveal" style="--d:.2s">Bei 1.084,6 °C wird aus Erz Kupfer. Bei IMPERIAL TRUST wird aus Kupfer
+        Verpflichtung — jede Lieferung ein Eid auf Reinheit, Herkunft und Termin.</p>
+    </div>
+</section>
+
+<!-- ===== KONTAKT ===== -->
+<section class="contact" id="kontakt">
+    <span class="overline reveal">Sprechen Sie mit dem Kontor</span>
+    <h2 class="reveal" style="--d:.08s">Anfrage<em>&nbsp;stellen</em></h2>
+    <p class="reveal" style="--d:.16s">Nennen Sie uns Metall, Form und Menge — wir antworten innerhalb eines
+    Werkstags mit Angebot, Prüfunterlagen und available-to-promise-Termin.</p>
+    <div class="hero-ctas reveal" style="--d:.24s; justify-content:center;">
+        <a class="btn btn-solid" href="mailto:kontor@imperial-trust.de">kontor@imperial-trust.de</a>
+        <a class="btn btn-ghost" href="https://ebay.de" target="_blank" rel="noopener">Zum Handelsplatz</a>
+    </div>
+    <div class="contact-meta reveal" style="--d:.3s">
+        <div><strong>+49 89 000 19-19</strong>Telefon · Mo–Fr 9–17 Uhr</div>
+        <div><strong>München</strong>Residenzstraße 19, Kontorhaus</div>
+        <div><strong>Cu · Ag</strong>Handelssortiment</div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-nav">
+            <a href="#kontor">Kontor</a>
+            <a href="#metalle">Metalle</a>
+            <a href="#kollektion">Kollektion</a>
+            <a href="#standards">Standards</a>
+            <a href="#prozess">Prozess</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+        <a class="rail-mono" href="#top" style="width:48px;height:48px;">IT</a>
+    </div>
+    <div class="footer-word">Imperial Trust</div>
+    <div class="footer-base">
+        <span>© <span id="yr">2025</span> IMPERIAL TRUST Edelmetall-Kontor — Website 19</span>
+        <span>Kupfer 99,99 % · Feinsilber 999 · Geprüfte Materialien</span>
+        <a href="#top">Nach oben ↑</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ===== SCROLL PROGRESS (rail) ===== */
+    var railFill = document.getElementById('railFill');
+    var railPct = document.getElementById('railPct');
+
+    /* ===== PARALLAX ===== */
+    var plxFrames = Array.prototype.slice.call(document.querySelectorAll('[data-plx]'));
+    var plxImgs = Array.prototype.slice.call(document.querySelectorAll('[data-plx-inner]'));
+
+    function parallax() {
+        var vh = window.innerHeight;
+        plxFrames.forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            var mid = r.top + r.height / 2 - vh / 2;
+            el.style.transform = 'translate3d(0,' + (mid * parseFloat(el.dataset.plx)).toFixed(1) + 'px,0)';
+        });
+        plxImgs.forEach(function (img) {
+            var r = img.parentElement.getBoundingClientRect();
+            if (r.bottom < -80 || r.top > vh + 80) return;
+            var mid = r.top + r.height / 2 - vh / 2;
+            img.style.transform = 'translate3d(0,' + (mid * parseFloat(img.dataset.plxInner)).toFixed(1) + 'px,0)';
+        });
+    }
+
+    /* ===== TICK (single rAF loop) ===== */
+    var stepsEl = document.getElementById('steps');
+    function tick() {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - vh();
+        var p = max > 0 ? Math.min(window.pageYOffset / max, 1) : 0;
+        if (railFill) railFill.style.height = (p * 100).toFixed(1) + '%';
+        if (railPct) railPct.textContent = String(Math.round(p * 100)).padStart(2, '0');
+
+        /* timeline fill */
+        if (stepsEl) {
+            var sr = stepsEl.getBoundingClientRect();
+            var progress = Math.min(Math.max((vh() * 0.72 - sr.top) / sr.height, 0), 1);
+            stepsEl.style.setProperty('--line-fill', (progress * 100).toFixed(1) + '%');
+        }
+        if (!reduce) parallax();
+    }
+    function vh() { return window.innerHeight || document.documentElement.clientHeight; }
+
+    var ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(function () { tick(); ticking = false; });
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+
+    /* ===== REVEALS ===== */
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.reveal, .reveal-wipe').forEach(function (el) { io.observe(el); });
+
+    /* ===== COUNTERS ===== */
+    var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            var el = e.target, target = parseFloat(el.dataset.count), t0 = null, dur = 1400;
+            function frame(ts) {
+                if (!t0) t0 = ts;
+                var k = Math.min((ts - t0) / dur, 1);
+                var eased = 1 - Math.pow(1 - k, 3);
+                el.textContent = Math.round(target * eased).toLocaleString('de-DE');
+                if (k < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+            cio.unobserve(el);
+        });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+
+    /* ===== ACTIVE RAIL DOT ===== */
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.rail-dots a'));
+    var secIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            dots.forEach(function (d) {
+                d.classList.toggle('on', d.getAttribute('href') === '#' + e.target.id);
+            });
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['kontor', 'metalle', 'kollektion', 'prozess', 'kontakt'].forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) secIO.observe(s);
+    });
+
+    /* ===== CURSOR-FOLLOWING PREVIEW (collection rows) ===== */
+    var view = document.getElementById('cursorView');
+    var viewImg = document.getElementById('cursorImg');
+    if (view && window.matchMedia('(pointer: fine)').matches) {
+        var vx = 0, vy = 0, cx = 0, cy = 0, raf = null;
+        function follow() {
+            cx += (vx - cx) * 0.14;
+            cy += (vy - cy) * 0.14;
+            view.style.left = (cx + 28) + 'px';
+            view.style.top = (cy - 150) + 'px';
+            raf = requestAnimationFrame(follow);
+        }
+        document.querySelectorAll('.row-item').forEach(function (row) {
+            row.addEventListener('mouseenter', function () {
+                viewImg.src = row.dataset.view;
+                view.classList.add('on');
+                if (!raf) raf = requestAnimationFrame(follow);
+            });
+            row.addEventListener('mousemove', function (ev) { vx = ev.clientX; vy = ev.clientY; });
+            row.addEventListener('mouseleave', function () {
+                view.classList.remove('on');
+                cancelAnimationFrame(raf); raf = null;
+            });
+        });
+    }
+
+    /* ===== YEAR ===== */
+    var yr = document.getElementById('yr');
+    if (yr) yr.textContent = new Date().getFullYear();
+
+    tick();
+})();
+</script>
+</div>
+</body>
+</html>
