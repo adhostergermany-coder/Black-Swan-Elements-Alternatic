@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | NORTHWING COPPER ELEMENTS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;500;600;700;800&family=Instrument+Sans:wght@300;400;500;600;700&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --night: #070b16;
+            --night-2: #0a1120;
+            --deep: #0e1830;
+            --ice: #dff3ff;
+            --ice-dim: rgba(223, 243, 255, 0.55);
+            --aurora-a: #7ef0d4;
+            --aurora-b: #4fb8ff;
+            --copper: #c97a3b;
+            --copper-bright: #e8a75f;
+            --line: rgba(160, 200, 255, 0.14);
+            --line-strong: rgba(160, 200, 255, 0.3);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --font-mono: 'Martian Mono', monospace;
+            --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
+        }
+
+        html { scrollbar-width: thin; scrollbar-color: var(--copper) var(--night); }
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: var(--night); }
+        ::-webkit-scrollbar-thumb { background: var(--copper); border-radius: 4px; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--night);
+            color: var(--ice);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Aurora backdrop */
+        .aurora-field { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+        .aurora-field .band {
+            position: absolute; left: -20%; right: -20%; height: 50vh;
+            filter: blur(38px); opacity: 0.4; mix-blend-mode: screen;
+            background: linear-gradient(90deg, transparent 0%, var(--aurora-a) 22%, var(--aurora-b) 48%, transparent 100%);
+            animation: auroraDrift 28s ease-in-out infinite alternate;
+        }
+        .aurora-field .band.b2 { top: 30%; opacity: 0.28; animation-duration: 38s; animation-delay: -12s; }
+        @keyframes auroraDrift {
+            0% { transform: translateX(-10%) translateY(0); }
+            100% { transform: translateX(8%) translateY(-5%); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 18px 40px;
+            background: rgba(7, 11, 22, 0.88); backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--line);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+        .logo-mark {
+            width: 40px; height: 40px; background: linear-gradient(135deg, var(--night-2), var(--deep));
+            border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center;
+        }
+        .logo-mark svg { width: 24px; height: 24px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.05; }
+        .logo-text .l1 {
+            font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+            letter-spacing: 0.14em; text-transform: uppercase; color: var(--ice);
+        }
+        .logo-text .l2 {
+            font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--copper-bright);
+        }
+        .back-link {
+            color: var(--ice-dim); text-decoration: none; font-family: var(--font-mono);
+            font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--copper-bright); }
+
+        /* Content */
+        .page-content { max-width: 820px; margin: 0 auto; padding: 170px 40px 100px; }
+        .page-content h1 {
+            font-family: var(--font-display); font-weight: 700; font-size: 2.6rem; margin-bottom: 40px;
+            background: linear-gradient(100deg, var(--ice), var(--aurora-a));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .page-content h2 {
+            font-family: var(--font-display); font-weight: 600; font-size: 1.25rem;
+            margin-top: 40px; margin-bottom: 14px; color: var(--aurora-b);
+            letter-spacing: 0.04em;
+        }
+        .page-content p, .page-content li { font-size: 0.95rem; color: var(--ice-dim); line-height: 1.85; margin-bottom: 14px; }
+        .page-content ul { list-style: none; margin-bottom: 18px; }
+        .page-content ul li::before { content: '◆ '; color: var(--copper); }
+        .page-content a { color: var(--copper-bright); text-decoration: none; border-bottom: 1px dashed var(--line-strong); }
+        .page-content a:hover { color: var(--ice); }
+
+        .divider { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+        .footer-mini {
+            max-width: 820px; margin: 0 auto; padding: 30px 40px;
+            border-top: 1px solid var(--line);
+            font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--ice-dim);
+            display: flex; justify-content: space-between;
+        }
+        .footer-mini a { color: var(--copper-bright); text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .header { padding: 16px 24px; }
+            .page-content { padding: 130px 24px 60px; }
+            .page-content h1 { font-size: 1.9rem; }
+            .footer-mini { padding: 22px 24px; flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aurora-field" aria-hidden="true">
+        <div class="band b1"></div>
+        <div class="band b2"></div>
+    </div>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 32 32" fill="none" stroke-width="2">
+                    <path d="M4 27 L14 27 L14 8 L24 8 L24 27 L28 27" stroke="#c97a3b"/>
+                    <path d="M16 4 L16 28" stroke="#7ef0d4"/>
+                    <path d="M2 14 L30 14" stroke="#4fb8ff" stroke-opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <span class="l1">Northwing</span>
+                <span class="l2">Copper Elements</span>
+            </div>
+        </a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            Northwing Copper Elements GmbH<br>
+            Gletscherwerkstatt 7<br>
+            8610 Mo i Rana, Norwegen
+        </p>
+
+        <h2>Vertreten durch</h2>
+        <p>
+            Geschäftsführer: Erik Nordvik<br>
+            Prokuristin: Lene Frost
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +47 75 00 18 18<br>
+            E-Mail: <a href="mailto:kontakt@northwing.de">kontakt@northwing.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 318 476 209
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 Northwing Copper Elements</p>
+        <a href="index.html">Startseite</a>
+    </footer>
+
+</body>
+</html>
