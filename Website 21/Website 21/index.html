@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEREST EAGLE — Kupfer &amp; Silber | Edelmetallhandel in Gipfelqualität</title>
+<meta name="description" content="EVEREST EAGLE — Luxuriöser Handel mit assay-zertifiziertem Kupfer und Feinsilber 999. Barren, Kathoden, Granulat. Geprüfte Herkunft, versiegelt, geliefert.">
+<!-- Bildquellen: Wikimedia Commons (freie Lizenzen) —
+     hero-everest.jpg: "Sunset view of Everest" · eagle-flight.jpg: "Golden Eagle Flying" (NPS) ·
+     copper-ingots.jpg: "1 kilo copper bar 999 fineness from Degussa" · silver-bars.jpg: "Scottsdale Mint 100 Troy Ounce Silver Bar" ·
+     copper-texture.jpg: "Metal sparks" · silver-texture.jpg: "Silver crystal" ·
+     copper-ore.jpg: "Native Copper Macro Digon3" · foundry-copper.jpg: "ECSC Financial report 1995 Dillinger Hütte Continuous casting" ·
+     Details & Lizenzen: https://commons.wikimedia.org -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Figtree:wght@300;400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0B0A09;--bg2:#12100D;--panel:#171310;
+  --cu:#C87941;--cu2:#E9A26B;--cud:#8C4F26;
+  --si:#D8DEE6;--si2:#9AA6B2;--snow:#F4F2EE;
+  --line:rgba(216,222,230,.13);--line2:rgba(200,121,65,.42);
+  --fd:'Prata',Georgia,serif;
+  --fb:'Figtree',system-ui,sans-serif;
+  --fm:'Fragment Mono',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--si);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--cu);color:var(--bg)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:#080706}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--cud),var(--cu) 45%,var(--si2));border-radius:99px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+.mono{font-family:var(--fm);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+main{margin-left:72px}
+section[id]{scroll-margin-top:74px}
+@media(max-width:900px){main{margin-left:0}}
+
+/* Korn-Overlay (Filmlook) */
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 8s steps(10) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-3%,-2%)}80%{transform:translate(4%,2%)}}
+
+/* Linke Vertikal-Schiene */
+.rail{position:fixed;top:0;left:0;bottom:0;width:72px;z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:22px 0;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(11,10,9,.92),rgba(18,16,13,.92));backdrop-filter:blur(8px)}
+.rail-brand{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fm);font-size:.66rem;letter-spacing:.42em;text-transform:uppercase;color:var(--si2)}
+.rail-brand b{color:var(--cu2);font-weight:400}
+.rail-dots{display:flex;flex-direction:column;gap:20px;align-items:center}
+.rail-dots a{width:9px;height:9px;border:1px solid var(--si2);border-radius:50%;position:relative;transition:.4s var(--ease)}
+.rail-dots a:hover,.rail-dots a.on{background:var(--cu);border-color:var(--cu);box-shadow:0 0 14px rgba(200,121,65,.55)}
+.rail-dots a i{position:absolute;left:18px;top:50%;transform:translateY(-50%);font:400 .58rem/1 var(--fm);font-style:normal;letter-spacing:.2em;color:var(--si2);opacity:0;transition:.3s;white-space:nowrap}
+.rail-dots a:hover i{opacity:1}
+.rail-meta{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--fm);font-size:.58rem;letter-spacing:.4em;color:#6E675F}
+.rail-progress{position:fixed;left:0;top:0;width:3px;height:0;background:linear-gradient(180deg,var(--cu2),var(--cu),var(--si2));z-index:80}
+.topbar{display:none}
+@media(max-width:900px){
+  .rail{display:none}
+  .topbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:70;align-items:center;justify-content:space-between;gap:14px;
+    padding:14px 20px;background:rgba(11,10,9,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .tb-brand{font-family:var(--fd);font-size:1rem;color:var(--snow);white-space:nowrap}
+  .topbar .tb-brand em{font-style:normal;color:var(--cu2)}
+  .topbar nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .topbar nav a{font-family:var(--fm);font-size:.62rem;letter-spacing:.18em;color:var(--si2);white-space:nowrap}
+  .topbar nav a:hover{color:var(--cu2)}
+}
+
+/* GIPFEL / HERO — mehrschichtiger Parallax */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:-18% 0;background:url("images/hero-everest.jpg") center 30%/cover no-repeat;will-change:transform;filter:saturate(1.08) contrast(1.06) brightness(.94)}
+/* Hero-Glow — kupfernes Leuchten hinter dem Titel (Cinematic) */
+.hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(46% 40% at 24% 46%,rgba(200,121,65,.24),transparent 70%),
+             radial-gradient(34% 30% at 80% 36%,rgba(233,162,107,.17),transparent 72%);
+  animation:heroglow 9s ease-in-out infinite alternate}
+@keyframes heroglow{from{opacity:.68;transform:scale(1)}to{opacity:1;transform:scale(1.06)}}
+.hero-veil{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(11,10,9,.6) 0%,rgba(11,10,9,.22) 40%,rgba(11,10,9,.84) 80%,var(--bg) 100%),
+  linear-gradient(90deg,rgba(11,10,9,.85) 0%,rgba(11,10,9,.15) 55%,rgba(140,79,38,.16) 100%),
+  radial-gradient(125% 95% at 50% 20%,transparent 52%,rgba(6,5,4,.5) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:120px 0 90px}
+.hero-kicker{display:flex;align-items:center;gap:14px;color:var(--si2);margin-bottom:26px}
+.hero-kicker::before{content:"";width:56px;height:1px;background:var(--cu)}
+.hero-kicker b{color:var(--cu2);font-weight:400}
+.hero h1{font-family:var(--fd);font-weight:400;font-size:clamp(2.9rem,8vw,6.8rem);line-height:1.04;color:var(--snow);text-shadow:0 0 70px rgba(200,121,65,.3)}
+.hero h1 .l2{display:block;background:linear-gradient(100deg,var(--snow) 5%,var(--si) 28%,var(--cu2) 52%,var(--cu) 68%,var(--si) 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.55em) rotate(1.5deg);animation:wup 1.1s var(--ease) forwards}
+@keyframes wup{to{opacity:1;transform:none}}
+.hero-sub{max-width:46ch;color:var(--si2);font-size:clamp(1rem,1.4vw,1.12rem);margin:30px 0 42px}
+.hero-sub strong{color:var(--si);font-weight:500}
+.hero-ctas{display:flex;gap:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 30px;font-family:var(--fm);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--line2);color:var(--snow);position:relative;overflow:hidden;z-index:0;transition:border-color .45s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--cu),var(--cud));transform:translateX(-101%);transition:transform .5s var(--ease);z-index:-1}
+.btn:hover{border-color:var(--cu)}
+.btn:hover::before{transform:translateX(0)}
+.btn.solid{border-color:var(--cu);color:var(--bg)}
+.btn.solid::before{transform:translateX(0);background:linear-gradient(100deg,var(--cu2),var(--cu))}
+.btn.solid:hover::before{background:var(--si)}
+.btn .arr{transition:transform .45s var(--ease)}
+.btn:hover .arr{transform:translateX(6px)}
+/* Adler-Medaillon mit Eigenparallax */
+.medallion{position:absolute;right:clamp(16px,7vw,110px);top:50%;margin-top:calc(clamp(240px,30vw,400px)/-2);width:clamp(240px,30vw,400px);aspect-ratio:1;z-index:3;will-change:transform}
+.medallion .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:1px solid rgba(216,222,230,.35);box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 110px rgba(200,121,65,.24),inset 0 0 0 10px rgba(11,10,9,.35)}
+.medallion img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.medallion .ring{position:absolute;inset:-16px;border-radius:50%;border:1px dashed rgba(200,121,65,.5);animation:spin 46s linear infinite;box-shadow:0 0 26px rgba(200,121,65,.28),inset 0 0 26px rgba(200,121,65,.2)}
+.medallion .tag{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;font-family:var(--fm);font-size:.6rem;letter-spacing:.3em;color:var(--si2);background:rgba(11,10,9,.72);border:1px solid var(--line);padding:8px 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--si2)}
+.hero-scroll .line{width:1px;height:54px;background:linear-gradient(180deg,var(--cu),transparent);overflow:hidden;position:relative}
+.hero-scroll .line::after{content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;background:var(--si);animation:drip 2.2s var(--ease) infinite}
+@keyframes drip{0%{top:-40%}70%,100%{top:110%}}
+@media(max-width:900px){
+  .hero{flex-direction:column;justify-content:center}
+  .medallion{position:relative;right:auto;top:auto;margin:104px auto 0;width:min(64vw,320px)}
+  .hero-inner{text-align:center;padding-top:44px}
+  .hero-kicker{justify-content:center}
+  .hero-sub{margin-inline:auto}
+  .hero-ctas{justify-content:center}
+}
+
+/* KURS-TICKER (Endlos-Laufband) */
+.ticker{border-block:1px solid var(--line2);background:linear-gradient(90deg,#141009,#1a1310 50%,#141009);overflow:hidden;position:relative;z-index:4}
+.ticker-track{display:flex;width:max-content;animation:tick 30s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker span{display:inline-flex;align-items:center;gap:26px;padding:15px 13px;font-family:var(--fm);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--si2);white-space:nowrap}
+.ticker b{color:var(--snow);font-weight:400}
+.ticker i{font-style:normal;color:var(--cu2)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* KAPITEL-System (römische Nummerierung) */
+.chapter{position:relative;padding:clamp(90px,13vh,160px) 0}
+.ch-head{display:flex;align-items:baseline;gap:22px;margin-bottom:clamp(40px,6vh,72px)}
+.ch-no{font-family:var(--fd);font-size:clamp(3rem,7vw,5.4rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(233,162,107,.55)}
+.ch-label{color:var(--cu2)}
+.ch-title{font-family:var(--fd);font-weight:400;font-size:clamp(1.85rem,3.4vw,2.9rem);color:var(--snow);line-height:1.18;max-width:24ch}
+.ch-title em{font-style:normal;background:linear-gradient(100deg,var(--cu2),var(--cu));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* I · MANIFEST — asymmetrisches Split-Layout */
+.manifest{display:grid;grid-template-columns:1.05fr .9fr;gap:clamp(36px,6vw,86px);align-items:center}
+.manifest-copy p{color:var(--si2);margin-bottom:20px;max-width:54ch}
+.manifest-copy p b{color:var(--si);font-weight:500}
+.manifest-copy .lead{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--si);margin-top:24px}
+.sign{display:flex;align-items:center;gap:16px;margin-top:34px}
+.sign .sig{font-family:var(--fd);font-size:1.35rem;color:var(--cu2)}
+.manifest-fig{position:relative}
+.manifest-fig .frame{overflow:hidden;position:relative;transform:rotate(-1.6deg)}
+.manifest-fig img{width:100%;aspect-ratio:4/3.1;object-fit:cover;transition:transform 1.2s var(--ease)}
+.manifest-fig:hover img{transform:scale(1.05)}
+.manifest-fig .frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(216,222,230,.2);pointer-events:none}
+.manifest-fig .float-tag{position:absolute;right:-14px;top:-20px;background:var(--cu);color:var(--bg);font-family:var(--fm);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:12px 18px;box-shadow:0 18px 40px rgba(140,79,38,.4)}
+.manifest-fig .back-plate{position:absolute;inset:-26px 26px 26px -26px;border:1px solid rgba(200,121,65,.35);z-index:-1;transform:rotate(1.2deg)}
+@media(max-width:900px){.manifest{grid-template-columns:1fr}.manifest-fig{order:-1;max-width:520px}.manifest-fig .float-tag{right:8px}}
+
+/* II · METALLE — versetzte Panels mit Glanz-Sweep */
+.metals{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,60px)}
+@media(min-width:901px){.metals{padding-bottom:64px}}
+.metal{border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),#100D0A);position:relative;overflow:hidden;transition:border-color .5s var(--ease),transform .5s var(--ease)}
+.metal:hover{border-color:var(--line2);transform:translateY(-6px)}
+.metal.offset{margin-top:64px}
+.metal-fig{overflow:hidden;position:relative;aspect-ratio:16/10.5;margin:0}
+.metal-fig.tall{aspect-ratio:16/12.2}
+.metal-fig img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease);filter:saturate(1.06) contrast(1.05)}
+.metal:hover .metal-fig img{transform:scale(1.07)}
+.metal-fig::before,.frame::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(200,121,65,.15),transparent 36%,transparent 62%,rgba(140,79,38,.2)),
+             radial-gradient(125% 95% at 50% 42%,transparent 55%,rgba(6,5,4,.36) 100%)}
+.metal-fig::after{content:"";position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(244,242,238,.2),transparent);transform:skewX(-18deg);transition:left .9s var(--ease);z-index:2}
+.metal:hover .metal-fig::after{left:135%}
+.metal-body{padding:clamp(24px,3vw,38px)}
+.metal-body h3{font-family:var(--fd);font-weight:400;font-size:clamp(1.45rem,2.3vw,2rem);color:var(--snow)}
+.metal-body h3 small{display:block;font-family:var(--fm);font-size:.62rem;letter-spacing:.3em;color:var(--cu2);margin-bottom:10px;text-transform:uppercase}
+.metal-body p{color:var(--si2);font-size:.95rem;margin:14px 0 24px}
+.spec{list-style:none}
+.spec li{display:flex;justify-content:space-between;gap:14px;padding:11px 2px;border-bottom:1px dashed var(--line);font-size:.86rem}
+.spec li span:first-child{font-family:var(--fm);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--si2);padding-top:4px}
+.spec li b{font-weight:500;color:var(--si);text-align:right}
+.spec li b em{font-style:normal;color:var(--cu2)}
+.metal-cta{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cu2)}
+.metal-cta .ln{width:34px;height:1px;background:var(--cu);transition:width .45s var(--ease)}
+.metal-cta:hover .ln{width:58px}
+@media(max-width:900px){.metals{grid-template-columns:1fr}}
+
+/* PARALLAX-TRENNER — background-attachment: fixed (einmalig im Portfolio) */
+.divider{position:relative;min-height:86vh;display:grid;place-items:center;text-align:center;overflow:hidden;
+  background:url("images/foundry-copper.jpg") center/cover no-repeat fixed}
+.divider.silver{background-image:url("images/copper-texture.jpg")}
+.divider .veil{position:absolute;inset:0;background:
+  radial-gradient(ellipse at center,rgba(11,10,9,.34),rgba(11,10,9,.86)),
+  linear-gradient(180deg,rgba(140,79,38,.2),transparent 32%,transparent 62%,rgba(6,5,4,.52))}
+.divider::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  radial-gradient(135% 105% at 50% 50%,transparent 56%,rgba(5,4,3,.62) 100%),
+  linear-gradient(180deg,rgba(5,4,3,.38),transparent 14%,transparent 86%,rgba(5,4,3,.5))}
+.divider blockquote{position:relative;z-index:2;padding:0 24px;margin:0}
+.divider blockquote p{font-family:var(--fd);font-weight:400;font-size:clamp(1.5rem,3.8vw,3rem);color:var(--snow);max-width:26ch;margin:0 auto;line-height:1.3}
+.divider blockquote p em{font-style:normal;color:var(--cu2)}
+.divider .mono{color:var(--si2);margin-top:24px;display:block}
+@media(max-width:900px){.divider{background-attachment:scroll;min-height:64vh}}
+
+/* III · PROZESS — sticky Bild + nummerierte Schritte */
+.process{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,6vw,80px);align-items:start}
+.process-fig{position:sticky;top:110px;margin:0}
+.process-fig .frame{overflow:hidden;position:relative}
+.process-fig img{width:100%;aspect-ratio:4/3.6;object-fit:cover}
+.process-fig .cap{margin-top:14px;color:var(--si2)}
+.steps{list-style:none;margin:0;padding:0;counter-reset:st}
+.steps li{position:relative;padding:26px 0 26px 64px;border-bottom:1px solid var(--line)}
+.steps li::before{counter-increment:st;content:"0" counter(st);position:absolute;left:0;top:27px;font-family:var(--fm);font-size:.72rem;color:var(--cu2);letter-spacing:.2em}
+.steps li::after{content:"";position:absolute;left:20px;top:0;height:100%;width:1px;background:linear-gradient(180deg,rgba(200,121,65,.5),transparent)}
+.steps h4{font-family:var(--fd);font-weight:400;font-size:1.22rem;color:var(--snow);margin-bottom:8px}
+.steps p{color:var(--si2);font-size:.92rem;max-width:54ch}
+@media(max-width:900px){.process{grid-template-columns:1fr}.process-fig{position:relative;top:0;max-width:460px}}
+
+/* IV · ZAHLEN — Zähler-Grid */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),#0F0C0A)}
+.num{padding:clamp(28px,4vw,48px) clamp(18px,2.4vw,34px);border-right:1px solid var(--line);position:relative;overflow:hidden}
+.num:last-child{border-right:0}
+.num::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--cu),transparent);transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease) .25s}
+.num.in::before{transform:scaleX(1)}
+.num-val{font-family:var(--fd);font-size:clamp(1.8rem,3.4vw,2.8rem);color:var(--snow);line-height:1.15}
+.num-val em{font-style:normal;color:var(--cu2);font-size:.58em}
+.num-lab{margin-top:12px;color:var(--si2)}
+@media(max-width:900px){.nums{grid-template-columns:1fr 1fr}.num:nth-child(2){border-right:0}.num:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* V · KONTAKT */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,6vw,90px)}
+.c-info p{color:var(--si2);max-width:42ch;margin:20px 0 30px}
+.c-rows{list-style:none}
+.c-rows li{display:flex;gap:16px;padding:15px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.c-rows .k{font-family:var(--fm);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cu2);min-width:92px;padding-top:4px}
+.c-rows a:hover{color:var(--cu2)}
+.form{border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),#0F0C0A);padding:clamp(26px,3.4vw,44px)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.f-field{margin-bottom:22px}
+.f-field label{display:block;font-family:var(--fm);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--si2);margin-bottom:9px}
+.f-field input,.f-field select,.f-field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:11px 2px;color:var(--snow);transition:border-color .4s}
+.f-field input::placeholder,.f-field textarea::placeholder{color:#5E584F}
+.f-field textarea{min-height:96px;resize:vertical}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{outline:0;border-color:var(--cu)}
+.f-field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C87941' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 4px center}
+.f-field select option{background:#171310;color:var(--si)}
+@media(max-width:900px){.contact{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:44px 0 30px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-brand{font-family:var(--fd);color:var(--snow);font-size:1.05rem}
+.foot-brand em{font-style:normal;color:var(--cu2)}
+.foot small{color:#6E675F;display:block;margin-top:6px}
+.foot a:hover{color:var(--cu2)}
+
+/* SCROLL-REVEALS */
+.rv{opacity:0;transform:translateY(38px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv-l{opacity:0;transform:translateX(-44px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv-r{opacity:0;transform:translateX(44px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv-img{clip-path:inset(0 0 100% 0);transform:scale(1.05);transition:clip-path 1.2s var(--ease),transform 1.5s var(--ease)}
+.in.rv,.in.rv-l,.in.rv-r{opacity:1;transform:none}
+.in.rv-img{clip-path:inset(0 0 0% 0);transform:scale(1)}
+[data-stag]>*{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.in[data-stag]>*{opacity:1;transform:none}
+.in[data-stag]>*:nth-child(1){transition-delay:.05s}
+.in[data-stag]>*:nth-child(2){transition-delay:.16s}
+.in[data-stag]>*:nth-child(3){transition-delay:.27s}
+.in[data-stag]>*:nth-child(4){transition-delay:.38s}
+.in[data-stag]>*:nth-child(5){transition-delay:.49s}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv,.rv-l,.rv-r,[data-stag]>*{opacity:1;transform:none}
+  .rv-img{clip-path:none;transform:none}
+  .hero h1 .w{opacity:1;transform:none}
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="rail-progress" id="progress" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Seitenavigation">
+  <a class="rail-brand" href="#top">EVEREST <b>EAGLE</b></a>
+  <nav class="rail-dots">
+    <a href="#top" aria-label="Start"><i>START</i></a>
+    <a href="#manifest" aria-label="Kapitel Manifest"><i>I · MANIFEST</i></a>
+    <a href="#metalle" aria-label="Kapitel Metalle"><i>II · METALLE</i></a>
+    <a href="#prozess" aria-label="Kapitel Prozess"><i>III · PROZESS</i></a>
+    <a href="#zahlen" aria-label="Kapitel Zahlen"><i>IV · ZAHLEN</i></a>
+    <a href="#kontakt" aria-label="Kapitel Kontakt"><i>V · KONTAKT</i></a>
+  </nav>
+  <div class="rail-meta">CU·AG·999</div>
+</aside>
+
+<header class="topbar">
+  <a class="tb-brand" href="#top">EVEREST <em>EAGLE</em></a>
+  <nav>
+    <a href="#manifest">MANIFEST</a>
+    <a href="#metalle">METALLE</a>
+    <a href="#prozess">PROZESS</a>
+    <a href="#zahlen">ZAHLEN</a>
+    <a href="#kontakt">KONTAKT</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- GIPFEL / HERO -->
+  <section class="hero" id="hero" data-dot="#top">
+    <div class="hero-bg" data-plx="0.16" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="medallion" data-plx="-0.1">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="disc"><img src="images/eagle-flight.jpg" alt="Steinadler im Flug vor hellem Himmel"></div>
+      <div class="tag">AQUILA CHRYSAETOS · MMXXVI</div>
+    </div>
+    <div class="wrap hero-inner">
+      <p class="hero-kicker mono">Kupfer &amp; Silber — <b>Handel in Gipfelqualität</b></p>
+      <h1><span class="w" style="animation-delay:.15s">EVEREST</span>
+        <span class="l2"><span class="w" style="animation-delay:.34s">EAGLE</span></span></h1>
+      <p class="hero-sub">Wo der Adler über <strong>8.848 Metern</strong> kreist, beginnt unsere Norm: <strong>assay-zertifiziertes Kupfer</strong> und <strong>Feinsilber 999</strong> — aus geprüfter Herkunft, versiegelt, dokumentiert, geliefert.</p>
+      <div class="hero-ctas">
+        <a class="btn solid" href="#metalle">Metalle ansehen <span class="arr">→</span></a>
+        <a class="btn" href="#kontakt">Anfrage stellen <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="hero-scroll mono" aria-hidden="true"><span>SCROLL</span><span class="line"></span></div>
+  </section>
+
+  <!-- KURS-TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Kupfer Kathoden <b>CU-ETP 99,99 %</b> <i>◆</i></span>
+      <span>Silberbarren <b>999,0 FINE</b> <i>◆</i></span>
+      <span>LME Kupfer <b>3M OFFIZIELL</b> <i>◆</i></span>
+      <span>LBMA Silber <b>SPOT-REF</b> <i>◆</i></span>
+      <span>Assay <b>ISO/IEC 17025</b> <i>◆</i></span>
+      <span>Herkunft <b>RÜCKVERFOLGBAR</b> <i>◆</i></span>
+      <span>Kupfer Kathoden <b>CU-ETP 99,99 %</b> <i>◆</i></span>
+      <span>Silberbarren <b>999,0 FINE</b> <i>◆</i></span>
+      <span>LME Kupfer <b>3M OFFIZIELL</b> <i>◆</i></span>
+      <span>LBMA Silber <b>SPOT-REF</b> <i>◆</i></span>
+      <span>Assay <b>ISO/IEC 17025</b> <i>◆</i></span>
+      <span>Herkunft <b>RÜCKVERFOLGBAR</b> <i>◆</i></span>
+    </div>
+  </div>
+
+  <!-- I · MANIFEST -->
+  <section class="chapter" id="manifest" data-dot="#manifest">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-no" aria-hidden="true">I</span>
+        <span class="ch-label mono">Manifest</span>
+      </div>
+      <div class="manifest">
+        <div class="manifest-copy rv-l">
+          <h2 class="ch-title">Vom Herz der Erde bis zum <em>Dach der Welt.</em></h2>
+          <p class="lead">EVEREST EAGLE handelt mit zwei Metallen, die unsere Zivilisation tragen: <b>Kupfer</b> — das Blut der Elektrifizierung — und <b>Silber</b> — der edelste Leiter, den die Natur kennt.</p>
+          <p>Jede Lieferung folgt einer Regel, so beständig wie der Gipfel selbst: <b>geprüfte Herkunft, unabhängiges Assay, versiegelte Logistik.</b> Keine Kompromisse — weder bei Reinheit noch bei Diskretion.</p>
+          <p>Unsere Klienten sind Gießereien, Solarkonfektionäre, Minting-Häuser und Vermögensverwalter — von München bis Singapur.</p>
+          <div class="sign">
+            <span class="sig">E&amp;E</span>
+            <span class="mono" style="color:var(--si2)">Handelshaus · Est. MMXXVI</span>
+          </div>
+        </div>
+        <figure class="manifest-fig rv-r">
+          <div class="back-plate" aria-hidden="true"></div>
+          <div class="frame rv-img"><img src="images/copper-ore.jpg" alt="Natives Kupfer in Makroaufnahme — leuchtende Kupferkristalle"></div>
+          <figcaption class="float-tag">Native Copper · Naturform</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- II · METALLE — versetzte Luxus-Panels -->
+  <section class="chapter" id="metalle" data-dot="#metalle">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-no" aria-hidden="true">II</span>
+        <span class="ch-label mono">Die Metalle</span>
+      </div>
+      <div class="metals" data-stag>
+        <article class="metal">
+          <figure class="metal-fig tall"><img src="images/copper-ingots.jpg" alt="Kupferbarren mit 99,9 Prozent Feingehalt"></figure>
+          <div class="metal-body">
+            <h3><small>Feuer · Cu 29</small>KUPFER 99,99</h3>
+            <p>Kathoden- und Barrenqualität für Elektrotechnik, Erneuerbare Energien und Präzisionsgießerei. LME-registrierbare Waren.</p>
+            <ul class="spec">
+              <li><span>Reinheit</span><b>99,99 % <em>Cu</em></b></li>
+              <li><span>Dichte</span><b>8,96 g/cm³</b></li>
+              <li><span>Schmelzpunkt</span><b>1.085 °C</b></li>
+              <li><span>Formen</span><b>Barren · Kathoden · Granulat</b></li>
+            </ul>
+            <a class="metal-cta" href="#kontakt">Kupfer anfragen <span class="ln"></span></a>
+          </div>
+        </article>
+        <article class="metal offset">
+          <figure class="metal-fig"><img src="images/silver-bars.jpg" alt="Scottsdale-Mint-Silberbarren über 100 Feinunzen"></figure>
+          <div class="metal-body">
+            <h3><small>Eis · Ag 47</small>SILBER 999 FINE</h3>
+            <p>Feinsilber für Minting, Industrie und Werterhalt. Jeder Barren mit Assay-Zertifikat, Seriennummer und Siegel.</p>
+            <ul class="spec">
+              <li><span>Feingehalt</span><b>999,0 / 1000 <em>Ag</em></b></li>
+              <li><span>Dichte</span><b>10,49 g/cm³</b></li>
+              <li><span>Schmelzpunkt</span><b>962 °C</b></li>
+              <li><span>Formen</span><b>Barren · Granulat · Anoden</b></li>
+            </ul>
+            <a class="metal-cta" href="#kontakt">Silber anfragen <span class="ln"></span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLAX-TRENNER I -->
+  <section class="divider" aria-label="Zitat">
+    <div class="veil" aria-hidden="true"></div>
+    <blockquote>
+      <p class="rv">„Geschmiedet zwischen <em>Feuer</em> und <em>Eis</em> — geliefert auf Gipfelniveau.“</p>
+      <span class="mono rv" style="transition-delay:.25s">Hausprinzip Nr. 1 · EVEREST EAGLE</span>
+    </blockquote>
+  </section>
+
+  <!-- III · PROZESS -->
+  <section class="chapter" id="prozess" data-dot="#prozess">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-no" aria-hidden="true">III</span>
+        <span class="ch-label mono">Der Weg nach oben</span>
+      </div>
+      <div class="process">
+        <figure class="process-fig rv-l">
+          <div class="frame rv-img"><img src="images/silver-texture.jpg" alt="Natürlicher Silberkristall"></div>
+          <figcaption class="cap mono">Silberkristall · Naturform</figcaption>
+        </figure>
+        <ol class="steps" data-stag>
+          <li>
+            <h4>Herkunft &amp; Abbau</h4>
+            <p>Nur Mineure mit rückverfolgbaren Quellen. Jede Partie erhält einen digitalen Herkunftspass mit Gruben- und Chargenangabe.</p>
+          </li>
+          <li>
+            <h4>Raffination</h4>
+            <p>Elektrolytische Feinraffination auf 99,99 % Cu bzw. 999,0 Ag in zertifizierten Hütten — chargenrein getrennt.</p>
+          </li>
+          <li>
+            <h4>Assay &amp; Siegel</h4>
+            <p>Unabhängige Prüflaboratorien bestätigen den Feingehalt. Barren werden nummeriert, fotografiert und versiegelt.</p>
+          </li>
+          <li>
+            <h4>Logistik &amp; Lagerung</h4>
+            <p>Versicherter Transport oder Zollfreilagerung — diskret, vollständig dokumentiert, auf den Tag genau.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV · ZAHLEN -->
+  <section class="chapter" id="zahlen" data-dot="#zahlen">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-no" aria-hidden="true">IV</span>
+        <span class="ch-label mono">In Zahlen</span>
+      </div>
+      <div class="nums" data-stag>
+        <div class="num rv"><div class="num-val"><span data-count="12500">0</span><em> t</em></div><div class="num-lab mono">Kupfer gehandelt</div></div>
+        <div class="num rv"><div class="num-val"><span data-count="380000">0</span><em> kg</em></div><div class="num-lab mono">Feinsilber ausgeliefert</div></div>
+        <div class="num rv"><div class="num-val"><span data-count="99.99" data-dec="2">0</span><em> %</em></div><div class="num-lab mono">Maximale Reinheit</div></div>
+        <div class="num rv"><div class="num-val"><span data-count="27">0</span><em> J.</em></div><div class="num-lab mono">Markterfahrung im Team</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALLAX-TRENNER II -->
+  <section class="divider silver" aria-label="Textur">
+    <div class="veil" aria-hidden="true"></div>
+    <blockquote>
+      <p class="rv">Kupfer leitet. Silber <em>übertrifft.</em> Wir liefern beides.</p>
+      <span class="mono rv" style="transition-delay:.25s">Cu 29 · Ag 47 — Nachbarn im Periodensystem</span>
+    </blockquote>
+  </section>
+
+  <!-- V · KONTAKT -->
+  <section class="chapter" id="kontakt" data-dot="#kontakt">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-no" aria-hidden="true">V</span>
+        <span class="ch-label mono">Kontakt</span>
+      </div>
+      <div class="contact">
+        <div class="c-info rv-l">
+          <h2 class="ch-title">Sprechen wir über <em>Ihre nächste Partie.</em></h2>
+          <p>Antwort innerhalb von 24 Stunden — mit Angebot, Assay-Daten, Verfügbarkeit und Festpreisfenster.</p>
+          <ul class="c-rows">
+            <li><span class="k">Handelshaus</span><span>EVEREST EAGLE Metallhandel GmbH</span></li>
+            <li><span class="k">Anschrift</span><span>Bergwerkstraße 8 · 80331 München</span></li>
+            <li><span class="k">E-Mail</span><a href="mailto:kontakt@everest-eagle.de">kontakt@everest-eagle.de</a></li>
+            <li><span class="k">Telefon</span><a href="tel:+49890000000">+49 89 000 000-0</a></li>
+            <li><span class="k">Erreichbar</span><span>Mo–Fr · 08:00–18:00 MEZ</span></li>
+          </ul>
+        </div>
+        <form class="form rv-r" id="cform">
+          <div class="f-row">
+            <div class="f-field"><label for="nm">Name</label><input id="nm" name="name" type="text" required placeholder="Ihr Name"></div>
+            <div class="f-field"><label for="em">E-Mail</label><input id="em" name="email" type="email" required placeholder="name@firma.de"></div>
+          </div>
+          <div class="f-field"><label for="mt">Metall</label>
+            <select id="mt" name="metall">
+              <option>Kupfer 99,99 % — Kathoden</option>
+              <option>Kupfer 99,99 % — Barren</option>
+              <option>Silber 999,0 — Barren</option>
+              <option>Silber 999,0 — Granulat</option>
+              <option>Gemischte Partie / Beratung</option>
+            </select>
+          </div>
+          <div class="f-field"><label for="ms">Menge &amp; Nachricht</label><textarea id="ms" name="nachricht" placeholder="z. B. 5 t Kathoden, Lieferung Q3 nach Hamburg …"></textarea></div>
+          <button class="btn solid" type="submit">Anfrage senden <span class="arr">→</span></button>
+          <p class="mono" id="fmsg" style="margin-top:16px;color:var(--si2);display:none">Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="foot-brand">EVEREST <em>EAGLE</em></div>
+      <small>Kupfer &amp; Silber in Gipfelqualität — assay-zertifiziert, versiegelt, geliefert.</small>
+    </div>
+    <nav class="mono" style="display:flex;gap:22px;flex-wrap:wrap">
+      <a href="#manifest">Manifest</a>
+      <a href="#metalle">Metalle</a>
+      <a href="#prozess">Prozess</a>
+      <a href="#zahlen">Zahlen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <small class="mono" style="color:#6E675F">© <span id="yr">2026</span> EVEREST EAGLE · Bilder: Wikimedia Commons (freie Lizenzen)</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mobile = window.matchMedia("(max-width: 900px)");
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* Scroll-Fortschritt in der linken Schiene */
+  var prog = document.getElementById("progress");
+  function onProg(){
+    var h = document.documentElement;
+    var p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+    prog.style.height = (p * 100).toFixed(2) + "%";
+  }
+
+  /* Parallax via requestAnimationFrame — nur Desktop, ohne reduced-motion */
+  var plx = Array.prototype.slice.call(document.querySelectorAll("[data-plx]"));
+  var ticking = false;
+  function parallax(){
+    ticking = false;
+    if (reduced || mobile.matches){
+      plx.forEach(function(el){ el.style.transform = ""; });
+      return;
+    }
+    var vh = window.innerHeight;
+    plx.forEach(function(el){
+      var host = el.parentElement;
+      var r = host.getBoundingClientRect();
+      if (r.bottom < -80 || r.top > vh + 80) return;
+      var off = (r.top + r.height / 2 - vh / 2) * parseFloat(el.getAttribute("data-plx"));
+      el.style.transform = "translate3d(0," + off.toFixed(1) + "px,0)";
+    });
+  }
+  function onScroll(){
+    onProg();
+    if (!ticking){ ticking = true; requestAnimationFrame(parallax); }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  /* Reveals + Zähler */
+  function fmt(v, dec){
+    return v.toLocaleString("de-DE", {minimumFractionDigits:dec, maximumFractionDigits:dec});
+  }
+  function runCount(el){
+    if (el.__done) return;
+    el.__done = true;
+    var t = parseFloat(el.getAttribute("data-count"));
+    var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
+    if (reduced){ el.textContent = fmt(t, dec); return; }
+    var t0 = null, dur = 1700;
+    (function step(ts){
+      if (!t0) t0 = ts;
+      var k = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(t * e, dec);
+      if (k < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      e.target.querySelectorAll("[data-count]").forEach(runCount);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.16, rootMargin:"0px 0px -6% 0px"});
+  document.querySelectorAll(".rv,.rv-l,.rv-r,.rv-img,[data-stag]").forEach(function(el){ io.observe(el); });
+
+  /* Aktiver Navigationspunkt */
+  var dots = Array.prototype.slice.call(document.querySelectorAll(".rail-dots a"));
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var href = e.target.getAttribute("data-dot");
+      dots.forEach(function(d){ d.classList.toggle("on", d.getAttribute("href") === href); });
+    });
+  }, {rootMargin:"-45% 0px -45% 0px"});
+  document.querySelectorAll("[data-dot]").forEach(function(s){ io2.observe(s); });
+
+  /* Formular -> vorbereitete E-Mail */
+  var form = document.getElementById("cform");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var d = new FormData(form);
+    var body = "Name: " + (d.get("name") || "") +
+               "\nE-Mail: " + (d.get("email") || "") +
+               "\nMetall: " + (d.get("metall") || "") +
+               "\n\n" + (d.get("nachricht") || "");
+    window.location.href = "mailto:kontakt@everest-eagle.de?subject=" +
+      encodeURIComponent("Anfrage über everest-eagle.de — " + (d.get("metall") || "")) +
+      "&body=" + encodeURIComponent(body);
+    document.getElementById("fmsg").style.display = "block";
+  });
+})();
+</script>
+</body>
+</html>
