@@ -1,4 +1,4 @@
-GALERIE ARGENTUM — Bildquellen (Wikimedia Commons)
+BLACK TEMPLAR METALS — Bildquellen (Wikimedia Commons)
 Alle Bilder wurden von https://commons.wikimedia.org heruntergeladen.
 
 hero-argentine.jpg
@@ -6,6 +6,18 @@ hero-argentine.jpg
   Autor: siehe Commons-Dateiseite
   Lizenz: CC BY-SA 3.0
   https://commons.wikimedia.org/wiki/File:Silberbarren.jpg
+
+pour-copper.jpg
+  Datei: File:Molten copper being poured - MCM Mufilira.jpg
+  Autor: photosmith2011 (Flickr)
+  Lizenz: CC BY-SA 2.0
+  https://commons.wikimedia.org/wiki/File:Molten_copper_being_poured_-_MCM_Mufilira.jpg
+
+ingot-cypriot.jpg
+  Datei: File:Copper ingot MET DT261186.jpg
+  Autor: Metropolitan Museum of Art (Open Access, Public Domain)
+  Lizenz: CC0 / Public Domain
+  https://commons.wikimedia.org/wiki/File:Copper_ingot_MET_DT261186.jpg
 
 bar-heraeus.jpg
   Datei: File:Heraeus 10 oz 9999 fine silver bar (52202724589).jpg
@@ -38,4 +50,3 @@ wire-kazakhstan.jpg
   https://commons.wikimedia.org/wiki/File:Silver_wire_(Kazakhstan)_1_(17270580951).jpg
 
 Lizenzen: https://creativecommons.org/licenses/by-sa/3.0/ · /4.0/ · /by/2.0/ · CC0
-Namensnennung erfolgt über diese Datei sowie das Impressum.
