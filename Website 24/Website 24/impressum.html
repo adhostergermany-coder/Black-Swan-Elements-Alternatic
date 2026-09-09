@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | CUCORE — Atelier für Kupfer &amp; Silber</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%231F1913'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23B7803E' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23DFA968' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='5.5' fill='%23DFA968'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600&family=Red+Hat+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ivory: #F4EFE6;
+            --parchment: #FAF7F0;
+            --bronze: #B7803E;
+            --bronze-dark: #8F5B24;
+            --verdigris: #477A6C;
+            --ink: #241E16;
+            --mute: #7C7367;
+            --line: rgba(36, 30, 22, 0.16);
+            --line-soft: rgba(36, 30, 22, 0.08);
+        }
+
+        body {
+            font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--ivory);
+            line-height: 1.7;
+        }
+
+        h1, h2 { font-family: 'Gilda Display', Georgia, serif; font-weight: 400; }
+
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 18px 60px;
+            background: rgba(36, 30, 22, 0.96);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 13px; }
+
+        .logo-coin {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(115deg, #E8C48E 0%, #FDF2DD 24%, #C89A5C 47%, #F5E3C4 66%, #A97733 100%);
+            display: grid; place-items: center;
+            font-family: 'Gilda Display', serif; font-size: 19px; color: #241E16;
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.5), inset 0 -6px 12px rgba(143,91,36,0.35), 0 3px 10px rgba(143,91,36,0.25);
+        }
+
+        .logo-name {
+            font-family: 'Gilda Display', serif;
+            font-size: 21px;
+            color: #FAF7F0;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .logo-tagline {
+            display: block;
+            font-family: 'Red Hat Mono', monospace;
+            font-size: 8.5px;
+            color: #7FA79B;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .back-link {
+            color: rgba(250, 247, 240, 0.55);
+            text-decoration: none;
+            font-family: 'Red Hat Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: var(--bronze); }
+
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 160px 60px 100px;
+        }
+
+        .page-content h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .kicker {
+            font-family: 'Red Hat Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--verdigris);
+            margin-bottom: 36px;
+        }
+
+        .page-content h2 {
+            font-size: 24px;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .page-content p,
+        .page-content li {
+            font-size: 15px;
+            color: var(--mute);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .page-content ul { list-style: none; margin-bottom: 16px; }
+
+        .page-content a { color: var(--bronze-dark); text-decoration: none; border-bottom: 1px solid rgba(183,128,62,0.4); }
+        .page-content a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+        .divider { border: none; border-top: 1px solid var(--line-soft); margin: 32px 0; }
+
+        .credits li { margin-bottom: 16px; }
+        .credits b { color: var(--ink); font-weight: 600; }
+        .credits .mono {
+            font-family: 'Red Hat Mono', monospace;
+            font-size: 12.5px;
+            color: var(--bronze-dark);
+        }
+
+        .footer-mini {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 60px;
+            border-top: 1px solid var(--line-soft);
+            font-size: 13px;
+            color: var(--mute);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-coin {
+            width: 15px; height: 15px; border-radius: 50%;
+            background: linear-gradient(115deg, #E8C48E 0%, #FDF2DD 24%, #C89A5C 47%, #F5E3C4 66%, #A97733 100%);
+            display: inline-block;
+        }
+
+        @media (max-width: 700px) {
+            .header { padding: 16px 24px; }
+            .page-content { padding: 130px 24px 60px; }
+            .page-content h1 { font-size: 32px; }
+            .footer-mini { padding: 20px 24px; flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-coin">C</span>
+            <span>
+                <span class="logo-name">CUCORE</span>
+                <span class="logo-tagline">Kupfer · Silber</span>
+            </span>
+        </a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+        <p class="kicker">Atelier für Kupfer &amp; Silber · Hamburg</p>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            CUCORE Atelier für Kupfer &amp; Silber<br>
+            Speicherstadt-Ring 12<br>
+            20457 Hamburg
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0) 40 998 224 60<br>
+            E-Mail: <a href="mailto:atelier@cucore.de">atelier@cucore.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 331 224 608
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Bildnachweise</h2>
+        <p>Verwendete Fotografien (Wikimedia Commons, Ausschnitte teils bearbeitet):</p>
+        <ul class="credits">
+            <li>
+                <b>hero-furnace.jpg</b> — <span class="mono">„Casting a billet from an electric furnace, Chase Brass and Copper Co., Euclid, Ohio“</span><br>
+                Alfred T. Palmer — Public domain
+            </li>
+            <li>
+                <b>molten-flow.jpg</b> — <span class="mono">„Clouds of molten copper“</span><br>
+                Sue Allen (panoramio) — CC BY-SA 3.0
+            </li>
+            <li>
+                <b>ingot-met.jpg</b> — <span class="mono">„Copper ingot, The Metropolitan Museum of Art“</span><br>
+                The Metropolitan Museum of Art — CC0
+            </li>
+            <li>
+                <b>silver-bar.jpg</b> — <span class="mono">„100 Troy oz. Silver Bullion Bar from Johnson Matthey“</span><br>
+                Ausecure — CC BY-SA 4.0
+            </li>
+            <li>
+                <b>silver-ingot.jpg</b> — <span class="mono">„Johnson Matthey 500 grammes silver bullion“</span><br>
+                Kallemax — Public domain
+            </li>
+            <li>
+                <b>silver-granules.jpg</b> — <span class="mono">„Fine silver granules“</span><br>
+                Mauro Cateb — CC BY-SA 4.0
+            </li>
+            <li>
+                <b>silver-crystal.jpg</b> — <span class="mono">„Silver crystal“</span><br>
+                Alchemist-hp — CC BY-SA 3.0 DE
+            </li>
+            <li>
+                <b>copper-rods.jpg</b> — <span class="mono">„Copper Rod“</span><br>
+                Niklitov — CC BY-SA 4.0
+            </li>
+            <li>
+                <b>wire-rod.jpg</b> — <span class="mono">„Copper wire rod produced by LS Cable &amp; System“</span><br>
+                Lsgeeks — CC BY-SA 3.0
+            </li>
+            <li>
+                <b>copper-patina.jpg</b> — <span class="mono">„Rainbow Copper Texture Wallpaper“</span><br>
+                Pink Sherbet Photography — CC BY 2.0
+            </li>
+        </ul>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 CUCORE Atelier für Kupfer &amp; Silber</p>
+        <a href="index.html" style="border:none; color:var(--bronze-dark);">Startseite</a>
+        <span class="footer-coin" aria-hidden="true"></span>
+    </footer>
+
+</body>
+</html>
