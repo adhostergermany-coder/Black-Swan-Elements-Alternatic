@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIONHEART COPPER BARS — Königliche Kupfermanufaktur</title>
+<meta name="description" content="LIONHEART COPPER BARS — Kupfer 99,99 % und Feinsilber 999 in höfischer Präzision. Wappen, Archive, Kronkammern: Edelmetall als königliches Erbe.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 3 58 12v18c0 15-11 26-26 31C17 56 6 45 6 30V12z' fill='%23430D12' stroke='%23D4A952' stroke-width='2.5'/%3E%3Cpath d='M20 40l4-13 8 8 8-8 4 13-8-3v7H28v-7z' fill='%23EFD393'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   LIONHEART COPPER BARS — "THE LION'S COURT"
+   Einzigartiges Konzept dieser Sammlung (keine Überschneidung):
+   · Königlicher Oxblood/Bordeaux-Hof statt Schwarz/Grün/Elfenbein
+   · GOTISCHE SPITZBOGEN-Architektur (nur hier) statt Rechteck-Karten
+   · MARCELLUS (Titularispensal) + MANROPE + SPLINE SANS MONO
+   · Heraldische Wappen-SVGs (Löwe, Krone, Bajoche) als Motive
+   · "FACKELSCHEIN": Cursor folgt warmes Licht über der entire Seite
+   · Spaltengalerie wie ein KATHEDRALENFENSTER, nicht wie ein Grid
+   · Parallax-Tiefen: Hero, Bögen, Kronleuchter-Glanz, Archive
+   · Rotierendes königliches SIEGEL (rotating royal seal)
+   · Diagonal versetzte Zeremonien-Liste (asymmetric ceremony rows)
+   ================================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --oxblood: #4A0F15;
+    --oxblood-2: #611620;
+    --oxblood-3: #7A2028;
+    --wine-deep: #310A0F;
+    --wine-night: #23070A;
+    --crown: #D4A952;
+    --crown-bright: #EFD393;
+    --crown-pale: #F6E8C8;
+    --crown-deep: #8A6320;
+    --silver-mist: #D9DEE4;
+    --silver-bright: #F2F5F8;
+    --parch: #F1E6D0;
+    --parch-dim: #CDBF9A;
+    --mute: #B09684;
+    --ember: #E8865A;
+    --line: rgba(212, 169, 82, 0.28);
+    --line-soft: rgba(212, 169, 82, 0.14);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --serif: 'Marcellus', 'Times New Roman', serif;
+    --sans: 'Manrope', 'Segoe UI', sans-serif;
+    --mono: 'Spline Sans Mono', 'Consolas', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--sans);
+    font-weight: 400;
+    background: var(--wine-night);
+    color: var(--parch);
+    line-height: 1.75;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .serif { font-family: var(--serif); font-weight: 400; line-height: 1.1; }
+.mono { font-family: var(--mono); }
+
+::selection { background: var(--crown); color: var(--wine-deep); }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+.wrap { width: min(1240px, 92vw); margin: 0 auto; }
+
+/* ---------- FACKELSCHEIN: cursor torchlight ---------- */
+.torch {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(500px circle at var(--tx, 60%) var(--ty, 30%),
+        rgba(239, 211, 147, 0.13), rgba(232, 134, 90, 0.055) 42%, transparent 68%);
+    transition: opacity 0.4s;
+    mix-blend-mode: screen;
+}
+@media (hover: none) { .torch { display: none; } }
+
+/* ---------- royal seal (rotating) ---------- */
+.seal {
+    width: 118px; height: 118px; position: relative; display: grid; place-items: center;
+    flex: 0 0 auto;
+}
+.seal svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: sealSpin 26s linear infinite; }
+.seal .seal-core {
+    font-family: var(--serif); font-size: 34px; color: var(--crown-bright);
+    line-height: 1; text-align: center;
+}
+.seal .seal-core small { display: block; font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; color: var(--mute); margin-top: 4px; }
+@keyframes sealSpin { to { transform: rotate(360deg); } }
+
+/* ---------- header ---------- */
+.site-head {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px clamp(20px, 4vw, 54px);
+    border-bottom: 1px solid transparent;
+    transition: padding 0.4s var(--ease), background 0.4s, border-color 0.4s;
+}
+.site-head.scrolled {
+    padding: 12px clamp(20px, 4vw, 54px);
+    background: rgba(29, 5, 7, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: var(--line-soft);
+}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand-crest {
+    width: 46px; height: 46px; flex: 0 0 auto;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+    transition: transform 0.5s var(--ease);
+}
+.brand:hover .brand-crest { transform: rotate(-6deg) scale(1.06); }
+.brand-word b {
+    display: block; font-family: var(--serif); font-weight: 400; font-size: 20px;
+    letter-spacing: 0.24em; color: var(--crown-pale); line-height: 1.2;
+}
+.brand-word small {
+    display: block; font-family: var(--mono); font-size: 8px;
+    letter-spacing: 0.44em; text-transform: uppercase; color: var(--mute); margin-top: 3px;
+}
+.nav { display: flex; align-items: center; gap: 32px; }
+.nav a {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--mute); text-decoration: none;
+    padding: 6px 0; position: relative; transition: color 0.3s;
+}
+.nav a:not(.head-cta)::after {
+    content: ''; position: absolute; left: 50%; bottom: 0; width: 0; height: 1px;
+    background: var(--crown); transition: width 0.4s var(--ease), left 0.4s var(--ease);
+}
+.nav a:hover:not(.head-cta) { color: var(--crown-pale); }
+.nav a:hover:not(.head-cta)::after { width: 100%; left: 0; }
+.nav a.head-cta {
+    color: var(--wine-night); background: linear-gradient(160deg, var(--crown-bright), var(--crown));
+    padding: 13px 26px; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    transition: filter 0.3s, transform 0.3s var(--ease);
+}
+.nav a.head-cta:hover { filter: brightness(1.12); transform: translateY(-2px); }
+
+.burger {
+    display: none; background: none; cursor: pointer;
+    border: 1px solid var(--line); width: 44px; height: 44px;
+    flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.burger i { display: block; width: 18px; height: 1.5px; background: var(--parch); transition: 0.35s var(--ease); }
+.burger.open i:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open i:nth-child(2) { opacity: 0; }
+.burger.open i:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.drawer {
+    position: fixed; inset: 0; z-index: 90;
+    background: rgba(29, 5, 7, 0.97);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
+}
+.drawer.open { opacity: 1; visibility: visible; }
+.drawer a {
+    font-family: var(--serif); font-size: 28px; color: var(--parch); text-decoration: none;
+    transform: translateY(16px); opacity: 0;
+    transition: transform 0.55s var(--ease), opacity 0.55s, color 0.3s;
+}
+.drawer.open a { transform: none; opacity: 1; }
+.drawer a:hover { color: var(--crown-bright); }
+
+/* ---------- buttons ---------- */
+.btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    text-decoration: none; padding: 17px 32px; position: relative;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s, background 0.3s, color 0.3s, border-color 0.3s;
+}
+.btn-crown {
+    color: var(--wine-night);
+    background: linear-gradient(150deg, var(--crown-bright) 0%, var(--crown) 58%, var(--crown-deep) 100%);
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    box-shadow: 0 12px 28px -12px rgba(201, 151, 63, 0.55);
+}
+.btn-crown:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -14px rgba(233, 199, 127, 0.5); }
+.btn-ghost {
+    color: var(--crown-pale); border: 1px solid var(--line);
+    background: rgba(67, 13, 18, 0.35);
+}
+.btn-ghost:hover { border-color: var(--crown); background: rgba(201, 151, 63, 0.1); transform: translateY(-3px); }
+.btn-ghost::after {
+    content: '→'; font-family: var(--mono); transition: transform 0.3s var(--ease);
+}
+.btn-ghost:hover::after { transform: translateX(5px); }
+
+/* ---------- reveals ---------- */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- gothic arch scaffolding (unique shape language) ---------- */
+.arch { border-radius: 999px 999px 0 0; }
+.arch-frame {
+    position: relative;
+    border: 1px solid var(--line);
+    border-bottom: none;
+    background: linear-gradient(180deg, rgba(90, 18, 24, 0.5), rgba(44, 8, 12, 0.72));
+    box-shadow: 0 40px 80px -40px rgba(0,0,0,0.75), inset 0 1px 0 rgba(233,199,127,0.14);
+}
+.arch-frame::before, .arch-frame::after {
+    content: ''; position: absolute; left: 12px; right: 12px; height: 1px;
+    background: var(--line-soft); pointer-events: none;
+}
+.arch-frame::before { top: 16%; }
+.arch-frame::after { top: 22%; }
+
+/* ================= HERO — "DAS TOR DES HOFES" ================= */
+.hero {
+    position: relative; z-index: 2;
+    min-height: 100svh;
+    display: flex; align-items: center;
+    padding: 140px clamp(20px, 4vw, 54px) 110px;
+    overflow: hidden;
+}
+.hero-bg { position: absolute; inset: -16% 0; z-index: 0; will-change: transform; }
+.hero-bg img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    filter: saturate(1.06) contrast(1.05) brightness(0.86);
+    will-change: transform;
+}
+.hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+        linear-gradient(105deg, rgba(35,7,10,0.97) 0%, rgba(49,10,15,0.9) 30%, rgba(74,15,21,0.55) 58%, rgba(35,7,10,0.82) 100%),
+        radial-gradient(60% 46% at 72% 26%, rgba(239,211,147,0.17), transparent 62%),
+        linear-gradient(0deg, var(--wine-night) 2%, transparent 30%);
+}
+.hero-inner { position: relative; z-index: 3; width: 100%; display: grid; grid-template-columns: 1.12fr 0.88fr; gap: clamp(36px, 5vw, 80px); align-items: center; }
+.hero-copy { max-width: 680px; }
+
+.hero-kicker {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--crown);
+    border: 1px solid var(--line-soft); background: rgba(67,13,18,0.5);
+    padding: 10px 18px; margin-bottom: 34px;
+}
+.hero-kicker i { font-style: normal; width: 7px; height: 7px; background: var(--ember); border-radius: 50%; box-shadow: 0 0 12px var(--ember); animation: emberPulse 2.6s ease-in-out infinite; }
+@keyframes emberPulse { 0%,100% { opacity: 1; box-shadow: 0 0 12px var(--ember); } 50% { opacity: 0.35; box-shadow: 0 0 3px var(--ember); } }
+
+.hero h1 { font-size: clamp(56px, 8vw, 128px); letter-spacing: 0.015em; color: var(--parch); }
+.hero h1 .row { display: block; }
+.hero h1 .gold {
+    background: linear-gradient(98deg, var(--crown-deep) 0%, var(--crown-bright) 30%, var(--crown) 55%, var(--crown-pale) 76%, #B8862F 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+}
+.hero h1 .silverline {
+    background: linear-gradient(98deg, #8D97A3 0%, var(--silver-bright) 32%, #AEB7C2 56%, #E7EDF3 78%, #7E8894 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+}
+.hero-lede { margin-top: 28px; max-width: 54ch; font-weight: 300; font-size: clamp(15.5px, 1.4vw, 18px); color: var(--parch-dim); }
+.hero-lede b { font-weight: 600; color: var(--crown-bright); }
+
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 42px; }
+
+.hero-decree {
+    margin-top: 54px; padding-top: 26px; border-top: 1px solid var(--line-soft);
+    display: flex; gap: clamp(26px, 4vw, 60px); flex-wrap: wrap;
+}
+.hero-decree .decree { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); font-family: var(--mono); }
+.hero-decree .decree strong {
+    display: block; font-family: var(--serif); font-weight: 400; font-size: 26px;
+    letter-spacing: 0.04em; color: var(--crown-pale); margin-bottom: 4px;
+}
+
+/* hero arch portrait (parallax layers) */
+.hero-court { position: relative; height: min(72vh, 660px); }
+.court-arch {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: min(400px, 74%); aspect-ratio: 0.62;
+    border-radius: 999px 999px 0 0; overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 60px 110px -40px rgba(0,0,0,0.85), inset 0 0 0 8px rgba(29,5,7,0.6);
+    will-change: transform;
+    z-index: 2;
+}
+.court-arch img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.court-arch::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 46%, rgba(35,7,10,0.88) 96%),
+                radial-gradient(50% 34% at 50% 8%, rgba(239,211,147,0.24), transparent 70%);
+}
+.court-caption {
+    position: absolute; z-index: 3; left: 50%; transform: translateX(-50%);
+    bottom: -6px; white-space: nowrap;
+    background: var(--wine-deep); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--crown-bright); padding: 11px 24px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+}
+.court-side {
+    position: absolute; overflow: hidden;
+    border: 1px solid var(--line-soft); border-radius: 999px 999px 0 0;
+    box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7);
+    will-change: transform; z-index: 1;
+}
+.court-side img { width: 100%; height: 100%; object-fit: cover; }
+.court-side::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,5,7,0.14), rgba(29,5,7,0.62)); }
+.side-a { width: clamp(120px, 13vw, 180px); aspect-ratio: 0.66; left: -2%; top: 6%; }
+.side-b { width: clamp(104px, 11vw, 150px); aspect-ratio: 0.66; right: -1%; bottom: 14%; }
+.seal-hero { position: absolute; z-index: 4; right: 4%; top: -2%; opacity: 0.94; }
+
+/* hero foot: scroll lead */
+.hero-scroll {
+    position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 4;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.44em; color: var(--mute); text-transform: uppercase;
+}
+.hero-scroll i { width: 1px; height: 46px; background: linear-gradient(180deg, var(--crown), transparent); display: block; animation: leadDown 2.2s ease-in-out infinite; }
+@keyframes leadDown { 0% { transform: scaleY(0); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: top; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* ================= WAPPENBAND — heraldic strip ================= */
+.herold {
+    position: relative; z-index: 2;
+    background: linear-gradient(180deg, var(--wine-deep), var(--oxblood));
+    border-block: 1px solid var(--line-soft);
+    padding: 34px 0;
+}
+.herold .wrap { display: flex; justify-content: space-between; align-items: center; gap: 26px; flex-wrap: wrap; }
+.herold-item { display: flex; align-items: center; gap: 14px; }
+.herold-item svg { width: 34px; height: 34px; flex: 0 0 auto; opacity: 0.92; }
+.herold-item span { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--parch-dim); }
+.herold-item span b { display: block; font-family: var(--serif); font-weight: 400; font-size: 16px; letter-spacing: 0.12em; color: var(--crown-pale); margin-bottom: 2px; }
+
+/* ================= KAPITEL — chapter manifesto ================= */
+.kapitel { position: relative; z-index: 2; padding: clamp(100px, 13vh, 170px) clamp(20px, 4vw, 54px); }
+.kapitel-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: clamp(40px, 6vw, 100px); align-items: start; }
+.kapitel-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--crown); margin-bottom: 24px;
+}
+.kapitel-tag::before { content: ''; width: 34px; height: 1px; background: var(--crown); opacity: 0.65; }
+.kapitel h2 { font-size: clamp(36px, 4.8vw, 72px); color: var(--parch); }
+.kapitel h2 em { font-style: normal; color: var(--crown-bright); }
+.kapitel-copy p { color: var(--parch-dim); font-weight: 300; font-size: clamp(15.5px, 1.3vw, 17.5px); margin-bottom: 18px; max-width: 58ch; }
+.kapitel-copy p b { color: var(--parch); font-weight: 600; }
+.kapitel-quote {
+    margin-top: 32px; position: relative; padding: 26px 30px;
+    border: 1px solid var(--line-soft); background: rgba(67, 13, 18, 0.4);
+    font-family: var(--serif); font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5; color: var(--parch);
+}
+.kapitel-quote::before {
+    content: '❝'; position: absolute; top: -18px; left: 22px;
+    font-size: 40px; color: var(--crown); background: var(--wine-night); padding: 0 10px; line-height: 1;
+}
+.kapitel-quote small { display: block; margin-top: 12px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crown); }
+
+.kapitel-visual { position: relative; }
+.monolith {
+    border-radius: 999px 999px 0 0; overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 50px 100px -40px rgba(0,0,0,0.8);
+    will-change: transform;
+}
+.monolith img { width: 100%; height: auto; }
+.monolith-meta {
+    display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    margin-top: 18px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--mute);
+}
+.monolith-meta b { color: var(--crown-bright); font-weight: 400; }
+.monolith-float {
+    position: absolute; right: -14px; bottom: 42px; z-index: 3;
+    background: var(--oxblood); border: 1px solid var(--line);
+    padding: 16px 20px; box-shadow: 0 24px 50px -18px rgba(0,0,0,0.7);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mute);
+    will-change: transform;
+}
+.monolith-float b { display: block; font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: 0.06em; color: var(--crown-bright); margin-bottom: 3px; }
+
+/* ================= KRONKAMMER — cathedral window gallery ================= */
+.kronkammer { position: relative; z-index: 2; padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 54px); background: linear-gradient(180deg, var(--wine-night), var(--wine-deep) 60%, var(--wine-night)); }
+.kron-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: clamp(44px, 6vh, 76px); }
+.kron-head h2 { font-size: clamp(36px, 5vw, 76px); color: var(--parch); }
+.kron-head h2 em { font-style: normal; background: linear-gradient(98deg, var(--crown), var(--crown-pale)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.kron-head p { max-width: 40ch; color: var(--mute); font-size: 15px; }
+
+.window-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(22px, 3vw, 44px);
+    align-items: end;
+}
+.winch { position: relative; }
+.winch:nth-child(2) { transform: translateY(-46px); }
+.winch .arch-frame { overflow: hidden; }
+.winch img { width: 100%; aspect-ratio: 0.68; object-fit: cover; filter: saturate(1.04) contrast(1.03); transition: transform 1s var(--ease), filter 0.6s; }
+.winch:hover img { transform: scale(1.06); filter: saturate(1.14) contrast(1.05); }
+.winch-win {
+    position: absolute; inset: auto 0 0; z-index: 2;
+    background: linear-gradient(180deg, transparent, rgba(29,5,7,0.94) 62%);
+    padding: 70px 22px 20px;
+}
+.winch-win h3 { font-size: 22px; letter-spacing: 0.08em; color: var(--crown-pale); }
+.winch-win p { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mute); margin-top: 6px; }
+.winch-win p b { color: var(--crown); font-weight: 400; }
+.winch-base {
+    height: 46px; border: 1px solid var(--line); border-top: none;
+    background: repeating-linear-gradient(90deg, rgba(201,151,63,0.16) 0 2px, transparent 2px 26px), var(--oxblood-2);
+    position: relative;
+}
+.winch-base::before, .winch-base::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line-soft);
+}
+.winch-base::before { left: 26%; }
+.winch-base::after { right: 26%; }
+.winch-glow {
+    position: absolute; z-index: 3; left: 50%; top: 18%; transform: translateX(-50%);
+    width: 82%; height: 30%; pointer-events: none;
+    background: radial-gradient(52% 60% at 50% 22%, rgba(239,211,147,0.26), transparent 70%);
+    mix-blend-mode: screen;
+}
+
+/* ================= ZEREMONIE — gothic arcade niches ================= */
+.zeremonie { position: relative; z-index: 2; padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 54px); }
+.zer-head { text-align: center; margin-bottom: clamp(44px, 7vh, 84px); }
+.zer-head .kapitel-tag { justify-content: center; }
+.zer-head .kapitel-tag::after { content: ''; width: 34px; height: 1px; background: var(--crown); opacity: 0.65; }
+.zer-head h2 { font-size: clamp(34px, 4.6vw, 68px); color: var(--parch); }
+.zer-arcade { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.2vw, 30px); align-items: end; }
+.zer-niche { position: relative; }
+.zer-niche:nth-child(2) { transform: translateY(-30px); }
+.zer-niche:nth-child(4) { transform: translateY(-16px); }
+.zer-niche-inner {
+    position: relative;
+    border: 1px solid var(--line);
+    border-bottom: none;
+    border-radius: 999px 999px 0 0;
+    background:
+        radial-gradient(120% 90% at 50% 0%, rgba(239,211,147,0.10), transparent 52%),
+        linear-gradient(180deg, rgba(97,22,32,0.55), rgba(49,10,15,0.75));
+    padding: 34px 24px 30px;
+    min-height: 320px;
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+    box-shadow: 0 34px 64px -30px rgba(0,0,0,0.75), inset 0 1px 0 rgba(239,211,147,0.14);
+    overflow: hidden;
+    transition: transform 0.5s var(--ease), border-color 0.4s, background 0.4s;
+}
+.zer-niche:hover .zer-niche-inner { transform: translateY(-8px); border-color: var(--crown); }
+.zer-niche-inner::before {
+    content: ''; position: absolute; left: 14px; right: 14px; top: 13%; height: 1px;
+    background: var(--line-soft);
+}
+.zer-niche-inner::after {
+    content: ''; position: absolute; left: 14px; right: 14px; top: 17%; height: 1px;
+    background: var(--line-soft);
+}
+.zer-step {
+    font-family: var(--serif); font-size: 40px; color: var(--crown); line-height: 1;
+}
+.zer-step small { display: block; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.34em; color: var(--mute); margin-top: 8px; text-transform: uppercase; }
+.zer-name h3 { font-size: clamp(17px, 1.6vw, 20px); color: var(--parch); letter-spacing: 0.07em; }
+.zer-name p { color: var(--parch-dim); font-size: 13.5px; margin-top: 6px; font-weight: 300; }
+.zer-note {
+    margin-top: auto; font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+    color: var(--mute); text-transform: uppercase; border-top: 1px dashed var(--line); padding-top: 12px; width: 100%;
+}
+.zer-note b { color: var(--crown-bright); font-weight: 400; display: block; margin-top: 4px; }
+.zer-sill {
+    height: 40px; border: 1px solid var(--line); border-top: none;
+    background: repeating-linear-gradient(90deg, rgba(212,169,82,0.16) 0 2px, transparent 2px 24px), var(--oxblood-2);
+    position: relative;
+}
+.zer-sill::before, .zer-sill::after { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line-soft); }
+.zer-sill::before { left: 28%; }
+.zer-sill::after { right: 28%; }
+
+/* ================= ARCHIV — edicts / ticker of laws ================= */
+.archiv { position: relative; z-index: 2; padding: clamp(80px, 11vh, 140px) 0; background: linear-gradient(180deg, var(--wine-night), #24060A); border-block: 1px solid var(--line-soft); overflow: hidden; }
+.archiv-head { text-align: center; margin-bottom: 40px; }
+.archiv-head h2 { font-size: clamp(28px, 3.6vw, 52px); color: var(--parch); }
+.archiv-head p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em; color: var(--crown); text-transform: uppercase; margin-top: 10px; }
+.edict-track { display: flex; gap: 0; width: max-content; animation: edictSlide 44s linear infinite; }
+.archiv:hover .edict-track { animation-play-state: paused; }
+.edict {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 0 34px; white-space: nowrap;
+    font-family: var(--serif); font-size: clamp(17px, 2vw, 24px); color: var(--parch-dim);
+}
+.edict b { color: var(--crown-bright); font-weight: 400; }
+.edict::after { content: '✦'; color: var(--crown); font-size: 14px; margin-left: 18px; }
+@keyframes edictSlide { to { transform: translateX(-50%); } }
+
+/* ================= KAMMER — silver chamber split ================= */
+.kammer { position: relative; z-index: 2; padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 54px); }
+.kammer-grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: clamp(36px, 5vw, 90px); align-items: center; }
+.kammer-media { position: relative; }
+.kammer-media .main {
+    border-radius: 999px 999px 0 0; overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 50px 100px -40px rgba(0,0,0,0.85);
+    will-change: transform;
+}
+.kammer-media .main img { width: 100%; aspect-ratio: 0.8; object-fit: cover; }
+.kammer-inlay {
+    position: absolute; left: -8%; bottom: -30px; width: 44%;
+    border: 1px solid var(--line); overflow: hidden;
+    box-shadow: 0 30px 60px -22px rgba(0,0,0,0.75);
+    background: var(--wine-deep);
+    will-change: transform;
+}
+.kammer-inlay img { width: 100%; aspect-ratio: 1.15; object-fit: cover; }
+.kammer-copy .kapitel-tag { margin-bottom: 22px; }
+.kammer-copy h2 { font-size: clamp(34px, 4.6vw, 70px); color: var(--parch); }
+.kammer-copy h2 em { font-style: normal; color: var(--silver-bright); }
+.kammer-copy p { color: var(--parch-dim); font-weight: 300; margin: 20px 0; max-width: 54ch; }
+.kammer-copy p b { color: var(--parch); font-weight: 600; }
+.purity {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 30px;
+}
+.purity .p-row {
+    border: 1px solid var(--line-soft); background: rgba(67,13,18,0.4);
+    padding: 18px 20px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    transition: border-color 0.3s, background 0.3s;
+}
+.purity .p-row:hover { border-color: var(--crown); background: rgba(112,26,32,0.5); }
+.p-row .p-name { font-family: var(--serif); font-size: 17px; color: var(--parch); letter-spacing: 0.06em; }
+.p-row .p-name small { display: block; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.28em; color: var(--mute); margin-top: 3px; text-transform: uppercase; }
+.p-row .p-val { font-family: var(--mono); font-size: 13px; color: var(--crown-bright); }
+
+/* ================= KRONJUWELEN — precious lots ================= */
+.kron { position: relative; z-index: 2; padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 54px); background: linear-gradient(180deg, var(--wine-night), var(--wine-deep)); }
+.kron-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: clamp(40px, 6vh, 70px); }
+.kron-head h2 { font-size: clamp(34px, 4.8vw, 72px); color: var(--parch); }
+.kron-head h2 em { font-style: normal; color: var(--crown-bright); }
+.lot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); }
+.lot {
+    position: relative; border: 1px solid var(--line-soft);
+    background: linear-gradient(170deg, rgba(90,18,24,0.5), rgba(29,5,7,0.6));
+    overflow: hidden;
+    transition: transform 0.5s var(--ease), border-color 0.4s, box-shadow 0.5s;
+}
+.lot:hover { transform: translateY(-8px); border-color: var(--crown); box-shadow: 0 34px 60px -26px rgba(0,0,0,0.8); }
+.lot-rib {
+    position: absolute; top: 16px; left: -34px; z-index: 3; transform: rotate(-38deg);
+    background: var(--crown); color: var(--wine-night);
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
+    padding: 6px 40px; font-weight: 500;
+}
+.lot-rib.silver { background: var(--silver-mist); }
+.lot-media { overflow: hidden; position: relative; }
+.lot-media img { width: 100%; aspect-ratio: 0.92; object-fit: cover; transition: transform 0.9s var(--ease); }
+.lot:hover .lot-media img { transform: scale(1.07); }
+.lot-media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 52%, rgba(29,5,7,0.9));
+}
+.lot-body { padding: 24px 24px 26px; position: relative; }
+.lot-body h3 { font-size: 21px; color: var(--crown-pale); letter-spacing: 0.07em; }
+.lot-body .lot-line {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 12px; padding-top: 14px; border-top: 1px dashed var(--line);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute);
+}
+.lot-body .lot-line b { color: var(--crown-bright); font-weight: 400; font-size: 12px; }
+.lot-body p { color: var(--mute); font-size: 13.5px; margin-top: 12px; font-weight: 300; }
+.kron-foot { margin-top: 34px; display: flex; justify-content: center; }
+
+/* ================= TESTIMONIUM — court voices ================= */
+.testimonium { position: relative; z-index: 2; padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 54px); }
+.testi-head { text-align: center; margin-bottom: clamp(44px, 6vh, 74px); }
+.testi-head h2 { font-size: clamp(32px, 4.4vw, 64px); color: var(--parch); }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.6vw, 36px); }
+.testi {
+    border: 1px solid var(--line-soft); background: rgba(44,8,12,0.55);
+    padding: 34px 30px; position: relative;
+    transition: border-color 0.4s, transform 0.5s var(--ease);
+}
+.testi:hover { border-color: var(--crown); transform: translateY(-6px); }
+.testi::before {
+    content: '❝'; position: absolute; top: -16px; left: 26px;
+    background: var(--wine-night); color: var(--crown); font-size: 34px; line-height: 1; padding: 0 8px;
+    font-family: var(--serif);
+}
+.testi p { font-size: 15px; color: var(--parch-dim); font-weight: 300; }
+.testi p b { color: var(--parch); font-weight: 600; }
+.testi-by {
+    display: flex; align-items: center; gap: 14px; margin-top: 24px; padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+}
+.testi-by .ring {
+    width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
+    display: grid; place-items: center; font-family: var(--serif); font-size: 16px; color: var(--wine-night);
+    background: conic-gradient(from 210deg, var(--crown-bright), var(--crown), var(--crown-deep), var(--crown-bright));
+}
+.testi-by b { display: block; font-family: var(--serif); font-weight: 400; font-size: 15px; letter-spacing: 0.08em; color: var(--parch); }
+.testi-by small { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mute); }
+
+/* ================= FÜRSTENRUFE — final CTA parallax ================= */
+.fuerst {
+    position: relative; z-index: 2; min-height: 88vh;
+    display: flex; align-items: center; overflow: hidden;
+    padding: 120px clamp(20px, 4vw, 54px);
+}
+.fuerst-bg { position: absolute; inset: -14% 0; z-index: 0; will-change: transform; }
+.fuerst-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.62) saturate(1.05); will-change: transform; }
+.fuerst-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+        radial-gradient(56% 60% at 50% 40%, rgba(74,15,21,0.58), transparent 74%),
+        linear-gradient(0deg, var(--wine-night) 2%, rgba(35,7,10,0.35) 40%, rgba(35,7,10,0.55) 100%);
+}
+.fuerst-inner { position: relative; z-index: 2; text-align: center; width: 100%; }
+.fuerst-inner .seal { margin: 0 auto 30px; }
+.fuerst-inner h2 { font-size: clamp(40px, 6vw, 92px); color: var(--parch); max-width: 18ch; margin: 0 auto; }
+.fuerst-inner h2 em { font-style: normal; background: linear-gradient(98deg, var(--crown-bright), var(--crown), var(--crown-pale)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.fuerst-inner p { color: var(--parch-dim); max-width: 52ch; margin: 22px auto 0; font-weight: 300; }
+.fuerst-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+
+/* ================= footer ================= */
+.footer { position: relative; z-index: 2; background: #1B0507; border-top: 1px solid var(--line-soft); padding: 70px clamp(20px, 4vw, 54px) 34px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(30px, 4vw, 70px); }
+.footer .brand-word b { font-size: 18px; }
+.footer-motto { color: var(--mute); font-size: 14px; max-width: 34ch; margin-top: 16px; font-weight: 300; }
+.footer h4 { font-family: var(--mono); font-weight: 400; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crown); margin-bottom: 18px; }
+.footer ul { list-style: none; }
+.footer li { margin-bottom: 10px; }
+.footer a { color: var(--parch-dim); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+.footer a:hover { color: var(--crown-bright); }
+.footer-bottom {
+    margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6E5B54;
+}
+.footer-bottom b { color: var(--crown); font-weight: 400; }
+
+/* ================= back to top ================= */
+.to-top {
+    position: fixed; right: 22px; bottom: 22px; z-index: 80;
+    width: 52px; height: 52px; display: grid; place-items: center;
+    background: var(--oxblood); border: 1px solid var(--line); color: var(--crown-bright);
+    text-decoration: none; font-family: var(--mono); font-size: 16px;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    opacity: 0; transform: translateY(14px); pointer-events: none;
+    transition: opacity 0.4s, transform 0.4s var(--ease), background 0.3s;
+}
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { background: var(--oxblood-3); }
+
+/* ================= responsive ================= */
+@media (max-width: 1080px) {
+    .window-grid { grid-template-columns: repeat(2, 1fr); }
+    .winch:nth-child(2) { transform: translateY(-30px); }
+    .lot-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .zer-arcade { grid-template-columns: repeat(2, 1fr); }
+    .zer-niche:nth-child(2), .zer-niche:nth-child(4) { transform: none; }
+}
+@media (max-width: 900px) {
+    .nav { display: none; }
+    .burger { display: flex; }
+    .hero-inner, .kapitel-grid, .kammer-grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 120px; }
+    .hero-court { height: auto; padding: 40px 0 10px; }
+    .court-arch { position: relative; top: 0; left: 0; transform: none; margin: 0 auto; }
+    .court-side, .seal-hero { display: none; }
+    .winch:nth-child(2) { transform: none; }
+    .zer-arcade { grid-template-columns: 1fr; }
+    .zer-niche { max-width: 460px; margin: 0 auto; width: 100%; }
+}
+@media (max-width: 640px) {
+    .window-grid, .lot-grid, .testi-grid { grid-template-columns: 1fr; }
+    .purity { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(44px, 12vw, 64px); }
+    .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+    .seal { width: 96px; height: 96px; }
+}
+
+/* motion safety */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="torch" id="torch"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-head" id="siteHead">
+    <a href="#hof" class="brand" aria-label="LIONHEART COPPER BARS">
+        <svg class="brand-crest" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 3 58 12v18c0 15-11 26-26 31C17 56 6 45 6 30V12z" fill="#430D12" stroke="#D4A952" stroke-width="2.5"/>
+            <path d="M20 40l4-13 8 8 8-8 4 13-8-3v7H28v-7z" fill="#EFD393"/>
+        </svg>
+        <span class="brand-word">
+            <b>LIONHEART</b>
+            <small>Copper Bars · Est. MMXXVI</small>
+        </span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#kapitel">Das Kapitel</a>
+        <a href="#kronkammer">Kronkammer</a>
+        <a href="#zeremonie">Zeremonie</a>
+        <a href="#kammer">Silberkammer</a>
+        <a href="#kronjuwelen">Kronjuwelen</a>
+        <a href="#hof" class="head-cta">Hof betreten</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+        <i></i><i></i><i></i>
+    </button>
+</header>
+
+<div class="drawer" id="drawer">
+    <a href="#kapitel">Das Kapitel</a>
+    <a href="#kronkammer">Kronkammer</a>
+    <a href="#zeremonie">Zeremonie</a>
+    <a href="#kammer">Silberkammer</a>
+    <a href="#kronjuwelen">Kronjuwelen</a>
+    <a href="#fuerst" class="head-cta" style="font-family: var(--mono); font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--wine-night); background: linear-gradient(160deg, var(--crown-bright), var(--crown)); padding: 14px 30px; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); margin-top: 10px;">Hof betreten</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hof">
+    <div class="hero-bg" data-parallax="0.22">
+        <img src="images/hero-liongate.jpg" alt="Kupferbarren von 999 Feinheit — das Tor des Löwenhofs" fetchpriority="high">
+    </div>
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <span class="hero-kicker reveal"><i></i> Königliche Kupfermanufaktur · Cu 99,99 % · Feinsilber 999</span>
+            <h1 class="reveal" style="--d:.08s">
+                <span class="row">DAS ERBE</span>
+                <span class="row gold">DES LÖWEN</span>
+                <span class="row silverline">IN KUPFER</span>
+            </h1>
+            <p class="hero-lede reveal" style="--d:.16s">
+                LIONHEART schmiedet <b>Kupferbarren von 99,99 % Reinheit</b> und Feinsilber 999 —
+                geprägt wie königliche Erlasse, gelagert wie Kronjuwelen. Jede Charge trägt
+                ihr Wappen, ihre Nummer, ihren Eid.
+            </p>
+            <div class="hero-ctas reveal" style="--d:.24s">
+                <a class="btn btn-crown" href="#kronjuwelen">Kronjuwelen ansehen</a>
+                <a class="btn btn-ghost" href="#zeremonie">Die Zeremonie</a>
+            </div>
+            <div class="hero-decree reveal" style="--d:.32s">
+                <div class="decree"><strong>99,99 %</strong> Kupferreinheit</div>
+                <div class="decree"><strong>999,0</strong> Feinsilber-Siegel</div>
+                <div class="decree"><strong>14 Tage</strong> Hoflieferung</div>
+            </div>
+        </div>
+
+        <div class="hero-court" aria-hidden="false">
+            <div class="court-side side-a" data-parallax="0.1">
+                <img src="images/silver-mono.jpg" alt="Feinsilber-Barren Ag 99,99" loading="lazy">
+            </div>
+            <div class="court-arch" data-parallax="0.06">
+                <img src="images/lion-guardian.jpg" alt="Bronzener Löwe — Wächter der Kronkammer" loading="lazy">
+            </div>
+            <div class="court-side side-b" data-parallax="0.13">
+                <img src="images/copper-bundle.png" alt="Kathoden-Kupfer Bündel" loading="lazy">
+            </div>
+            <div class="seal seal-hero reveal" style="--d:.4s" aria-hidden="true">
+                <svg viewBox="0 0 120 120">
+                    <defs><path id="sealArc" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+                    <circle cx="60" cy="60" r="57" fill="none" stroke="rgba(201,151,63,0.4)" stroke-width="1"/>
+                    <circle cx="60" cy="60" r="34" fill="none" stroke="rgba(201,151,63,0.35)" stroke-width="1" stroke-dasharray="3 5"/>
+                    <text font-family="Spline Sans Mono, monospace" font-size="9.5" letter-spacing="3.1" fill="#D4A952">
+                        <textPath href="#sealArc">LIONHEART · KUPFER 99,99 · FEINSILBER 999 ·</textPath>
+                    </text>
+                </svg>
+                <span class="seal-core">L<small>HOF</small></span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll"><span>Zum Hof</span><i></i></div>
+</section>
+
+<!-- ================= HERALDIC STRIP ================= -->
+<section class="herold" aria-label="Wappenschmuck">
+    <div class="wrap">
+        <div class="herold-item">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4 56 13v17c0 13-10 23-24 28C18 53 8 43 8 30V13z" fill="none" stroke="#D4A952" stroke-width="2"/><path d="M22 39l3.5-11 6.5 6.5L38.5 28 42 39l-6.5-2.4V43h-7v-6.4z" fill="#EFD393"/></svg>
+            <span><b>Der Löwe</b>Wappentier des Hauses</span>
+        </div>
+        <div class="herold-item">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 44l4-18 8 10 8-16 8 16 8-10 4 18z" fill="none" stroke="#D4A952" stroke-width="2"/><rect x="12" y="44" width="40" height="5" fill="#D4A952" opacity="0.8"/></svg>
+            <span><b>Die Krone</b>Chargen-Erlass MMXXVI</span>
+        </div>
+        <div class="herold-item">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="14" width="44" height="30" fill="none" stroke="#D4A952" stroke-width="2"/><path d="M10 14l44 30M54 14L10 44" stroke="#D4A952" stroke-width="2"/><path d="M18 50h28v4H18z" fill="#D4A952" opacity="0.7"/></svg>
+            <span><b>Die Bajoche</b>Gevierte Prägung</span>
+        </div>
+        <div class="herold-item">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6l6 12 13 2-9.5 9 2.5 13-12-6.5L20 42l2.5-13L13 20l13-2z" fill="none" stroke="#EFD393" stroke-width="2"/></svg>
+            <span><b>Der Stern</b>Reinheit unter Eid</span>
+        </div>
+    </div>
+</section>
+
+<!-- ================= KAPITEL ================= -->
+<section class="kapitel" id="kapitel">
+    <div class="wrap kapitel-grid">
+        <div>
+            <span class="kapitel-tag reveal">Kapitel I · Das Bekenntnis</span>
+            <h2 class="reveal" style="--d:.08s">Metall mit <em>Würde</em> und Wappen</h2>
+            <div class="kapitel-copy">
+                <p class="reveal" style="--d:.14s">
+                    Im Löwenhof entsteht kein Warenumschlag, sondern <b>Zeremonie</b>:
+                    Jeder Barren wird kathodisch gewonnen, im Vakuum gegossen und mit dem
+                    Wappen des Hauses versehen — <b>Löwe, Krone und Bajoche</b>, eingeschlagen
+                    wie ein königliches Siegel.
+                </p>
+                <p class="reveal" style="--d:.2s">
+                    Unsere Schmelzer sind <b>Hubherren</b>, unsere Prüfer <b>Siegelwarte</b>.
+                    Wer einen Lionheart-Barren erwirbt, tritt ein in ein Register, das jede
+                    Charge dem <b>Eid der Reinheit</b> unterstellt: 99,99 % Kupfer, 999,0 Silber —
+                    dokumentiert, plombiert, unantastbar.
+                </p>
+            </div>
+            <blockquote class="kapitel-quote reveal" style="--d:.26s">
+                „Ein Barren ohne Wappen ist nur Metall. Ein Barren mit Wappen ist ein Versprechen.“
+                <small>— Gründungsdekret, Artikel I</small>
+            </blockquote>
+        </div>
+        <div class="kapitel-visual">
+            <figure class="monolith reveal" style="--d:.15s" data-parallax="0.08">
+                <img src="images/copper-monolith.jpg" alt="Kathoden-Kupfer Monolith 99,99 % Reinheit" loading="lazy">
+            </figure>
+            <div class="monolith-float reveal" style="--d:.3s" data-parallax="0.14">
+                <b>MMXXVI·I</b>Römische Chargen-Ära
+            </div>
+            <div class="monolith-meta reveal" style="--d:.22s">
+                <span>Prägung <b>Geviert · Tiefstich</b></span>
+                <span>Lager <b>Die Kronkammer</b></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= KRONKAMMER — cathedral windows ================= -->
+<section class="kronkammer" id="kronkammer">
+    <div class="wrap">
+        <div class="kron-head">
+            <div>
+                <span class="kapitel-tag reveal">Kapitel II · Die Galerie</span>
+                <h2 class="reveal" style="--d:.08s">Die <em>Kronkammer</em> der Metalle</h2>
+            </div>
+            <p class="reveal" style="--d:.16s">Drei Fenster der Sammlung — Kupfer, Silber und das Bündel der Kathoden, beleuchtet wie Reliquien.</p>
+        </div>
+        <div class="window-grid">
+            <div class="winch reveal">
+                <div class="arch-frame">
+                    <img src="images/hero-liongate.jpg" alt="Kupferbarren 999 — Seitenansicht" loading="lazy">
+                    <div class="winch-glow"></div>
+                    <div class="winch-win">
+                        <h3>Der Löwentorso</h3>
+                        <p>Feinkupfer <b>99,99 %</b> · Prägung I</p>
+                    </div>
+                </div>
+                <div class="winch-base"></div>
+            </div>
+            <div class="winch reveal" style="--d:.12s">
+                <div class="arch-frame">
+                    <img src="images/silver-bullion.jpg" alt="Feinsilber-Barren 999" loading="lazy">
+                    <div class="winch-glow"></div>
+                    <div class="winch-win">
+                        <h3>Die Silbertafel</h3>
+                        <p>Feinsilber <b>999,0</b> · Uralektromed</p>
+                    </div>
+                </div>
+                <div class="winch-base"></div>
+            </div>
+            <div class="winch reveal" style="--d:.24s">
+                <div class="arch-frame">
+                    <img src="images/copper-bundle.png" alt="Bündel Kathoden-Kupfer" loading="lazy">
+                    <div class="winch-glow"></div>
+                    <div class="winch-win">
+                        <h3>Das Kathoden-Bündel</h3>
+                        <p>Kathoden <b>Cu-ETP</b> · Gelagert</p>
+                    </div>
+                </div>
+                <div class="winch-base"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ZEREMONIE — asymmetric ceremony rows ================= -->
+<section class="zeremonie" id="zeremonie">
+    <div class="wrap">
+        <div class="zer-head">
+            <span class="kapitel-tag reveal">Kapitel III · Der Weg des Barrens</span>
+            <h2 class="reveal" style="--d:.08s">Vier Akte der <em>Zeremonie</em></h2>
+        </div>
+        <div class="zer-arcade">
+            <div class="zer-niche reveal">
+                <div class="zer-niche-inner">
+                    <div class="zer-step">I<small>Erster Akt</small></div>
+                    <div class="zer-name">
+                        <h3>Die Wahl der Kathode</h3>
+                        <p>Nur LME-registrierte Kathoden Cu-ETP treten in den Hof — geprüft auf Würde und Reinheit.</p>
+                    </div>
+                    <div class="zer-note">Herkunft<b>LME-Register</b></div>
+                </div>
+                <div class="zer-sill"></div>
+            </div>
+            <div class="zer-niche reveal" style="--d:.08s">
+                <div class="zer-niche-inner">
+                    <div class="zer-step">II<small>Zweiter Akt</small></div>
+                    <div class="zer-name">
+                        <h3>Das Bad der Reinheit</h3>
+                        <p>Elektrolytische Raffination auf 99,99 % — der Eid, den jedes Atom schwört.</p>
+                    </div>
+                    <div class="zer-note">Reinheit<b>Cu 99,99 %</b></div>
+                </div>
+                <div class="zer-sill"></div>
+            </div>
+            <div class="zer-niche reveal" style="--d:.16s">
+                <div class="zer-niche-inner">
+                    <div class="zer-step">III<small>Dritter Akt</small></div>
+                    <div class="zer-name">
+                        <h3>Der Guss &amp; das Wappen</h3>
+                        <p>Vakuum-Guss, Tiefstich-Prägung: Löwe, Krone, Bajoche und römische Chargennummer.</p>
+                    </div>
+                    <div class="zer-note">Prägung<b>MMXXVI-Siegel</b></div>
+                </div>
+                <div class="zer-sill"></div>
+            </div>
+            <div class="zer-niche reveal" style="--d:.24s">
+                <div class="zer-niche-inner">
+                    <div class="zer-step">IV<small>Vierter Akt</small></div>
+                    <div class="zer-name">
+                        <h3>Die Plombierung</h3>
+                        <p>Siegelwarte plombieren jeden Barren; das Hofregister verleiht ihm Namen und Rang.</p>
+                    </div>
+                    <div class="zer-note">Dokument<b>Hofregister</b></div>
+                </div>
+                <div class="zer-sill"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ARCHIV — edict ticker ================= -->
+<section class="archiv" id="erlasse" aria-label="Erlasse des Hauses">
+    <div class="archiv-head">
+        <h2 class="reveal">Die Erlasse des Löwenhofs</h2>
+        <p class="reveal" style="--d:.1s">Beständig wie das Metall · Scroll hält an</p>
+    </div>
+    <div class="edict-track" aria-hidden="true">
+        <span class="edict">Erlasse I — <b>99,99 % oder nichts</b></span>
+        <span class="edict">Erlasse II — <b>Jede Charge trägt ihr Wappen</b></span>
+        <span class="edict">Erlasse III — <b>Plomben sind unantastbar</b></span>
+        <span class="edict">Erlasse IV — <b>Das Register kennt jeden Barren</b></span>
+        <span class="edict">Erlasse V — <b>Silber schweigt, Kupfer spricht</b></span>
+        <span class="edict">Erlasse I — <b>99,99 % oder nichts</b></span>
+        <span class="edict">Erlasse II — <b>Jede Charge trägt ihr Wappen</b></span>
+        <span class="edict">Erlasse III — <b>Plomben sind unantastbar</b></span>
+        <span class="edict">Erlasse IV — <b>Das Register kennt jeden Barren</b></span>
+        <span class="edict">Erlasse V — <b>Silber schweigt, Kupfer spricht</b></span>
+    </div>
+</section>
+
+<!-- ================= KAMMER — silver chamber ================= -->
+<section class="kammer" id="kammer">
+    <div class="wrap kammer-grid">
+        <div class="kammer-media">
+            <figure class="main reveal" data-parallax="0.07">
+                <img src="images/silver-bullion.jpg" alt="Feinsilber 999 — die Silberkammer" loading="lazy">
+            </figure>
+            <div class="kammer-inlay reveal" style="--d:.2s" data-parallax="0.16">
+                <img src="images/silver-mono.jpg" alt="Silberbarren Detail Ag 99,99" loading="lazy">
+            </div>
+        </div>
+        <div class="kammer-copy">
+            <span class="kapitel-tag reveal">Kapitel IV · Die Silberkammer</span>
+            <h2 class="reveal" style="--d:.08s">Feinsilber <em>999</em> — der stille Bruder</h2>
+            <p class="reveal" style="--d:.14s">
+                Neben dem Löwen ruht das <b>Feinsilber</b>: Granulate, Kristalle und Barren
+                von <b>999,0</b> Feinheit. Es ist der stille Bruder im Hof — lautlos in seinem
+                Glanz, unbestechlich in seiner Reinheit.
+            </p>
+            <p class="reveal" style="--d:.18s">
+                Jede Tafel wird <b>unter Plombe</b> verliehen und im Hofregister vermerkt.
+                Wer Silber des Hauses führt, führt einen Namen — nicht nur ein Gewicht.
+            </p>
+            <div class="purity">
+                <div class="p-row reveal" style="--d:.22s">
+                    <span class="p-name">Feinkupfer<small>LME Cu-ETP Kathoden</small></span>
+                    <span class="p-val">99,99 %</span>
+                </div>
+                <div class="p-row reveal" style="--d:.26s">
+                    <span class="p-name">Feinsilber<small>Ag 999,0 geplombt</small></span>
+                    <span class="p-val">999,0</span>
+                </div>
+                <div class="p-row reveal" style="--d:.3s">
+                    <span class="p-name">Sauerstoff<small>OF-Cu auf Wunsch</small></span>
+                    <span class="p-val">≤ 5 ppm</span>
+                </div>
+                <div class="p-row reveal" style="--d:.34s">
+                    <span class="p-name">Dichte-Prüfung<small>Siegelwarte-Amt</small></span>
+                    <span class="p-val">3-fach</span>
+                </div>
+            </div>
+            <div class="hero-ctas reveal" style="--d:.38s; margin-top: 34px;">
+                <a class="btn btn-crown" href="#fuerst">Silber anfragen</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= KRONJUWELEN — lots ================= -->
+<section class="kron" id="kronjuwelen">
+    <div class="wrap">
+        <div class="kron-head">
+            <div>
+                <span class="kapitel-tag reveal">Kapitel V · Die Sammlung</span>
+                <h2 class="reveal" style="--d:.08s">Kronjuwelen <em>des Hofs</em></h2>
+            </div>
+            <p class="reveal" style="--d:.16s; max-width: 38ch; color: var(--mute); font-size: 15px;">Drei Erbstücke der aktuellen Ära — jede mit Wappen, Plombe und Register-Eintrag.</p>
+        </div>
+        <div class="lot-grid">
+            <article class="lot reveal">
+                <div class="lot-rib">Chargen-Erlass</div>
+                <div class="lot-media">
+                    <img src="images/hero-liongate.jpg" alt="Kupferbarren 1 kg — Löwentorso" loading="lazy">
+                </div>
+                <div class="lot-body">
+                    <h3>Der Löwentorso · 1 kg</h3>
+                    <p>Gevierte Prägung mit Löwenwappen, römischer Nummer und Plombe der Siegelwarte.</p>
+                    <div class="lot-line"><span>Feinheit</span><b>Cu 99,99 %</b></div>
+                    <div class="lot-line"><span>Ära</span><b>MMXXVI·I</b></div>
+                </div>
+            </article>
+            <article class="lot reveal" style="--d:.12s">
+                <div class="lot-rib silver">Silber-Verleihung</div>
+                <div class="lot-media">
+                    <img src="images/silver-bullion.jpg" alt="Feinsilber-Barren — Silbertafel" loading="lazy">
+                </div>
+                <div class="lot-body">
+                    <h3>Die Silbertafel · 100 oz</h3>
+                    <p>Hofverliehenes Feinsilber mit Gravur des Hauses — der stille Bruder in edelster Form.</p>
+                    <div class="lot-line"><span>Feinheit</span><b>Ag 999,0</b></div>
+                    <div class="lot-line"><span>Ära</span><b>MMXXVI·I</b></div>
+                </div>
+            </article>
+            <article class="lot reveal" style="--d:.24s">
+                <div class="lot-rib">Kathoden-Huldigung</div>
+                <div class="lot-media">
+                    <img src="images/copper-monolith.jpg" alt="Kathoden-Monolith — Huldigung" loading="lazy">
+                </div>
+                <div class="lot-body">
+                    <h3>Der Monolith · 2,2 t</h3>
+                    <p>Industrieller Kathoden-Block für Gießereien — Reinheit unter Eid, Lieferung aus der Kammer.</p>
+                    <div class="lot-line"><span>Feinheit</span><b>Cu-ETP</b></div>
+                    <div class="lot-line"><span>Format</span><b>Kathode</b></div>
+                </div>
+            </article>
+        </div>
+        <div class="kron-foot reveal">
+            <a class="btn btn-ghost" href="#fuerst">Vollständiges Register anfordern</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= TESTIMONIUM ================= -->
+<section class="testimonium" aria-label="Stimmen des Hofs">
+    <div class="wrap">
+        <div class="testi-head">
+            <span class="kapitel-tag reveal" style="justify-content: center;">Kapitel VI · Die Stimmen</span>
+            <h2 class="reveal" style="--d:.08s">Was der Hof <em style="font-style: normal; color: var(--crown-bright);">raunt</em></h2>
+        </div>
+        <div class="testi-grid">
+            <div class="testi reveal">
+                <p>Die Prägung unseres Lionheart-Barrens hängt seit der Verleihung im <b>Empfang unserer Gießerei</b> — als Zeichen, dass Reinheit Tradition ist.</p>
+                <div class="testi-by">
+                    <span class="ring">M</span>
+                    <span><b>Marla Kinzler</b><small>Gießerei Kinzler &amp; Söhne</small></span>
+                </div>
+            </div>
+            <div class="testi reveal" style="--d:.1s">
+                <p><b>Dokumentierte Reinheit, plombiert, registergeführt</b> — so etwas findet man nicht am Kupfermarkt, sondern nur am Hof.</p>
+                <div class="testi-by">
+                    <span class="ring">J</span>
+                    <span><b>Jonas Weidner</b><small>Metallhandel Weidner OHG</small></span>
+                </div>
+            </div>
+            <div class="testi reveal" style="--d:.2s">
+                <p>Wir bestellen Kathoden nach Erlasse — <b>pünktlich wie ein Kronrat</b>, verpackt wie ein Geschenk des Hauses.</p>
+                <div class="testi-by">
+                    <span class="ring">S</span>
+                    <span><b>Sofia Almeida</b><small>Almeida Drahtwerke</small></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FÜRSTENRUFE — final CTA ================= -->
+<section class="fuerst" id="fuerst">
+    <div class="fuerst-bg" data-parallax="0.2">
+        <img src="images/copper-kilo-tribute.jpg" alt="Kupferbarren Tribute — Eintritt in den Löwenhof" loading="lazy">
+    </div>
+    <div class="fuerst-inner">
+        <div class="seal reveal" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+                <defs><path id="sealArc2" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+                <circle cx="60" cy="60" r="57" fill="none" stroke="rgba(201,151,63,0.4)" stroke-width="1"/>
+                <circle cx="60" cy="60" r="34" fill="none" stroke="rgba(201,151,63,0.35)" stroke-width="1" stroke-dasharray="3 5"/>
+                <text font-family="Spline Sans Mono, monospace" font-size="9.5" letter-spacing="3.1" fill="#D4A952">
+                    <textPath href="#sealArc2">TREUE · REINHEIT · HANDWERK · SEIT MMXXVI ·</textPath>
+                </text>
+            </svg>
+            <span class="seal-core">✦<small>LIONHEART</small></span>
+        </div>
+        <h2 class="reveal" style="--d:.08s">Tritt ein in den <em>Hof des Löwen</em></h2>
+        <p class="reveal" style="--d:.14s">
+            Fordere das Hofregister an: aktuelle Chargen, Feinheits-Nachweise und Verleih-Bedingungen —
+            persönlich, diskret, unmittelbar.
+        </p>
+        <div class="fuerst-ctas reveal" style="--d:.2s">
+            <a class="btn btn-crown" href="mailto:hof@lionheart-copper.de?subject=Anfrage%20Hofregister">Hofregister anfordern</a>
+            <a class="btn btn-ghost" href="#hof">Zurück zum Tor</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <a href="#hof" class="brand" style="margin-bottom: 6px;">
+                <svg class="brand-crest" viewBox="0 0 64 64" aria-hidden="true" style="width: 40px; height: 40px;">
+                    <path d="M32 3 58 12v18c0 15-11 26-26 31C17 56 6 45 6 30V12z"fill="#430D12" stroke="#D4A952" stroke-width="2.5"/>
+            <path d="M20 40l4-13 8 8 8-8 4 13-8-3v7H28v-7z" fill="#EFD393"/>
+                </svg>
+                <span class="brand-word">
+                    <b>LIONHEART</b>
+                    <small>Copper Bars · Est. MMXXVI</small>
+                </span>
+            </a>
+            <p class="footer-motto">Königliche Kupfermanufaktur — Kupfer 99,99 % und Feinsilber 999, geprägt, plombiert und registergeführt.</p>
+        </div>
+        <div>
+            <h4>Hof</h4>
+            <ul>
+                <li><a href="#kapitel">Das Kapitel</a></li>
+                <li><a href="#kronkammer">Kronkammer</a></li>
+                <li><a href="#zeremonie">Zeremonie</a></li>
+                <li><a href="#fuerst">Hofregister</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Kammern</h4>
+            <ul>
+                <li><a href="#kronjuwelen">Kronjuwelen</a></li>
+                <li><a href="#kammer">Silberkammer</a></li>
+                <li><a href="#erlasse">Erlasse</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Kontakt</h4>
+            <ul>
+                <li><a href="mailto:hof@lionheart-copper.de">hof@lionheart-copper.de</a></li>
+                <li><a href="tel:+492610000000">+49 261 000 000</a></li>
+                <li><a href="#hof">Löwenhof, Koblenz</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© <script>document.write(new Date().getFullYear())</script> LIONHEART COPPER BARS · Alle Rechte vorbehalten</span>
+        <span>Feinkupfer <b>99,99 %</b> · Feinsilber <b>999,0</b></span>
+    </div>
+</footer>
+
+<a href="#hof" class="to-top" id="toTop" aria-label="Nach oben">↑</a>
+
+<script>
+/* ---------- header scroll ---------- */
+const head = document.getElementById('siteHead');
+const toTop = document.getElementById('toTop');
+const onScrollHead = () => {
+    head.classList.toggle('scrolled', window.scrollY > 40);
+    toTop.classList.toggle('show', window.scrollY > 700);
+};
+window.addEventListener('scroll', onScrollHead, { passive: true });
+onScrollHead();
+
+/* ---------- burger ---------- */
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+});
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+}));
+
+/* ---------- FACKELSCHEIN: cursor torchlight ---------- */
+const torch = document.getElementById('torch');
+let tRaf = null, tX = 60, tY = 30;
+window.addEventListener('pointermove', (e) => {
+    tX = (e.clientX / window.innerWidth) * 100;
+    tY = (e.clientY / window.innerHeight) * 100;
+    if (!tRaf) {
+        tRaf = requestAnimationFrame(() => {
+            torch.style.setProperty('--tx', tX + '%');
+            torch.style.setProperty('--ty', tY + '%');
+            tRaf = null;
+        });
+    }
+}, { passive: true });
+
+/* ---------- reveals ---------- */
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+}, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- PARALLAX (hero, arches, monoliths, final) ---------- */
+const pxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+let pTick = false;
+function runParallax() {
+    const vh = window.innerHeight;
+    pxEls.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        const speed = parseFloat(el.dataset.parallax || '0.1');
+        const mid = r.top + r.height / 2 - vh / 2;
+        el.style.transform = 'translate3d(0,' + (mid * -speed).toFixed(1) + 'px,0)';
+    });
+    pTick = false;
+}
+window.addEventListener('scroll', () => {
+    if (!pTick) { pTick = true; requestAnimationFrame(runParallax); }
+}, { passive: true });
+window.addEventListener('resize', () => runParallax());
+runParallax();
+</script>
+</body>
+</html>
