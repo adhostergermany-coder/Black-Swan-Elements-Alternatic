@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | WINTERCLAW METALS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #F5F7FA;
+            --ink-2: #ECF1F5;
+            --frost-line: rgba(30, 53, 70, 0.12);
+            --frost-line-hi: rgba(30, 53, 70, 0.26);
+            --ice: #2F6383;
+            --ice-bright: #2E4356;
+            --copper: #B06A35;
+            --copper-hi: #C07A44;
+            --text: #1B2833;
+            --muted: #4E6273;
+            --dim: #7C8B99;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        h1, h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; }
+
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 18px 60px;
+            background: rgba(245, 247, 250, 0.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--frost-line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo { text-decoration: none; }
+
+        .logo-name {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #3A5064 0%, #1C2C3A 60%, #0F1B25 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-tagline {
+            display: block;
+            font-size: 9px;
+            color: var(--copper-hi);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .back-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: var(--copper-hi); }
+
+        .page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 160px 60px 100px;
+        }
+
+        .page-content h1 {
+            font-size: 42px;
+            margin-bottom: 40px;
+            color: var(--ice-bright);
+        }
+
+        .page-content h2 {
+            font-size: 24px;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .page-content p,
+        .page-content li {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .page-content ul { list-style: none; margin-bottom: 16px; }
+
+        .page-content a { color: var(--copper-hi); text-decoration: none; }
+        .page-content a:hover { text-decoration: underline; }
+
+        .divider { border: none; border-top: 1px solid var(--frost-line); margin: 44px 0; }
+
+        .footer-mini {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 60px;
+            border-top: 1px solid var(--frost-line);
+            font-size: 13px;
+            color: var(--dim);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-mini a { color: var(--copper-hi); text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .header { padding: 16px 24px; }
+            .page-content { padding: 120px 24px 60px; }
+            .page-content h1 { font-size: 32px; }
+            .footer-mini { padding: 20px 24px; flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-name">Winterclaw</span>
+            <span class="logo-tagline">Metals · Kupfer &amp; Silber</span>
+        </a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            Winterclaw Metals GmbH<br>
+            Kaispeierring 4<br>
+            20457 Hamburg
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0) 40 8877 2200<br>
+            E-Mail: <a href="mailto:handel@winterclaw-metals.de">handel@winterclaw-metals.de</a>
+        </p>
+
+        <h2>Vertretungsberechtigt</h2>
+        <p>
+            Geschäftsführer: Emil Winterclaw
+        </p>
+
+        <h2>Registereintrag</h2>
+        <p>
+            Eintragung im Handelsregister<br>
+            Registergericht: Amtsgericht Hamburg<br>
+            Registernummer: HRB 188 442
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 298 771 403
+        </p>
+
+        <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+        <p>
+            Emil Winterclaw, Anschrift wie oben
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 Winterclaw Metals GmbH</p>
+        <a href="index.html">Startseite</a>
+    </footer>
+
+</body>
+</html>

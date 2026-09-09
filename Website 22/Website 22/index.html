@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINTERCLAW METALS | Kupfer &amp; Silberhandel</title>
+    <meta name="description" content="Winterclaw Metals – Handel, Raffination und Logistik von Kupfer und Silber. Seit 1962 aus Hamburg.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #F5F7FA;
+            --ink-2: #ECF1F5;
+            --ink-3: #E3EAF0;
+            --panel: rgba(255, 255, 255, 0.72);
+            --panel-hi: rgba(255, 255, 255, 0.95);
+            --frost-line: rgba(30, 53, 70, 0.12);
+            --frost-line-hi: rgba(30, 53, 70, 0.26);
+            --ice: #2F6383;
+            --ice-bright: #3E7CA1;
+            --steel: #7A99AB;
+            --silver: #33475A;
+            --copper: #B06A35;
+            --copper-hi: #C07A44;
+            --text: #1B2833;
+            --muted: #4E6273;
+            --dim: #7C8B99;
+            --radius: 14px;
+            --radius-lg: 22px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: rgba(192, 122, 68, 0.28); color: #140B04; }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.15;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 22px 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(245, 247, 250, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 14px 56px;
+            border-bottom: 1px solid var(--frost-line);
+            box-shadow: 0 10px 40px rgba(30, 53, 70, 0.12);
+        }
+
+        .header.scrolled .logo-name {
+            background: linear-gradient(180deg, #3A5064 0%, #1C2C3A 60%, #0F1B25 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .header.scrolled .logo-tagline { color: var(--copper-hi); }
+
+        .header.scrolled .nav a { color: var(--silver); }
+        .header.scrolled .nav a:hover { color: var(--ice); }
+
+        .header.scrolled .hamburger { border-color: var(--frost-line-hi); }
+        .header.scrolled .hamburger span { background: var(--text); }
+
+        .logo { text-decoration: none; display: inline-block; }
+
+        .logo-name {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #FBFDFE 0%, #C9DAE6 48%, #8AA3B5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-tagline {
+            display: block;
+            font-size: 9px;
+            color: #E2A26C;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-top: 1px;
+        }
+
+        .nav { display: flex; align-items: center; gap: 34px; }
+
+        .nav a {
+            color: #D5E3EE;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -6px;
+            width: 0; height: 1px;
+            background: var(--copper-hi);
+            transition: var(--transition);
+        }
+
+        .nav a:hover { color: #fff; }
+        .nav a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: 1px solid rgba(169, 203, 224, 0.5);
+            border-radius: 8px;
+            padding: 9px 11px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 20px; height: 2px;
+            background: #DCE8F1;
+            margin: 4px 0;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(245, 247, 250, 0.97);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .mobile-nav.active { opacity: 1; pointer-events: auto; }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover { color: var(--copper-hi); }
+
+        .mobile-close {
+            position: absolute;
+            top: 26px; right: 30px;
+            background: none;
+            border: 1px solid var(--frost-line-hi);
+            border-radius: 50%;
+            width: 44px; height: 44px;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background:
+                linear-gradient(180deg, rgba(10, 13, 18, 0.72) 0%, rgba(10, 13, 18, 0.45) 45%, rgba(10, 13, 18, 0.96) 100%),
+                url('images/hero-pour.jpg') center 30% / cover no-repeat;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 110%, rgba(192, 122, 68, 0.16), transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 140px 40px 100px;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #A9CBE0;
+            border: 1px solid rgba(169, 203, 224, 0.35);
+            background: rgba(10, 13, 18, 0.35);
+            backdrop-filter: blur(6px);
+            padding: 10px 22px;
+            border-radius: 100px;
+            margin-bottom: 34px;
+        }
+
+        .hero-kicker::before, .hero-kicker::after {
+            content: '';
+            width: 26px; height: 1px;
+            background: linear-gradient(90deg, transparent, #5E7A8C);
+        }
+
+        .hero-kicker::after { background: linear-gradient(90deg, #5E7A8C, transparent); }
+
+        .hero h1 {
+            font-size: clamp(50px, 8.5vw, 104px);
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #FBFDFE 0%, #C9DAE6 48%, #8AA3B5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.55));
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 500;
+            font-style: italic;
+            color: #E2A26C;
+            letter-spacing: 2px;
+            margin-bottom: 26px;
+        }
+
+        .hero-text {
+            color: #B9CBD8;
+            font-size: 16px;
+            font-weight: 300;
+            max-width: 640px;
+            margin: 0 auto 42px;
+        }
+
+        .hero-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 17px 38px;
+            border-radius: 100px;
+            transition: var(--transition);
+        }
+
+        .btn-copper {
+            background: linear-gradient(160deg, var(--copper-hi), var(--copper) 60%, #93582B);
+            color: #140B04;
+            box-shadow: 0 14px 38px rgba(192, 122, 68, 0.35);
+        }
+
+        .btn-copper:hover { transform: translateY(-3px); box-shadow: 0 20px 48px rgba(192, 122, 68, 0.5); }
+
+        .btn-ghost {
+            color: #D7E6F0;
+            border: 1px solid rgba(169, 203, 224, 0.5);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(6px);
+        }
+
+        .btn-ghost:hover { border-color: #A9CBE0; background: rgba(169, 203, 224, 0.15); transform: translateY(-3px); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 34px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #8FA5B5;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 1px; height: 42px;
+            background: linear-gradient(180deg, #5E7A8C, transparent);
+            animation: drip 2.2s ease-in-out infinite;
+        }
+
+        @keyframes drip {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+            50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 120px 0; position: relative; }
+
+        .section-deep { background: var(--ink-2); border-top: 1px solid rgba(30, 53, 70, 0.08); border-bottom: 1px solid rgba(30, 53, 70, 0.08); }
+
+        .section-header { max-width: 720px; margin-bottom: 70px; }
+
+        .section-header.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--copper-hi);
+            margin-bottom: 18px;
+        }
+
+        .section-label::before { content: ''; width: 34px; height: 1px; background: var(--copper); }
+
+        .section-title {
+            font-size: clamp(34px, 4.6vw, 52px);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 18px;
+        }
+
+        .section-title em { font-style: italic; color: var(--ice-bright); }
+
+        .section-subtitle { color: var(--muted); font-size: 16px; font-weight: 300; }
+
+        /* ===== STATS STRIP ===== */
+        .stats-strip {
+            position: relative;
+            z-index: 5;
+            margin-top: -1px;
+            background: linear-gradient(180deg, var(--ink-2), var(--ink));
+            border-bottom: 1px solid rgba(30, 53, 70, 0.08);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--frost-line);
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transform: translateY(-60px);
+            margin-bottom: -60px;
+            box-shadow: 0 30px 70px rgba(30, 53, 70, 0.18);
+        }
+
+        .stat {
+            background: linear-gradient(160deg, var(--ink-3), var(--ink-2));
+            padding: 38px 26px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(180deg, #2E4356, #6C8798);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-number small { font-size: 26px; }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        /* ===== SPLIT / ABOUT ===== */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .split.reverse { grid-template-columns: 1fr 1fr; }
+        .split.reverse .split-media { order: 2; }
+
+        .split-media { position: relative; }
+
+        .split-media img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--frost-line-hi);
+            box-shadow: 0 40px 90px rgba(30, 53, 70, 0.22);
+            filter: saturate(0.92) contrast(1.04);
+        }
+
+        .split-media::before {
+            content: '';
+            position: absolute;
+            inset: 18px -18px -18px 18px;
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+        }
+
+        .media-chip {
+            position: absolute;
+            left: 24px; bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #BFD9E8;
+            background: rgba(10, 13, 18, 0.72);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 217, 232, 0.4);
+            border-radius: 100px;
+            padding: 10px 18px;
+        }
+
+        .media-chip::before {
+            content: '';
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--copper-hi);
+            box-shadow: 0 0 12px rgba(224, 162, 110, 0.9);
+        }
+
+        .about-text p { color: var(--muted); font-size: 15.5px; font-weight: 300; margin-bottom: 18px; }
+
+        .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 34px; }
+
+        .fact {
+            background: var(--panel);
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            transition: var(--transition);
+        }
+
+        .fact:hover { border-color: var(--frost-line-hi); background: var(--panel-hi); transform: translateY(-3px); }
+
+        .fact h4 { font-size: 20px; color: var(--ice-bright); margin-bottom: 4px; }
+
+        .fact span { font-size: 12.5px; color: var(--dim); font-weight: 300; }
+
+        /* ===== MATERIALS ===== */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .mat-cards { display: grid; gap: 18px; }
+
+        .mat-card {
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+            background: var(--panel);
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            transition: var(--transition);
+        }
+
+        .mat-card:hover { border-color: var(--frost-line-hi); background: var(--panel-hi); transform: translateX(6px); }
+
+        .mat-icon {
+            flex: 0 0 auto;
+            width: 52px; height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: linear-gradient(160deg, rgba(62, 124, 161, 0.14), rgba(62, 124, 161, 0.04));
+            border: 1px solid var(--frost-line-hi);
+        }
+
+        .mat-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--ice-bright); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+        .mat-card h4 { font-size: 23px; color: var(--text); margin-bottom: 6px; }
+
+        .mat-card h4 span { font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 2px; color: var(--copper-hi); margin-left: 10px; text-transform: uppercase; }
+
+        .mat-card p { color: var(--muted); font-size: 14px; font-weight: 300; }
+
+        /* ===== PARALLAX BAND ===== */
+        .parallax-band {
+            position: relative;
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('images/copper-macro.jpg') center 40% / cover no-repeat;
+            background-attachment: fixed;
+        }
+
+        .parallax-band::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, #0A0D12 0%, rgba(10, 13, 18, 0.45) 30%, rgba(10, 13, 18, 0.45) 70%, #0A0D12 100%);
+        }
+
+        .band-inner { position: relative; z-index: 2; max-width: 820px; padding: 0 40px; }
+
+        .band-inner blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.3;
+            color: #D3E7F2;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            margin-bottom: 22px;
+        }
+
+        .band-inner blockquote strong { color: #E2A26C; font-style: normal; }
+
+        .band-inner cite {
+            font-style: normal;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #B9C9D6;
+        }
+
+        /* ===== PROCESS ===== */
+        .process { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+        .process-steps { display: grid; gap: 0; margin-top: 44px; }
+
+        .step {
+            display: flex;
+            gap: 26px;
+            padding: 30px 0;
+            border-top: 1px solid var(--frost-line);
+            transition: var(--transition);
+        }
+
+        .step:last-child { border-bottom: 1px solid var(--frost-line); }
+
+        .step:hover { background: linear-gradient(90deg, rgba(62, 124, 161, 0.08), transparent); padding-left: 14px; }
+
+        .step-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 700;
+            font-style: italic;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--copper-hi);
+            line-height: 1;
+            flex: 0 0 52px;
+        }
+
+        .step h4 { font-size: 22px; color: var(--text); margin-bottom: 6px; }
+        .step p { color: var(--muted); font-size: 14px; font-weight: 300; }
+
+        /* ===== PRODUCTS ===== */
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 70px;
+            align-items: stretch;
+        }
+
+        .product-feature {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--frost-line-hi);
+            min-height: 480px;
+            background: url('images/silver-granules.jpg') center / cover no-repeat;
+            box-shadow: 0 40px 90px rgba(30, 53, 70, 0.25);
+        }
+
+        .product-feature::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 35%, rgba(10, 13, 18, 0.9) 100%);
+        }
+
+        .product-feature-caption {
+            position: absolute;
+            left: 30px; right: 30px; bottom: 28px;
+            z-index: 2;
+        }
+
+        .product-feature-caption h3 { font-size: 30px; color: #fff; margin-bottom: 6px; }
+
+        .product-feature-caption p { color: #C3D2DE; font-size: 13.5px; font-weight: 300; }
+
+        .product-list { display: grid; gap: 18px; }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: var(--panel);
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius);
+            padding: 26px 30px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-item:hover { border-color: var(--frost-line-hi); background: var(--panel-hi); transform: translateY(-3px); }
+
+        .product-item.premium { border-color: rgba(192, 122, 68, 0.45); }
+
+        .product-tag {
+            position: absolute;
+            top: -11px; right: 26px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #140B04;
+            background: linear-gradient(160deg, var(--copper-hi), var(--copper));
+            border-radius: 100px;
+            padding: 4px 12px;
+        }
+
+        .product-item h4 { font-size: 22px; color: var(--text); }
+
+        .product-item h4 small {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--dim);
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .product-meta { display: flex; align-items: center; gap: 18px; flex: 0 0 auto; }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ice-bright);
+        }
+
+        .product-price small { font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--dim); }
+
+        .product-buy {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #140B04;
+            background: linear-gradient(160deg, var(--copper-hi), var(--copper));
+            border-radius: 100px;
+            padding: 11px 22px;
+            transition: var(--transition);
+        }
+
+        .product-buy:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(192, 122, 68, 0.4); }
+
+        /* ===== LOGISTICS ===== */
+        .logistics-band {
+            position: relative;
+            min-height: 58vh;
+            display: flex;
+            align-items: flex-end;
+            background: url('images/global-hafen.jpg') center 45% / cover no-repeat;
+            background-attachment: fixed;
+        }
+
+        .logistics-band::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #0A0D12 0%, rgba(10, 13, 18, 0.3) 40%, rgba(10, 13, 18, 0.85) 100%);
+        }
+
+        .logistics-caption { position: relative; z-index: 2; padding: 90px 0 80px; width: 100%; }
+
+        .logistics-caption .section-header { margin-bottom: 0; }
+
+        .logistics-caption .section-title em { color: #7FB3CE; }
+
+        .logi-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .logi-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--frost-line-hi);
+            min-height: 340px;
+            display: flex;
+            align-items: flex-end;
+            box-shadow: 0 30px 70px rgba(30, 53, 70, 0.28);
+            transition: var(--transition);
+        }
+
+        .logi-card:hover { transform: translateY(-6px); border-color: var(--ice); }
+
+        .logi-card.port { background: url('images/logistics-port.jpg') center / cover no-repeat; }
+        .logi-card.vessel { background: url('images/export-ship.jpg') center / cover no-repeat; }
+
+        .logi-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(10, 13, 18, 0.94) 100%);
+        }
+
+        .logi-body { position: relative; z-index: 2; padding: 30px; }
+
+        .logi-body h4 { font-size: 26px; color: #fff; margin-bottom: 8px; }
+        .logi-body p { color: #C3D2DE; font-size: 13.5px; font-weight: 300; max-width: 420px; }
+
+        .logi-body span {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #E2A26C;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .contact-rows { display: grid; gap: 16px; }
+
+        .contact-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--panel);
+            border: 1px solid var(--frost-line);
+            border-radius: var(--radius);
+            padding: 24px 26px;
+            transition: var(--transition);
+        }
+
+        .contact-row:hover { border-color: var(--frost-line-hi); background: var(--panel-hi); }
+
+        .contact-row svg { width: 22px; height: 22px; fill: none; stroke: var(--copper-hi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; margin-top: 3px; }
+
+        .contact-row h5 {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 5px;
+        }
+
+        .contact-row p, .contact-row a { color: var(--text); font-size: 15px; text-decoration: none; }
+
+        .contact-row a:hover { color: var(--copper-hi); }
+
+        .contact-cta {
+            background:
+                radial-gradient(ellipse at 20% 0%, rgba(62, 124, 161, 0.1), transparent 55%),
+                linear-gradient(160deg, var(--ink-3), var(--ink-2));
+            border: 1px solid var(--frost-line-hi);
+            border-radius: var(--radius-lg);
+            padding: 46px 44px;
+        }
+
+        .contact-cta h3 { font-size: 32px; color: var(--text); margin-bottom: 14px; }
+        .contact-cta p { color: var(--muted); font-size: 14.5px; font-weight: 300; margin-bottom: 30px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #E7EDF2;
+            border-top: 1px solid var(--frost-line);
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 60px;
+        }
+
+        .footer h5 {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ice);
+            margin-bottom: 20px;
+        }
+
+        .footer p { color: var(--dim); font-size: 13.5px; font-weight: 300; }
+
+        .footer .logo-name {
+            background: linear-gradient(180deg, #3A5064 0%, #1C2C3A 60%, #0F1B25 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .footer .logo-tagline { color: var(--copper-hi); }
+
+        .footer-links { list-style: none; }
+
+        .footer-links li { margin-bottom: 11px; }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 300;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover { color: var(--copper-hi); padding-left: 5px; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(30, 53, 70, 0.1);
+            padding: 26px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom p { font-size: 12.5px; color: var(--dim); }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .reveal:nth-child(2) { transition-delay: 0.08s; }
+        .reveal:nth-child(3) { transition-delay: 0.16s; }
+        .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .split, .materials-grid, .process, .product-layout, .contact-wrap { grid-template-columns: 1fr; gap: 50px; }
+            .split.reverse .split-media { order: 0; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .product-feature { min-height: 380px; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 22px; }
+            .header { padding: 18px 22px; }
+            .header.scrolled { padding: 12px 22px; }
+            .nav { display: none; }
+            .hamburger { display: block; }
+            .section { padding: 90px 0; }
+            .hero { background-attachment: scroll; }
+            .parallax-band, .logistics-band { background-attachment: scroll; min-height: 480px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); transform: translateY(-30px); margin-bottom: -30px; }
+            .about-facts { grid-template-columns: 1fr; }
+            .logi-cards { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .hero h1 { letter-spacing: 4px; }
+            .product-item { flex-direction: column; align-items: flex-start; }
+            .product-meta { width: 100%; justify-content: space-between; }
+            .split-media::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <a href="index.html" class="logo">
+            <span class="logo-name">Winterclaw</span>
+            <span class="logo-tagline">Metals · Kupfer &amp; Silber</span>
+        </a>
+        <nav class="nav">
+            <a href="#ueber">Über uns</a>
+            <a href="#materialien">Materialien</a>
+            <a href="#produktion">Produktion</a>
+            <a href="#produkte">Produkte</a>
+            <a href="#logistik">Logistik</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menü öffnen">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-close" id="mobileClose" aria-label="Menü schließen">✕</button>
+        <a href="#ueber" class="mobile-link">Über uns</a>
+        <a href="#materialien" class="mobile-link">Materialien</a>
+        <a href="#produktion" class="mobile-link">Produktion</a>
+        <a href="#produkte" class="mobile-link">Produkte</a>
+        <a href="#logistik" class="mobile-link">Logistik</a>
+        <a href="#kontakt" class="mobile-link">Kontakt</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <span class="hero-kicker">Metallhandel seit 1962 · Hamburg</span>
+            <h1>Winterclaw Metals</h1>
+            <p class="hero-sub">Kupfer. Silber. Vertrauen.</p>
+            <p class="hero-text">
+                Wir handeln, raffinieren und liefern Edel- und Nichteisenmetalle in reinster Qualität –
+                vom Granulat bis zur Sonderlegierung, aus Hamburg in die ganze Welt.
+            </p>
+            <div class="hero-actions">
+                <a href="#produkte" class="btn btn-copper">Produkte entdecken</a>
+                <a href="#kontakt" class="btn btn-ghost">Anfrage stellen</a>
+            </div>
+        </div>
+        <a href="#ueber" class="hero-scroll">Scrollen</a>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat reveal">
+                    <div class="stat-number">1962</div>
+                    <div class="stat-label">Gegründet</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-number">12.5<small>&thinsp;kt</small></div>
+                    <div class="stat-label">Jahresumsatz</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Länder weltweit</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-number">99.99<small>%</small></div>
+                    <div class="stat-label">Reinheit garantiert</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ÜBER UNS -->
+    <section class="section" id="ueber">
+        <div class="container">
+            <div class="split">
+                <div class="split-media reveal">
+                    <img src="images/heritage-vat.jpg" alt="Historischer Abstich flüssigen Metalls aus der Gießpfanne">
+                    <span class="media-chip">Gießerei, 1962</span>
+                </div>
+                <div class="about-text">
+                    <div class="section-header reveal">
+                        <span class="section-label">01 · Über uns</span>
+                        <h2 class="section-title">Aus Feuer und <em>Eis</em> geboren</h2>
+                    </div>
+                    <p class="reveal">
+                        Winterclaw Metals begann 1962 als kleine Hamburger Gießerei am Nordhafen – mit einem
+                        Schmelzofen, sechs Mitarbeitenden und einem unerbittlichen Anspruch: Metall in seiner
+                        reinsten Form zu liefern.
+                    </p>
+                    <p class="reveal">
+                        Heute führen wir die Tradition fort. Aus der einstigen Gießerei wurde ein moderner
+                        Metallhandelsbetrieb, der Kupfer und Silber weltweit an Industrie, Fertigung und
+                        Sammler liefert – ohne je den Anspruch aus den Augen zu verlieren, mit dem alles begann.
+                    </p>
+                    <div class="about-facts">
+                        <div class="fact reveal">
+                            <h4>Familiengeführt</h4>
+                            <span>In dritter Generation seit 1962</span>
+                        </div>
+                        <div class="fact reveal">
+                            <h4>Zertifiziert</h4>
+                            <span>ISO 9001 &amp; LBMA Good Delivery</span>
+                        </div>
+                        <div class="fact reveal">
+                            <h4>Raffination</h4>
+                            <span>Eigene Elektrolyse-Anlage</span>
+                        </div>
+                        <div class="fact reveal">
+                            <h4>Herkunft</h4>
+                            <span>Nachvollziehbare Lieferketten</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERIALIEN -->
+    <section class="section section-deep" id="materialien">
+        <div class="container">
+            <div class="materials-grid">
+                <div class="split-media reveal" style="margin-bottom:0;">
+                    <img src="images/crystal-materials.jpg" alt="Kristalline Struktur einer Kupfer-Silber-Legierung">
+                    <span class="media-chip">CuAg · Legierungsstudie</span>
+                </div>
+                <div>
+                    <div class="section-header reveal">
+                        <span class="section-label">02 · Materialien</span>
+                        <h2 class="section-title">Drei Metalle. <em>Ein</em> Anspruch.</h2>
+                        <p class="section-subtitle">Jede Lieferung wird spektrometrisch geprüft und zertifiziert.</p>
+                    </div>
+                    <div class="mat-cards">
+                        <div class="mat-card reveal">
+                            <div class="mat-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                            </div>
+                            <div>
+                                <h4>Kupfer <span>99,99 %</span></h4>
+                                <p>Elektrolytkupfer in Kathoden, Granulat und Barren – die Grundlage unserer Fertigung seit Gründung.</p>
+                            </div>
+                        </div>
+                        <div class="mat-card reveal">
+                            <div class="mat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Silber <span>999 Feinsilber</span></h4>
+                                <p>Feinsilber als Granulat, Draht und KW-Stück – für Elektronik, Photovoltaik und Anlage.</p>
+                            </div>
+                        </div>
+                        <div class="mat-card reveal">
+                            <div class="mat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <div>
+                                <h4>Sonderlegierungen <span>CuAg · CuSn</span></h4>
+                                <p>Kundenspezifische Legierungen mit dokumentierter Zusammensetzung und chargenreiner Rückverfolgbarkeit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX BAND -->
+    <section class="parallax-band">
+        <div class="band-inner">
+            <blockquote>„Metall vergisst nie, wie es entstand.<br>Wir erinnern uns – <strong>bei jedem Abstich.</strong>“</blockquote>
+            <cite>E. Winterclaw · Geschäftsführer</cite>
+        </div>
+    </section>
+    <!-- PRODUKTION -->
+    <section class="section" id="produktion">
+        <div class="container">
+            <div class="process">
+                <div class="split-media reveal">
+                    <img src="images/walzwerk.jpg" alt="Glühend heißer Brammenstrang auf dem Walzwerk">
+                    <span class="media-chip">Warmwalzwerk · 920 °C</span>
+                </div>
+                <div>
+                    <div class="section-header reveal" style="margin-bottom:0;">
+                        <span class="section-label">03 · Produktion</span>
+                        <h2 class="section-title">Vom Rohmetall zur <em>Fertigkeit</em></h2>
+                        <p class="section-subtitle">Drei Stufen, ein Ergebnis: zertifizierte Reinheit.</p>
+                    </div>
+                    <div class="process-steps">
+                        <div class="step reveal">
+                            <span class="step-num">01</span>
+                            <div>
+                                <h4>Gießen &amp; Raffinieren</h4>
+                                <p>Rohkupfer und Altmetall werden elektrolytisch auf 99,99 % Reinheit raffiniert – chargengenau dokumentiert.</p>
+                            </div>
+                        </div>
+                        <div class="step reveal">
+                            <span class="step-num">02</span>
+                            <div>
+                                <h4>Walzen &amp; Glühen</h4>
+                                <p>Im Warmwalzwerk entsteht aus Brammenstrang Bandmaterial mit definierten Gefüge- und Härteprofilen.</p>
+                            </div>
+                        </div>
+                        <div class="step reveal">
+                            <span class="step-num">03</span>
+                            <div>
+                                <h4>Analyse &amp; Freigabe</h4>
+                                <p>Spektrometerprüfung, Zeitplanung und Freigabe: Keine Lieferung verlässt das Haus ohne Analysezeugnis 3.1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUKTE -->
+    <section class="section section-deep" id="produkte">
+        <div class="container">
+            <div class="section-header center reveal">
+                <span class="section-label" style="justify-content:center;">04 · Produkte</span>
+                <h2 class="section-title">Direkt <em>erhältlich</em></h2>
+                <p class="section-subtitle">Ausgewählte Produkte aus unserer Fertigung – versandfertig in 24 Stunden.</p>
+            </div>
+            <div class="product-layout">
+                <div class="product-feature reveal">
+                    <div class="product-feature-caption">
+                        <h3>Silbergranulat 999</h3>
+                        <p>Feinkörniges Feinsilber aus eigener Raffination – die Referenz für Gießereien und Elektronikfertigung.</p>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="product-item reveal">
+                        <h4>Kupfergranulat 99,99 %
+                            <small>Elektrolytkupfer, Korngröße 2–8 mm · 1-kg-Gebinde</small>
+                        </h4>
+                        <div class="product-meta">
+                            <span class="product-price">ab €8,90<small> / kg</small></span>
+                            <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                        </div>
+                    </div>
+                    <div class="product-item reveal">
+                        <h4>Silbergranulat 999
+                            <small>Feinsilber, Korngröße 1–5 mm · 50-g-Dose bis 1-kg-Gebinde</small>
+                        </h4>
+                        <div class="product-meta">
+                            <span class="product-price">ab €52<small> / 50 g</small></span>
+                            <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                        </div>
+                    </div>
+                    <div class="product-item premium reveal">
+                        <span class="product-tag">Premium</span>
+                        <h4>CuAg-Kristalle
+                            <small>Kupfer-Silber-Kristallstufe, handverlesen · Sammlerstück</small>
+                        </h4>
+                        <div class="product-meta">
+                            <span class="product-price">ab €49<small> / Stück</small></span>
+                            <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                        </div>
+                    </div>
+                    <div class="product-item reveal">
+                        <h4>Kupferblech 1,5 mm
+                            <small>Warmgewalzt, Werkstoff CW004A · Zuschnitt 200×500 mm</small>
+                        </h4>
+                        <div class="product-meta">
+                            <span class="product-price">ab €24<small> / Zuschnitt</small></span>
+                            <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- LOGISTIK -->
+    <section id="logistik">
+        <div class="logistics-band">
+            <div class="logistics-caption">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <span class="section-label">05 · Logistik</span>
+                        <h2 class="section-title" style="color:#fff;">Vom Hafen in die <em>Welt</em></h2>
+                        <p class="section-subtitle" style="color:#C3D2DE;">Ob Container, Stückgut oder Projektladung: Wir liefern in 23 Länder – dokumentiert, versichert und termintreu.</p>
+                    </div>
+                    <div class="logi-cards">
+                        <div class="logi-card port reveal">
+                            <div class="logi-body">
+                                <h4>Terminal-Umschlag</h4>
+                                <p>Feste Slotbuchungen in Hamburg, Antwerpen und Felixstowe – mit eigener Zollabwicklung.</p>
+                                <span>Hafenlogistik</span>
+                            </div>
+                        </div>
+                        <div class="logi-card vessel reveal">
+                            <div class="logi-body">
+                                <h4>Seefracht &amp; Export</h4>
+                                <p>Containerierte Vollladungen mit versichertem Transport und lückenloser Sendungsverfolgung.</p>
+                                <span>Weltweite Verschiffung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">06 · Kontakt</span>
+                <h2 class="section-title">Sprechen wir über <em>Metall</em></h2>
+                <p class="section-subtitle">Angebot, Analysezeugnis oder Liefertermin – wir antworten innerhalb eines Werktags.</p>
+            </div>
+            <div class="contact-wrap">
+                <div class="contact-rows">
+                    <div class="contact-row reveal">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <div>
+                            <h5>Sitz</h5>
+                            <p>Winterclaw Metals GmbH<br>Kaispeierring 4 · 20457 Hamburg</p>
+                        </div>
+                    </div>
+                    <div class="contact-row reveal">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        <div>
+                            <h5>Telefon</h5>
+                            <a href="tel:+494088772200">+49 (0) 40 8877 2200</a>
+                        </div>
+                    </div>
+                    <div class="contact-row reveal">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        <div>
+                            <h5>E-Mail</h5>
+                            <a href="mailto:handel@winterclaw-metals.de">handel@winterclaw-metals.de</a>
+                        </div>
+                    </div>
+                    <div class="contact-row reveal">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <div>
+                            <h5>Erreichbarkeit</h5>
+                            <p>Mo–Fr 08:00–17:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta reveal">
+                    <h3>Musteranfrage stellen</h3>
+                    <p>
+                        Sie möchten Granulat, Blech oder Kristalle vorab prüfen? Wir senden Ihnen gern ein
+                        kostenloses Muster inklusive Analysezeugnis zu.
+                    </p>
+                    <a href="mailto:handel@winterclaw-metals.de?subject=Musteranfrage" class="btn btn-copper">Muster anfordern</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="logo">
+                        <span class="logo-name">Winterclaw</span>
+                        <span class="logo-tagline">Metals · Kupfer &amp; Silber</span>
+                    </a>
+                    <p style="margin-top:20px; max-width:320px;">
+                        Handel, Raffination und Logistik von Kupfer und Silber.
+                        Familiengeführt in dritter Generation – aus Hamburg, für die Welt.
+                    </p>
+                </div>
+                <div>
+                    <h5>Materialien</h5>
+                    <ul class="footer-links">
+                        <li><a href="#materialien">Kupfer 99,99 %</a></li>
+                        <li><a href="#materialien">Silber 999</a></li>
+                        <li><a href="#materialien">Sonderlegierungen</a></li>
+                        <li><a href="#produkte">Produkte</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Unternehmen</h5>
+                    <ul class="footer-links">
+                        <li><a href="#ueber">Über uns</a></li>
+                        <li><a href="#produktion">Produktion</a></li>
+                        <li><a href="#logistik">Logistik</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Rechtliches</h5>
+                    <ul class="footer-links">
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                        <li><a href="https://ebay.de" target="_blank">eBay Shop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Winterclaw Metals GmbH. Alle Rechte vorbehalten.</p>
+                <p>Gegossen in Hamburg seit 1962</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile nav
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburgerBtn.addEventListener('click', () => mobileNav.classList.add('active'));
+        mobileClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+        mobileLinks.forEach(link => link.addEventListener('click', () => mobileNav.classList.remove('active')));
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
