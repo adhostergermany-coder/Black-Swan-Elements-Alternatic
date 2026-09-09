@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | QUANTUM Metal Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --obsidian: #14101d;
+            --abyss: #1d1628;
+            --abyss-2: #241b31;
+            --line: rgba(196, 148, 96, 0.28);
+            --line-soft: rgba(196, 148, 96, 0.14);
+            --copper: #C4935E;
+            --copper-deep: #A97445;
+            --copper-glow: #E2B37E;
+            --verdigris: #5FA89B;
+            --smoke: #E9E1F2;
+            --muted: #A99AB9;
+            --dim: #7B6D8C;
+            --serif: 'Tenor Sans', 'Times New Roman', serif;
+            --sans: 'Urbanist', 'Segoe UI', sans-serif;
+            --mono: 'Space Mono', monospace;
+        }
+
+        body {
+            font-family: var(--sans);
+            background:
+                radial-gradient(70% 40% at 85% -5%, rgba(196,147,94,0.1), transparent 60%),
+                var(--obsidian);
+            color: var(--smoke);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        h1, h2 { font-family: var(--serif); font-weight: 400; }
+
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 48px;
+            background: rgba(20, 16, 29, 0.86);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-mark {
+            width: 40px; height: 40px; display: grid; place-items: center;
+            border: 1px solid var(--line);
+            background: linear-gradient(160deg, rgba(196,147,94,0.2), rgba(95,168,155,0.08));
+            transform: rotate(45deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .logo:hover .logo-mark { transform: rotate(135deg); }
+        .logo-mark i {
+            font-style: normal; font-family: var(--serif); font-size: 19px;
+            color: var(--copper-glow); transform: rotate(-45deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .logo:hover .logo-mark i { transform: rotate(-135deg); }
+        .logo-word { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-word b { font-family: var(--serif); font-weight: 400; font-size: 21px; letter-spacing: 0.38em; color: var(--smoke); }
+        .logo-word small { font-family: var(--mono); font-size: 8px; letter-spacing: 0.52em; color: var(--dim); text-transform: uppercase; margin-top: 4px; }
+
+        .back-link {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
+            text-transform: uppercase; color: var(--muted); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: color 0.3s;
+        }
+        .back-link i { font-style: normal; transition: transform 0.35s; }
+        .back-link:hover { color: var(--copper-glow); }
+        .back-link:hover i { transform: translateX(-5px); }
+
+        .page-content {
+            max-width: 800px; margin: 0 auto; padding: 170px 60px 90px;
+        }
+
+        .page-kicker {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.42em;
+            text-transform: uppercase; color: var(--verdigris);
+            display: inline-flex; align-items: center; gap: 14px; margin-bottom: 22px;
+        }
+        .page-kicker::before { content: ''; width: 34px; height: 1px; background: var(--verdigris); opacity: 0.7; }
+
+        .page-content h1 { font-size: clamp(34px, 5vw, 52px); color: #F7F2FC; margin-bottom: 42px; }
+
+        .page-content h2 { font-size: 24px; margin: 40px 0 12px; color: var(--copper-glow); }
+        .page-content p, .page-content li {
+            font-weight: 300; font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 12px;
+        }
+        .page-content b { color: var(--smoke); font-weight: 500; }
+        .page-content a { color: var(--copper-glow); }
+        .page-content a:hover { text-decoration: underline; }
+
+        .info-card {
+            border: 1px solid var(--line-soft);
+            background: rgba(29, 22, 40, 0.55);
+            padding: 28px 30px; margin: 24px 0;
+            position: relative;
+        }
+        .info-card::before {
+            content: ''; position: absolute; top: -1px; left: -1px; width: 40px; height: 40px;
+            border-top: 2px solid var(--copper-glow); border-left: 2px solid var(--copper-glow);
+        }
+        .info-card p { margin-bottom: 6px; }
+
+        .divider { border: none; border-top: 1px solid var(--line-soft); margin: 44px 0; }
+
+        .footer-mini {
+            max-width: 800px; margin: 0 auto; padding: 0 60px 46px;
+        }
+        .footer-mini-inner {
+            border-top: 1px solid var(--line-soft); padding-top: 22px;
+            display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+        }
+        .footer-mini p, .footer-mini a {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+            color: var(--dim); text-transform: uppercase; text-decoration: none;
+        }
+        .footer-mini a:hover { color: var(--copper-glow); }
+
+        @media (max-width: 768px) {
+            .header { padding: 14px 22px; }
+            .page-content { padding: 140px 24px 70px; }
+            .footer-mini { padding: 0 24px 40px; }
+            .logo-word b { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo" aria-label="QUANTUM Metal Group">
+            <span class="logo-mark"><i>Q</i></span>
+            <span class="logo-word"><b>QUANTUM</b><small>Metal Group</small></span>
+        </a>
+        <a href="index.html" class="back-link"><i>←</i> Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <span class="page-kicker">Rechtliches</span>
+        <h1>Impressum</h1>
+
+        <div class="info-card">
+            <p><b>QUANTUM Metal Group GmbH</b></p>
+            <p>Speicherstadt 14 · 20457 Hamburg · Deutschland</p>
+            <p>Telefon: <a href="tel:+49402281740">+49 40 228 17 40</a> · E-Mail: <a href="mailto:handel@quantum-metals.de">handel@quantum-metals.de</a></p>
+            <p>USt-IdNr.: DE 314 159 265</p>
+        </div>
+
+        <h2>Vertretungsberechtigt</h2>
+        <p>Geschäftsführer: <b>Dr. Elena Hartmann</b>, <b>Jonas Brandt</b></p>
+        <p>Handelsregister: Amtsgericht Hamburg, HRB 214 883</p>
+
+        <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <p><b>Dr. Elena Hartmann</b>, Adresse wie oben.</p>
+
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
+
+        <h2>Haftung für Links</h2>
+        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte kann keine Gewähr übernommen werden.</p>
+
+        <h2>Urheberrecht</h2>
+        <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Bilder: Wikimedia Commons (CC BY-SA / Public Domain) — Einzelnachweise in der Bilddokumentation.</p>
+
+        <hr class="divider">
+
+        <h2>Datenschutz in Kürze</h2>
+        <p>Kontaktformular-Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.</p>
+        <p>Hosting und Server-Logfiles erfolgen durch den Betreiber nach Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren Betrieb).</p>
+
+        <div class="info-card">
+            <p><b>Bildnachweise (Wikimedia Commons)</b></p>
+            <p>Schmelze: „Clouds of molten copper — panoramio“ · Kathoden: „Bundles of cathode copper“ · Barren: „1 kilo copper bar 999 fineness from Degussa“ · Silber: „Silver ingot and ingot mold“ · Granulat: „Works — Ingots and granules“ · Draht: „Copper wire rod produced by LS Cable &amp; System“ · Terminal: „Container Terminal Tollerort 01“ · Transport: „Chile — copper slates on train“ · Textur: „NatCopper“</p>
+        </div>
+
+        <div class="footer-mini">
+            <div class="footer-mini-inner">
+                <p>© 2026 QUANTUM Metal Group GmbH</p>
+                <a href="index.html">← Zurück zur Startseite</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

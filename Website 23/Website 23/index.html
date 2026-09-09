@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTUM Metal Group — Kupfer &amp; Silber der Extraklasse</title>
+    <meta name="description" content="QUANTUM Metal Group — Handel und Raffination von Kupfer und Silber in institutioneller Qualität. Streng limitierte Chargen, dokumentierte Reinheit, weltweite Logistik.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --obsidian: #14101d;
+            --abyss: #1d1628;
+            --abyss-2: #241b31;
+            --panel: rgba(38, 28, 52, 0.42);
+            --line: rgba(196, 148, 96, 0.22);
+            --line-soft: rgba(196, 148, 96, 0.13);
+            --copper: #C4935E;
+            --copper-deep: #A97445;
+            --copper-glow: #E2B37E;
+            --verdigris: #5FA89B;
+            --verdigris-deep: #3C7C72;
+            --smoke: #E9E1F2;
+            --muted: #A99AB9;
+            --dim: #7B6D8C;
+            --serif: 'Tenor Sans', 'Times New Roman', serif;
+            --sans: 'Urbanist', 'Segoe UI', sans-serif;
+            --mono: 'Space Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--obsidian);
+            color: var(--smoke);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: rgba(196, 147, 94, 0.35); color: #fff; }
+
+        h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.12; letter-spacing: 0.02em; }
+
+        img { display: block; max-width: 100%; }
+
+        a { color: var(--copper-glow); text-decoration: none; }
+
+        .wrap { width: min(1240px, 92vw); margin: 0 auto; }
+
+        /* ——— shared atoms ——— */
+        .kicker {
+            display: inline-flex; align-items: center; gap: 14px;
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.42em;
+            text-transform: uppercase; color: var(--verdigris);
+        }
+        .kicker::before { content: ''; width: 34px; height: 1px; background: var(--verdigris); opacity: 0.7; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            font-family: var(--mono); font-size: 12px; letter-spacing: 0.28em;
+            text-transform: uppercase; padding: 17px 34px;
+            color: var(--smoke); border: 1px solid var(--line);
+            background: linear-gradient(160deg, rgba(196,147,94,0.16), rgba(196,147,94,0.04));
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s, background 0.35s;
+            position: relative; overflow: hidden;
+        }
+        .btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(160deg, rgba(226,179,126,0.32), rgba(226,179,126,0.08));
+            opacity: 0; transition: opacity 0.35s;
+        }
+        .btn:hover { transform: translateY(-3px); border-color: rgba(226,179,126,0.6); }
+        .btn:hover::after { opacity: 1; }
+        .btn.ghost { background: transparent; border-color: rgba(233,225,242,0.22); }
+        .btn.ghost:hover { border-color: var(--copper-glow); }
+        .btn span { position: relative; z-index: 1; }
+
+        /* ——— header ——— */
+        .site-head {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 22px 48px;
+            transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .site-head.scrolled {
+            padding: 13px 48px;
+            background: rgba(20, 16, 29, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom-color: var(--line-soft);
+        }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo-mark {
+            width: 40px; height: 40px; display: grid; place-items: center;
+            border: 1px solid var(--line);
+            background: linear-gradient(160deg, rgba(196,147,94,0.2), rgba(95,168,155,0.08));
+            transform: rotate(45deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .logo:hover .logo-mark { transform: rotate(135deg); }
+        .logo-mark i {
+            font-style: normal; font-family: var(--serif); font-size: 19px;
+            color: var(--copper-glow); transform: rotate(-45deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .logo:hover .logo-mark i { transform: rotate(-135deg); }
+        .logo-word { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-word b {
+            font-family: var(--serif); font-weight: 400; font-size: 21px;
+            letter-spacing: 0.38em; color: var(--smoke);
+        }
+        .logo-word small {
+            font-family: var(--mono); font-size: 8px; letter-spacing: 0.52em;
+            color: var(--dim); text-transform: uppercase; margin-top: 4px;
+        }
+        .nav { display: flex; align-items: center; gap: 36px; }
+        .nav a {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
+            text-transform: uppercase; color: var(--muted); position: relative;
+            padding: 6px 0; transition: color 0.3s;
+        }
+        .nav a::after {
+            content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
+            background: linear-gradient(90deg, var(--copper-glow), transparent);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .nav a:hover { color: var(--smoke); }
+        .nav a:hover::after { transform: scaleX(1); }
+        .head-cta { padding: 12px 24px; }
+
+        .burger { display: none; background: none; border: 1px solid var(--line); padding: 10px 12px; cursor: pointer; }
+        .burger i { display: block; width: 20px; height: 1.5px; background: var(--smoke); margin: 5px 0; transition: 0.3s; }
+
+        /* ——— hero ——— */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center;
+            overflow: hidden;
+        }
+        .hero-media {
+            position: absolute; inset: -18% 0 0; z-index: 0; will-change: transform;
+        }
+        .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-media::after {
+            content: ''; position: absolute; inset: 0;
+            background:
+                linear-gradient(100deg, rgba(20,16,29,0.96) 0%, rgba(20,16,29,0.82) 34%, rgba(29,22,40,0.44) 68%, rgba(20,16,29,0.72) 100%),
+                linear-gradient(0deg, var(--obsidian) 0%, transparent 26%);
+        }
+        .hero-aura {
+            position: absolute; z-index: 1; width: 62vmax; height: 62vmax; border-radius: 50%;
+            background: radial-gradient(circle, rgba(196,147,94,0.17) 0%, transparent 62%);
+            top: -18vmax; right: -14vmax; pointer-events: none;
+        }
+        .hero-inner { position: relative; z-index: 2; width: 100%; padding-top: 90px; }
+        .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 60px; align-items: end; }
+        .hero h1 {
+            font-size: clamp(52px, 7vw, 108px);
+            color: #F7F2FC;
+            margin: 26px 0 8px;
+            text-wrap: balance;
+        }
+        .hero h1 .molten {
+            background: linear-gradient(105deg, #F7F2FC 0%, var(--copper-glow) 45%, var(--copper-deep) 78%, var(--verdigris) 105%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+        .hero-sub {
+            font-weight: 300; font-size: 18px; color: var(--muted);
+            max-width: 56ch; margin-top: 22px;
+        }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
+        .hero-panel {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 34px 32px 28px;
+            position: relative;
+        }
+        .hero-panel::before {
+            content: ''; position: absolute; top: -1px; left: -1px;
+            width: 52px; height: 52px;
+            border-top: 2px solid var(--copper-glow); border-left: 2px solid var(--copper-glow);
+        }
+        .hero-panel::after {
+            content: ''; position: absolute; bottom: -1px; right: -1px;
+            width: 52px; height: 52px;
+            border-bottom: 2px solid var(--verdigris); border-right: 2px solid var(--verdigris);
+        }
+        .panel-label {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.4em;
+            text-transform: uppercase; color: var(--verdigris); margin-bottom: 22px;
+            display: block;
+        }
+        .rate-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 13px 0; border-top: 1px solid var(--line-soft);
+        }
+        .rate-row:first-of-type { border-top: none; }
+        .rate-row .r-name { font-size: 14px; font-weight: 500; letter-spacing: 0.06em; color: var(--smoke); }
+        .rate-row .r-name small { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em; color: var(--dim); margin-top: 3px; text-transform: uppercase; }
+        .rate-row .r-val { font-family: var(--mono); font-size: 15px; color: var(--copper-glow); text-align: right; }
+        .rate-row .r-val small { display: block; font-size: 10px; color: var(--dim); letter-spacing: 0.08em; margin-top: 2px; }
+        .r-val.up small::before { content: '▲ '; font-size: 8px; color: var(--verdigris); }
+        .r-val.down small::before { content: '▼ '; font-size: 8px; color: #C96A5A; }
+        .panel-foot {
+            margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line);
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim);
+            display: flex; justify-content: space-between; text-transform: uppercase;
+        }
+        .panel-foot b { color: var(--verdigris); font-weight: 400; }
+        .hero-scroll {
+            position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 12px;
+            font-family: var(--mono); font-size: 9px; letter-spacing: 0.5em; color: var(--dim);
+            text-transform: uppercase;
+        }
+        .hero-scroll i {
+            width: 1px; height: 54px; overflow: hidden; position: relative;
+            background: rgba(233,225,242,0.14); font-style: normal;
+        }
+        .hero-scroll i::after {
+            content: ''; position: absolute; left: 0; top: -60%; width: 100%; height: 60%;
+            background: linear-gradient(180deg, transparent, var(--copper-glow));
+            animation: scrollPulse 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+        @keyframes scrollPulse { to { top: 110%; } }
+
+        /* ——— credential rotator (3D flip) ——— */
+        .cred {
+            position: relative; z-index: 4;
+            background:
+                radial-gradient(50% 160% at 50% 0%, rgba(196,147,94,0.08), transparent 65%),
+                linear-gradient(180deg, var(--abyss), var(--obsidian));
+            border-block: 1px solid var(--line-soft);
+            padding: 30px 0 26px;
+            perspective: 900px;
+        }
+        .cred .wrap { display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: center; }
+        .cred-stage {
+            height: 74px; position: relative; transform-style: preserve-3d;
+            border-left: 2px solid var(--copper);
+        }
+        .cred-line {
+            position: absolute; top: 0; bottom: 0; left: 26px; right: 0;
+            display: flex; flex-direction: column; justify-content: center; gap: 5px;
+            opacity: 0; transform: rotateX(-78deg) translateZ(30px); transform-origin: 50% 100%;
+            transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity; pointer-events: none;
+        }
+        .cred-line.on { opacity: 1; transform: none; pointer-events: auto; }
+        .cred-line.leaving { opacity: 0; transform: rotateX(62deg) translateZ(-24px); }
+        .cred-line b {
+            font-family: var(--serif); font-weight: 400; font-size: clamp(21px, 2.5vw, 32px);
+            color: #F7F2FC; letter-spacing: 0.015em; line-height: 1.12;
+        }
+        .cred-line b i { font-style: normal; color: var(--copper-glow); }
+        .cred-line span {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.34em;
+            text-transform: uppercase; color: var(--verdigris);
+        }
+        .cred-meta { display: flex; align-items: center; gap: 22px; }
+        .cred-count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; color: var(--dim); white-space: nowrap; }
+        .cred-count b { color: var(--copper-glow); font-weight: 400; }
+        .cred-btns { display: flex; gap: 8px; }
+        .cred-btn {
+            width: 42px; height: 42px; display: grid; place-items: center;
+            background: transparent; border: 1px solid var(--line); color: var(--muted);
+            font-family: var(--mono); font-size: 13px; cursor: pointer; transition: 0.3s;
+        }
+        .cred-btn:hover { border-color: var(--copper-glow); color: var(--copper-glow); background: rgba(196,147,94,0.08); }
+        .cred-progress {
+            grid-column: 1 / -1; height: 1px; background: var(--line-soft);
+            position: relative; margin-top: 18px;
+        }
+        .cred-progress i {
+            position: absolute; top: 0; bottom: 0; left: 0; width: 0;
+            background: linear-gradient(90deg, var(--copper-deep), var(--copper-glow));
+        }
+        .cred-progress i.run { animation: credRun 6s linear forwards; }
+        @keyframes credRun { to { width: 100%; } }
+        @media (max-width: 768px) {
+            .cred .wrap { grid-template-columns: 1fr; gap: 18px; }
+            .cred-stage { height: 92px; }
+            .cred-meta { justify-content: space-between; width: 100%; }
+        }
+
+        /* ——— manifesto ——— */
+        .manifesto { padding: 150px 0 130px; position: relative; }
+        .manifesto .wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 70px; align-items: start; }
+        .manifesto h2 { font-size: clamp(34px, 4.2vw, 58px); color: #F7F2FC; text-wrap: balance; }
+        .manifesto h2 em {
+            font-style: normal; color: var(--copper-glow);
+        }
+        .manifesto-copy p { font-weight: 300; font-size: 16.5px; color: var(--muted); margin-bottom: 18px; }
+        .manifesto-copy p b { color: var(--smoke); font-weight: 500; }
+        .sig-grid {
+            margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+            background: var(--line-soft); border: 1px solid var(--line-soft);
+        }
+        .sig-cell {
+            background: var(--abyss); padding: 22px 20px;
+            transition: background 0.35s;
+        }
+        .sig-cell:hover { background: var(--abyss-2); }
+        .sig-cell b {
+            font-family: var(--serif); font-size: 30px; font-weight: 400;
+            color: var(--copper-glow); display: block;
+        }
+        .sig-cell span {
+            font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.26em;
+            text-transform: uppercase; color: var(--dim); margin-top: 8px; display: block;
+        }
+
+        /* ——— metals (horizontal-scroll row) ——— */
+        .metals { padding: 120px 0 140px; position: relative; overflow: hidden; }
+        .metals-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 58px; }
+        .metals-head h2 { font-size: clamp(34px, 4.2vw, 56px); color: #F7F2FC; max-width: 14ch; text-wrap: balance; }
+        .metals-head p { max-width: 34ch; color: var(--muted); font-weight: 300; }
+        .metals-rail {
+            display: grid; grid-auto-flow: column; grid-auto-columns: minmax(380px, 0.9fr);
+            gap: 22px; overflow-x: auto; padding: 4px 4px 26px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin; scrollbar-color: var(--copper-deep) transparent;
+        }
+        .metals-rail::-webkit-scrollbar { height: 4px; }
+        .metals-rail::-webkit-scrollbar-thumb { background: var(--copper-deep); }
+        .metal-card {
+            scroll-snap-align: start;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(165deg, var(--abyss-2), var(--abyss));
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: border-color 0.4s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .metal-card:hover { border-color: var(--line); transform: translateY(-6px); }
+        .metal-fig { position: relative; height: 300px; overflow: hidden; }
+        .metal-fig img { width: 100%; height: 112%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .metal-card:hover .metal-fig img { transform: scale(1.07); }
+        .metal-fig::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(20,16,29,0.14), rgba(29,22,40,0.06) 55%, var(--abyss) 100%);
+        }
+        .metal-grade {
+            position: absolute; top: 18px; left: 18px; z-index: 2;
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em;
+            color: var(--verdigris); text-transform: uppercase;
+            background: rgba(20,16,29,0.78); border: 1px solid var(--line-soft);
+            padding: 7px 13px; backdrop-filter: blur(6px);
+        }
+        .metal-idx {
+            position: absolute; top: 14px; right: 20px; z-index: 2;
+            font-family: var(--serif); font-size: 46px; color: rgba(233,225,242,0.16);
+        }
+        .metal-body { padding: 28px 28px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+        .metal-body h3 { font-size: 27px; color: #F7F2FC; }
+        .metal-body p { font-weight: 300; color: var(--muted); font-size: 14.5px; }
+        .metal-specs { margin-top: auto; border-top: 1px solid var(--line-soft); padding-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+        .metal-specs span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; display: block; }
+        .metal-specs b { font-weight: 500; color: var(--smoke); font-size: 14px; letter-spacing: 0.04em; display: block; margin-top: 2px; }
+        .metal-link {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+            color: var(--copper-glow); display: inline-flex; align-items: center; gap: 10px;
+        }
+        .metal-link i { font-style: normal; transition: transform 0.35s; }
+        .metal-link:hover i { transform: translateX(6px); }
+
+        /* ——— process ——— */
+        .process { position: relative; padding: 150px 0; background: linear-gradient(180deg, var(--obsidian), #171122 50%, var(--obsidian)); }
+        .process-media {
+            position: absolute; inset: -16% 0; overflow: hidden; z-index: 0;
+        }
+        .process-media img {
+            width: 100%; height: 124%; object-fit: cover; will-change: transform;
+            filter: saturate(0.82) brightness(0.5);
+        }
+        .process-media::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, var(--obsidian) 0%, rgba(23,17,34,0.62) 26%, rgba(23,17,34,0.66) 74%, var(--obsidian) 100%);
+        }
+        .process .wrap { position: relative; z-index: 1; }
+        .process-head { text-align: center; max-width: 640px; margin: 0 auto 76px; }
+        .process-head h2 { font-size: clamp(34px, 4.4vw, 58px); color: #F7F2FC; margin-top: 20px; text-wrap: balance; }
+        .process-head p { color: var(--muted); font-weight: 300; margin-top: 16px; }
+        .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+        .proc-cell {
+            background: rgba(20,16,29,0.74); backdrop-filter: blur(8px);
+            padding: 38px 30px 34px; position: relative;
+            transition: background 0.4s;
+        }
+        .proc-cell:hover { background: rgba(36,27,49,0.88); }
+        .proc-num {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.34em;
+            color: var(--verdigris); display: block; margin-bottom: 46px;
+        }
+        .proc-cell h3 { font-size: 22px; color: #F7F2FC; margin-bottom: 12px; }
+        .proc-cell p { font-weight: 300; font-size: 13.5px; color: var(--muted); }
+        .proc-cell::after {
+            content: ''; position: absolute; left: 30px; bottom: 0; height: 2px; width: 0;
+            background: linear-gradient(90deg, var(--copper-glow), transparent);
+            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .proc-cell:hover::after { width: calc(100% - 60px); }
+
+        /* ——— products (angular luxury cards) ——— */
+        .products { padding: 140px 0; }
+        .prod-head { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 30px; margin-bottom: 60px; }
+        .prod-head h2 { font-size: clamp(34px, 4.2vw, 56px); color: #F7F2FC; max-width: 15ch; text-wrap: balance; }
+        .prod-head p { max-width: 38ch; color: var(--muted); font-weight: 300; margin-top: 14px; }
+        .prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+        .product {
+            position: relative;
+            background: linear-gradient(160deg, var(--abyss-2), var(--abyss));
+            border: 1px solid var(--line-soft);
+            clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+            padding: 26px;
+            display: flex; flex-direction: column; gap: 16px;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s;
+        }
+        .product:hover { transform: translateY(-8px); border-color: var(--line); }
+        .product-fig { position: relative; overflow: hidden; }
+        .product-fig::before {
+            content: ''; position: absolute; inset: 0; z-index: 1;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+        .product-fig img { width: 100%; height: 250px; object-fit: cover; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .product:hover .product-fig img { transform: scale(1.06); }
+        .product-fig figcaption {
+            position: absolute; z-index: 2; bottom: 0; left: 0;
+            font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em;
+            color: var(--verdigris); background: rgba(20,16,29,0.82);
+            padding: 7px 12px; text-transform: uppercase; border-top: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft);
+        }
+        .product h3 { font-size: 24px; color: #F7F2FC; }
+        .product h3 small {
+            display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.3em;
+            color: var(--verdigris); margin-bottom: 9px; text-transform: uppercase;
+        }
+        .product p { font-weight: 300; color: var(--muted); font-size: 14px; }
+        .product-meta {
+            margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+            padding-top: 16px; border-top: 1px solid var(--line-soft);
+        }
+        .product-price { font-family: var(--serif); font-size: 23px; color: var(--copper-glow); }
+        .product-price small { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.1em; display: block; margin-top: 2px; }
+        .product-buy {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+            color: var(--smoke); border: 1px solid var(--line); padding: 12px 22px;
+            transition: 0.35s; background: rgba(196,147,94,0.07);
+        }
+        .product-buy:hover { background: rgba(226,179,126,0.2); border-color: var(--copper-glow); }
+        .product-note {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--dim);
+            text-transform: uppercase; display: flex; justify-content: space-between;
+            border-top: 1px dashed var(--line-soft); padding-top: 14px;
+        }
+        .product-note b { color: var(--verdigris); font-weight: 400; }
+
+        /* ——— numbers band ——— */
+        .band {
+            border-block: 1px solid var(--line-soft);
+            background:
+                radial-gradient(60% 130% at 50% 0%, rgba(196,147,94,0.07), transparent 60%),
+                linear-gradient(180deg, var(--abyss), var(--obsidian));
+            padding: 74px 0;
+        }
+        .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .band-cell { text-align: center; position: relative; }
+        .band-cell + .band-cell::before {
+            content: ''; position: absolute; left: -15px; top: 12%; height: 76%; width: 1px;
+            background: linear-gradient(180deg, transparent, var(--line), transparent);
+        }
+        .band-cell b {
+            font-family: var(--serif); font-size: clamp(36px, 4vw, 52px); font-weight: 400;
+            color: #F7F2FC; display: block;
+        }
+        .band-cell b i { font-style: normal; color: var(--copper-glow); }
+        .band-cell span {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em;
+            text-transform: uppercase; color: var(--dim); margin-top: 10px; display: block;
+        }
+
+        /* ——— logistics ——— */
+        .logistics { padding: 150px 0; position: relative; }
+        .logistics .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 70px; align-items: center; }
+        .logi-fig { position: relative; overflow: hidden; }
+        .logi-fig img { width: 100%; height: 128%; position: relative; top: -14%; object-fit: cover; will-change: transform; filter: saturate(0.85); }
+        .logi-fig::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(200deg, transparent 55%, rgba(20,16,29,0.55));
+            border: 1px solid var(--line-soft);
+        }
+        .logi-badge {
+            position: absolute; z-index: 2; right: -18px; top: 40px;
+            background: linear-gradient(160deg, var(--copper-deep), var(--obsidian));
+            border: 1px solid var(--line);
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em;
+            color: var(--copper-glow); padding: 15px 20px; text-transform: uppercase;
+        }
+        .logi-copy h2 { font-size: clamp(34px, 4.2vw, 56px); color: #F7F2FC; margin: 22px 0 18px; text-wrap: balance; }
+        .logi-copy > p { font-weight: 300; color: var(--muted); max-width: 52ch; }
+        .logi-list { margin-top: 34px; display: grid; gap: 0; border-top: 1px solid var(--line-soft); }
+        .logi-item {
+            display: grid; grid-template-columns: 62px 1fr; gap: 20px; align-items: start;
+            padding: 20px 4px; border-bottom: 1px solid var(--line-soft);
+            transition: background 0.35s, padding 0.35s;
+        }
+        .logi-item:hover { background: rgba(196,147,94,0.05); padding-left: 14px; }
+        .logi-item i {
+            font-style: normal; font-family: var(--serif); font-size: 26px; color: rgba(196,147,94,0.5);
+        }
+        .logi-item b { display: block; font-weight: 600; font-size: 15.5px; color: var(--smoke); letter-spacing: 0.04em; }
+        .logi-item p { font-weight: 300; font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+        .logi-cta { margin-top: 36px; }
+
+        /* ——— audit / quote ——— */
+        .audit {
+            position: relative; padding: 160px 0; overflow: hidden;
+            background: linear-gradient(180deg, var(--obsidian), #171122 52%, var(--obsidian));
+        }
+        .audit-fig {
+            position: absolute; inset: -14% 0; z-index: 0;
+        }
+        .audit-fig img {
+            width: 100%; height: 128%; object-fit: cover; will-change: transform;
+            filter: brightness(0.34) saturate(0.7);
+        }
+        .audit-fig::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, var(--obsidian) 0%, rgba(20,16,29,0.5) 30%, rgba(20,16,29,0.55) 70%, var(--obsidian) 100%),
+                        radial-gradient(70% 90% at 78% 50%, rgba(95,168,155,0.12), transparent 60%);
+        }
+        .audit .wrap { position: relative; z-index: 1; text-align: center; }
+        .audit blockquote {
+            font-family: var(--serif); font-size: clamp(26px, 3.4vw, 44px); line-height: 1.35;
+            color: #F7F2FC; max-width: 22ch; margin: 28px auto 30px; text-wrap: balance;
+        }
+        .audit blockquote em { font-style: normal; color: var(--copper-glow); }
+        .audit cite {
+            font-family: var(--mono); font-style: normal; font-size: 11px; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--dim); display: block;
+        }
+        .audit cite b { color: var(--verdigris); font-weight: 400; }
+        .audit-cta { margin-top: 44px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* ——— contact ——— */
+        .contact { padding: 150px 0 120px; }
+        .contact .wrap { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 70px; }
+        .contact-copy h2 { font-size: clamp(34px, 4.2vw, 56px); color: #F7F2FC; margin: 22px 0 18px; text-wrap: balance; }
+        .contact-copy p { font-weight: 300; color: var(--muted); max-width: 46ch; }
+        .contact-list { margin-top: 36px; display: grid; gap: 4px; }
+        .contact-line {
+            display: flex; justify-content: space-between; gap: 24px;
+            padding: 15px 0; border-bottom: 1px solid var(--line-soft);
+            font-size: 14.5px;
+        }
+        .contact-line span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); padding-top: 3px; }
+        .contact-line b { font-weight: 500; color: var(--smoke); text-align: right; }
+        .contact-line a { color: var(--copper-glow); }
+        .contact-form {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            position: relative;
+        }
+        .contact-form::before {
+            content: ''; position: absolute; top: -1px; right: -1px; width: 52px; height: 52px;
+            border-top: 2px solid var(--copper-glow); border-right: 2px solid var(--copper-glow);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .field { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
+        .field label {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--dim);
+        }
+        .field input, .field select, .field textarea {
+            background: rgba(20,16,29,0.6); border: 1px solid var(--line-soft);
+            padding: 14px 16px; color: var(--smoke); font-family: var(--sans); font-size: 14.5px;
+            font-weight: 400; transition: border-color 0.3s, background 0.3s;
+            width: 100%;
+        }
+        .field textarea { min-height: 120px; resize: vertical; }
+        .field select { appearance: none; background-image: linear-gradient(45deg, transparent 49%, var(--copper) 50%), linear-gradient(-45deg, transparent 49%, var(--copper) 50%); background-position: calc(100% - 22px) 55%, calc(100% - 16px) 55%; background-size: 6px 6px; background-repeat: no-repeat; }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none; border-color: rgba(226,179,126,0.55); background: rgba(29,22,40,0.7);
+        }
+        .field input::placeholder, .field textarea::placeholder { color: var(--dim); }
+        .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+        .form-foot small { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; color: var(--dim); }
+        .form-foot .btn { padding: 15px 30px; }
+
+        /* ——— footer ——— */
+        .site-foot {
+            border-top: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, var(--obsidian), #100c17);
+            padding: 80px 0 0;
+        }
+        .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 50px; padding-bottom: 60px; }
+        .foot-brand p { font-weight: 300; color: var(--muted); font-size: 14px; max-width: 34ch; margin-top: 18px; }
+        .foot-col h4 {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.34em;
+            text-transform: uppercase; color: var(--verdigris); margin-bottom: 20px; font-weight: 400;
+        }
+        .foot-col ul { list-style: none; display: grid; gap: 11px; }
+        .foot-col a { color: var(--muted); font-weight: 300; font-size: 14px; transition: color 0.3s, padding-left 0.3s; }
+        .foot-col a:hover { color: var(--copper-glow); padding-left: 6px; }
+        .foot-base {
+            border-top: 1px solid var(--line-soft);
+            padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+        }
+        .foot-base p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; }
+        .foot-base a { color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
+        .foot-base a:hover { color: var(--copper-glow); }
+
+        /* ——— reveal-on-scroll ——— */
+        .rv { opacity: 0; transform: translateY(34px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        .rv.in { opacity: 1; transform: none; }
+
+        /* ——— responsive ——— */
+        @media (max-width: 1080px) {
+            .hero-grid, .manifesto .wrap, .logistics .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 46px; }
+            .hero-panel { max-width: 560px; }
+            .prod-grid { grid-template-columns: 1fr 1fr; }
+            .foot-grid { grid-template-columns: 1fr 1fr; }
+            .band .wrap { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .band-cell:nth-child(3)::before { display: none; }
+            .nav { display: none; }
+            .burger { display: block; }
+            .head-cta { display: none; }
+            .site-head.nav-open .nav {
+                display: flex; position: fixed; top: 76px; left: 16px; right: 16px;
+                flex-direction: column; align-items: flex-start; gap: 20px;
+                background: rgba(20, 16, 29, 0.97); border: 1px solid var(--line);
+                padding: 30px 28px; backdrop-filter: blur(18px); z-index: 999;
+            }
+            .site-head.nav-open .burger i:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+            .site-head.nav-open .burger i:nth-child(2) { opacity: 0; }
+            .site-head.nav-open .burger i:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        }
+
+        @media (max-width: 768px) {
+            .site-head { padding: 18px 22px; }
+            .site-head.scrolled { padding: 12px 22px; }
+            .hero { min-height: 92vh; }
+            .hero h1 { font-size: clamp(44px, 12vw, 64px); }
+            .hero-actions .btn { flex: 1; justify-content: center; }
+            .proc-grid { grid-template-columns: 1fr 1fr; }
+            .prod-grid { grid-template-columns: 1fr; }
+            .prod-head { grid-template-columns: 1fr; }
+            .metals-rail { grid-auto-columns: 86vw; }
+            .manifesto, .process, .products, .logistics, .audit, .contact { padding-top: 96px; padding-bottom: 96px; }
+            .manifesto .wrap { gap: 40px; }
+            .sig-grid { grid-template-columns: 1fr 1fr; }
+            .sig-cell:last-child { grid-column: 1 / -1; }
+            .contact-form { padding: 26px 22px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .logi-badge { right: 10px; top: 22px; }
+            .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+            .band .wrap { grid-template-columns: 1fr 1fr; }
+            .foot-base { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .cred-progress i.run, .hero-scroll i::after { animation: none; }
+            .cred-line { transition: none; }
+            .rv { opacity: 1; transform: none; transition: none; }
+            .hero-media, .process-media, .logi-fig img, .audit-fig { transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-head" id="siteHead">
+        <a href="index.html" class="logo" aria-label="QUANTUM Metal Group">
+            <span class="logo-mark"><i>Q</i></span>
+            <span class="logo-word">
+                <b>QUANTUM</b>
+                <small>Metal Group</small>
+            </span>
+        </a>
+        <nav class="nav" aria-label="Hauptnavigation">
+            <a href="#metalle">Metalle</a>
+            <a href="#prozess">Prozess</a>
+            <a href="#produkte">Produkte</a>
+            <a href="#logistik">Logistik</a>
+            <a href="#pruefung">Prüfung</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+        <a href="#kontakt" class="btn head-cta"><span>Anfrage</span></a>
+        <button class="burger" id="burger" aria-label="Menü öffnen"><i></i><i></i><i></i></button>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <div class="hero-media" data-plx="0.28">
+            <img src="images/hero-smelt.jpg" alt="Glühendes Kupfer in der Schmelzhalle" fetchpriority="high">
+        </div>
+        <div class="hero-aura"></div>
+        <div class="hero-inner">
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div>
+                        <span class="kicker">Kupfer · Silber · Raffination</span>
+                        <h1>Präzision, die man <span class="molten">wiegen</span> kann.</h1>
+                        <p class="hero-sub">
+                            QUANTUM Metal Group handelt und veredelt Kupfer und Silber in institutioneller
+                            Qualität — dokumentierte Reinheit, versiegelte Chargen, diskrete Abwicklung
+                            für Industrie, MINT und private Anleger.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#produkte" class="btn"><span>Chargen ansehen</span></a>
+                            <a href="#prozess" class="btn ghost"><span>Unser Prozess</span></a>
+                        </div>
+                    </div>
+                    <aside class="hero-panel rv">
+                        <span class="panel-label">Live · Notierungen</span>
+                        <div class="rate-row">
+                            <div class="r-name">Kupfer<small>LBMA · Grade A</small></div>
+                            <div class="r-val up">9,842 $<small>+0,62 % · 24 h</small></div>
+                        </div>
+                        <div class="rate-row">
+                            <div class="r-name">Silber<small>LBMA · 99,99</small></div>
+                            <div class="r-val down">31,44 $<small>−0,18 % · 24 h</small></div>
+                        </div>
+        <div class="rate-row">
+                            <div class="r-name">Molybdän<small>LME · Fee</small></div>
+                            <div class="r-val up">23,61 $<small>+1,07 % · 24 h</small></div>
+                        </div>
+                        <div class="panel-foot"><span>Ref.: <b>QNT-2609-88</b></span><span>Stand 17:00 CET</span></div>
+                    </aside>
+                </div>
+            </div>
+            <div class="hero-scroll"><span>Scrollen</span><i></i></div>
+        </div>
+    </section>
+
+    <!-- ============ CREDENTIAL ROTATOR ============ -->
+    <section class="cred" aria-label="Kennzahlen">
+        <div class="wrap">
+            <div class="cred-stage" id="credStage">
+                <div class="cred-line on">
+                    <b><i>99,99 %</i> Reinheit — assay-bestätigt.</b>
+                    <span>Unabhängiges Prüflabor · jede Charge</span>
+                </div>
+                <div class="cred-line">
+                    <b>LBMA <i>Good Delivery</i> Standard.</b>
+                    <span>Zertifizierte Hüttenpartner</span>
+                </div>
+                <div class="cred-line">
+                    <b>Versiegelt &amp; versichert in <i>48 h</i> weltweit.</b>
+                    <span>Luftfracht · Zollfreizone Hamburg</span>
+                </div>
+                <div class="cred-line">
+                    <b><i>0</i> Reklamationen seit 2019.</b>
+                    <span>Dokumentierte Auslieferungskette</span>
+                </div>
+                <div class="cred-line">
+                    <b>Assay konform <i>EN 13601</i>.</b>
+                    <span>Rückverfolgbar bis zur Hütte</span>
+                </div>
+            </div>
+            <div class="cred-meta">
+                <span class="cred-count"><b id="credNow">01</b> / 05</span>
+                <div class="cred-btns">
+                    <button class="cred-btn" id="credPrev" aria-label="Vorheriges Statement">←</button>
+                    <button class="cred-btn" id="credNext" aria-label="Nächstes Statement">→</button>
+                </div>
+            </div>
+            <div class="cred-progress"><i id="credBar" class="run"></i></div>
+        </div>
+    </section>
+
+    <!-- ============ MANIFESTO ============ -->
+    <section class="manifesto">
+        <div class="wrap">
+            <div class="rv">
+                <span class="kicker">Das Haus</span>
+                <h2>Ein Haus für <em>Reinheit</em>, gebaut auf Dokumenten.</h2>
+            </div>
+            <div class="manifesto-copy rv">
+                <p>
+                    Seit 1994 handeln wir Kupfer und Silber — nicht als Ware, sondern als
+                    <b>beglaubigtes Material</b>. Jede Charge verlässt unser Haus mit Assay,
+                    Herkunftsnachweis und Versicherungsschutz.
+                </p>
+                <p>
+                    Zwischen Bergwerk und Bauteil liegen zwölf Stationen. Wir kontrollieren
+                    davon <b>sieben</b> — vom Schmelzregime bis zur versiegelten Auslieferung.
+                </p>
+                <div class="sig-grid">
+                    <div class="sig-cell"><b>1994</b><span>Gegründet</span></div>
+                    <div class="sig-cell"><b>7 / 12</b><span>Kontrollierte Stationen</span></div>
+                    <div class="sig-cell"><b>31</b><span>Lieferländer</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ METALS ============ -->
+    <section class="metals" id="metalle">
+        <div class="wrap">
+            <div class="metals-head rv">
+                <div>
+                    <span class="kicker">Sortiment</span>
+                    <h2>Zwei Metalle. Ein Standard.</h2>
+                </div>
+                <p>Wahre Ausnahme-Qualität entsteht durch Reduktion: Wir konzentrieren uns auf zwei Metalle — und machen daraus eine Disziplin.</p>
+            </div>
+            <div class="metals-rail">
+                <article class="metal-card rv">
+                    <figure class="metal-fig">
+                        <span class="metal-grade">Cu-ETP · 99,99</span>
+                        <span class="metal-idx">01</span>
+                        <img src="images/cathode-walls.jpg" alt="Kupferkathoden in Bündeln">
+                    </figure>
+                    <div class="metal-body">
+                        <h3>Kupfer</h3>
+                        <p>Kathoden, Walzprodukte und Granulat aus kontrollierter Schmelzführung. Leitfähigkeit dokumentiert, Oberflächen garantiert.</p>
+                        <div class="metal-specs">
+                            <div><span>Reinheit</span><b>99,99 % Cu</b></div>
+                            <div><span>Norm</span><b>EN 13601 / CW004A</b></div>
+                            <div><span>Formen</span><b>Kathoden · Granulat</b></div>
+                            <div><span>Herkunft</span><b>7 Hüttenwerke</b></div>
+                        </div>
+                        <a href="#produkte" class="metal-link">Chargen ansehen <i>→</i></a>
+                    </div>
+                </article>
+                <article class="metal-card rv">
+                    <figure class="metal-fig">
+                        <span class="metal-grade">Ag 999.0 Fine</span>
+                        <span class="metal-idx">02</span>
+                        <img src="images/silver-granules.jpg" alt="Silberbarren und Granulat">
+                    </figure>
+                    <div class="metal-body">
+                        <h3>Silber</h3>
+                        <p>Minted Bars, Granulat und Industrielieferungen — mit LBMA-konformer Dokumentation und versiegelten Einheiten.</p>
+                        <div class="metal-specs">
+                            <div><span>Reinheit</span><b>999,0 Ag</b></div>
+                            <div><span>Norm</span><b>LBMA Good Delivery</b></div>
+                            <div><span>Formen</span><b>Barren · Granulat</b></div>
+                            <div><span>Versiegelung</span><b>Zertifikats-Kapsel</b></div>
+                        </div>
+                        <a href="#produkte" class="metal-link">Chargen ansehen <i>→</i></a>
+                    </div>
+                </article>
+                <article class="metal-card rv">
+                    <figure class="metal-fig">
+                        <span class="metal-grade">CuAg · Legierung</span>
+                        <span class="metal-idx">03</span>
+                        <img src="images/cable-rod.jpg" alt="Kupferdraht-Ringguss">
+                    </figure>
+                    <div class="metal-body">
+                        <h3>Speziallegierungen</h3>
+                        <p>Kupfer-Silber-Legierungen für Elektro- und Vakuumtechnik — gefertigt nach Zeichnung, mit Lieferung ab einer Rolle.</p>
+                        <div class="metal-specs">
+                            <div><span>Typ</span><b>CuAg 0,1</b></div>
+                            <div><span>Norm</span><b>EN 13602</b></div>
+                            <div><span>Formen</span><b>Draht · Profil</b></div>
+                            <div><span>Mindestabnahme</span><b>1 Rolle</b></div>
+                        </div>
+                        <a href="#kontakt" class="metal-link">Anfrage stellen <i>→</i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="process" id="prozess">
+        <div class="process-media" data-plx="0.16">
+            <img src="images/port-rails.jpg" alt="Kupferkathoden auf Transportwagen" loading="lazy">
+        </div>
+        <div class="wrap">
+            <div class="process-head rv">
+                <span class="kicker" style="justify-content:center">Vom Erz zum Siegel</span>
+                <h2>Vier Stationen. Eine Kette.</h2>
+                <p>Jeder Schritt dokumentiert, jeder Übergang versiegelt — die Kette endet erst in Ihren Händen.</p>
+            </div>
+            <div class="proc-grid rv">
+                <div class="proc-cell">
+                    <span class="proc-num">01 · Selektion</span>
+                    <h3>Hüttenauswahl</h3>
+                    <p>Sieben Partnerhütten, jährlich auditiert. Reinheitszusagen werden vertraglich fixiert.</p>
+                </div>
+                <div class="proc-cell">
+                    <span class="proc-num">02 · Schmelze</span>
+                    <h3>Schmelzregime</h3>
+                    <p>Prozessführung unter Schutzgas; jede Schmelze erhält eine individuelle Chargen-ID.</p>
+                </div>
+                <div class="proc-cell">
+                    <span class="proc-num">03 · Prüfung</span>
+                    <h3>Assay &amp; Siegel</h3>
+                    <p>Unabhängige Prüflaboratorien bestätigen Reinheit — bevor das QUANTUM-Siegel aufgebracht wird.</p>
+                </div>
+                <div class="proc-cell">
+                    <span class="proc-num">04 · Auslieferung</span>
+                    <h3>Versiegelte Auslieferung</h3>
+                    <p>Umverpackung, Dokumentenmappe, Versicherungsschutz bis zur Annahme — weltweit in 48 h.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PRODUCTS ============ -->
+    <section class="products" id="produkte">
+        <div class="wrap">
+            <div class="prod-head rv">
+                <div>
+                    <span class="kicker">Chargen</span>
+                    <h2>Aktuelle Chargen &amp; Preise</h2>
+                    <p>Streng limitierte Einheiten mit Assay-Dokument. Preise tagesaktuell — Zwischenverkauf vorbehalten.</p>
+                </div>
+                <a href="#kontakt" class="btn ghost"><span>Chargenliste anfordern</span></a>
+            </div>
+            <div class="prod-grid">
+                <article class="product rv">
+                    <figure class="product-fig">
+                        <img src="images/bar-copper.jpg" alt="1-kg-Kupferbarren 99,9 %">
+                        <figcaption>Chargen-ID QNT-CU-2601</figcaption>
+        </figure>
+                    <h3><small>Kupfer · 1 kg Barren</small>„Degussa-Stil 999er“</h3>
+                    <p>Gestanzt, graviert und versiegelt. Der Klassiker für MINT und industrielle Reserve.</p>
+                    <div class="product-meta">
+                        <div class="product-price">ab €8,90<small>pro kg · frei Haus</small></div>
+                        <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                    </div>
+                    <div class="product-note"><span>Verfügbar: <b>412 kg</b></span><span>Assay: <b>99,99 %</b></span></div>
+                </article>
+                <article class="product rv">
+                    <figure class="product-fig">
+                        <img src="images/bar-silver.jpg" alt="Silberbarren im Gussform-Format">
+                        <figcaption>Chargen-ID QNT-AG-0188</figcaption>
+                    </figure>
+                    <h3><small>Silber · 5 kg Gussbarren</small>„Gussform 999er“</h3>
+                    <p>Traditionell gegossen, handelsüblich beschriftet, kapselversiegelt — inklusive Herkunftsnachweis.</p>
+                    <div class="product-meta">
+                        <div class="product-price">ab €52<small>pro 50 g</small></div>
+                        <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                    </div>
+                    <div class="product-note"><span>Verfügbar: <b>96 Stk.</b></span><span>Assay: <b>999,0</b></span></div>
+                </article>
+                <article class="product rv">
+                    <figure class="product-fig">
+                        <img src="images/silver-granules.jpg" alt="Silbergranulat neben Barren">
+                        <figcaption>Chargen-ID QNT-AG-0402</figcaption>
+                    </figure>
+                    <h3><small>Silber · Granulat</small>„Korn 2–4 mm“</h3>
+                    <p>Industrieware für Galvanik und Elektronik — dosiergenau, rückstandsfrei, chargenrein.</p>
+                    <div class="product-meta">
+                        <div class="product-price">ab €49<small>pro Stück</small></div>
+                        <a href="https://ebay.de" target="_blank" class="product-buy">Kaufen</a>
+                    </div>
+                    <div class="product-note"><span>Verfügbar: <b>1.480 kg</b></span><span>Assay: <b>99,99 %</b></span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BAND ============ -->
+    <section class="band">
+        <div class="wrap">
+            <div class="band-cell rv"><b>1.900</b><span>Tonnen Umschlag / Jahr</span></div>
+            <div class="band-cell rv"><b><i>48</i> h</b><span>Weltweite Auslieferung</span></div>
+            <div class="band-cell rv"><b>0</b><span>Reklamationen seit 2019</span></div>
+            <div class="band-cell rv"><b>31</b><span>Lieferländer</span></div>
+        </div>
+    </section>
+
+    <!-- ============ LOGISTICS ============ -->
+    <section class="logistics" id="logistik">
+        <div class="wrap">
+            <figure class="logi-fig rv">
+                <img src="images/port-harbor.jpg" alt="Containerterminal mit Portalkränen" loading="lazy" data-plx="0.1">
+                <span class="logi-badge">Zollfreie Zone</span>
+            </figure>
+            <div class="logi-copy rv">
+                <span class="kicker">Logistik</span>
+                <h2>Vom Terminal bis zur Werkshalle.</h2>
+                <p>Eigene Kontingente bei zwei Reedereien, zollfreies Hochregallager im Hamburger Hafen — diskret, versichert, dokumentiert.</p>
+                <div class="logi-list">
+                    <div class="logi-item">
+                        <i>01</i>
+                        <div>
+                            <b>Verladung in versiegelten IBCs</b>
+                            <p>Kupferkathoden und Silbergranulat in geprüften, nummerierten Behältern.</p>
+                        </div>
+                    </div>
+                    <div class="logi-item">
+                        <i>02</i>
+                        <div>
+                            <b>Luftfracht innerhalb 48 Stunden</b>
+                            <p>Kuriernetze mit Prioritätsboarding — Temperaturen und Erschütterungen geloggt.</p>
+                        </div>
+                    </div>
+                    <div class="logi-item">
+                        <i>03</i>
+                        <div>
+                            <b>Verwahrung im Tresorraum</b>
+                            <p>Auf Wunsch Verwahrung in der Zollfreizone mit individueller Regal-ID.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#kontakt" class="btn logi-cta"><span>Logistik anfragen</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ AUDIT QUOTE ============ -->
+    <section class="audit" id="pruefung">
+        <div class="audit-fig" data-plx="0.12">
+            <img src="images/texture-foil.jpg" alt="Natürliches Kupferblech mit Kristallstruktur">
+        </div>
+        <div class="wrap">
+            <span class="kicker" style="justify-content:center">Unabhängige Prüfung</span>
+            <blockquote>
+                „Reinheit ist kein Versprechen.<br> <em>Sie ist ein Dokument.</em>“
+            </blockquote>
+            <cite><b>QNT Assay-Protokoll 2026</b> · Unabhängiges Labor, Schweiz</cite>
+            <div class="audit-cta">
+                <a href="#kontakt" class="btn"><span>Assay-Beispiel anfordern</span></a>
+                <a href="impressum.html" class="btn ghost"><span>Impressum</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="kontakt">
+        <div class="wrap">
+            <div class="contact-copy rv">
+                <span class="kicker">Kontakt</span>
+                <h2>Sprechen wir über Ihre Charge.</h2>
+                <p>Antwort innerhalb eines Werktags — mit Verfügbarkeiten, Assay-Dokumenten und Festpreisangebot.</p>
+                <div class="contact-list">
+                    <div class="contact-line"><span>Handel</span><b><a href="mailto:handel@quantum-metals.de">handel@quantum-metals.de</a></b></div>
+                    <div class="contact-line"><span>Telefon</span><b>+49 40 228 17 40</b></div>
+        <div class="contact-line"><span>Desk-Zeiten</span><b>Mo–Fr · 08:00–18:00 CET</b></div>
+                    <div class="contact-line"><span>Sitz</span><b>Speicherstadt 14 · 20457 Hamburg</b></div>
+                </div>
+            </div>
+            <form class="contact-form rv" onsubmit="event.preventDefault(); this.reset();">
+                <div class="form-row">
+                    <div class="field">
+                        <label for="f-name">Name</label>
+                        <input id="f-name" type="text" required placeholder="Ihr Name">
+                    </div>
+                    <div class="field">
+                        <label for="f-firm">Unternehmen</label>
+                        <input id="f-firm" type="text" placeholder="Optional">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field">
+                        <label for="f-mail">E-Mail</label>
+                        <input id="f-mail" type="email" required placeholder="name@firma.de">
+                    </div>
+                    <div class="field">
+                        <label for="f-tel">Telefon</label>
+                        <input id="f-tel" type="tel" placeholder="+49 …">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="f-metal">Metall &amp; Form</label>
+                    <select id="f-metal" required>
+                        <option value="" disabled selected>Bitte wählen…</option>
+                        <option>Kupfer · Kathoden</option>
+                        <option>Kupfer · Barren</option>
+                        <option>Silber · Barren</option>
+                        <option>Silber · Granulat</option>
+                        <option>Legierung · nach Zeichnung</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="f-msg">Anfrage</label>
+                    <textarea id="f-msg" required placeholder="Menge, Reinheit, Lieferziel …"></textarea>
+                </div>
+                <div class="form-foot">
+                    <small>Mit dem Absenden akzeptieren Sie unsere Datenverarbeitung gemäß DSGVO.</small>
+                    <button type="submit" class="btn"><span>Anfrage senden</span></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-foot">
+        <div class="wrap">
+            <div class="foot-grid">
+                <div class="foot-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-mark"><i>Q</i></span>
+                        <span class="logo-word"><b>QUANTUM</b><small>Metal Group</small></span>
+                    </a>
+                    <p>Handel und Raffination von Kupfer und Silber in institutioneller Qualität. Hamburger Traditionsunternehmen seit 1994.</p>
+                </div>
+                <div class="foot-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#metalle">Metalle</a></li>
+                        <li><a href="#prozess">Prozess</a></li>
+                        <li><a href="#produkte">Produkte</a></li>
+                        <li><a href="#logistik">Logistik</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Service</h4>
+                    <ul>
+                        <li><a href="#pruefung">Prüfung &amp; Assay</a></li>
+                        <li><a href="#kontakt">Anfrage</a></li>
+                        <li><a href="https://ebay.de" target="_blank">eBay Shop</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Standort</h4>
+                    <ul>
+                        <li><a href="#kontakt">Speicherstadt 14</a></li>
+                        <li><a href="#kontakt">20457 Hamburg</a></li>
+                        <li><a href="mailto:handel@quantum-metals.de">handel@quantum-metals.de</a></li>
+                        <li><a href="tel:+49402281740">+49 40 228 17 40</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-base">
+                <p>© 2026 QUANTUM Metal Group GmbH · Alle Rechte vorbehalten</p>
+                <a href="impressum.html">Impressum &amp; Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ——— header shrink ———
+        const head = document.getElementById('siteHead');
+        const onScroll = () => head.classList.toggle('scrolled', window.scrollY > 40);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // ——— parallax engine (multi-layer) ———
+        const layers = Array.from(document.querySelectorAll('[data-plx]'));
+        let lastY = -1;
+        function parallax() {
+            const vh = window.innerHeight;
+            const y = window.scrollY;
+            if (y === lastY) return;
+            lastY = y;
+            for (const el of layers) {
+                const speed = parseFloat(el.dataset.plx || '0');
+                const box = el.parentElement.getBoundingClientRect();
+                // distance of the section from viewport center, normalized
+                const delta = (box.top + box.height / 2 - vh / 2) * speed;
+                el.style.transform = 'translate3d(0,' + delta.toFixed(1) + 'px,0)';
+            }
+        }
+        window.addEventListener('scroll', parallax, { passive: true });
+        window.addEventListener('resize', parallax, { passive: true });
+        parallax();
+
+        // ——— credential rotator ———
+        const credLines = Array.from(document.querySelectorAll('.cred-line'));
+        const credBar = document.getElementById('credBar');
+        const credNow = document.getElementById('credNow');
+        let credIdx = 0, credTimer = null;
+        const CRED_MS = 6000;
+        function credShow(n) {
+            const cur = credLines[credIdx];
+            const next = credLines[(n + credLines.length) % credLines.length];
+            if (cur === next) return;
+            cur.classList.remove('on'); cur.classList.add('leaving');
+            setTimeout(() => cur.classList.remove('leaving'), 700);
+            next.classList.remove('leaving'); next.classList.add('on');
+            credIdx = (n + credLines.length) % credLines.length;
+            credNow.textContent = String(credIdx + 1).padStart(2, '0');
+            credBar.classList.remove('run'); void credBar.offsetWidth; credBar.classList.add('run');
+        }
+        function credAuto() {
+            clearInterval(credTimer);
+            credTimer = setInterval(() => credShow(credIdx + 1), CRED_MS);
+        }
+        document.getElementById('credNext').addEventListener('click', () => { credShow(credIdx + 1); credAuto(); });
+        document.getElementById('credPrev').addEventListener('click', () => { credShow(credIdx - 1); credAuto(); });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            credBar.classList.remove('run'); credBar.style.width = '100%';
+        } else {
+            credAuto();
+        }
+
+        // ——— mobile menu ———
+        const burger = document.getElementById('burger');
+        burger.addEventListener('click', () => head.classList.toggle('nav-open'));
+        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => head.classList.remove('nav-open')));
+
+        // ——— reveal on scroll ———
+        const io = new IntersectionObserver((entries) => {
+            for (const e of entries) {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            }
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+        // ——— immediate reveal for above-the-fold elements (fallback) ———
+        const vh0 = window.innerHeight;
+        document.querySelectorAll('.rv').forEach(el => {
+            if (el.getBoundingClientRect().top < vh0 * 0.92) el.classList.add('in');
+        });
+    </script>
+</body>
+</html>
