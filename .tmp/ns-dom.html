@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NORTHSTAR — Sternwarte des Edelmetalls · Feinsilber 999 · Polstern-Fonds</title>
+<meta name="description" content="NORTHSTAR — das private Observatorium des Edelmetallhandels. Feinsilber 999,0, Barren, Granulat und Erz, kartiert wie ein Sternbild. Navigation nach dem Polarstern-Prinzip: ein Fixpunkt, unverrückbar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23071219'/%3E%3Cpath d='M32 6l4.6 21.4L58 32l-21.4 4.6L32 58l-4.6-21.4L6 32l21.4-4.6z' fill='%23E7C86A'/%3E%3Ccircle cx='32' cy='32' r='3.5' fill='%23FBF2DC'/%3E%3C/svg%3E">
+<!--
+    NORTHSTAR · Website 28 · Konzept «Die Sternwarte»
+    Bewusst eigenständig gegenüber Websites 1–27 dieser Sammlung:
+
+    · DUNKEL-BLAU-SCHWARZES OBSERVATORIUM (Mitternachtsatlas) — kein Oxblood-Rot (25),
+      kein Violett/Plum (12/23), kein Arktis-Ice (14/18), kein Papier-Gallery-Hell (24/27)
+    · GOLDBERNSTEIN (Astronomengold #E7C86A) als EINZIGER warmer Akzent — kein Kupfer,
+      kein Messing-Doppelton wie 8/9/26
+    · CORMORANT UNICASE (kapitälchengleich) + JOST (Futura-Geometrie) + IBM PLEX MONO —
+      im Bestand nirgends in dieser Kombination
+    · KONSTELLATIONS-Layout: Edelmetalle als Sternbilder mit gezeichneter Verbindungslinie
+      (SVG) — einzigartig in der Sammlung
+    · Spektral-Leisten («Spektralbestimmung») statt Prozent-Ringen oder Tabellen
+    · Lebender Sternenhimmel: Canvas-Funkeln + driftende Meteore (nur hier)
+    · Parallax auf 3 Ebenen (Sterne / Nebel / Schleier) + MAUS-Parallax auf dem Himmel
+    · Der «Beobachter»: Rotation folgt langsam dem Scrollen (Pointer-Element, einzigartig)
+    · RA/DE-Koordinaten-Mono-Notation alsTypografisches Motiv
+    · Bilder: reale, freie Aufnahmen von Wikimedia Commons (Silberbarren, Silberkristalle,
+      Kongsberg-Natursilber, ESO-Milchstraße, ESO-Lagunennebel) — siehe images/CREDITS.txt
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;600;700&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&amp;display=swap" rel="stylesheet">
+<style>
+/* ============================== RESET ============================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --obsidian:  #050B13;   /* Astroboden */
+    --obsidian-2:#081521;   /* erhobenes Panel */
+    --deep:      #0B2033;   /* Tiefblau des Nachthimmels */
+    --deep-2:    #102A42;
+    --gold:      #E7C86A;   /* Astronomengold — Hauptakzent */
+    --gold-soft: #F4E5B8;   /* heller Glanz */
+    --gold-deep: #A87F2C;   /* gealtertes Gold */
+    --starlight: #F4EFE3;   /* Sternenlicht (Text) */
+    --mist:      #9FB2C1;   /* Nebelgrau (Sekundärtext) */
+    --faint:     #61788C;   /* ferne Sterne */
+    --line:      rgba(231, 200, 106, 0.22);
+    --line-soft: rgba(231, 200, 106, 0.11);
+    --line-ice:  rgba(159, 178, 193, 0.14);
+    --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    --disp: 'Cormorant Unicase', 'Times New Roman', serif;
+    --sans: 'Jost', 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'Consolas', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--sans);
+    font-weight: 300;
+    background: var(--obsidian);
+    color: var(--starlight);
+    line-height: 1.75;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--gold); color: var(--obsidian); }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+h1, h2, h3, .disp { font-family: var(--disp); font-weight: 500; line-height: 1.08; }
+.mono { font-family: var(--mono); }
+
+.wrap { width: min(1240px, 92vw); margin: 0 auto; position: relative; z-index: 2; }
+
+/* ============================== HIMMEL (Feste Parallax-Ebenen) ============================== */
+.skyrim {
+    position: fixed; inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.skyrim--stars {
+    position: absolute; inset: -12% -6%;
+    background: url('images/stars-deep.jpg') center 30% / cover no-repeat;
+    filter: saturate(0.82) brightness(0.62);
+    will-change: transform;
+}
+.skyrim--stars::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+        radial-gradient(120% 85% at 50% -10%, rgba(5, 11, 19, 0) 40%, rgba(5, 11, 19, 0.88) 100%),
+        linear-gradient(180deg, rgba(5, 11, 19, 0.62) 0%, rgba(5, 11, 19, 0.35) 45%, rgba(5, 11, 19, 0.92) 100%);
+}
+.skyrim--neb {
+    position: absolute; inset: 0;
+    background: url('images/nebula-lagoon.jpg') center 60% / cover no-repeat;
+    opacity: 0.10;
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+.skyrim--veil {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(60% 42% at 78% 8%, rgba(231, 200, 106, 0.10), transparent 65%),
+        radial-gradient(46% 38% at 14% 82%, rgba(16, 42, 66, 0.5), transparent 70%);
+    will-change: transform;
+}
+/* AABB-Gitter: Rektaszension / Deklination (astro navigation motive) */
+.graticule {
+    position: fixed; inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, var(--line-ice) 1px, transparent 1px) 0 0 / 25vw 100%,
+        linear-gradient(180deg, var(--line-ice) 1px, transparent 1px) 0 0 / 100% 33vh;
+    mask-image: radial-gradient(90% 70% at 50% 40%, rgba(0,0,0,.75), transparent 90%);
+    -webkit-mask-image: radial-gradient(90% 70% at 50% 40%, rgba(0,0,0,.75), transparent 90%);
+    opacity: .5;
+}
+
+/* ============================== STERNEN-CANVAS (Funkeln + Meteore) ============================== */
+.veil {
+    position: fixed; inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ============================== DER BEOBACHTER (Pointer) ============================== */
+.observer {
+    position: fixed;
+    right: clamp(14px, 3.4vw, 52px);
+    top: 50%;
+    width: 108px; height: 108px;
+    transform: translateY(-50%);
+    z-index: 40;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+}
+.observer svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.observer .ring { animation: obsIn 1.4s var(--ease) .6s both; }
+.observer .reticle { transform-origin: 50% 50%; will-change: transform; }
+.observer .core { fill: var(--gold-soft); filter: drop-shadow(0 0 8px rgba(231, 200, 106, .8)); }
+@keyframes obsIn { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+
+/* ============================== FORTSCHRITT (Sternenposition) ============================== */
+.progress {
+    position: fixed; left: clamp(14px, 3vw, 42px); top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    pointer-events: auto;
+}
+.progress::before {
+    content: ''; position: absolute; top: -34px; bottom: -34px; left: 50%;
+    width: 1px; background: linear-gradient(180deg, transparent, var(--line-ice) 15%, var(--line-ice) 85%, transparent);
+}
+.progress-dot {
+    width: 8px; height: 8px;
+    transform: rotate(45deg);
+    border: 1px solid var(--faint);
+    background: transparent;
+    display: block;
+    transition: background .35s, border-color .35s, box-shadow .35s;
+}
+.progress-dot:hover, .progress-dot.on {
+    border-color: var(--gold);
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(231, 200, 106, .55);
+}
+.progress-alt {
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: .52em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+    background: var(--obsidian);
+    padding: 10px 0;
+}
+
+/* ============================== KOPFZEILE ============================== */
+.chartroom {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+    padding: 22px clamp(20px, 4.4vw, 58px);
+    border-bottom: 1px solid transparent;
+    transition: padding .45s var(--ease), background .45s, border-color .45s, box-shadow .45s;
+}
+.chartroom.scrolled {
+    padding: 12px clamp(20px, 4.4vw, 58px);
+    background: rgba(5, 11, 19, 0.86);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom-color: var(--line-soft);
+    box-shadow: 0 14px 44px rgba(0, 0, 0, .38);
+}
+.brand {
+    display: flex; align-items: center; gap: 15px;
+    text-decoration: none;
+}
+.brand-star { width: 40px; height: 40px; flex: 0 0 auto; filter: drop-shadow(0 0 10px rgba(231,200,106,.4)); transition: transform .7s var(--ease); }
+.brand:hover .brand-star { transform: rotate(90deg); }
+.brand-word { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-word b {
+    font-family: var(--disp);
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: .34em;
+    color: var(--gold-soft);
+}
+.brand-word i {
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: .44em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-top: 3px;
+}
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 38px); }
+.nav a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    position: relative;
+    padding: 6px 0;
+    transition: color .3s;
+}
+.nav a::after {
+    content: '';
+    position: absolute; left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .45s var(--ease);
+}
+.nav a:hover { color: var(--gold-soft); }
+.nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.ephemeris-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--faint);
+    border: 1px solid var(--line-ice);
+    padding: 8px 14px;
+    white-space: nowrap;
+}
+@media (max-width: 900px) { .nav, .ephemeris-time { display: none; } }
+.burger {
+    display: none;
+    width: 42px; height: 42px;
+    background: transparent;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    position: relative;
+}
+.burger span, .burger span::before, .burger span::after {
+    content: ''; position: absolute; left: 11px; right: 11px; height: 1px;
+    background: var(--gold-soft);
+    transition: transform .4s var(--ease), opacity .3s;
+}
+.burger span { top: 50%; }
+.burger span::before { top: -7px; }
+.burger span::after { top: 7px; }
+.burger.open span { background: transparent; }
+.burger.open span::before { transform: translateY(7px) rotate(45deg); }
+.burger.open span::after { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+    position: fixed; inset: 0; z-index: 90;
+    background: rgba(5, 11, 19, .96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: grid; place-items: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity .45s var(--ease), visibility .45s;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu nav { display: flex; flex-direction: column; gap: 30px; text-align: center; }
+.mobile-menu a {
+    font-family: var(--disp);
+    font-size: clamp(24px, 6vw, 34px);
+    color: var(--starlight);
+    text-decoration: none;
+    letter-spacing: .12em;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu .mm-coord { font-family: var(--mono); font-size: 10px; letter-spacing: .5em; color: var(--faint); }
+
+/* ============================== STERNBILD-HERO ============================== */
+.observatory {
+    position: relative;
+    z-index: 2;
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+    padding: clamp(120px, 16vh, 190px) 0 clamp(70px, 9vh, 110px);
+}
+.observatory .wrap { display: grid; gap: 26px; }
+.scope-tag {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    animation: riseIn 1s var(--ease) .15s forwards;
+}
+.scope-tag::before { content: ''; width: 44px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.scope-tag::after { content: '✦'; font-size: 12px; letter-spacing: 0; color: var(--gold-soft); }
+
+.hero-title {
+    font-size: clamp(52px, 10.5vw, 148px);
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--starlight);
+    line-height: .98;
+    display: flex; flex-wrap: wrap;
+}
+.hero-title .glyph {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(38px) rotate(6deg);
+    animation: glyphIn 1.05s var(--ease) forwards;
+    background: linear-gradient(180deg, var(--starlight) 58%, var(--gold) 130%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes glyphIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
+
+.hero-sub {
+    max-width: 620px;
+    font-size: clamp(16px, 1.6vw, 19px);
+    font-weight: 300;
+    color: var(--mist);
+    opacity: 0;
+    animation: riseIn 1s var(--ease) .85s forwards;
+}
+.hero-sub b { color: var(--gold-soft); font-weight: 500; }
+@keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-coords {
+    display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 56px);
+    opacity: 0;
+    animation: riseIn 1s var(--ease) 1.05s forwards;
+}
+.coord { display: flex; flex-direction: column; gap: 5px; }
+.coord b {
+    font-family: var(--disp);
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 500;
+    color: var(--gold-soft);
+    letter-spacing: .06em;
+}
+.coord i { font-style: normal; font-family: var(--mono); font-size: 9.5px; letter-spacing: .38em; text-transform: uppercase; color: var(--faint); }
+
+.hero-cta {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    margin-top: 8px;
+    opacity: 0;
+    animation: riseIn 1s var(--ease) 1.25s forwards;
+}
+.btn {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 17px 32px;
+    overflow: hidden;
+    transition: color .4s, border-color .4s, background .4s;
+}
+.btn--gold {
+    color: var(--obsidian);
+    background: linear-gradient(135deg, var(--gold-soft), var(--gold) 55%, var(--gold-deep));
+    border: 1px solid var(--gold);
+    font-weight: 500;
+}
+.btn--gold:hover { box-shadow: 0 0 34px rgba(231, 200, 106, .38); transform: translateY(-2px); }
+.btn--line { color: var(--gold-soft); border: 1px solid var(--line); }
+.btn--line::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .5s var(--ease);
+    z-index: -1;
+}
+.btn--line:hover { color: var(--obsidian); border-color: var(--gold); }
+.btn--line:hover::before { transform: scaleX(1); transform-origin: left; }
+.btn--gold:active, .btn--line:active { transform: translateY(0); }
+.btn .arr { transition: transform .4s var(--ease); }
+.btn:hover .arr { transform: translateX(6px); }
+
+/* scroll-Weisung: fallender Stern */
+.scrollstar {
+    position: absolute;
+    left: 50%; bottom: 30px;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+    color: var(--faint);
+    opacity: 0;
+    animation: riseIn 1s var(--ease) 1.6s forwards;
+    z-index: 3;
+}
+.scrollstar .trail {
+    width: 1px; height: 52px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    position: relative;
+    overflow: hidden;
+}
+.scrollstar .trail::after {
+    content: '';
+    position: absolute; left: 0; top: -16px;
+    width: 1px; height: 16px;
+    background: var(--gold-soft);
+    animation: fall 2.2s var(--ease) infinite;
+}
+@keyframes fall { 0% { top: -16px; opacity: 0; } 35% { opacity: 1; } 100% { top: 52px; opacity: 0; } }
+
+/* ============================== SEKTIONEN ============================== */
+.sec { position: relative; z-index: 2; padding: clamp(90px, 13vh, 160px) 0; }
+
+.sec-head { display: grid; gap: 18px; margin-bottom: clamp(44px, 7vh, 80px); max-width: 760px; }
+.sec-tag {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .5em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.sec-tag::before { content: ''; width: 34px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.sec-tag .ra-de { color: var(--faint); letter-spacing: .3em; }
+.sec-title { font-size: clamp(34px, 5vw, 58px); font-weight: 500; letter-spacing: .04em; color: var(--starlight); }
+.sec-lead { color: var(--mist); font-size: clamp(15.5px, 1.5vw, 18px); max-width: 640px; }
+
+/* ---------- 1 · FIRMAMENT: Edelmetalle als Sternbilder ---------- */
+.constellation { position: relative; display: grid; gap: clamp(46px, 8vh, 92px); }
+.constellation::before {
+    content: '';
+    position: absolute; left: clamp(26px, 4vw, 58px); top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--line) 6%, var(--line) 94%, transparent);
+}
+.constel-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: clamp(84px, 10vw, 128px) 1fr;
+    gap: clamp(22px, 4vw, 54px);
+    align-items: start;
+}
+.constel-row .node {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding-top: 8px;
+}
+.node-orb {
+    width: 16px; height: 16px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 5px rgba(231, 200, 106, .12), 0 0 24px rgba(231, 200, 106, .5);
+    transition: box-shadow .4s;
+}
+.constel-row:hover .node-orb { box-shadow: 0 0 0 9px rgba(231, 200, 106, .16), 0 0 34px rgba(231, 200, 106, .75); }
+.node-mag { font-family: var(--mono); font-size: 9px; letter-spacing: .3em; color: var(--faint); }
+.metal-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(24px, 3.6vw, 52px);
+    background: linear-gradient(160deg, rgba(11, 32, 51, .66), rgba(5, 11, 19, .82));
+    border: 1px solid var(--line-soft);
+    padding: clamp(26px, 3.6vw, 48px);
+    overflow: hidden;
+    transition: border-color .5s, transform .6s var(--ease), box-shadow .6s;
+}
+.metal-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(48% 68% at 88% 0%, rgba(231, 200, 106, .10), transparent 62%);
+    opacity: 0;
+    transition: opacity .6s;
+}
+.constel-row:hover .metal-card { border-color: var(--line); transform: translateY(-5px); box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
+.constel-row:hover .metal-card::before { opacity: 1; }
+.metal-info { position: relative; z-index: 1; display: grid; gap: 14px; align-content: start; }
+.metal-eyebrow { font-family: var(--mono); font-size: 9.5px; letter-spacing: .44em; text-transform: uppercase; color: var(--gold); }
+.metal-name { font-family: var(--disp); font-size: clamp(26px, 3vw, 38px); font-weight: 500; color: var(--gold-soft); letter-spacing: .05em; }
+.metal-formula { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: .18em; }
+.metal-desc { color: var(--mist); font-size: 15.5px; max-width: 52ch; }
+.metal-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--mist);
+    border: 1px solid var(--line-ice);
+    padding: 7px 13px;
+    transition: border-color .3s, color .3s;
+}
+.constel-row:hover .chip { border-color: var(--line); color: var(--gold-soft); }
+.metal-visual { position: relative; z-index: 1; min-height: 220px; }
+.metal-visual figure { position: relative; height: 100%; overflow: hidden; border: 1px solid var(--line-ice); }
+.metal-visual img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.05); transition: transform 1.1s var(--ease), filter .6s; }
+.constel-row:hover .metal-visual img { transform: scale(1.06); filter: saturate(1) contrast(1.08); }
+.metal-visual figcaption {
+    position: absolute; left: 0; bottom: 0; right: 0;
+    display: flex; justify-content: space-between; gap: 10px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--mist);
+    padding: 12px 14px;
+    background: linear-gradient(0deg, rgba(5, 11, 19, .88), transparent);
+}
+
+/* ---------- 2 · NEBELKAMMER (Parallax-Band) ---------- */
+.nebelkammer {
+    position: relative;
+    padding: clamp(110px, 18vh, 210px) 0;
+    background: url('images/nebula-lagoon.jpg') center 42% / cover no-repeat fixed;
+}
+.nebelkammer::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, var(--obsidian) 0%, rgba(5, 11, 19, .55) 30%, rgba(5, 11, 19, .62) 70%, var(--obsidian) 100%);
+}
+.nebelkammer .wrap { position: relative; z-index: 1; display: grid; gap: 26px; justify-items: center; text-align: center; }
+.neb-quote {
+    font-family: var(--disp);
+    font-size: clamp(28px, 4.6vw, 54px);
+    font-weight: 500;
+    letter-spacing: .05em;
+    color: var(--starlight);
+    max-width: 21ch;
+    line-height: 1.22;
+}
+.neb-quote em { font-style: normal; color: var(--gold); }
+.neb-sub { font-family: var(--mono); font-size: 11px; letter-spacing: .4em; text-transform: uppercase; color: var(--mist); }
+.neb-sub b { color: var(--gold); font-weight: 400; }
+
+/* ---------- 3 · SPEKTRALBESTIMMUNG ---------- */
+.spectral { display: grid; gap: clamp(14px, 2.6vh, 22px); max-width: 900px; }
+.spectral--row { display: grid; grid-template-columns: minmax(120px, 200px) 1fr minmax(64px, 90px); align-items: center; gap: clamp(16px, 3vw, 34px); }
+.spectral--label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--mist); }
+.spectral--label b { display: block; font-family: var(--disp); font-size: 19px; font-weight: 500; letter-spacing: .1em; color: var(--gold-soft); margin-bottom: 2px; }
+.spectral--bar {
+    position: relative;
+    height: 8px;
+    background: rgba(159, 178, 193, .1);
+    border: 1px solid var(--line-ice);
+    overflow: hidden;
+}
+.spectral--fill {
+    position: absolute; inset: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold) 55%, var(--gold-soft));
+    box-shadow: 0 0 16px rgba(231, 200, 106, .45);
+    transition: transform 1.5s var(--ease);
+}
+.spectral--row.lit .spectral--fill { transform: scaleX(var(--w, .5)); }
+.spectral--val { font-family: var(--mono); font-size: 13px; color: var(--gold); text-align: right; letter-spacing: .12em; }
+.spectral-note { margin-top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+
+/* ---------- 4 · ATELIER (Split) ---------- */
+.atelier {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(30px, 5vw, 80px);
+    align-items: center;
+}
+.atelier-visual { position: relative; }
+.atelier-visual .stack { position: relative; display: grid; }
+.atelier-visual img { width: 100%; height: auto; border: 1px solid var(--line-ice); filter: saturate(.92); }
+.atelier-visual .plate-a { width: 86%; justify-self: start; }
+.atelier-visual .plate-b {
+    width: 58%;
+    justify-self: end;
+    margin-top: -22%;
+    border: 1px solid var(--line);
+    box-shadow: 0 34px 80px rgba(0, 0, 0, .6);
+}
+.atelier-coord {
+    position: absolute; right: -6px; top: -26px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: .4em;
+    color: var(--gold);
+    writing-mode: vertical-rl;
+}
+.atelier-info { display: grid; gap: 22px; }
+.feature { display: grid; grid-template-columns: 30px 1fr; gap: 18px; align-items: start; padding: 18px 0; border-bottom: 1px solid var(--line-soft); }
+.feature:last-child { border-bottom: none; }
+.feature-glyph {
+    font-family: var(--mono);
+    color: var(--gold);
+    font-size: 13px;
+    border: 1px solid var(--line);
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    transform: rotate(45deg);
+}
+.feature-glyph span { transform: rotate(-45deg); }
+.feature h3 { font-family: var(--disp); font-weight: 500; font-size: 20px; letter-spacing: .08em; color: var(--gold-soft); margin-bottom: 5px; }
+.feature p { color: var(--mist); font-size: 15px; }
+
+/* ---------- 5 · KABINETT (Platten-Galerie) ---------- */
+.kabinett { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.8vw, 24px); }
+.plate { position: relative; overflow: hidden; border: 1px solid var(--line-ice); background: var(--obsidian-2); }
+.plate img { width: 100%; height: clamp(280px, 34vw, 430px); object-fit: cover; filter: saturate(.88) contrast(1.04); transition: transform 1.2s var(--ease), filter .7s; }
+.plate:hover img { transform: scale(1.07); filter: saturate(1) contrast(1.08); }
+.plate figcaption {
+    position: absolute; inset: auto 0 0 0;
+    padding: 44px 18px 16px;
+    background: linear-gradient(0deg, rgba(5, 11, 19, .92), transparent);
+    display: grid; gap: 3px;
+}
+.plate b { font-family: var(--disp); font-weight: 500; font-size: 17px; letter-spacing: .12em; color: var(--gold-soft); }
+.plate i { font-style: normal; font-family: var(--mono); font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: var(--faint); }
+.plate::after {
+    content: '';
+    position: absolute; top: 12px; right: 12px;
+    width: 9px; height: 9px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity .4s;
+}
+.plate:hover::after { opacity: 1; }
+
+/* ---------- 6 · EPHIMERIDEN (Zahlen in Umlaufbahn) ---------- */
+.eph-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 3vw, 40px); }
+.eph {
+    position: relative;
+    text-align: center;
+    padding: clamp(30px, 4vw, 52px) clamp(18px, 2.6vw, 36px);
+    border: 1px solid var(--line-soft);
+    background: linear-gradient(170deg, rgba(11, 32, 51, .5), rgba(5, 11, 19, .75));
+    overflow: hidden;
+}
+.eph::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    width: 70px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.eph-num { font-family: var(--disp); font-size: clamp(42px, 5vw, 64px); font-weight: 500; color: var(--gold-soft); line-height: 1; letter-spacing: .04em; }
+.eph-num small { font-size: .45em; color: var(--gold); letter-spacing: .1em; }
+.eph-label { margin-top: 12px; font-family: var(--mono); font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: var(--mist); }
+.eph-sub { margin-top: 8px; font-size: 14px; color: var(--faint); }
+
+/* ---------- 7 · VERBINDUNG (Kontakt) ---------- */
+.verbindung { text-align: center; }
+.verbindung .wrap { display: grid; gap: 26px; justify-items: center; }
+.verbindung .scope-tag::before { background: linear-gradient(90deg, transparent, var(--gold)); }
+.verbindung .sec-title { max-width: 18ch; }
+.verbindung .sec-lead { max-width: 56ch; }
+.verbindung form {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: min(720px, 100%);
+    text-align: left;
+}
+.verbindung .field { display: grid; gap: 8px; }
+.verbindung .field.full { grid-column: 1 / -1; }
+.verbindung label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .4em; text-transform: uppercase; color: var(--faint); }
+.verbindung input, .verbindung select, .verbindung textarea {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--starlight);
+    background: rgba(11, 32, 51, .4);
+    border: 1px solid var(--line-ice);
+    padding: 15px 17px;
+    outline: none;
+    transition: border-color .3s, background .3s;
+    width: 100%;
+    border-radius: 0;
+}
+.verbindung select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%); background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.verbindung textarea { min-height: 120px; resize: vertical; }
+.verbindung input:focus, .verbindung select:focus, .verbindung textarea:focus { border-color: var(--gold); background: rgba(11, 32, 51, .65); }
+.verbindung .form-cta { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.form-note { font-family: var(--mono); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+
+/* ============================== FUSSZEILE ============================== */
+.fertigung {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid var(--line-soft);
+    background: rgba(5, 11, 19, .8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: clamp(50px, 8vh, 90px) 0 34px;
+}
+.fertigung-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: clamp(28px, 4vw, 60px);
+    margin-bottom: 46px;
+}
+.fertigung h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .44em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; font-weight: 400; }
+.fertigung p { color: var(--mist); font-size: 14.5px; max-width: 40ch; }
+.fertigung ul { list-style: none; display: grid; gap: 10px; }
+.fertigung ul a { color: var(--mist); text-decoration: none; font-size: 14.5px; display: inline-flex; align-items: center; gap: 10px; transition: color .3s, gap .3s var(--ease); }
+.fertigung ul a::before { content: '✦'; font-size: 9px; color: var(--gold-deep); transition: color .3s; }
+.fertigung ul a:hover { color: var(--gold-soft); gap: 14px; }
+.fertigung ul a:hover::before { color: var(--gold); }
+.fertigung-base {
+    border-top: 1px solid var(--line-soft);
+    padding-top: 24px;
+    display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+.fertigung-base a { color: var(--mist); text-decoration: none; transition: color .3s; }
+.fertigung-base a:hover { color: var(--gold); }
+
+/* ============================== REVEALS ============================== */
+.rv { opacity: 0; transform: translateY(34px); transition: opacity 1s var(--ease), transform 1s var(--ease); will-change: opacity, transform; }
+.rv--left { transform: translateX(-40px); }
+.rv--right { transform: translateX(40px); }
+.rv--zoom { transform: scale(.94); }
+.rv.on { opacity: 1; transform: none; }
+.rv[data-d="1"] { transition-delay: .08s; }
+.rv[data-d="2"] { transition-delay: .16s; }
+.rv[data-d="3"] { transition-delay: .24s; }
+.rv[data-d="4"] { transition-delay: .32s; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; }
+}
+
+/* ============================== RESPONSIVE ============================== */
+@media (max-width: 1080px) {
+    .kabinett { grid-template-columns: repeat(2, 1fr); }
+    .metal-card { grid-template-columns: 1fr; }
+    .metal-visual { min-height: 240px; }
+    .observer { display: none; }
+}
+@media (max-width: 900px) {
+    .atelier { grid-template-columns: 1fr; }
+    .atelier-visual { order: -1; }
+    .eph-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+    .fertigung-grid { grid-template-columns: 1fr; gap: 34px; }
+    .verbindung form { grid-template-columns: 1fr; }
+    .nebelkammer { background-attachment: scroll; }
+    .progress { display: none; }
+}
+@media (max-width: 640px) {
+    .kabinett { grid-template-columns: 1fr; }
+    .constellation::before { left: 20px; }
+    .constel-row { grid-template-columns: 40px 1fr; }
+    .spectral--row { grid-template-columns: 1fr; gap: 8px; }
+    .spectral--val { text-align: left; }
+    .burger { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= Parallax-Himmel (3 Ebenen) ================= -->
+<div class="skyrim" aria-hidden="true">
+    <div class="skyrim--stars" data-par="0.16" style="transform: translate3d(0px, 0px, 0px);"></div>
+    <div class="skyrim--neb" data-par="0.30" style="transform: translate3d(0px, 0px, 0px);"></div>
+    <div class="skyrim--veil" data-par="0.44" style="transform: translate3d(0px, 0px, 0px);"></div>
+</div>
+<div class="graticule" aria-hidden="true"></div>
+<canvas class="veil" id="veil" aria-hidden="true" width="764" height="485"></canvas>
+
+<!-- ================= Der Beobachter ================= -->
+<div class="observer" aria-hidden="true">
+    <svg viewBox="0 0 108 108">
+        <g class="reticle" id="reticle" style="transform: rotate(0deg);">
+            <circle cx="54" cy="54" r="40" fill="none" stroke="rgba(231,200,106,.5)" stroke-width="1" stroke-dasharray="3 7"></circle>
+            <path d="M54 4v14M54 90v14M4 54h14M90 54h14" stroke="rgba(159,178,193,.55)" stroke-width="1"></path>
+            <path d="M17 17l9 9M91 17l-9 9M17 91l9-9M91 91l-9-9" stroke="rgba(159,178,193,.3)" stroke-width="1"></path>
+        </g>
+        <circle class="core" cx="54" cy="54" r="4"></circle>
+    </svg>
+</div>
+
+<!-- ================= Fortschritt ================= -->
+<nav class="progress" aria-label="Abschnitte">
+    <span class="progress-alt">NAV·STAR</span>
+    <a class="progress-dot on" href="#observatory" title="Observatorium"></a>
+    <a class="progress-dot" href="#firmament" title="Firmament"></a>
+    <a class="progress-dot" href="#spektral" title="Spektral"></a>
+    <a class="progress-dot" href="#kabinett" title="Kabinett"></a>
+    <a class="progress-dot" href="#verbindung" title="Verbindung"></a>
+</nav>
+
+<!-- ================= Kopfzeile ================= -->
+<header class="chartroom" id="chartroom">
+    <a class="brand" href="#observatory">
+        <svg class="brand-star" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 2l3.4 14.6L38 20l-14.6 3.4L20 38l-3.4-14.6L2 20l14.6-3.4z" fill="none" stroke="#E7C86A" stroke-width="1.4"></path>
+            <path d="M20 8l2.2 9.8L32 20l-9.8 2.2L20 32l-2.2-9.8L8 20l9.8-2.2z" fill="#F4E5B8"></path>
+        </svg>
+        <span class="brand-word"><b>NORTHSTAR</b><i>Edelmetall-Observatorium</i></span>
+    </a>
+    <nav class="nav">
+        <a href="#firmament">Firmament</a>
+        <a href="#spektral">Spektrum</a>
+        <a href="#atelier">Atelier</a>
+        <a href="#kabinett">Kabinett</a>
+        <a href="#verbindung">Verbindung</a>
+    </nav>
+    <div class="ephemeris-time" id="ephTime">ST·11:02:05</div>
+    <button class="burger" id="burger" aria-label="Menü öffnen"><span></span></button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <nav>
+        <span class="mm-coord">RA 02h 31m · DE +89°</span>
+        <a href="#firmament">Firmament</a>
+        <a href="#spektral">Spektrum</a>
+        <a href="#atelier">Atelier</a>
+        <a href="#kabinett">Kabinett</a>
+        <a href="#verbindung">Verbindung</a>
+    </nav>
+</div>
+
+<main>
+
+<!-- ================= HERO · DAS OBSERVATORIUM ================= -->
+<section class="observatory" id="observatory">
+    <div class="wrap">
+        <p class="scope-tag">Sternwarte des Edelmetalls · Feinsilber 999,0</p>
+        <h1 class="hero-title" id="heroTitle" aria-label="NORTHSTAR"><span class="glyph" style="animation-delay: 0.25s;">N</span><span class="glyph" style="animation-delay: 0.305s;">O</span><span class="glyph" style="animation-delay: 0.36s;">R</span><span class="glyph" style="animation-delay: 0.415s;">T</span><span class="glyph" style="animation-delay: 0.47s;">H</span><span class="glyph" style="animation-delay: 0.525s;">S</span><span class="glyph" style="animation-delay: 0.58s;">T</span><span class="glyph" style="animation-delay: 0.635s;">A</span><span class="glyph" style="animation-delay: 0.69s;">R</span></h1>
+        <p class="hero-sub">Der Polarstern steht <b>unverrückbar</b> — und genau daraus bezieht er seine Kraft.
+        NORTHSTAR kartiert Feinsilber, Barren und Erz wie ein Sternbild: <b>fest verzeichnet, assayerprüft,
+        auf den Zehntel-Promille genau</b>. Ein Fixpunkt für Ihr Vermögen.</p>
+        <div class="hero-coords">
+            <div class="coord"><b>999,0</b><i>Feinheit Ag</i></div>
+            <div class="coord"><b>02h 31m</b><i>RA · Polarstern</i></div>
+            <div class="coord"><b>+89° 16′</b><i>Deklination</i></div>
+            <div class="coord"><b>LBMA</b><i>Preisverzeichnis</i></div>
+        </div>
+        <div class="hero-cta">
+            <a class="btn btn--gold" href="#firmament">Das Firmament betreten <span class="arr">→</span></a>
+            <a class="btn btn--line" href="#verbindung">Kontakt aufnehmen</a>
+        </div>
+    </div>
+    <div class="scrollstar" aria-hidden="true"><span>Navigieren</span><span class="trail"></span></div>
+</section>
+
+<!-- ================= 1 · FIRMAMENT ================= -->
+<section class="sec" id="firmament">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <p class="sec-tag">Kapitel I <span class="ra-de">· RA 02h 31m 49s</span></p>
+            <h2 class="sec-title">Das Firmament der Metalle</h2>
+            <p class="sec-lead">Fünf Himmelskörper, fünf Handelsformen des Silbers — jede mit fester
+            Position, dokumentierter Reinheit und sichtbarem Licht. Keine Kartierung ohne Beleg.</p>
+        </div>
+
+        <div class="constellation">
+
+            <article class="constel-row rv rv--left">
+                <div class="node"><span class="node-orb"></span><span class="node-mag">MAG 0,1</span></div>
+                <div class="metal-card">
+                    <div class="metal-info">
+                        <p class="metal-eyebrow">Sternbild I · Der Hauptstern</p>
+                        <h3 class="metal-name">Feinsilber-Barren</h3>
+                        <p class="metal-formula">AG · 999,0 / 1000 · LG 400 oz ≙ 12,44 kg</p>
+                        <p class="metal-desc">Der Leuchtfeuer-Barren in Good-Delivery-Stärke. Gegossen, gelocht,
+                        registriert — mit Seriennummer und Assay-Zeichen. Der Hauptstern unserer Karte:
+                        alles andere navigiert nach ihm.</p>
+                        <div class="metal-facts">
+                            <span class="chip">Good Delivery</span>
+                            <span class="chip">Gussfrisch</span>
+                            <span class="chip">Registriert</span>
+                        </div>
+                    </div>
+                    <div class="metal-visual">
+                        <figure>
+                            <img src="images/silver-bar-top.jpg" alt="1000-Unzen-Feinsilberbarren von oben, gestempelt und registriert" loading="lazy">
+                            <figcaption><span>LG-BARREN · 400 OZ</span><span>AG 999,0</span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+            <article class="constel-row rv rv--right">
+                <div class="node"><span class="node-orb"></span><span class="node-mag">MAG 0,6</span></div>
+                <div class="metal-card">
+                    <div class="metal-info">
+                        <p class="metal-eyebrow">Sternbild II · Der Doppelstern</p>
+                        <h3 class="metal-name">Assay-Karte &amp; Chip</h3>
+                        <p class="metal-formula">AG · 999,9 FINE · 1 OZ TROY</p>
+                        <p class="metal-desc">Der Doppelstern: Barren und Beglaubigung, untrennbar verbunden.
+                        Versiegelte Assay-Karte mit Chargen-ID — der kleinste handelsfähige Stern
+                        im System, ideal für den Einstieg in die Karte.</p>
+                        <div class="metal-facts">
+                            <span class="chip">Versiegelt</span>
+                            <span class="chip">Chargen-ID</span>
+                            <span class="chip">1 oz TR</span>
+                        </div>
+                    </div>
+                    <div class="metal-visual">
+                        <figure>
+                            <img src="images/silver-bar-ingot.jpg" alt="Feinsilber-Chip-Barren mit versiegelter Assay-Karte" loading="lazy">
+                            <figcaption><span>ASSAY-KARTE</span><span>AG 999,9</span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+            <article class="constel-row rv rv--left">
+                <div class="node"><span class="node-orb"></span><span class="node-mag">MAG 1,2</span></div>
+                <div class="metal-card">
+                    <div class="metal-info">
+                        <p class="metal-eyebrow">Sternbild III · Der Kristallhaufen</p>
+                        <h3 class="metal-name">Silber-Kristallstufen</h3>
+                        <p class="metal-formula">AG · NATIV · DRUSEN &amp; DENDRITEN</p>
+                        <p class="metal-desc">Wo Silber nicht gegossen, sondern gewachsen ist: dendritische
+                        Kristallstufen von museumaler Klarheit. Jede Stufe ein Unikat — verzeichnet wie ein
+                        veränderlicher Stern, un wiedholbar wie sein Licht.</p>
+                        <div class="metal-facts">
+                            <span class="chip">Unikat</span>
+                            <span class="chip">Sammlerstufe</span>
+                            <span class="chip">Museumstauglich</span>
+                        </div>
+                    </div>
+                    <div class="metal-visual">
+                        <figure>
+                            <img src="images/silver-crystals.jpg" alt="Gewachsene Silberkristalle als Sammlerstufe" loading="lazy">
+                            <figcaption><span>KRISTALLSTUFE</span><span>NATIV-AG</span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+            <article class="constel-row rv rv--right">
+                <div class="node"><span class="node-orb"></span><span class="node-mag">MAG 1,8</span></div>
+                <div class="metal-card">
+                    <div class="metal-info">
+                        <p class="metal-eyebrow">Sternbild IV · Die Nebel-Masse</p>
+                        <h3 class="metal-name">Industrie-Granulat</h3>
+                        <p class="metal-formula">AG · 999,0 · KORN 2–5 MM · GROSSHANDEL</p>
+                        <p class="metal-desc">Der stille Leuchter der Industrie: Granulat für Elektronik,
+                        Photovoltaik und Katalyse. Gehandelt in Tonnage, geliefert in bewährten
+                        Behältnissen — die unsichtbare Masse hinter sichtbaren Sternen.</p>
+                        <div class="metal-facts">
+                            <span class="chip">Tonnage</span>
+                            <span class="chip">Industrie</span>
+                            <span class="chip">Stapelbar</span>
+                        </div>
+                    </div>
+                    <div class="metal-visual">
+                        <figure>
+                            <img src="images/silver-bar-top.jpg" alt="Industrielles Silber-Handelsformat, Detailaufnahme" loading="lazy">
+                            <figcaption><span>HANDELSFORMAT</span><span>AG 999,0</span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+            <article class="constel-row rv rv--left">
+                <div class="node"><span class="node-orb"></span><span class="node-mag">MAG 2,4</span></div>
+                <div class="metal-card">
+                    <div class="metal-info">
+                        <p class="metal-eyebrow">Sternbild V · Der Ur-Stern</p>
+                        <h3 class="metal-name">Natursilber-Erz</h3>
+                        <p class="metal-formula">AG · GESTEIN · KONGSBERG-TYP</p>
+                        <p class="metal-desc">Silber, wie die Erde es schuf: silberne Adern in Steingerüst,
+                        erzengelkahl und archaisch. Für Sammler, die den Ursprung vor der Münze schätzen —
+                        der Ur-Stern jeder Karte.</p>
+                        <div class="metal-facts">
+                            <span class="chip">Originär</span>
+                            <span class="chip">Geologisch</span>
+                            <span class="chip">Belegt</span>
+                        </div>
+                    </div>
+                    <div class="metal-visual">
+                        <figure>
+                            <img src="images/native-silver.jpg" alt="Natursilber-Ader in Gestein, Kongsberg-Typ" loading="lazy">
+                            <figcaption><span>NATURSILBER</span><span>ERZ-STUFE</span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= 2 · NEBELKAMMER ================= -->
+<section class="nebelkammer" id="nebelkammer">
+    <div class="wrap">
+        <p class="neb-sub rv">Kapitel II · Die Nebelkammer <b>· ESO-Aufnahme: Lagunennebel</b></p>
+        <blockquote class="neb-quote rv" data-d="1">«Im Nebel des Marktes zählt <em>ein einziger Fixstern</em> mehr als tausend flüchtige Lichter.»</blockquote>
+        <p class="neb-sub rv" data-d="2">Hausprinzip · <b>IN VERMEHRENDEM FINSTERNIS NAVIGIEREN</b></p>
+    </div>
+</section>
+
+<!-- ================= 3 · SPEKTRALBESTIMMUNG ================= -->
+<section class="sec" id="spektral">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <p class="sec-tag">Kapitel III <span class="ra-de">· SPEKTRALANALYSE</span></p>
+            <h2 class="sec-title">Spektralbestimmung</h2>
+            <p class="sec-lead">Jedes Metall wird spektral gelesen — wie Astronomen die chemische
+            Signatur eines Sterns aus seinem Licht ableiten. Die Balken zeigen unsere
+            aktuellen Prüfwerte für Lieferfähigkeit und Reinheit.</p>
+        </div>
+
+        <div class="spectral" id="spectralChart">
+            <div class="spectral--row" data-w="0.999" style="--w: 0.999;">
+                <div class="spectral--label"><b>Feinheit</b>AG-Gehalt</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">99,90 %</div>
+            </div>
+            <div class="spectral--row" data-w="0.94" style="--w: 0.94;">
+                <div class="spectral--label"><b>Werkführung</b>Guss-Präzision</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">94 / 100</div>
+            </div>
+            <div class="spectral--row" data-w="0.88" style="--w: 0.88;">
+                <div class="spectral--label"><b>Lieferfähigkeit</b>Good Delivery</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">88 / 100</div>
+            </div>
+            <div class="spectral--row" data-w="0.76" style="--w: 0.76;">
+                <div class="spectral--label"><b>Sammlerwert</b>Stufen &amp; Erz</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">76 / 100</div>
+            </div>
+            <div class="spectral--row" data-w="0.91" style="--w: 0.91;">
+                <div class="spectral--label"><b>Rücknahmehärte</b>Buyback</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">91 / 100</div>
+            </div>
+            <div class="spectral--row" data-w="0.97" style="--w: 0.97;">
+                <div class="spectral--label"><b>Belegdichte</b>Assay-Dokumente</div>
+                <div class="spectral--bar"><span class="spectral--fill"></span></div>
+                <div class="spectral--val">97 / 100</div>
+            </div>
+        </div>
+        <p class="spectral-note rv">Messreihe Q3 · Alle Werte interner Prüfpraxis, ohne Gewähr · ✦</p>
+    </div>
+</section>
+
+<!-- ================= 4 · ATELIER ================= -->
+<section class="sec" id="atelier">
+    <div class="wrap">
+        <div class="atelier">
+            <div class="atelier-info">
+                <div class="sec-head rv" style="margin-bottom:0">
+                    <p class="sec-tag">Kapitel IV <span class="ra-de">· WERKHALLE</span></p>
+                    <h2 class="sec-title">Das Atelier des Gusses</h2>
+                    <p class="sec-lead">Vom Erz zum Barren: Unsere Werkhalle arbeitet wie eine Sternwarte
+                    im Uhrwerk — geschätzt auf Reinheit, geführt von Prozedur, beendet mit Unterschrift.</p>
+                </div>
+                <div class="feature rv" data-d="1">
+                    <span class="feature-glyph"><span>✦</span></span>
+                    <div>
+                        <h3>Vier-Augen-Assay</h3>
+                        <p>Jeder Guss durchläuft zwei unabhängige Prüfungen — Röntgenfluoreszenz und
+                        Stichprobe im Ofen. Erst die doppelte Signatur lässt den Barren auf die Karte.</p>
+                    </div>
+                </div>
+                <div class="feature rv" data-d="2">
+                    <span class="feature-glyph"><span>✦</span></span>
+                    <div>
+                        <h3>Karte statt Liste</h3>
+                        <p>Kein Los verschwindet in einer Excel-Zeile: Jedes Stück erhält Koordinate,
+                        Seriennummer und Bild — auffindbar wie ein Stern im Atlas.</p>
+                    </div>
+                </div>
+                <div class="feature rv" data-d="3">
+                    <span class="feature-glyph"><span>✦</span></span>
+                    <div>
+                        <h3>Unveränderliche Lagerung</h3>
+                        <p>Zollgebundene Hochsicherheits-Läger mit Luftfeuchtigkeits-Regelung:
+                        Silber altert nicht — und unsere Dokumentation auch nicht.</p>
+                    </div>
+                </div>
+                <div class="feature rv" data-d="4">
+                    <span class="feature-glyph"><span>✦</span></span>
+                    <div>
+                        <h3>Rücknahme zum Fixpreis</h3>
+                        <p>Unser Rücknahmesystem folgt der LBMA-Notierung mit festem Auf- und Abschlag —
+                        ein Preis, der nicht mit dem Nebel tanzt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="atelier-visual rv rv--zoom" data-d="1">
+                <span class="atelier-coord">WERKHALLE · 51°N · SILBERGUSS</span>
+                <div class="stack">
+                    <img class="plate-a" src="images/silver-crystals.jpg" alt="Silberkristalle im Atelier, Makroaufnahme" loading="lazy">
+                    <img class="plate-b" src="images/native-silver.jpg" alt="Natursilber-Detail, Kongsberg-Typ" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= 5 · KABINETT ================= -->
+<section class="sec" id="kabinett">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <p class="sec-tag">Kapitel V <span class="ra-de">· SICHTBARES LICHT</span></p>
+            <h2 class="sec-title">Das Kabinett der Platten</h2>
+            <p class="sec-lead">Vier Aufnahmen aus Bestand und Werkhalle — Original-Fotografien,
+            nicht gerendert. Was Sie sehen, ist was wir liefern.</p>
+        </div>
+        <div class="kabinett">
+            <figure class="plate rv" data-d="1">
+                <img src="images/silver-bar-top.jpg" alt="1000-Unzen-Silberbarren, Ansicht von oben" loading="lazy">
+                <figcaption><b>LG-Barren</b><i>400 oz · AG 999,0</i></figcaption>
+            </figure>
+            <figure class="plate rv" data-d="2">
+                <img src="images/silver-bar-ingot.jpg" alt="Silber-Chip-Barren mit Assay-Karte" loading="lazy">
+                <figcaption><b>Chip &amp; Karte</b><i>1 oz · AG 999,9</i></figcaption>
+            </figure>
+            <figure class="plate rv" data-d="3">
+                <img src="images/silver-crystals.jpg" alt="Gewachsene Silberkristalle" loading="lazy">
+                <figcaption><b>Kristallstufe</b><i>Nativ · Unikat</i></figcaption>
+            </figure>
+            <figure class="plate rv" data-d="4">
+                <img src="images/native-silver.jpg" alt="Natursilber in Gestein" loading="lazy">
+                <figcaption><b>Natursilber</b><i>Erz · Kongsberg-Typ</i></figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ================= 6 · EPHIMERIDEN ================= -->
+<section class="sec" id="ephemeriden">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <p class="sec-tag">Kapitel VI <span class="ra-de">· JAHR-EPHEMERIDEN</span></p>
+            <h2 class="sec-title">Ephemeriden des Hauses</h2>
+            <p class="sec-lead">Zahlen, die kreisen — erfasst zum Stichtag, gültig für das laufende Handelsjahr.</p>
+        </div>
+        <div class="eph-grid">
+            <div class="eph rv" data-d="1">
+                <div class="eph-num" data-count="12480">0</div>
+                <div class="eph-label">Verzeichnete Barren</div>
+                <p class="eph-sub">seit Gründung, kumuliert</p>
+            </div>
+            <div class="eph rv" data-d="2">
+                <div class="eph-num" data-count="999" data-suffix=",0">0</div>
+                <div class="eph-label">Feinheit Ag</div>
+                <p class="eph-sub">Good-Delivery-Standard</p>
+            </div>
+            <div class="eph rv" data-d="3">
+                <div class="eph-num" data-count="47">0</div>
+                <div class="eph-label">Prüflabore &amp; Minter</div>
+                <p class="eph-sub">weltweit assoziiert</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= 7 · VERBINDUNG ================= -->
+<section class="sec verbindung" id="verbindung">
+    <div class="wrap">
+        <p class="scope-tag rv">Kapitel VII · Signalempfang</p>
+        <h2 class="sec-title rv" data-d="1">Richten Sie Ihr Teleskop</h2>
+        <p class="sec-lead rv" data-d="2">Anfrage, Portefeuille-Ziel oder Sammlerstufe: Beschreiben Sie,
+        wonach Sie suchen — wir antworten innerhalb eines Handelstages mit Angebot und Beleg.</p>
+        <form class="rv" data-d="3" action="#" onsubmit="return handleSignal(event)">
+            <div class="field">
+                <label for="sigName">Name</label>
+                <input type="text" id="sigName" name="name" placeholder="Ihr Name" required="">
+            </div>
+            <div class="field">
+                <label for="sigMail">E-Mail</label>
+                <input type="email" id="sigMail" name="email" placeholder="name@observatorium.de" required="">
+            </div>
+            <div class="field full">
+                <label for="sigTopic">Interesse</label>
+                <select id="sigTopic" name="topic">
+                    <option>Feinsilber-Barren (LG / 400 oz)</option>
+                    <option>Chip-Barren &amp; Assay-Karten</option>
+                    <option>Kristall- &amp; Erz-Stufen</option>
+                    <option>Industrie-Granulat (Tonnage)</option>
+                    <option>Polarstern-Fonds Beratung</option>
+                </select>
+            </div>
+            <div class="field full">
+                <label for="sigMsg">Nachricht</label>
+                <textarea id="sigMsg" name="msg" placeholder="Beschreiben Sie Ihr Anliegen — Stückzahl, Budget, Zeithorizont."></textarea>
+            </div>
+            <div class="form-cta">
+                <button type="submit" class="btn btn--gold">Signal senden <span class="arr">→</span></button>
+                <span class="form-note" id="sigNote">Antwort ≤ 1 Handelstag · Diskret</span>
+            </div>
+        </form>
+    </div>
+</section>
+
+</main>
+
+<!-- ================= FUSSZEILE ================= -->
+<footer class="fertigung" id="kontakt">
+    <div class="wrap">
+        <div class="fertigung-grid">
+            <div>
+                <a class="brand" href="#observatory" style="margin-bottom:20px">
+                    <svg class="brand-star" viewBox="0 0 40 40" aria-hidden="true">
+                        <path d="M20 2l3.4 14.6L38 20l-14.6 3.4L20 38l-3.4-14.6L2 20l14.6-3.4z" fill="none" stroke="#E7C86A" stroke-width="1.4"></path>
+                        <path d="M20 8l2.2 9.8L32 20l-9.8 2.2L20 32l-2.2-9.8L8 20l9.8-2.2z" fill="#F4E5B8"></path>
+                    </svg>
+                    <span class="brand-word"><b>NORTHSTAR</b><i>Edelmetall-Observatorium</i></span>
+                </a>
+                <p>Der Polarstern täuscht nicht — er steht. Wir genauso: seit Gründung ein
+                Fixpunkt für Feinsilber in Barren, Stufe und Erz. Kartiert, geprüft, geliefert.</p>
+            </div>
+            <div>
+                <h4>Kartierung</h4>
+                <ul>
+                    <li><a href="#firmament">Firmament der Metalle</a></li>
+                    <li><a href="#spektral">Spektralbestimmung</a></li>
+                    <li><a href="#atelier">Atelier des Gusses</a></li>
+                    <li><a href="#kabinett">Kabinett der Platten</a></li>
+                    <li><a href="#ephemeriden">Ephemeriden</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Observatorium</h4>
+                <ul>
+                    <li><a href="#verbindung">Signalempfang (Kontakt)</a></li>
+                    <li><a href="impressum.html">Impressum &amp; Datenschutz</a></li>
+                    <li><a href="#kontakt">LBMA-Notierung</a></li>
+                    <li><a href="#kontakt">Lager &amp; Logistik</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="fertigung-base">
+            <span>© <span id="year">2026</span> NORTHSTAR · Alle Rechte vorbehalten</span>
+            <span>RA 02h 31m · DE +89° 16′ · MAG −1,8</span>
+            <span>Bilder: ESO / Wikimedia (CC) · <a href="impressum.html">Bildnachweise</a></span>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   NORTHSTAR · Sternwarten-Logik
+   1) Sterne-Canvas (Funkeln + Meteore)  2) 3-Ebenen-Parallax
+   3) Beobachter-Retikel folgt Maus/Scroll  4) Hero-Glyphen
+   5) Spektral-Balken  6) Ephemeriden-Zähler  7) Reveal & UI
+   ============================================================ */
+(function () {
+    'use strict';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Hero: Buchstaben als Sternbild ---------- */
+    var hero = document.getElementById('heroTitle');
+    if (hero) {
+        var text = hero.textContent.trim();
+        hero.textContent = '';
+        for (var i = 0; i < text.length; i++) {
+            var s = document.createElement('span');
+            s.className = 'glyph';
+            s.textContent = text[i];
+            s.style.animationDelay = (0.25 + i * 0.055) + 's';
+            hero.appendChild(s);
+        }
+    }
+
+    /* ---------- 1 · Sterne-Canvas: Funkeln + Meteor-Schweife ---------- */
+    var canvas = document.getElementById('veil');
+    var ctx = canvas.getContext('2d');
+    var stars = [], meteors = [], W = 0, H = 0;
+
+    function sizeCanvas() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+    function seedStars() {
+        stars = [];
+        var n = Math.min(150, Math.round(W * H / 14000));
+        for (var i = 0; i < n; i++) {
+            stars.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: Math.random() * 1.3 + 0.3,
+                base: Math.random() * 0.55 + 0.18,
+                amp: Math.random() * 0.5 + 0.1,
+                sp: Math.random() * 0.0022 + 0.0007,
+                ph: Math.random() * Math.PI * 2,
+                gold: Math.random() < 0.22
+            });
+        }
+    }
+    function spawnMeteor() {
+        var fromLeft = Math.random() < 0.7;
+        meteors.push({
+            x: fromLeft ? -40 : W + 40,
+            y: Math.random() * H * 0.5,
+            vx: (fromLeft ? 1 : -1) * (5.5 + Math.random() * 4),
+            vy: 1.6 + Math.random() * 1.6,
+            life: 0,
+            max: 90 + Math.random() * 50
+        });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        var t = performance.now();
+        for (var i = 0; i < stars.length; i++) {
+            var st = stars[i];
+            var a = st.base + Math.sin(t * st.sp + st.ph) * st.amp;
+            if (a <= 0.02) continue;
+            ctx.globalAlpha = Math.min(a, 0.92);
+            ctx.fillStyle = st.gold ? '#E7C86A' : '#EAF2F8';
+            ctx.beginPath();
+            ctx.arc(st.x, st.y, st.r, 0, 6.2832);
+            ctx.fill();
+        }
+        if (!reduce) {
+            if (Math.random() < 0.004 && meteors.length < 2) spawnMeteor();
+            for (var m = meteors.length - 1; m >= 0; m--) {
+                var mt = meteors[m];
+                mt.x += mt.vx; mt.y += mt.vy; mt.life++;
+                var fade = Math.sin(Math.PI * Math.min(mt.life / mt.max, 1));
+                var tailX = mt.x - mt.vx * 9, tailY = mt.y - mt.vy * 9;
+                var grad = ctx.createLinearGradient(mt.x, mt.y, tailX, tailY);
+                grad.addColorStop(0, 'rgba(244,229,184,' + (0.85 * fade) + ')');
+                grad.addColorStop(1, 'rgba(244,229,184,0)');
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                ctx.moveTo(mt.x, mt.y);
+                ctx.lineTo(tailX, tailY);
+                ctx.stroke();
+                if (mt.life > mt.max || mt.x < -80 || mt.x > W + 80) meteors.splice(m, 1);
+            }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+    }
+    sizeCanvas(); seedStars(); requestAnimationFrame(draw);
+    window.addEventListener('resize', function () { sizeCanvas(); seedStars(); });
+
+    /* ---------- 2 · Parallax (3 Ebenen, sanft) ---------- */
+    var layers = document.querySelectorAll('[data-par]');
+    var mx = 0, my = 0, cmx = 0, cmy = 0;
+    if (!reduce) {
+        window.addEventListener('mousemove', function (e) {
+            mx = (e.clientX / window.innerWidth - 0.5);
+            my = (e.clientY / window.innerHeight - 0.5);
+        });
+    }
+    var ticking = false;
+    function parallax() {
+        var sy = window.scrollY || window.pageYOffset;
+        for (var i = 0; i < layers.length; i++) {
+            var el = layers[i];
+            var p = parseFloat(el.getAttribute('data-par'));
+            el.style.transform = 'translate3d(' + (cmx * p * 26).toFixed(2) + 'px,' + (sy * p * -1 + cmy * p * 18).toFixed(2) + 'px,0)';
+        }
+    }
+    function loop() {
+        cmx += (mx - cmx) * 0.045;
+        cmy += (my - cmy) * 0.045;
+        parallax();
+        requestAnimationFrame(loop);
+    }
+    loop();
+
+    /* ---------- 3 · Beobachter-Retikel ---------- */
+    var reticle = document.getElementById('reticle');
+    if (reticle && !reduce) {
+        var rot = 0, target = 0;
+        window.addEventListener('scroll', function () {
+            target = (window.scrollY || 0) * 0.06;
+        }, { passive: true });
+        (function retLoop() {
+            rot += (target - rot) * 0.06;
+            reticle.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
+            requestAnimationFrame(retLoop);
+        })();
+    }
+
+    /* ---------- 5 · Spektral-Balken ---------- */
+    var specRows = document.querySelectorAll('.spectral--row');
+    var specObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (en.isIntersecting) {
+                en.target.classList.add('lit');
+                specObs.unobserve(en.target);
+            }
+        });
+    }, { threshold: 0.4 });
+    specRows.forEach(function (r) { r.style.setProperty('--w', r.getAttribute('data-w')); specObs.observe(r); });
+
+    /* ---------- 6 · Ephemeriden-Zähler ---------- */
+    var counters = document.querySelectorAll('.eph-num[data-count]');
+    var cObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var el = en.target, end = parseInt(el.getAttribute('data-count'), 10), t0 = null;
+            var suffix = el.getAttribute('data-suffix') || '';
+            function step(ts) {
+                if (!t0) t0 = ts;
+                var p = Math.min((ts - t0) / 1800, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(end * eased).toLocaleString('de-DE') + (p === 1 ? suffix : '');
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+            cObs.unobserve(el);
+        });
+    }, { threshold: 0.6 });
+    counters.forEach(function (c) { cObs.observe(c); });
+
+    /* ---------- 7 · Reveals ---------- */
+    var reveals = document.querySelectorAll('.rv');
+    if (reduce) {
+        reveals.forEach(function (el) { el.classList.add('on'); });
+    } else {
+        var rObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) { en.target.classList.add('on'); rObs.unobserve(en.target); }
+            });
+        }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+        reveals.forEach(function (el) { rObs.observe(el); });
+    }
+
+    /* ---------- UI: Kopfzeile, Fortschritt, Menü, Uhr ---------- */
+    var head = document.getElementById('chartroom');
+    var dots = document.querySelectorAll('.progress-dot');
+    var sections = ['observatory', 'firmament', 'spektral', 'kabinett', 'verbindung']
+        .map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+    function onScroll() {
+        var y = window.scrollY || 0;
+        head.classList.toggle('scrolled', y > 40);
+        var active = 0;
+        sections.forEach(function (sec, idx) {
+            if (y >= sec.offsetTop - window.innerHeight * 0.4) active = idx;
+        });
+        dots.forEach(function (d, i) { d.classList.toggle('on', i === active); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var burger = document.getElementById('burger');
+    var menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', function () {
+        burger.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+            burger.classList.remove('open');
+            menu.classList.remove('open');
+        });
+    });
+
+    /* Ephemeriden-Uhr (Sidereal-Stil) */
+    var clockEl = document.getElementById('ephTime');
+    function tick() {
+        var d = new Date();
+        var p = function (n) { return n < 10 ? '0' + n : '' + n; };
+        clockEl.textContent = 'ST·' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
+    tick(); setInterval(tick, 1000);
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Formular-Plausch (Demo) */
+    window.handleSignal = function (e) {
+        e.preventDefault();
+        var note = document.getElementById('sigNote');
+        note.textContent = '✦ Signal empfangen — wir antworten innerhalb eines Handelstages.';
+        note.style.color = '#E7C86A';
+        e.target.reset();
+        return false;
+    };
+})();
+</script>
+
+
+</body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NORTHSTAR — Impressum &amp; Datenschutz</title>
+<meta name="description" content="Impressum und Datenschutz des NORTHSTAR Orbitalen Tresors — Angaben gemäß § 5 TMG, Bildnachweise und Datenschutzinformationen.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23060709'/%3E%3Cpath d='M32 6l4.6 21.4L58 32l-21.4 4.6L32 58l-4.6-21.4L6 32l21.4-4.6z' fill='%23DFE9F2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Saira:wght@200;300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --void: #060709;
+    --void-2: #0B0D11;
+    --steel-1: #F2F5F8;
+    --steel-2: #C9D3DC;
+    --steel-3: #8A97A3;
+    --steel-4: #55606B;
+    --north: #7FD6FF;
+    --north-soft: rgba(127,214,255,.14);
+    --north-line: rgba(127,214,255,.35);
+    --line: rgba(201,211,220,.18);
+    --line-soft: rgba(201,211,220,.09);
+    --fd: 'Syncopate', 'Arial Black', sans-serif;
+    --fb: 'Saira', 'Segoe UI', sans-serif;
+    --fm: 'Share Tech Mono', 'Consolas', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--fb); font-weight: 300;
+    background: var(--void); color: var(--steel-1);
+    line-height: 1.7; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--north); color: var(--void); }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+.deepfield {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: url('images/stars-deep.jpg') center 35% / cover no-repeat;
+    filter: saturate(.3) brightness(.35);
+}
+.deepfield::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(6,7,9,.75), rgba(6,7,9,.92));
+}
+.corner { position: fixed; width: 54px; height: 54px; border: 1.5px solid var(--north); z-index: 80; pointer-events: none; }
+.corner.tl { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.corner.tr { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+.corner.bl { bottom: 14px; left: 14px; border-right: none; border-bottom: none; }
+.corner.br { bottom: 14px; right: 14px; border-left: none; border-bottom: none; }
+.topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 70;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 18px clamp(20px, 4vw, 56px);
+    background: rgba(6,7,9,.86);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line-soft);
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand .glyph {
+    width: 34px; height: 34px; border: 1.5px solid var(--steel-2);
+    display: grid; place-items: center; transform: rotate(45deg);
+    transition: transform .8s cubic-bezier(.16,1,.3,1), border-color .4s;
+}
+.brand .glyph span { transform: rotate(-45deg); font-family: var(--fd); font-weight: 700; font-size: 15px; color: var(--steel-1); }
+.brand:hover .glyph { transform: rotate(225deg); border-color: var(--north); }
+.brand:hover .glyph span { color: var(--north); }
+.brand .word b { display: block; font-family: var(--fd); font-weight: 700; font-size: 13px; letter-spacing: .42em; color: var(--steel-1); line-height: 1.2; }
+.brand .word i { font-style: normal; font-family: var(--fm); font-size: 8px; letter-spacing: .4em; text-transform: uppercase; color: var(--steel-3); }
+.backlink {
+    font-family: var(--fm); font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--steel-2); text-decoration: none; border: 1px solid var(--line);
+    padding: 10px 16px; transition: color .3s, background .3s, border-color .3s;
+}
+.backlink:hover { color: var(--void); background: var(--north); border-color: var(--north); }
+
+.dossier { position: relative; z-index: 2; padding: clamp(120px, 15vh, 170px) clamp(20px, 5vw, 60px) clamp(60px, 8vh, 90px); }
+.wrap { width: min(880px, 100%); margin: 0 auto; }
+.dossier-head { text-align: center; margin-bottom: clamp(40px, 6vh, 64px); }
+.sec-tag {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--fm); font-size: 10px; letter-spacing: .5em; text-transform: uppercase;
+    color: var(--north); margin-bottom: 18px;
+}
+.sec-tag::before, .sec-tag::after { content: ''; width: 34px; height: 1px; background: var(--north-line); }
+h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(22px, 3.6vw, 40px); letter-spacing: .12em; color: var(--steel-1); }
+.dossier-head p { margin-top: 12px; font-family: var(--fm); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--steel-4); }
+
+.article {
+    position: relative;
+    background: linear-gradient(165deg, rgba(16,18,23,.88), rgba(6,7,9,.94));
+    border: 1px solid var(--line-soft);
+    padding: clamp(26px, 4.4vw, 54px);
+    margin-bottom: 24px;
+}
+.article::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--north), transparent);
+}
+.article h2 { font-family: var(--fd); font-weight: 400; font-size: 17px; letter-spacing: .14em; color: var(--steel-1); margin-bottom: 18px; }
+.article h3 { font-family: var(--fb); font-weight: 500; font-size: 15px; letter-spacing: .08em; color: var(--steel-2); margin: 20px 0 8px; }
+.article p { color: var(--steel-3); font-size: 15px; margin-bottom: 12px; }
+.article ul { list-style: none; margin: 10px 0 16px; display: grid; gap: 8px; }
+.article ul li { color: var(--steel-3); font-size: 15px; padding-left: 20px; position: relative; }
+.article ul li::before { content: '\25C6'; position: absolute; left: 0; top: 2px; color: var(--north); font-size: 8px; }
+.article a { color: var(--north); text-decoration: none; }
+.article a:hover { text-decoration: underline; }
+.article table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; }
+.article td { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 15px; color: var(--steel-3); vertical-align: top; }
+.article td:first-child { font-family: var(--fm); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--north); width: 190px; padding-right: 20px; }
+.article td:last-child { color: var(--steel-1); }
+.article .credits figure { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+.article .credits figure:last-child { border-bottom: none; }
+.article .credits img { width: 110px; height: 78px; object-fit: cover; border: 1px solid var(--line); }
+.article .credits b { display: block; font-family: var(--fm); font-size: 11px; letter-spacing: .18em; color: var(--steel-1); margin-bottom: 4px; }
+.article .credits p { margin: 0; font-size: 13.5px; }
+.coord-note { font-family: var(--fm); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--steel-4); margin-top: 18px; }
+
+.footer-hud {
+    position: relative; z-index: 2;
+    border-top: 1px solid var(--line-soft);
+    background: rgba(6,7,9,.9);
+    padding: 34px clamp(20px, 5vw, 60px);
+}
+.footer-base {
+    max-width: 1240px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; gap: 12px 30px; justify-content: space-between; align-items: center;
+    font-family: var(--fm); font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--steel-4);
+}
+.footer-base a { color: var(--steel-3); text-decoration: none; transition: color .3s; }
+.footer-base a:hover { color: var(--north); }
+
+@media (max-width: 640px) {
+    .article .credits figure { grid-template-columns: 1fr; }
+    .article td:first-child { width: auto; display: block; padding-bottom: 2px; }
+    .article td:last-child { display: block; }
+}
+</style>
+</head>
+<body>
+
+<div class="deepfield" aria-hidden="true"></div>
+<span class="corner tl"></span><span class="corner tr"></span>
+<span class="corner bl"></span><span class="corner br"></span>
+
+<header class="topbar">
+    <a class="brand" href="index.html">
+        <span class="glyph"><span>N</span></span>
+        <span class="word"><b>NORTHSTAR</b><i>Orbitaler Tresor</i></span>
+    </a>
+    <a class="backlink" href="index.html">&larr; Zum Tresor</a>
+</header>
+
+<main class="dossier">
+    <div class="wrap">
+        <div class="dossier-head">
+            <p class="sec-tag">Beigef&uuml;gtes Dokument</p>
+            <h1>Impressum &amp; Datenschutz</h1>
+            <p>RA 02h 31m &middot; DE +89&deg; 16&prime; &middot; HB-NR. 28</p>
+        </div>
+
+        <section class="article">
+            <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+            <table>
+                <tr><td>Anbieter</td><td>NORTHSTAR Edelmetall-Observatorium GmbH</td></tr>
+                <tr><td>Anschrift</td><td>Sternwartenring 8 &middot; 20457 Hamburg &middot; Deutschland</td></tr>
+                <tr><td>Kontakt</td><td>Tel. +49 40 555 018 40 &middot; post@northstar-edelmetall.de</td></tr>
+                <tr><td>Vertreten durch</td><td>Gesch&auml;ftsf&uuml;hrer A. Weiland</td></tr>
+                <tr><td>Handelsregister</td><td>Amtsgericht Hamburg, HRB 284 391</td></tr>
+                <tr><td>USt-ID</td><td>DE 347 928 516</td></tr>
+            </table>
+            <p class="coord-note">Verantwortlich i.S.d. &sect; 55 II RStV: A. Weiland, Anschrift wie oben</p>
+        </section>
+
+        <section class="article">
+            <h2>Bildnachweise (Wikimedia Commons / ESO)</h2>
+            <div class="credits">
+                <figure>
+                    <img src="images/stars-deep.jpg" alt="Milchstra&szlig;en-Panorama (ESO)">
+                    <figcaption>
+                        <b>stars-deep.jpg</b>
+                        <p>&laquo;ESO - Milky Way&raquo; &mdash; &copy; ESO / S. Brunier, CC BY 4.0 &mdash;
+                        <a href="https://commons.wikimedia.org/wiki/File:ESO_-_Milky_Way.jpg">commons.wikimedia.org</a></p>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <img src="images/nebula-lagoon.jpg" alt="Lagunennebel (ESO/VST)">
+                    <figcaption>
+                        <b>nebula-lagoon.jpg</b>
+                        <p>&laquo;VST images the Lagoon Nebula&raquo; &mdash; &copy; ESO / VPHAS+ Team, CC BY 4.0 &mdash;
+                        <a href="https://commons.wikimedia.org/wiki/File:VST_images_the_Lagoon_Nebula.jpg">commons.wikimedia.org</a></p>
+                    </figcaption>
+                </figure>
+            </div>
+            <h3>Weitere Bildnachweise</h3>
+            <ul>
+                <li>&laquo;1000oz.silver.bullion.bar.top.jpg&raquo; &mdash; CC BY-SA 3.0 &mdash; <a href="https://commons.wikimedia.org/wiki/File:1000oz.silver.bullion.bar.top.jpg">commons.wikimedia.org</a></li>
+                <li>&laquo;Chip silver bullion bar.jpg&raquo; &mdash; CC BY-SA &mdash; <a href="https://commons.wikimedia.org/wiki/File:Chip_silver_bullion_bar.jpg">commons.wikimedia.org</a></li>
+                <li>&laquo;Silver 2.jpg&raquo; &mdash; CC BY-SA 3.0 &mdash; <a href="https://commons.wikimedia.org/wiki/File:Silver_2.jpg">commons.wikimedia.org</a></li>
+                <li>&laquo;Silver (Kongsberg, Norway) 4.jpg&raquo; &mdash; CC BY-SA &mdash; <a href="https://commons.wikimedia.org/wiki/Category:Native_silver">commons.wikimedia.org</a></li>
+            </ul>
+            <p class="coord-note">Die Bilder wurden unver&auml;ndert &uuml;bernommen (Commons-skalierte Fassungen).</p>
+        </section>
+
+        <section class="article">
+            <h2>Datenschutz in K&uuml;rze</h2>
+            <p>Diese Website verarbeitet personenbezogene Daten nur, soweit technisch erforderlich.
+            Es werden keine Tracking-Cookies gesetzt; Google Fonts werden beim ersten Aufruf von
+            Google-Servern geladen (IP-Adresse an Google). Wer das vermeiden m&ouml;chte, kann die Seite
+            offline bzw. mit geblockten externen Anfragen besuchen.</p>
+            <ul>
+                <li>Keine Analytics, keine Marketing-Pixel, keine Cookies</li>
+                <li>Kontaktformular: Angaben dienen ausschlie&szlig;lich der Bearbeitung der Anfrage</li>
+                <li>Hosting-Server-Logfiles beim Provider, L&ouml;schung nach 7 Tagen</li>
+                <li>Auskunft, Berichtigung, L&ouml;schung: post@northstar-edelmetall.de</li>
+            </ul>
+        </section>
+
+        <section class="article">
+            <h2>Haftung f&uuml;r Inhalte / Links</h2>
+            <p>Trotz sorgf&auml;ltiger inhaltlicher Kontrolle &uuml;bernehmen wir keine Haftung f&uuml;r die
+            Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t der Inhalte. F&uuml;r Inhalte der verlinkten
+            externen Seiten sind ausschlie&szlig;lich deren Betreiber verantwortlich. Kauf, Verwahrung und
+            R&uuml;cknahme von Edelmetallen erfolgen ausschlie&szlig;lich auf Grundlage unserer separaten
+            Vertrags- und Konditionenunterlagen.</p>
+            <p class="coord-note">Stand: September 2026 &middot; Alle Angaben ohne Gew&auml;hr</p>
+        </section>
+    </div>
+</main>
+
+<footer class="footer-hud">
+    <div class="footer-base">
+        <span>&copy; <span id="year">2026</span> NORTHSTAR &middot; Orbitaler Tresor</span>
+        <span>RA 02h 31m &middot; DE +89&deg; 16&prime; &middot; MAG &minus;1,8</span>
+        <a href="index.html">&larr; Zum Tresor</a>
+    </div>
+</footer>
+
+<script>
+    var yEl = document.getElementById('year');
+    if (yEl) yEl.textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
