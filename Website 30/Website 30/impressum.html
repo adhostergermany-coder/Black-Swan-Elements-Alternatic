@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | IRONFORGE Edelmetallmanufaktur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --obsidian: #0A0A0C;
+            --bg-2: #131316;
+            --line: rgba(216, 178, 110, 0.16);
+            --ember: #D8B26E;
+            --ember-hot: #F2DFAE;
+            --text: #F4F1EA;
+            --muted: #A09A8E;
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background:
+                radial-gradient(ellipse 70% 40% at 50% 0%, rgba(216, 178, 110, 0.12), transparent 70%),
+                var(--obsidian);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        h1, h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.05em; }
+
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 16px 60px;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 6px; color: var(--text); text-decoration: none; }
+        .logo-name span { color: var(--ember); }
+
+        .back-link { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: 0.3s; }
+        .back-link:hover { color: var(--ember-hot); }
+
+        .page-content { max-width: 800px; margin: 0 auto; padding: 140px 60px 80px; }
+        .page-content h1 { font-size: 38px; margin-bottom: 36px; color: var(--ember-hot); }
+        .page-content h2 { font-size: 20px; margin-top: 34px; margin-bottom: 12px; }
+        .page-content p, .page-content li { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+        .page-content a { color: var(--ember-hot); text-decoration: none; }
+        .page-content a:hover { text-decoration: underline; }
+
+        .divider { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 122, 26, 0.4), transparent); margin: 40px 0 0; }
+
+        .footer-mini {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 28px 60px 40px;
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer-mini a { color: var(--ember-hot); text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .header { padding: 14px 24px; }
+            .page-content { padding: 120px 24px 40px; }
+            .page-content h1 { font-size: 30px; }
+            .footer-mini { padding: 20px 24px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo-name">IRON<span>FORGE</span></a>
+        <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
+    </header>
+
+    <main class="page-content">
+        <h1>Impressum</h1>
+
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+            IRONFORGE Edelmetallmanufaktur<br>
+            Musterstraße 14<br>
+            80331 München
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+            Telefon: +49 (0)89 987 654 32<br>
+            E-Mail: <a href="mailto:kontakt@ironforge.de">kontakt@ironforge.de</a>
+        </p>
+
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE 987 654 321
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <hr class="divider">
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
+            Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+            Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+            Tätigkeit hinweisen.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+            Seiten verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+            dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
+            der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
+            Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer class="footer-mini">
+        <p>&copy; 2026 IRONFORGE Edelmetallmanufaktur</p>
+        <a href="index.html">Startseite</a>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRONFORGE LAB | Kupfer- &amp; Silber-Konfigurator — Feuer formt Wert</title>
+    <meta name="description" content="IRONFORGE LAB: Stellen Sie Ihren Barren live zusammen — Metall, Gewicht, Oberfläche. Handguss seit 1989 aus München.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0C0C0E;
+            --bg-2: #131316;
+            --surface: rgba(22, 22, 27, 0.78);
+            --line: rgba(216, 178, 110, 0.16);
+            --line-strong: rgba(216, 178, 110, 0.5);
+            --amber: #D8B26E;
+            --amber-hi: #F2DFAE;
+            --bronze: #8A6A35;
+            --bone: #F1ECE1;
+            --mut: #A3A099;
+            --mono: 'Space Grotesk', monospace;
+            --serif: 'Fraunces', Georgia, serif;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--bone);
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.05; letter-spacing: 0; }
+        img { display: block; max-width: 100%; }
+        ::selection { background: rgba(216, 178, 110, 0.4); color: #fff; }
+
+        /* ===== GLOBAL 3D LAYERS ===== */
+        #bg3d { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.85; }
+        .vignette {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 20%, transparent 40%, rgba(10,10,12,0.55) 100%),
+                linear-gradient(180deg, rgba(10,10,12,0.6) 0%, transparent 20%, transparent 70%, rgba(10,10,12,0.85) 100%);
+        }
+        .grain {
+            position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        .page { position: relative; z-index: 3; }
+        .progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1200;
+            background: linear-gradient(90deg, var(--bronze), var(--amber), var(--amber-hi));
+            box-shadow: 0 0 12px rgba(216, 178, 110, 0.55);
+        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--bronze), var(--amber)); border-radius: 5px; }
+
+        /* ===== CUSTOM CURSOR (desktop only) ===== */
+        .cursor, .cursor-ring { position: fixed; top: 0; left: 0; z-index: 2000; pointer-events: none; border-radius: 50%; display: none; }
+        @media (hover: hover) and (pointer: fine) {
+            .cursor, .cursor-ring { display: block; }
+        }
+        .cursor { width: 8px; height: 8px; background: var(--amber-hi); transform: translate(-50%, -50%); }
+        .cursor-ring {
+            width: 36px; height: 36px; border: 1px solid var(--line-strong);
+            transform: translate(-50%, -50%);
+            transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+        }
+        .cursor-ring.grow { width: 64px; height: 64px; border-color: var(--amber-hi); background: rgba(216,178,110,0.08); }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 18px 40px 18px 116px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            background: rgba(12, 12, 14, 0.82);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 11px 40px 11px 116px;
+            border-bottom: 1px solid var(--line);
+        }
+        .logo { text-decoration: none; display: flex; align-items: baseline; gap: 12px; }
+        .logo-name { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 4px; color: var(--bone); }
+        .logo-name span { color: var(--amber); }
+        .logo-lab {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--bg);
+            background: var(--amber); padding: 3px 9px; border-radius: 2px; font-weight: 700;
+        }
+        .nav { display: flex; align-items: center; gap: 28px; }
+        .nav a {
+            color: var(--bone); text-decoration: none; font-size: 11.5px; font-weight: 500;
+            letter-spacing: 2px; text-transform: uppercase; transition: var(--transition);
+        }
+        .nav a:hover { color: var(--amber-hi); }
+        .nav-cta {
+            border: 1px solid var(--amber); color: var(--amber-hi) !important;
+            padding: 10px 22px; border-radius: 2px; background: rgba(216,178,110,0.07);
+        }
+        .nav-cta:hover { background: var(--amber); color: #1A1408 !important; box-shadow: 0 0 28px rgba(216,178,110,0.45); }
+
+        /* ===== CHAPTER RAIL ===== */
+        .rail {
+            position: fixed; left: 0; top: 0; bottom: 0; width: 76px; z-index: 900;
+            border-right: 1px solid var(--line);
+            background: rgba(12,12,14,0.7); backdrop-filter: blur(14px);
+            display: flex; flex-direction: column; align-items: center;
+            padding: 100px 0 24px;
+        }
+        .rail a {
+            position: relative; width: 100%; padding: 13px 0; text-align: center;
+            font-family: var(--mono); font-size: 10px; letter-spacing: 1px; color: var(--mut);
+            text-decoration: none; transition: var(--transition);
+        }
+        .rail a i { display: block; font-style: normal; font-size: 13px; color: var(--mut); margin-bottom: 2px; }
+        .rail a::before {
+            content: ''; position: absolute; left: 0; top: 50%; height: 0; width: 2px;
+            background: var(--amber); transform: translateY(-50%); transition: var(--transition);
+        }
+        .rail a.active { color: var(--amber-hi); }
+        .rail a.active i { color: var(--amber); }
+        .rail a.active::before { height: 60%; }
+        .rail-temp {
+            margin-top: auto; writing-mode: vertical-rl; font-family: var(--mono);
+            font-size: 10px; letter-spacing: 3px; color: var(--amber);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .rail-temp b { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber); animation: blink 2s infinite; }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* ===== HERO / LAB ===== */
+        .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 60px; }
+        .hero-inner {
+            width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px 0 116px;
+            display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 40px; align-items: center;
+        }
+        .lab-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase;
+            color: var(--amber-hi); border: 1px solid var(--line); border-radius: 100px;
+            padding: 8px 16px; margin-bottom: 24px; background: rgba(216,178,110,0.06);
+        }
+        .lab-tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber); animation: blink 2s infinite; }
+        .hero h1 { font-size: clamp(3rem, 6vw, 5.2rem); text-transform: none; letter-spacing: -0.01em; }
+        .hero h1 em {
+            font-style: italic; font-weight: 300; color: transparent;
+            background: linear-gradient(115deg, #F7ECD2, var(--amber-hi) 30%, var(--bronze) 60%, var(--amber) 85%);
+            -webkit-background-clip: text; background-clip: text;
+        }
+        .hero-sub { margin: 22px 0 30px; max-width: 500px; color: #CFD0D6; font-weight: 300; font-size: 1.02rem; }
+
+        /* Configurator */
+        .config { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); backdrop-filter: blur(16px); overflow: hidden; }
+        .config-head {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 20px; border-bottom: 1px solid var(--line);
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber);
+        }
+        .config-head span:last-child { color: var(--mut); }
+        .config-body { padding: 20px; display: grid; gap: 18px; }
+        .cfg-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mut); margin-bottom: 9px; display: block; }
+        .pills { display: flex; gap: 10px; flex-wrap: wrap; }
+        .pill {
+            font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 1px;
+            color: var(--bone); background: transparent; border: 1px solid var(--line);
+            padding: 10px 18px; border-radius: 100px; cursor: pointer; transition: var(--transition);
+        }
+        .pill small { color: var(--mut); margin-left: 6px; font-size: 10.5px; }
+        .pill:hover { border-color: var(--amber); }
+        .pill.on { background: var(--amber); border-color: var(--amber); color: #1A1408; }
+        .pill.on small { color: #1A1408; }
+        input[type="range"] { width: 100%; appearance: none; -webkit-appearance: none; height: 2px; background: linear-gradient(90deg, var(--amber) var(--fill, 50%), rgba(255,255,255,0.14) var(--fill, 50%)); border-radius: 2px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+            background: var(--amber-hi); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--amber), 0 0 16px rgba(216,178,110,0.5);
+            cursor: ew-resize;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--amber-hi); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--amber); cursor: ew-resize;
+        }
+        .range-row { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--amber-hi); margin-top: 8px; }
+        .range-row span:last-child { color: var(--mut); font-size: 11px; }
+        .readout { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+        .readout div { padding: 12px 14px; border-left: 1px solid var(--line); }
+        .readout div:first-child { border-left: 0; }
+        .readout span { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); }
+        .readout strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; color: var(--amber-hi); }
+        .price-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .price { font-family: var(--serif); font-size: 1.9rem; color: var(--bone); }
+        .price small { font-family: var(--mono); font-size: 10.5px; color: var(--mut); letter-spacing: 2px; display: block; }
+        .btn {
+            font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none; padding: 15px 30px; border-radius: 2px; transition: var(--transition); display: inline-block; cursor: pointer; border: 1px solid transparent;
+        }
+        .btn-ember { background: linear-gradient(120deg, var(--amber), var(--bronze)); color: #1A1408; box-shadow: 0 8px 30px rgba(216,178,110,0.3); }
+        .btn-ember:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(216,178,110,0.5); }
+        .btn-ghost { border-color: rgba(241,236,225,0.3); color: var(--bone); background: rgba(255,255,255,0.02); }
+        .btn-ghost:hover { border-color: var(--amber); color: var(--amber-hi); }
+
+        /* Hero stage — Standbild statt 3D-Barren (hero-fallback zeigt images/molten.jpg) */
+        .hero-stage { position: relative; height: 600px; }
+        .stage-hud {
+            position: absolute; top: 14px; left: 14px; right: 14px;
+            display: flex; justify-content: space-between; pointer-events: none;
+            font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber-hi);
+        }
+        .stage-hud span { background: rgba(12,12,14,0.65); border: 1px solid var(--line); padding: 7px 13px; border-radius: 2px; backdrop-filter: blur(8px); }
+        .hero-stage-glow {
+            position: absolute; left: 50%; bottom: 26px; width: 440px; height: 120px; transform: translateX(-50%);
+            background: radial-gradient(ellipse at center, rgba(216, 178, 110, 0.35), rgba(138, 106, 53, 0.12) 45%, transparent 70%);
+            filter: blur(18px); pointer-events: none; animation: pulseGlow 5s ease-in-out infinite;
+        }
+        @keyframes pulseGlow { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+        .drag-hint { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 9.5px; letter-spacing: 4px; text-transform: uppercase; color: var(--mut); }
+        .drag-hint b { color: var(--amber-hi); }
+        .hero-fallback { display: block; position: absolute; inset: 0; border-radius: 6px; overflow: hidden; }
+        .hero-fallback img { width: 100%; height: 100%; object-fit: cover; }
+        body.no-webgl #bg3d { display: none; }
+
+        /* ===== MARQUEE ===== */
+        .marquee { border-block: 1px solid var(--line); background: rgba(19,19,22,0.85); overflow: hidden; white-space: nowrap; padding: 15px 0; }
+        .marquee-track {
+            display: inline-flex; gap: 54px; padding-right: 54px; animation: marquee 28s linear infinite;
+            font-family: var(--serif); font-style: italic; font-size: 14px; letter-spacing: 3px; color: var(--amber);
+        }
+        .marquee-track span::after { content: '◆'; margin-left: 54px; color: var(--bronze); font-size: 9px; font-style: normal; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* ===== EDITORIAL SECTIONS ===== */
+        .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px 0 116px; }
+        .section { padding: 110px 0; position: relative; }
+        .sec-index { font-family: var(--mono); font-size: 11px; letter-spacing: 4px; color: var(--amber); text-transform: uppercase; display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+        .sec-index::before { content: ''; width: 44px; height: 1px; background: var(--amber); }
+        .sec-title { font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.01em; margin-bottom: 18px; text-wrap: balance; }
+        .sec-title em { font-style: italic; font-weight: 300; color: var(--amber-hi); }
+        .sec-lead { color: #B9B4AA; max-width: 640px; font-weight: 300; }
+        .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .giant-word {
+            font-family: var(--serif); font-size: clamp(4rem, 12vw, 11rem); line-height: 0.95;
+            color: transparent; -webkit-text-stroke: 1px rgba(216,178,110,0.25);
+            text-transform: uppercase; user-select: none; margin: 10px 0 40px; white-space: nowrap; overflow: hidden;
+        }
+
+        /* Metal editorial rows */
+        .metal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 56px 0; border-top: 1px solid var(--line); }
+        .metal-row:last-child { border-bottom: 1px solid var(--line); }
+        .metal-row.flip > :first-child { order: 2; }
+        .metal-fig { position: relative; }
+        .metal-fig img { width: 100%; height: 440px; object-fit: cover; border-radius: 4px; }
+        .metal-fig::after { content: ''; position: absolute; inset: 0; border-radius: 4px; box-shadow: inset 0 0 80px rgba(216,178,110,0.12); pointer-events: none; }
+        .metal-fig figcaption {
+            position: absolute; left: 16px; bottom: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--amber-hi); background: rgba(12,12,14,0.75);
+            border: 1px solid var(--line-strong); padding: 9px 15px; border-radius: 2px; backdrop-filter: blur(8px);
+        }
+        .metal-num { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--amber); }
+        .metal-row h3 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); margin: 10px 0 14px; }
+        .metal-row p { color: #B9B4AA; font-weight: 300; max-width: 460px; }
+        .spec-line { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 26px; }
+        .spec-line span { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--bone); border: 1px solid var(--line); padding: 7px 14px; border-radius: 100px; }
+        .load-btn { background: none; border: none; padding: 0; font-family: var(--mono); font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber-hi); cursor: pointer; display: inline-flex; align-items: center; gap: 12px; }
+        .load-btn::after { content: '→'; transition: var(--transition); }
+        .load-btn:hover::after { transform: translateX(6px); }
+        .load-btn:hover { color: #fff; }
+
+        /* Specimen index table */
+        .spec-table { margin-top: 48px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); backdrop-filter: blur(14px); }
+        .spec-head, .spec-row {
+            display: grid; grid-template-columns: 64px 1.4fr 1fr 1fr 1fr; gap: 12px; align-items: center;
+            padding: 18px 26px;
+        }
+        .spec-head { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mut); border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
+        .spec-row { border-bottom: 1px solid var(--line); transition: var(--transition); cursor: pointer; }
+        .spec-row:last-child { border-bottom: 0; }
+        .spec-row:hover { background: rgba(216,178,110,0.06); }
+        .spec-row .nr { font-family: var(--serif); font-style: italic; color: var(--amber); font-size: 1.15rem; }
+        .spec-row .nm { font-weight: 500; }
+        .spec-row .nm small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--mut); letter-spacing: 1.5px; font-weight: 400; }
+        .spec-row .dt { font-family: var(--mono); font-size: 12px; color: #CFD0D6; }
+        .spec-row .go { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: var(--amber-hi); text-align: right; }
+
+        /* Protocol steps */
+        #prozess { background: rgba(19,19,22,0.85); border-block: 1px solid var(--line); }
+        .proto { margin-top: 52px; display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+        .proto-row { display: grid; grid-template-columns: 110px 1fr 1.4fr auto; gap: 26px; align-items: center; padding: 30px 34px; border-bottom: 1px solid var(--line); background: var(--surface); transition: var(--transition); }
+        .proto-row:last-child { border-bottom: 0; }
+        .proto-row:hover { background: rgba(216,178,110,0.05); }
+        .proto-row .pn { font-family: var(--serif); font-size: 2.4rem; color: transparent; -webkit-text-stroke: 1px rgba(216,178,110,0.55); }
+        .proto-row h3 { font-size: 1.4rem; }
+        .proto-row h3 small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; font-weight: 500; }
+        .proto-row p { color: #B9B4AA; font-weight: 300; font-size: 0.94rem; }
+        .proto-row .pt { font-family: var(--mono); font-size: 12px; color: var(--amber-hi); border: 1px solid var(--line-strong); padding: 9px 16px; border-radius: 100px; white-space: nowrap; }
+
+        /* Horizontal gallery */
+        .hscroll { position: relative; height: 440vh; background: rgba(19,19,22,0.7); border-block: 1px solid var(--line); }
+        .hs-sticky { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .hs-head { position: absolute; top: 96px; left: 116px; z-index: 2; }
+        .hs-progress { position: absolute; top: 162px; left: 116px; width: 220px; height: 2px; background: rgba(216,178,110,0.15); }
+        .hs-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bronze), var(--amber-hi)); }
+        .hs-track { display: flex; align-items: center; gap: 30px; padding: 0 0 0 116px; will-change: transform; }
+        .hs-panel { flex: 0 0 auto; width: 320px; height: 420px; position: relative; border-radius: 4px; overflow: hidden; border: 1px solid rgba(216,178,110,0.28); background: #000; }
+        .hs-panel:nth-child(odd) { transform: translateY(34px) rotate(-2deg); }
+        .hs-panel:nth-child(even) { transform: translateY(-28px) rotate(2deg); }
+        .hs-panel img { width: 100%; height: 100%; object-fit: cover; }
+        .hs-panel figcaption {
+            position: absolute; left: 0; right: 0; bottom: 0; padding: 44px 16px 12px;
+            font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber-hi);
+            background: linear-gradient(180deg, transparent, rgba(10,10,12,0.92));
+        }
+        .hs-text { flex: 0 0 auto; width: 360px; padding-right: 24px; }
+        .hs-text h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 16px; }
+        .hs-text h2 em { font-style: italic; color: var(--amber-hi); }
+        .hs-text p { color: #B9B4AA; font-weight: 300; }
+        .hs-hint { position: absolute; bottom: 36px; left: 116px; font-family: var(--mono); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--mut); }
+
+        /* Stats strip */
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line); background: rgba(19,19,22,0.85); }
+        .stat { padding: 40px 20px; text-align: center; border-left: 1px solid var(--line); }
+        .stat:first-child { border-left: 0; }
+        .stat-num { font-family: var(--serif); font-size: 2.2rem; color: var(--amber-hi); }
+        .stat-label { margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--mut); }
+
+        /* Band */
+        .band {
+            min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; position: relative; background-size: cover; background-position: center; background-attachment: fixed;
+            clip-path: polygon(0 0, 100% 3.5rem, 100% 100%, 0 calc(100% - 3.5rem));
+        }
+        .band::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,12,0.72); }
+        .band-quote { position: relative; z-index: 1; font-family: var(--serif); font-size: clamp(1.8rem, 3.6vw, 2.8rem); max-width: 900px; padding: 0 30px; }
+        .band-quote em { color: var(--amber-hi); font-style: italic; }
+        .band-mark { position: relative; z-index: 1; margin-top: 22px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 4px; color: var(--mut); text-transform: uppercase; }
+
+        /* Contact */
+        .cta { padding: 150px 0 120px; background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(138,106,53,0.18), transparent 70%), rgba(19,19,22,0.88); border-top: 1px solid var(--line); }
+        .cta-card { background: var(--surface); backdrop-filter: blur(18px); border: 1px solid var(--line); border-radius: 6px; padding: 56px 50px; text-align: center; }
+        .cta-config {
+            display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 26px 0 6px;
+            font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber-hi);
+        }
+        .cta-config span { border: 1px solid var(--line-strong); padding: 8px 16px; border-radius: 100px; background: rgba(216,178,110,0.06); }
+        .contact-grid { display: flex; justify-content: center; gap: 56px; margin-top: 40px; flex-wrap: wrap; }
+        .contact-item h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+        .contact-item p { font-weight: 300; }
+        .contact-item a { color: var(--bone); text-decoration: none; }
+        .contact-item a:hover { color: var(--amber-hi); }
+        .cta .btn { margin-top: 40px; }
+
+        .footer {
+            border-top: 1px solid var(--line); padding: 30px 40px 30px 116px;
+            display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+            background: rgba(12,12,14,0.92);
+        }
+        .footer-brand { font-family: var(--serif); letter-spacing: 4px; font-size: 15px; }
+        .footer-brand span { color: var(--amber); }
+        .footer-meta { color: var(--mut); font-size: 12px; }
+        .footer a { color: var(--mut); text-decoration: none; }
+        .footer a:hover { color: var(--amber-hi); }
+
+        @media (max-width: 1100px) {
+            .rail { display: none; }
+            .header, .header.scrolled { padding-left: 24px; padding-right: 24px; }
+            .wrap, .hero-inner { padding-left: 24px; padding-right: 24px; }
+            .footer { padding-left: 24px; padding-right: 24px; }
+            .hs-head, .hs-progress, .hs-hint { left: 24px; }
+            .hs-track { padding-left: 24px; }
+        }
+        @media (max-width: 960px) {
+            .nav a:not(.nav-cta) { display: none; }
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-stage { height: 440px; }
+            .metal-row { grid-template-columns: 1fr; gap: 28px; }
+            .metal-row.flip > :first-child { order: 0; }
+            .metal-fig img { height: 320px; }
+            .spec-head { display: none; }
+            .spec-row { grid-template-columns: 44px 1fr auto; }
+            .spec-row .dt.hide-m { display: none; }
+            .proto-row { grid-template-columns: 70px 1fr; }
+            .proto-row p, .proto-row .pt { grid-column: 2; justify-self: start; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .stat { border-left: 0; border-top: 1px solid var(--line); }
+            .stat:nth-child(-n+2) { border-top: 0; }
+            .band { background-attachment: scroll; }
+            .section { padding: 80px 0; }
+            .giant-word { white-space: normal; }
+            .cursor, .cursor-ring { display: none !important; }
+        }
+        @media (max-width: 560px) {
+            .readout { grid-template-columns: 1fr 1fr; }
+            .readout div:last-child { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); }
+            .hero-stage { height: 360px; }
+            .cta-card { padding: 36px 24px; }
+            .hs-panel { width: 220px; height: 300px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .marquee-track, .hero-stage-glow, .rail-temp b, .lab-tag i { animation: none !important; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+    <noscript>
+        <style>
+            #bg3d, .drag-hint, .rail { display: none !important; }
+            .hero-fallback { display: block !important; position: relative; height: 300px; }
+            .hscroll { height: auto; }
+            .hs-sticky { position: static; height: auto; padding: 70px 0; }
+            .hs-track { overflow-x: auto; transform: none !important; }
+            .reveal { opacity: 1; transform: none; }
+        </style>
+    </noscript>
+</head>
+<body>
+    <canvas id="bg3d" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <div class="page">
+        <div class="progress" id="progress"></div>
+
+        <header class="header" id="header">
+            <a href="index.html" class="logo" data-hover>
+                <span class="logo-name">IRON<span>FORGE</span></span>
+                <span class="logo-lab">LAB · 30</span>
+            </a>
+            <nav class="nav">
+                <a href="#labor" data-hover>Konfigurator</a>
+                <a href="#metalle" data-hover>Metalle</a>
+                <a href="#stuecke" data-hover>Stücke</a>
+                <a href="#prozess" data-hover>Protokoll</a>
+                <a href="#kontakt" class="nav-cta" data-hover>Anfrage senden</a>
+            </nav>
+        </header>
+
+        <aside class="rail" aria-label="Kapitel">
+            <a href="#labor" data-chapter="labor" class="active" data-hover><i>01</i>Ofen</a>
+            <a href="#metalle" data-chapter="metalle" data-hover><i>02</i>Metall</a>
+            <a href="#stuecke" data-chapter="stuecke" data-hover><i>03</i>Stücke</a>
+            <a href="#prozess" data-chapter="prozess" data-hover><i>04</i>Proto</a>
+            <a href="#kontakt" data-chapter="kontakt" data-hover><i>05</i>Deal</a>
+            <div class="rail-temp"><b></b><span id="railTemp">1.085 °C</span></div>
+        </aside>
+
+        <!-- 01 · KONFIGURATOR-LABOR -->
+        <section class="hero" id="labor" data-chapter-sec="labor">
+            <div class="hero-inner">
+                <div>
+                    <p class="lab-tag"><i></i>Versuch 30 · Handguss-Labor · seit 1989</p>
+                    <h1>Feuer formt <em>Wert.</em></h1>
+                    <p class="hero-sub">Kein Katalog. Ein Labor: Stellen Sie Metall, Gewicht und Oberfläche zusammen — Legierung und Richtwert folgen live. So arbeitet IRONFORGE: jede Charge ein Unikat.</p>
+
+                    <div class="config">
+                        <div class="config-head"><span>◎ Barren-Labor</span><span id="cfgCode">IF-CU-5000-G</span></div>
+                        <div class="config-body">
+                            <div>
+                                <span class="cfg-label">01 · Metall</span>
+                                <div class="pills" id="metalPills">
+                                    <button class="pill on" data-metal="kupfer" data-hover>Kupfer <small>99,99</small></button>
+                                    <button class="pill" data-metal="silber" data-hover>Silber <small>999</small></button>
+                                    <button class="pill" data-metal="rohguss" data-hover>Rohguss <small>950</small></button>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="cfg-label">02 · Gewicht — <span id="wOut" style="color: var(--amber-hi)">5,0 kg</span></span>
+                                <input type="range" id="wRange" min="0.1" max="12.5" step="0.1" value="5" aria-label="Gewicht in Kilogramm">
+                                <div class="range-row"><span>100 g</span><span>12,5 kg Leipzig-Format</span></div>
+                            </div>
+                            <div>
+                                <span class="cfg-label">03 · Oberfläche</span>
+                                <div class="pills" id="finPills">
+                                    <button class="pill on" data-finish="guss" data-hover>Gusshaut</button>
+                                    <button class="pill" data-finish="poliert" data-hover>Poliert</button>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="cfg-label">04 · Ofen — <span id="tOut" style="color: var(--amber-hi)">1.085 °C</span></span>
+                                <input type="range" id="tRange" min="900" max="1100" step="1" value="1085" aria-label="Ofentemperatur in Grad Celsius">
+                                <div class="range-row"><span>900 °C</span><span>1.100 °C</span></div>
+                            </div>
+                            <div class="readout">
+                                <div><span>Legierung</span><strong id="roAlloy">Cu-ETP</strong></div>
+                                <div><span>Schmelze</span><strong id="roMelt">1.085 °C</strong></div>
+                                <div><span>Reinheit</span><strong id="roPure">99,99 %</strong></div>
+                            </div>
+                            <div class="price-row">
+                                <div class="price"><small>Richtwert inkl. Guss</small><span id="priceOut">139 €</span></div>
+                                <a href="#kontakt" class="btn btn-ember" data-hover>So anfragen ↓</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-stage" id="heroStage">
+                    <div class="hero-fallback"><img src="images/molten.jpg" alt="Handgegossener Kupferbarren in der Schmelzkammer — IRONFORGE Handguss seit 1989"></div>
+                    <div class="stage-hud" aria-hidden="true"><span id="hudMetal">CU · 99,99</span><span id="hudWeight">5,0 KG</span></div>
+                    <div class="hero-stage-glow" aria-hidden="true"></div>
+                    <p class="drag-hint"><b>Regler</b> konfigurieren den Barren · Anfrage per E-Mail</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Handguss seit 1989</span><span>Spektrometrisch geprüft</span><span>100 g bis 12,5 kg</span><span>Feuermarke IRONFORGE</span><span> diskret &amp; versichert</span>
+                <span>Handguss seit 1989</span><span>Spektrometrisch geprüft</span><span>100 g bis 12,5 kg</span><span>Feuermarke IRONFORGE</span><span> diskret &amp; versichert</span>
+            </div>
+        </div>
+
+        <!-- 02 · METALLE (editorial statt Produkt-Grid) -->
+        <section class="section" id="metalle" data-chapter-sec="metalle">
+            <div class="wrap">
+                <div class="reveal">
+                    <p class="sec-index">Kapitel 02 — Metalle</p>
+                    <h2 class="sec-title">Zwei Elemente, <em>ein Feuer.</em></h2>
+                </div>
+                <div class="giant-word" aria-hidden="true">Cu — Ag</div>
+
+                <div class="metal-row reveal">
+                    <figure class="metal-fig"><img src="images/copper1.jpg" alt="Frisch gegossene Kupferbarren in der Kokille" loading="lazy"><figcaption>Kokille · 1.085 °C</figcaption></figure>
+                    <div>
+                        <span class="metal-num">— No. 1</span>
+                        <h3>Kupfer, das Urmetall</h3>
+                        <p>Cu-ETP mit 99,99 % Reinheit, handgegossen in der offenen Kokille. Warme Gusshaut, tiefe Patina — jede Oberfläche ein Fingerabdruck des Feuers.</p>
+                        <div class="spec-line"><span>1.085 °C</span><span>99,99 %</span><span>0,1–12,5 kg</span></div>
+                        <button class="load-btn" data-load-metal="kupfer" data-hover>In den Ofen laden</button>
+                    </div>
+                </div>
+
+                <div class="metal-row flip reveal">
+                    <figure class="metal-fig"><img src="images/silver1.jpg" alt="Geprägte Feinsilberbarren 999,0 gestapelt" loading="lazy"><figcaption>Feinsilber · 999,0</figcaption></figure>
+                    <div>
+                        <span class="metal-num">— No. 2</span>
+                        <h3>Silber, der Glanz</h3>
+                        <p>Feinsilber 999,0 für Kenner, Rohguss 950 für die Werkbank. Verlässt unser Haus nur mit Zertifikat, Seriennummer und Feuermarke.</p>
+                        <div class="spec-line"><span>962 °C</span><span>999,0 / 950</span><span>Zertifikat</span></div>
+                        <button class="load-btn" data-load-metal="silber" data-hover>In den Ofen laden</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats">
+            <div class="stat"><div class="stat-num" data-target="99.99" data-dec="2" data-suffix=" %">99,99 %</div><div class="stat-label">Reinheit Kupfer</div></div>
+            <div class="stat"><div class="stat-num" data-target="999" data-dec="1" data-suffix="">999,0</div><div class="stat-label">Feinsilber</div></div>
+            <div class="stat"><div class="stat-num" data-target="1100" data-dec="0" data-suffix=" °C">1.100 °C</div><div class="stat-label">Max. Ofenhitze</div></div>
+            <div class="stat"><div class="stat-num" data-target="1989" data-dec="0" data-suffix="">1989</div><div class="stat-label">Gegründet</div></div>
+        </div>
+
+        <!-- 03 · STÜCKE (Index-Tabelle statt Cards) -->
+        <section class="section" id="stuecke" data-chapter-sec="stuecke">
+            <div class="wrap">
+                <div class="reveal">
+                    <p class="sec-index">Kapitel 03 — Stücke</p>
+                    <h2 class="sec-title">Der Index, <em>nicht der Katalog.</em></h2>
+                    <p class="sec-lead">Fünf Referenzstücke aus laufender Produktion. Zeile antippen — das Labor oben übernimmt Metall und Format.</p>
+                </div>
+                <div class="spec-table reveal">
+                    <div class="spec-head"><span>Nr.</span><span>Stück</span><span>Legierung</span><span class="hide-m">Format</span><span style="text-align:right">Aktion</span></div>
+                    <div class="spec-row" data-row-metal="kupfer" data-row-weight="5" data-hover><span class="nr">01</span><span class="nm">Kokillenguss-Klassiker<small>Handguss · Unikat</small></span><span class="dt">Cu 99,99</span><span class="dt hide-m">5 kg</span><span class="go">Laden →</span></div>
+                    <div class="spec-row" data-row-metal="kupfer" data-row-weight="12.5" data-hover><span class="nr">02</span><span class="nm">Leipziger Handelsguss<small>Historische Punze</small></span><span class="dt">Cu 99,99</span><span class="dt hide-m">12,5 kg</span><span class="go">Laden →</span></div>
+                    <div class="spec-row" data-row-metal="silber" data-row-weight="1" data-hover><span class="nr">03</span><span class="nm">Feinsilber-Referenz<small>Seriennummer · Zertifikat</small></span><span class="dt">Ag 999,0</span><span class="dt hide-m">1 kg</span><span class="go">Laden →</span></div>
+                    <div class="spec-row" data-row-metal="rohguss" data-row-weight="0.5" data-hover><span class="nr">04</span><span class="nm">Werkstattgussstange<small>Für Verarbeiter</small></span><span class="dt">Ag 950</span><span class="dt hide-m">500 g</span><span class="go">Laden →</span></div>
+                    <div class="spec-row" data-row-metal="silber" data-row-weight="0.25" data-hover><span class="nr">05</span><span class="nm">Handguss-Signatur<small>Meistersignatur · Unikat</small></span><span class="dt">Ag 999,0</span><span class="dt hide-m">250 g</span><span class="go">Laden →</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hscroll" id="galerie">
+            <div class="hs-sticky">
+                <div class="hs-head"><p class="sec-index">Werkstatt — in Bewegung</p></div>
+                <div class="hs-progress"><i id="hsBar"></i></div>
+                <div class="hs-track" id="hsTrack">
+                    <div class="hs-text">
+                        <h2>Neun Stationen, <em>ein Weg.</em></h2>
+                        <p>Weiter scrollen — die Manufaktur zieht vorbei: von der Schmelze bis zur Feuermarke.</p>
+                    </div>
+                    <figure class="hs-panel"><img src="images/molten.jpg" alt="Schmelzeneinsatz" loading="lazy"><figcaption>Schmelze · 1.085 °C</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/forge.jpg" alt="Esse" loading="lazy"><figcaption>Die Esse</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/sparks1.jpg" alt="Funkenflug" loading="lazy"><figcaption>Funkenflug</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/sparks2.jpg" alt="Trennschleifen" loading="lazy"><figcaption>Trennschleifen</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/copper1.jpg" alt="Kokillenguss" loading="lazy"><figcaption>Kokillenguss</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/copper2.jpg" alt="Leipziger Guss" loading="lazy"><figcaption>Leipziger Guss</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/silver1.jpg" alt="Feinsilber" loading="lazy"><figcaption>Feinsilber 999,0</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/silver2.jpg" alt="Rohguss" loading="lazy"><figcaption>Rohguss 950</figcaption></figure>
+                    <figure class="hs-panel"><img src="images/silver4.jpg" alt="Handguss" loading="lazy"><figcaption>Handguss</figcaption></figure>
+                </div>
+                <p class="hs-hint">Weiter scrollen &rarr;</p>
+            </div>
+        </section>
+
+        <!-- 04 · PROTOKOLL -->
+        <section class="section" id="prozess" data-chapter-sec="prozess">
+            <div class="wrap">
+                <div class="reveal">
+                    <p class="sec-index">Kapitel 04 — Protokoll</p>
+                    <h2 class="sec-title">Vier Grade <em>der Glut.</em></h2>
+                    <p class="sec-lead">Jede Charge läuft nach diesem Protokoll — gemessen, nicht behauptet.</p>
+                </div>
+                <div class="proto">
+                    <div class="proto-row reveal"><span class="pn">01</span><h3><small>Schritt · Schmelzen</small>Tiegelofen</h3><p>Kupfer bei 1.085 °C, Silber bei 962 °C — unter kontrollierter Ofenatmosphäre.</p><span class="pt">≈ 1.085 °C</span></div>
+                    <div class="proto-row reveal"><span class="pn">02</span><h3><small>Schritt · Gießen</small>Kokille</h3><p>Vorwärmte Formen, ruhige Hand: Gefüge und Oberfläche entstehen hier.</p><span class="pt">Hand ± 1 mm</span></div>
+                    <div class="proto-row reveal"><span class="pn">03</span><h3><small>Schritt · Prüfen</small>Spektrometer</h3><p>Jede Charge wird analysiert. Der Messwert steht im Zertifikat.</p><span class="pt">99,99 %</span></div>
+                    <div class="proto-row reveal"><span class="pn">04</span><h3><small>Schritt · Veredeln</small>Feuermarke</h3><p>Punzen, nummerieren, verpacken — erst dann ist es IRONFORGE.</p><span class="pt">IF · Punze</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="band" style="background-image: url('images/sparks1.jpg');">
+            <p class="band-quote">„Wo Funken fliegen, <em>entsteht Wert.</em>“</p>
+            <p class="band-mark">Schmelzkammer II · Ofenprotokoll 09</p>
+        </section>
+
+        <!-- 05 · KONTAKT mit Konfiguration -->
+        <section class="cta" id="kontakt" data-chapter-sec="kontakt">
+            <div class="wrap reveal">
+                <div class="cta-card">
+                    <p class="sec-index" style="justify-content: center;">Kapitel 05 — Deal</p>
+                    <h2 class="sec-title">Ihre Konfiguration, <em>unser Feuer.</em></h2>
+                    <p class="sec-lead" style="margin: 0 auto;">Die Anfrage übernimmt automatisch, was Sie oben eingestellt haben — ein Klick, keine Formulare.</p>
+                    <div class="cta-config" id="ctaConfig"><span>Kupfer 99,99</span><span>5,0 kg</span><span>Gusshaut</span></div>
+                    <div class="contact-grid">
+                        <div class="contact-item"><h4>Werk &amp; Ausstellung</h4><p>Musterstraße 14<br>80331 München</p></div>
+                        <div class="contact-item"><h4>Telefon</h4><p><a href="tel:+498998765432" data-hover>+49 (0)89 987 654 32</a><br>Mo–Fr, 8–17 Uhr</p></div>
+                        <div class="contact-item"><h4>E-Mail</h4><p><a href="mailto:kontakt@ironforge.de" data-hover>kontakt@ironforge.de</a><br>Antwort in 24 h</p></div>
+                    </div>
+                    <a href="mailto:kontakt@ironforge.de" class="btn btn-ember" id="orderMail" data-hover>Mit Konfiguration anfragen</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-brand">IRON<span>FORGE</span> LAB</div>
+            <div class="footer-meta">© 2026 IRONFORGE Edelmetallmanufaktur · Versuch 30</div>
+            <div><a href="impressum.html" data-hover>Impressum</a></div>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+            window.__threeReady = false;
+            setTimeout(function () {
+                if (!window.__threeReady) document.body.classList.add('no-webgl');
+            }, 5000);
+
+            var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            /* ---------- Konfigurator-State ---------- */
+            var META = {
+                kupfer:  { label: 'Kupfer 99,99',  code: 'CU', alloy: 'Cu-ETP',  pure: '99,99 %', melt: '1.085 °C', hud: 'CU · 99,99',  perKg: 18,  making: 49, meltC: 1085 },
+                silber:  { label: 'Silber 999',    code: 'AG', alloy: 'Ag 999,0', pure: '999,0',   melt: '962 °C',   hud: 'AG · 999',   perKg: 950, making: 89, meltC: 962 },
+                rohguss: { label: 'Rohguss 950',   code: 'RG', alloy: 'Ag 950',   pure: '950',      melt: '962 °C',   hud: 'AG · 950',   perKg: 820, making: 39, meltC: 962 }
+            };
+            var FIN = { guss: 'Gusshaut', poliert: 'Poliert' };
+            var state = { metal: 'kupfer', weight: 5.0, finish: 'guss', temp: 1085 };
+
+            var $ = function (id) { return document.getElementById(id); };
+            var metalPills = document.querySelectorAll('#metalPills .pill');
+            var finPills = document.querySelectorAll('#finPills .pill');
+            var wRange = $('wRange'), tRange = $('tRange');
+
+            function fmtKg(v) { return v.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' kg'; }
+            function fmtT(v) { return v.toLocaleString('de-DE', { maximumFractionDigits: 0 }) + ' °C'; }
+            function rangeFill(el) {
+                var p = (el.value - el.min) / (el.max - el.min) * 100;
+                el.style.setProperty('--fill', p + '%');
+            }
+
+            function price() {
+                var m = META[state.metal];
+                return Math.round(m.perKg * state.weight + m.making);
+            }
+
+            function render() {
+                var m = META[state.metal];
+                $('wOut').textContent = fmtKg(state.weight);
+                $('tOut').textContent = fmtT(state.temp);
+                $('railTemp').textContent = fmtT(state.temp);
+                $('roAlloy').textContent = m.alloy;
+                $('roMelt').textContent = m.melt;
+                $('roPure').textContent = m.pure;
+                $('priceOut').textContent = price().toLocaleString('de-DE') + ' €';
+                $('hudMetal').textContent = m.hud;
+                $('hudWeight').textContent = fmtKg(state.weight).toUpperCase();
+                $('cfgCode').textContent = 'IF-' + m.code + '-' + Math.round(state.weight * 1000) + '-' + (state.finish === 'guss' ? 'G' : 'P');
+                $('ctaConfig').innerHTML = '<span>' + m.label + '</span><span>' + fmtKg(state.weight) + '</span><span>' + FIN[state.finish] + '</span>';
+                var subject = encodeURIComponent('Anfrage ' + m.label + ' ' + fmtKg(state.weight) + ' ' + FIN[state.finish]);
+                var body = encodeURIComponent('Guten Tag,\n\nich interessiere mich für:\n- Metall: ' + m.label + ' (' + m.alloy + ')\n- Gewicht: ' + fmtKg(state.weight) + '\n- Oberfläche: ' + FIN[state.finish] + '\n- Richtwert: ' + price().toLocaleString('de-DE') + ' €\n\nBitte um Rückmeldung.\n');
+                $('orderMail').href = 'mailto:kontakt@ironforge.de?subject=' + subject + '&body=' + body;
+                rangeFill(wRange); rangeFill(tRange);
+                if (window.__forge) window.__forge.apply(state);
+            }
+
+            function setMetal(k) {
+                state.metal = k;
+                metalPills.forEach(function (b) { b.classList.toggle('on', b.dataset.metal === k); });
+                render();
+            }
+
+            metalPills.forEach(function (b) { b.addEventListener('click', function () { setMetal(b.dataset.metal); }); });
+            finPills.forEach(function (b) { b.addEventListener('click', function () {
+                state.finish = b.dataset.finish;
+                finPills.forEach(function (x) { x.classList.toggle('on', x === b); });
+                render();
+            }); });
+            wRange.addEventListener('input', function () { state.weight = parseFloat(wRange.value); render(); });
+            tRange.addEventListener('input', function () { state.temp = parseInt(tRange.value, 10); render(); });
+
+            document.querySelectorAll('[data-load-metal]').forEach(function (b) {
+                b.addEventListener('click', function () {
+                    setMetal(b.dataset.loadMetal);
+                    document.getElementById('labor').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+                });
+            });
+            document.querySelectorAll('.spec-row').forEach(function (r) {
+                r.addEventListener('click', function () {
+                    setMetal(r.dataset.rowMetal);
+                    state.weight = parseFloat(r.dataset.rowWeight);
+                    wRange.value = state.weight;
+                    render();
+                    document.getElementById('labor').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+                });
+            });
+            render();
+
+            /* ---------- Header / Progress ---------- */
+            var progress = $('progress'), header = $('header');
+            function onScrollChrome() {
+                header.classList.toggle('scrolled', window.scrollY > 40);
+                var doc = document.documentElement;
+                var max = doc.scrollHeight - window.innerHeight;
+                progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+            }
+            window.addEventListener('scroll', onScrollChrome, { passive: true });
+            onScrollChrome();
+
+            /* ---------- Chapter-Rail ---------- */
+            var railLinks = document.querySelectorAll('.rail a[data-chapter]');
+            var secs = document.querySelectorAll('[data-chapter-sec]');
+            if ('IntersectionObserver' in window) {
+                var rio = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            railLinks.forEach(function (a) {
+                                a.classList.toggle('active', a.dataset.chapter === e.target.dataset.chapterSec);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -55% 0px' });
+                secs.forEach(function (s) { rio.observe(s); });
+            }
+
+            /* ---------- Reveal ---------- */
+            var reveals = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+                    });
+                }, { threshold: 0.12 });
+                reveals.forEach(function (el) { io.observe(el); });
+            } else {
+                reveals.forEach(function (el) { el.classList.add('visible'); });
+            }
+
+            /* ---------- Counter ---------- */
+            function fmt(v, dec) { return v.toLocaleString('de-DE', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+            function animateCount(el) {
+                var target = parseFloat(el.getAttribute('data-target'));
+                var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+                var suffix = el.getAttribute('data-suffix') || '';
+                if (RM || !isFinite(target)) { el.textContent = fmt(target, dec) + suffix; return; }
+                var start = null;
+                (function step(ts) {
+                    if (start === null) start = ts;
+                    var p = Math.min((ts - start) / 1600, 1);
+                    el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suffix;
+                    if (p < 1) requestAnimationFrame(step);
+                })(performance.now());
+            }
+            var statsEl = document.querySelector('.stats');
+            if (statsEl && 'IntersectionObserver' in window) {
+                var statIo = new IntersectionObserver(function (entries) {
+                    if (entries.some(function (en) { return en.isIntersecting; })) {
+                        document.querySelectorAll('.stat-num[data-target]').forEach(animateCount);
+                        statIo.disconnect();
+                    }
+                }, { threshold: 0.3 });
+                statIo.observe(statsEl);
+            }
+
+            /* ---------- Horizontal Gallery ---------- */
+            var hsSec = $('galerie'), hsTrack = $('hsTrack'), hsBar = $('hsBar');
+            var hsMax = 0, hsX = 0, hsTX = 0, hsInit = false;
+            function sizeHS() { if (hsSec && hsTrack) hsMax = Math.max(0, hsTrack.scrollWidth - window.innerWidth + 140); }
+            function updateHS() {
+                if (!hsSec) return;
+                var r = hsSec.getBoundingClientRect();
+                var scrollable = hsSec.offsetHeight - window.innerHeight;
+                var p = Math.max(0, Math.min(1, -r.top / Math.max(scrollable, 1)));
+                hsTX = -p * hsMax;
+                if (!hsInit) { hsX = hsTX; hsInit = true; }
+                if (hsBar) hsBar.style.width = (p * 100).toFixed(1) + '%';
+            }
+            if (hsTrack) {
+                sizeHS();
+                window.addEventListener('resize', sizeHS);
+                window.addEventListener('load', sizeHS);
+                var tick = 0;
+                (function hsLoop() {
+                    if (tick++ % 20 === 0) sizeHS();
+                    updateHS();
+                    if (hsMax > 0) {
+                        hsX += (hsTX - hsX) * 0.085;
+                        hsTrack.style.transform = 'translate3d(' + hsX.toFixed(1) + 'px, 0, 0)';
+                    }
+                    requestAnimationFrame(hsLoop);
+                })();
+            }
+
+            /* ---------- Custom Cursor ---------- */
+            if (FINE && !RM) {
+                var dot = $('cursor'), ring = $('cursorRing');
+                var mx = -100, my = -100, rx = -100, ry = -100;
+                window.addEventListener('pointermove', function (e) { mx = e.clientX; my = e.clientY; }, { passive: true });
+                (function cl() {
+                    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
+                    dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
+                    var half = ring.classList.contains('grow') ? 32 : 18;
+                    ring.style.transform = 'translate(' + (rx - half) + 'px,' + (ry - half) + 'px)';
+                    requestAnimationFrame(cl);
+                })();
+                document.querySelectorAll('[data-hover], a, button, input').forEach(function (el) {
+                    el.addEventListener('pointerenter', function () { ring.classList.add('grow'); });
+                    el.addEventListener('pointerleave', function () { ring.classList.remove('grow'); });
+                });
+            }
+        })();
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+        const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const hasWebGL = (() => {
+            try {
+                const c = document.createElement('canvas');
+                return !!(c.getContext('webgl2') || c.getContext('webgl'));
+            } catch (e) { return false; }
+        })();
+        if (!hasWebGL) {
+            document.body.classList.add('no-webgl');
+        } else {
+            window.__threeReady = true;
+            document.body.classList.remove('no-webgl');
+            initBackground();
+            initForge();
+        }
+
+        function makeSpriteTexture(inner = 'rgba(242,223,174,1)', outer = 'rgba(216,178,110,0)') {
+            const c = document.createElement('canvas');
+            c.width = c.height = 128;
+            const ctx = c.getContext('2d');
+            const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+            g.addColorStop(0, inner);
+            g.addColorStop(0.25, 'rgba(232,200,140,0.9)');
+            g.addColorStop(0.6, 'rgba(216,178,110,0.25)');
+            g.addColorStop(1, outer);
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 128, 128);
+            const t = new THREE.CanvasTexture(c);
+            t.colorSpace = THREE.SRGBColorSpace;
+            return t;
+        }
+
+        function makeGlowTexture() {
+            const c = document.createElement('canvas');
+            c.width = 256; c.height = 256;
+            const ctx = c.getContext('2d');
+            const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+            g.addColorStop(0, 'rgba(242,223,174,0.85)');
+            g.addColorStop(0.35, 'rgba(216,178,110,0.35)');
+            g.addColorStop(0.7, 'rgba(138,106,53,0.12)');
+            g.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 256, 256);
+            const t = new THREE.CanvasTexture(c);
+            t.colorSpace = THREE.SRGBColorSpace;
+            return t;
+        }
+
+        function initBackground() {
+            const canvas = document.getElementById('bg3d');
+            if (!canvas) return;
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+            renderer.setSize(window.innerWidth, window.innerHeight, false);
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0c0c0e, 0.045);
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 0, 12);
+
+            const COUNT = isMobile ? 120 : 240;
+            const pos = new Float32Array(COUNT * 3);
+            const col = new Float32Array(COUNT * 3);
+            const speed = new Float32Array(COUNT);
+            const phase = new Float32Array(COUNT);
+            const cA = new THREE.Color(0xf2dfae), cB = new THREE.Color(0x8a6a35), tmp = new THREE.Color();
+            for (let i = 0; i < COUNT; i++) {
+                pos[i * 3] = (Math.random() - 0.5) * 26;
+                pos[i * 3 + 1] = (Math.random() - 0.5) * 16;
+                pos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+                tmp.copy(cA).lerp(cB, Math.random());
+                col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
+                speed[i] = 0.004 + Math.random() * 0.014;
+                phase[i] = Math.random() * Math.PI * 2;
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+            scene.add(new THREE.Points(geo, new THREE.PointsMaterial({
+                size: isMobile ? 0.14 : 0.17, map: makeSpriteTexture(), vertexColors: true,
+                transparent: true, opacity: 0.85, depthWrite: false, blending: THREE.AdditiveBlending
+            })));
+
+            const glowTex = makeGlowTexture();
+            const orbs = [];
+            for (let i = 0; i < 3; i++) {
+                const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, opacity: 0.15 + i * 0.04, depthWrite: false, blending: THREE.AdditiveBlending }));
+                const sc = 9 + i * 4;
+                s.scale.set(sc, sc * 0.7, 1);
+                s.position.set((i - 1) * 7, -3 + i * 1.5, -4 - i);
+                scene.add(s);
+                orbs.push({ s, bx: s.position.x, by: s.position.y, ph: i * 2.1 });
+            }
+
+            const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+            window.addEventListener('pointermove', (e) => {
+                mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
+            }, { passive: true });
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight, false);
+            });
+
+            let t = 0, running = true;
+            document.addEventListener('visibilitychange', () => { running = !document.hidden; });
+            if (RM) { renderer.render(scene, camera); return; }
+            (function loop() {
+                requestAnimationFrame(loop);
+                if (!running) return;
+                t += 0.008;
+                mouse.x += (mouse.tx - mouse.x) * 0.03;
+                mouse.y += (mouse.ty - mouse.y) * 0.03;
+                const p = geo.attributes.position.array;
+                for (let i = 0; i < COUNT; i++) {
+                    p[i * 3 + 1] += speed[i];
+                    p[i * 3] += Math.sin(t * 2 + phase[i]) * 0.004;
+                    if (p[i * 3 + 1] > 8.5) { p[i * 3 + 1] = -8.5; p[i * 3] = (Math.random() - 0.5) * 26; }
+                }
+                geo.attributes.position.needsUpdate = true;
+                orbs.forEach((o) => {
+                    o.s.position.x = o.bx + Math.sin(t * 0.7 + o.ph) * 0.8 + mouse.x * 0.6;
+                    o.s.position.y = o.by + Math.cos(t * 0.5 + o.ph) * 0.5 - window.scrollY * 0.0006;
+                });
+                camera.position.x = mouse.x * 0.7;
+                camera.position.y = -mouse.y * 0.5 - (window.scrollY * 0.0009);
+                camera.lookAt(0, 0, 0);
+                renderer.render(scene, camera);
+            })();
+        }
+
+        /* ===== FORGE: konfigurierbarer Barren ===== */
+        /* HINWEIS: Der 3D-Barren ist derzeit durch ein Standbild ersetzt (hero-fallback).
+           Diese Funktion bleibt erhalten — <canvas id="hero3d"> wieder in #heroStage einfügen,
+           um den interaktiven Barren zu reaktivieren (initForge bricht ohne Canvas selbst ab). */
+        function initForge() {
+            const canvas = document.getElementById('hero3d');
+            const stage = document.getElementById('heroStage');
+            if (!canvas || !stage) return;
+            let renderer;
+            try {
+                renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            } catch (e) { document.body.classList.add('no-webgl'); return; }
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.15;
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+            camera.position.set(0, 1.5, 7.4);
+            camera.lookAt(0, 0.1, 0);
+            try {
+                const pmrem = new THREE.PMREMGenerator(renderer);
+                scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.06).texture;
+            } catch (e) {}
+
+            scene.add(new THREE.AmbientLight(0x3a3630, 0.9));
+            scene.add(new THREE.HemisphereLight(0xf2e5c8, 0x141216, 0.5));
+            const key = new THREE.DirectionalLight(0xfff0d0, 1.6);
+            key.position.set(4, 6, 5);
+            scene.add(key);
+            const forgeL = new THREE.PointLight(0xd8a44e, 42, 14, 2);
+            forgeL.position.set(-3.2, -0.4, 2.4);
+            scene.add(forgeL);
+            const forgeR = new THREE.PointLight(0xb08a5a, 30, 14, 2);
+            forgeR.position.set(3.2, 0.4, 1.6);
+            scene.add(forgeR);
+            const rim = new THREE.PointLight(0x93a7ff, 10, 16, 2);
+            rim.position.set(0, 2.4, -4);
+            scene.add(rim);
+            const under = new THREE.PointLight(0xc09a58, 18, 8, 2);
+            under.position.set(0, -1.2, 0.4);
+            scene.add(under);
+
+            const group = new THREE.Group();
+            scene.add(group);
+
+            const geo = new THREE.BoxGeometry(3.6, 0.95, 1.8, 2, 1, 2);
+            const pa = geo.attributes.position;
+            for (let i = 0; i < pa.count; i++) {
+                const f = pa.getY(i) > 0 ? 1.14 : 0.86;
+                pa.setX(i, pa.getX(i) * f);
+                pa.setZ(i, pa.getZ(i) * f);
+            }
+            geo.computeVertexNormals();
+            const copperMat = new THREE.MeshStandardMaterial({ color: 0xa87f4e, metalness: 1.0, roughness: 0.3, envMapIntensity: 1.15 });
+            group.add(new THREE.Mesh(geo, copperMat));
+            group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo),
+                new THREE.LineBasicMaterial({ color: 0xe8d0a0, transparent: true, opacity: 0.28 })));
+
+            // Stempel (wird je Metall neu gezeichnet)
+            const stampCanvas = document.createElement('canvas');
+            stampCanvas.width = 1024; stampCanvas.height = 512;
+            const stampTex = new THREE.CanvasTexture(stampCanvas);
+            stampTex.colorSpace = THREE.SRGBColorSpace;
+            stampTex.anisotropy = 8;
+            function drawStamp(title, sub) {
+                const x = stampCanvas.getContext('2d');
+                x.clearRect(0, 0, 1024, 512);
+                x.textAlign = 'center';
+                x.fillStyle = 'rgba(40,26,10,0.8)';
+                x.font = '600 110px Fraunces, serif';
+                x.fillText(title, 512, 220);
+                x.font = '500 42px "Space Grotesk", sans-serif';
+                x.fillStyle = 'rgba(40,26,10,0.62)';
+                x.fillText(sub, 512, 320);
+                x.strokeStyle = 'rgba(242,223,174,0.5)';
+                x.lineWidth = 3;
+                x.strokeRect(48, 48, 928, 416);
+                stampTex.needsUpdate = true;
+            }
+            drawStamp('IRONFORGE', 'FEINKUPFER  99,99');
+            const topPlane = new THREE.Mesh(
+                new THREE.PlaneGeometry(3.4, 1.55),
+                new THREE.MeshStandardMaterial({ map: stampTex, transparent: true, metalness: 0.85, roughness: 0.45, polygonOffset: true, polygonOffsetFactor: -2 })
+            );
+            topPlane.rotation.x = -Math.PI / 2;
+            topPlane.position.y = 0.478;
+            topPlane.scale.set(1.1, 1.1, 1);
+            group.add(topPlane);
+
+            const glow = new THREE.Mesh(
+                new THREE.CircleGeometry(3.1, 48),
+                new THREE.MeshBasicMaterial({ map: makeGlowTexture(), transparent: true, opacity: 0.95, depthWrite: false, blending: THREE.AdditiveBlending })
+            );
+            glow.rotation.x = -Math.PI / 2;
+            glow.position.y = -1.15;
+            scene.add(glow);
+
+            const ring = new THREE.Mesh(
+                new THREE.RingGeometry(2.5, 2.56, 96),
+                new THREE.MeshBasicMaterial({ color: 0xd8b26e, transparent: true, opacity: 0.35, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })
+            );
+            ring.rotation.x = -Math.PI / 2;
+            ring.position.y = -1.14;
+            scene.add(ring);
+
+            const SN = isMobile ? 70 : 130;
+            const sp = new Float32Array(SN * 3);
+            const sv = new Float32Array(SN);
+            const sl = new Float32Array(SN);
+            for (let i = 0; i < SN; i++) {
+                const a = Math.random() * Math.PI * 2, r = 1 + Math.random() * 2.4;
+                sp[i * 3] = Math.cos(a) * r;
+                sp[i * 3 + 1] = -1 + Math.random() * 3;
+                sp[i * 3 + 2] = Math.sin(a) * r * 0.6;
+                sv[i] = 0.008 + Math.random() * 0.02;
+                sl[i] = Math.random() * 300;
+            }
+            const sgeo = new THREE.BufferGeometry();
+            sgeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+            scene.add(new THREE.Points(sgeo, new THREE.PointsMaterial({
+                size: 0.07, map: makeSpriteTexture(), transparent: true, opacity: 0.95,
+                color: 0xf2dfae, depthWrite: false, blending: THREE.AdditiveBlending
+            })));
+
+            group.position.y = 0.25;
+            group.rotation.set(-0.24, 0.56, 0);
+
+            /* ----- Konfigurator-Brücke (einzigartig auf Site 30) ----- */
+            const PRESETS = {
+                kupfer:  { color: 0xa87f4e, rough: 0.30, title: 'IRONFORGE', sub: 'FEINKUPFER  99,99' },
+                silber:  { color: 0xd8dce2, rough: 0.18, title: 'IRONFORGE', sub: 'FEINSILBER  999' },
+                rohguss: { color: 0x9a8a68, rough: 0.55, title: 'IRONFORGE', sub: 'ROHGUSS  950' }
+            };
+            let heat = 1.0;
+            window.__forge = {
+                apply(s) {
+                    const p = PRESETS[s.metal] || PRESETS.kupfer;
+                    const finishRough = s.finish === 'poliert' ? Math.min(p.rough, 0.12) : p.rough + 0.12;
+                    copperMat.color.setHex(p.color);
+                    copperMat.roughness = finishRough;
+                    copperMat.envMapIntensity = s.finish === 'poliert' ? 1.5 : 1.0;
+                    drawStamp(p.title, p.sub + '  ·  ' + String(s.weight).replace('.', ',') + ' KG');
+                    const k = Math.max(0.1, Math.min(12.5, s.weight));
+                    const sc = 0.62 + (k / 12.5) * 0.72;
+                    group.scale.set(sc, 0.8 + (k / 12.5) * 0.45, sc);
+                    heat = 0.55 + ((s.temp - 900) / 200) * 0.85;
+                }
+            };
+            window.__forge.apply({ metal: 'kupfer', weight: 5.0, finish: 'guss', temp: 1085 });
+
+            let targetRX = -0.24, targetRY = 0.56;
+            let dragging = false, lx = 0, ly = 0;
+            canvas.addEventListener('pointerdown', (e) => {
+                dragging = true; lx = e.clientX; ly = e.clientY;
+                try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+            });
+            window.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                targetRY += (e.clientX - lx) * 0.008;
+                targetRX = Math.max(-1.1, Math.min(1.1, targetRX - (e.clientY - ly) * 0.005));
+                lx = e.clientX; ly = e.clientY;
+            }, { passive: true });
+            const endDrag = () => { dragging = false; };
+            window.addEventListener('pointerup', endDrag);
+            window.addEventListener('pointercancel', endDrag);
+
+            const mouse = { x: 0, y: 0 };
+            window.addEventListener('pointermove', (e) => {
+                mouse.x = (e.clientX / window.innerWidth - 0.5);
+                mouse.y = (e.clientY / window.innerHeight - 0.5);
+            }, { passive: true });
+
+            function resize() {
+                const w = stage.clientWidth, h = stage.clientHeight;
+                if (!w || !h) return;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
+
+            let visible = true;
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { threshold: 0 }).observe(stage);
+            }
+            let running = true;
+            document.addEventListener('visibilitychange', () => { running = !document.hidden; });
+
+            const clock = new THREE.Clock();
+            function frame() {
+                requestAnimationFrame(frame);
+                if (!running || !visible) return;
+                const t = clock.getElapsedTime();
+                if (!dragging && !RM) targetRY += 0.006;
+                const sc = Math.min(window.scrollY / window.innerHeight, 1.5);
+                group.rotation.y += (targetRY + sc * 0.6 - group.rotation.y) * 0.06;
+                group.rotation.x += (targetRX - group.rotation.x) * 0.06;
+                if (!RM) group.position.y = 0.25 + Math.sin(t * 1.2) * 0.12;
+
+                const flick = RM ? 1 : (0.86 + Math.sin(t * 9.3) * 0.08 + Math.sin(t * 23.7) * 0.06);
+                forgeL.intensity = 42 * flick * heat;
+                forgeR.intensity = 30 * (2 - flick) * heat;
+                under.intensity = 18 * (0.9 + Math.sin(t * 3.1) * 0.15) * heat;
+                glow.material.opacity = Math.min(1, (0.85 + Math.sin(t * 2.2) * 0.12) * heat);
+                ring.scale.setScalar(1 + Math.sin(t * 1.4) * 0.02);
+
+                if (!RM) {
+                    const arr = sgeo.attributes.position.array;
+                    for (let i = 0; i < SN; i++) {
+                        sl[i]++;
+                        arr[i * 3 + 1] += sv[i] * (0.6 + heat * 0.6);
+                        arr[i * 3] += Math.sin(t * 2 + i) * 0.002;
+                        if (arr[i * 3 + 1] > 2.6 || sl[i] > 420) {
+                            const a = Math.random() * Math.PI * 2, r = 1 + Math.random() * 2.4;
+                            arr[i * 3] = Math.cos(a) * r;
+                            arr[i * 3 + 1] = -1.1;
+                            arr[i * 3 + 2] = Math.sin(a) * r * 0.6;
+                            sl[i] = 0;
+                        }
+                    }
+                    sgeo.attributes.position.needsUpdate = true;
+                }
+                camera.position.x += ((mouse.x * 0.7) - camera.position.x) * 0.04;
+                camera.position.y += ((1.5 - mouse.y * 0.5) - camera.position.y) * 0.04;
+                camera.lookAt(0, 0.1, 0);
+                renderer.render(scene, camera);
+            }
+            if (RM) renderer.render(scene, camera);
+            else frame();
+        }
+    </script>
+</body>
+</html>
