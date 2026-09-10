@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum — STEELIOS Edelmetall-Handel</title>
+    <meta name="description" content="Impressum von STEELIOS — Edelmetall-Handel für Feinsilber, Kupfer und Edelstahl.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Familjen+Grotesk:wght@400;500;600;700&family=Azeret+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --paper:   #F4F3EF;
+            --panel:   #FFFFFF;
+            --ink:     #171A1F;
+            --ink-2:   #3A404A;
+            --muted:   #5E6570;
+            --faint:   #8E959E;
+            --hair:    #D9DAD5;
+            --hair-2:  #C9CCC6;
+            --steel-1: #E8EAED;
+            --steel-2: #C6CBD1;
+            --steel-3: #8E959E;
+            --blade:   #5C6E91;
+            --blade-2: #7A8BAA;
+            --sans:  'Familjen Grotesk', 'Segoe UI', sans-serif;
+            --disp:  'Julius Sans One', 'Familjen Grotesk', sans-serif;
+            --serif: 'Spectral', Georgia, serif;
+            --mono:  'Azeret Mono', 'Courier New', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap { width: min(860px, 92vw); margin: 0 auto; }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(244,243,239,.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--hair);
+            padding: 16px clamp(20px, 5vw, 54px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+        .brand-mark {
+            width: 32px; height: 32px;
+            border: 1px solid var(--ink);
+            transform: rotate(45deg);
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, var(--steel-1), var(--steel-2) 55%, var(--steel-3));
+        }
+        .brand-mark span {
+            transform: rotate(-45deg);
+            font-family: var(--disp);
+            font-size: 12px;
+            color: var(--ink);
+        }
+        .brand-word b {
+            display: block;
+            font-family: var(--disp);
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: .32em;
+            color: var(--ink);
+        }
+        .brand-word small {
+            display: block;
+            font-family: var(--mono);
+            font-size: 7.5px;
+            letter-spacing: .4em;
+            color: var(--faint);
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+        .head-link {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--paper);
+            background: var(--ink);
+            padding: 13px 24px;
+            transition: background .3s;
+            white-space: nowrap;
+        }
+        .head-link:hover { background: var(--blade); }
+
+        main { padding: 64px 0 0; }
+
+        .doc-head { margin-bottom: 44px; }
+        .doc-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--blade);
+            margin-bottom: 16px;
+        }
+        .doc-kicker i { width: 34px; height: 1px; background: var(--blade); display: block; }
+        .doc-head h1 {
+            font-family: var(--serif);
+            font-weight: 300;
+            font-size: clamp(34px, 5vw, 52px);
+        }
+        .doc-no {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--faint);
+            margin-top: 10px;
+        }
+
+        .doc-card {
+            background: var(--panel);
+            border: 1px solid var(--hair);
+            padding: clamp(28px, 4vw, 44px);
+            margin-bottom: 22px;
+        }
+        .doc-card h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+        .doc-card h2 em { color: var(--blade); font-style: italic; }
+        .doc-card p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+        .doc-card p:last-child { margin-bottom: 0; }
+        .doc-card b { color: var(--ink); font-weight: 600; }
+
+        .cr-table { width: 100%; border-collapse: collapse; }
+        .cr-table td {
+            padding: 13px 6px;
+            border-bottom: 1px solid var(--hair);
+            vertical-align: top;
+            font-size: 14.5px;
+        }
+        .cr-table tr:last-child td { border-bottom: 0; }
+        .cr-table td:first-child {
+            width: 36%;
+            font-family: var(--mono);
+            font-size: 9.5px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-top: 17px;
+        }
+        .cr-table td:last-child { color: var(--ink); }
+
+        .credits { list-style: none; margin: 4px 0 16px; }
+        .credits li {
+            padding: 11px 0 11px 22px;
+            position: relative;
+            border-bottom: 1px solid var(--hair);
+            font-size: 14px;
+            color: var(--muted);
+        }
+        .credits li::before {
+            content: '';
+            position: absolute;
+            left: 3px; top: 21px;
+            width: 6px; height: 6px;
+            background: var(--blade);
+            transform: rotate(45deg);
+        }
+        .credits b { color: var(--ink); font-weight: 600; }
+
+        .doc-card a { color: var(--blade); text-decoration: none; border-bottom: 1px solid transparent; }
+        .doc-card a:hover { border-color: var(--blade); }
+
+        .foot {
+            border-top: 1px solid var(--hair);
+            margin-top: 56px;
+            padding: 24px clamp(20px, 5vw, 54px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--faint);
+        }
+        .foot a { color: var(--muted); text-decoration: none; }
+        .foot a:hover { color: var(--blade); }
+
+        @media (max-width: 640px) {
+            .brand-word small { display: none; }
+            .cr-table td { display: block; width: 100%; }
+            .cr-table td:first-child { padding-bottom: 2px; padding-top: 14px; }
+            .cr-table td:last-child { padding-top: 2px; padding-bottom: 12px; }
+            .doc-card { padding: 26px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <span class="brand-mark"><span>S</span></span>
+        <span class="brand-word">
+            <b>STEELIOS</b>
+            <small>Edelmetall-Handel</small>
+        </span>
+    </a>
+    <a href="index.html" class="head-link">Zum Handelshaus</a>
+</header>
+
+<main class="wrap">
+    <div class="doc-head">
+        <span class="doc-kicker"><i></i> Impressum · Rechtliches</span>
+        <h1>Impressum</h1>
+        <div class="doc-no">STEELIOS · Edelmetall-Handel · Deutschland</div>
+    </div>
+
+    <section class="doc-card">
+        <h2>Angaben gemäß <em>§ 5 TMG</em></h2>
+        <table class="cr-table">
+            <tr><td>Betreiber</td><td><b>STEELIOS Edelmetall-Handel GmbH</b> — Handel mit Feinsilber, Kupfer &amp; Edelstahl</td></tr>
+            <tr><td>Anschrift</td><td>Lagerhausstraße 27, 20457 Hamburg, Deutschland</td></tr>
+            <tr><td>Vertreten durch</td><td>D. Steinmann (Geschäftsführung)</td></tr>
+            <tr><td>Kontakt</td><td>info@steelios.de · +49 40 000 000</td></tr>
+            <tr><td>Handelsregister</td><td>HRB 202727, Amtsgericht Hamburg</td></tr>
+            <tr><td>USt-IdNr.</td><td>DE 000 000 000</td></tr>
+            <tr><td>Verantwortlich i. S. d. § 55 II RStV</td><td>D. Steinmann, Anschrift wie oben</td></tr>
+        </table>
+    </section>
+
+    <section class="doc-card">
+        <h2>Streitschlichtung</h2>
+        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+        <b>https://ec.europa.eu/consumers/odr</b>. Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+        <b>Verbraucherschlichtungsstelle</b> teilzunehmen.</p>
+    </section>
+
+    <section class="doc-card">
+        <h2>Haftung für Inhalte &amp; Links</h2>
+        <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+        verantwortlich. Für Inhalte von <b>verlinkten externen Seiten</b> ist stets der jeweilige Anbieter
+        verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar.</p>
+    </section>
+
+    <section class="doc-card">
+        <h2>Bildnachweise <em>(Wikimedia Commons)</em></h2>
+        <p>Verwendete Fotografien mit Lizenz — Details in <b>images/CREDITS.txt</b>:</p>
+        <ul class="credits">
+            <li><b>hero-cloudgate.jpg</b> — „Chicago from under the Cloud Gate“ · Roman Boed · CC BY 2.0</li>
+            <li><b>parallax-steelwall.jpg</b> — „Stainless Steel Wall“ · Jonathan Cutrer · CC BY 2.0</li>
+            <li><b>bar-johnson.jpg</b> — „100 Troy oz. Silver Bullion Bar from Johnson Matthey“ · Ausecure · CC BY-SA 4.0</li>
+            <li><b>ingot-wires.jpg</b> — „Silver ingot for wires“ · Mauro Cateb · CC BY-SA 4.0</li>
+            <li><b>ingot-mold.jpg</b> — „Silver ingot and ingot mold“ · Mauro Cateb · CC BY-SA 3.0</li>
+            <li><b>crystal-silver.jpg</b> — „Silver crystal“ · Alchemist-hp · CC BY-SA 3.0 DE</li>
+            <li><b>native-silver.jpg</b> — „Moscow State University native silver“ · Artyom Svetlov · CC BY 4.0</li>
+            <li><b>silver-filament.jpg</b> — „Native Silver filaments“ · Robert M. Lavinsky · CC BY-SA 3.0</li>
+            <li><b>billet-ingots.jpg</b> — „Zámrsk, steel ingots – 1“ · Miaow Miaow · CC BY-SA 3.0</li>
+            <li><b>billet-stack.jpg</b> — „Zámrsk steel ingots – 3“ · Miaow Miaow · CC BY-SA 3.0</li>
+            <li><b>coil-rosset.jpg</b> — „HDG Coils — Leeco Steel Trading“ · Arosset · CC BY-SA 4.0</li>
+        </ul>
+        <p>Lizenzen: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> ·
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> ·
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> ·
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> ·
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.de" target="_blank" rel="noopener">CC BY-SA 3.0 DE</a></p>
+    </section>
+
+    <div style="height: 46px;"></div>
+</main>
+
+<footer class="foot">
+    <span>&copy; <span id="jahr">2026</span> STEELIOS · Hamburg</span>
+    <span>Feinsilber 999,0 · Kupfer 99,99 % · Edelstahl 1.4301</span>
+    <a href="index.html">Zum Handelshaus ↑</a>
+</footer>
+
+<script>
+document.getElementById('jahr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
