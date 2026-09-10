@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><style>.r{opacity:0}.r.in{opacity:1}</style></head><body>
+<div class="r" id="a">A</div><div class="r" id="b">B</div>
+<script>
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.r').forEach(function(el){io.observe(el)});
+</script></body></html>
