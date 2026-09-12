@@ -1,0 +1,57 @@
+HIGHHORN RESERVE - Bildquellen (Wikimedia Commons)
+
+steinbock.jpg
+  Datei: File:MC Steinbock.jpg
+  Autor: Christian Mehlführer (User:Chmehl)
+  Lizenz: CC BY 2.5
+  Quelle: https://commons.wikimedia.org/wiki/File:MC_Steinbock.jpg
+
+gipfel.jpg
+  Datei: File:Höllentorkopf Gipfel (Rtg. Zugspitze).jpg
+  Autor: Michael131977
+  Lizenz: CC BY-SA 4.0
+  Quelle: https://commons.wikimedia.org/wiki/File:H%C3%B6llentorkopf_Gipfel_(Rtg._Zugspitze).jpg
+
+barren.jpg
+  Datei: File:Lingotes de cobre en El Teniente.jpg
+  Autor: Nicolas Schubert
+  Lizenz: CC BY 2.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Lingotes_de_cobre_en_El_Teniente.jpg
+
+barren-einzeln.jpg
+  Datei: File:Rusty's Bullion Bar 8.23 (18).jpg
+  Autor: Eric Golub
+  Lizenz: CC BY 2.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Rusty%27s_Bullion_Bar_8.23_(18).jpg
+
+barren-stapel.jpg
+  Datei: File:Kupferbarren 2019.JPG
+  Autor: Bullenwächter
+  Lizenz: CC BY-SA 3.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Kupferbarren_2019.JPG
+
+barren-set.jpg
+  Datei: File:Kupferbarren Hamburg-Wittenbergen.jpg
+  Autor: Bullenwächter
+  Lizenz: CC BY-SA 3.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Kupferbarren_Hamburg-Wittenbergen.jpg
+
+copper-wire.jpg
+  Datei: File:US Navy 040806-N-0684R-010 Electrician's Mate Fireman Brian Thompson from Fresno, Calif. coils copper wire for the inside of an electric motor.jpg
+  Autor: US Navy (Photographer's Mate Airman Ron Reeves)
+  Lizenz: Public domain
+  Quelle: https://commons.wikimedia.org/wiki/File:US_Navy_040806-N-0684R-010_Electrician%27s_Mate_Fireman_Brian_Thompson_from_Fresno,_Calif._coils_copper_wire_for_the_inside_of_an_electric_motor.jpg
+
+silver-wire.jpg
+  Datei: File:Native Silver filaments (cropped).jpg
+  Autor: James St. John
+  Lizenz: CC BY 2.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Native_Silver_filaments_(cropped).jpg
+
+aluminium-wire.jpg
+  Datei: File:Sample cross-section of high tension power (pylon) line.jpg
+  Autor: ClarkMills
+  Lizenz: CC BY-SA 3.0
+  Quelle: https://commons.wikimedia.org/wiki/File:Sample_cross-section_of_high_tension_power_(pylon)_line.jpg
+
+Hinweis: hero-bg.jpg war bereits im Projekt vorhanden; Quelle dort unbekannt.
