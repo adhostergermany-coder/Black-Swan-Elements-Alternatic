@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ETERNA ASSETS — Impressum &amp; Datenschutz</title>
 <meta name="description" content="Impressum und Datenschutz von ETERNA ASSETS — Angaben gemäß § 5 TMG, Bildnachweise und Datenschutzinformationen.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23F3EDE2'/%3E%3Cpath d='M32 8 L54 56 H44 L32 27 L20 56 H10 Z' fill='%23A3622E'/%3E%3C/svg%3E">
+<link rel="icon" href="images/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;500;600&family=Libre+Franklin:wght@200;300;400;500;600&family=Fraunces+SOFT:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
@@ -50,6 +50,11 @@ a{ color:inherit; }
   border-bottom:1px solid var(--line);
 }
 .sigil{ display:flex; align-items:center; gap:14px; text-decoration:none; }
+.sigil img{
+  height:38px; width:auto; max-width:220px; object-fit:contain;
+  background:transparent; padding:0; border-radius:0; display:block;
+  filter:invert(1);
+}
 .sigil-plate{
   width:44px; height:44px; display:grid; place-items:center;
   border:1px solid var(--cuve); border-radius:50% 50% 4px 4px;
@@ -122,12 +127,8 @@ a{ color:inherit; }
 <div class="grain" aria-hidden="true"></div>
 
 <header class="cabine">
-  <a class="sigil" href="index.html">
-    <span class="sigil-plate">EA</span>
-    <span class="sigil-word">
-      <b>ETERNA</b>
-      <i>Assets · Edelmetall-Manufaktur</i>
-    </span>
+  <a class="sigil" href="index.html" aria-label="ETERNA ASSETS">
+    <img src="images/logo.png" alt="ETERNA ASSETS Logo">
   </a>
   <a class="backlink" href="index.html">← Zum Kabinett</a>
 </header>
