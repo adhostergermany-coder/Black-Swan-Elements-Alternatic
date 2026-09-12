@@ -510,24 +510,12 @@ footer{border-top:1px solid var(--line);padding:44px 0 30px}
             <li><span class="k">Erreichbar</span><span>Mo–Fr · 08:00–18:00 MEZ</span></li>
           </ul>
         </div>
-        <form class="form rv-r" id="cform">
-          <div class="f-row">
-            <div class="f-field"><label for="nm">Name</label><input id="nm" name="name" type="text" required placeholder="Ihr Name"></div>
-            <div class="f-field"><label for="em">E-Mail</label><input id="em" name="email" type="email" required placeholder="name@firma.de"></div>
-          </div>
-          <div class="f-field"><label for="mt">Metall</label>
-            <select id="mt" name="metall">
-              <option>Kupfer 99,99 % — Kathoden</option>
-              <option>Kupfer 99,99 % — Barren</option>
-              <option>Silber 999,0 — Barren</option>
-              <option>Silber 999,0 — Granulat</option>
-              <option>Gemischte Partie / Beratung</option>
-            </select>
-          </div>
-          <div class="f-field"><label for="ms">Menge &amp; Nachricht</label><textarea id="ms" name="nachricht" placeholder="z. B. 5 t Kathoden, Lieferung Q3 nach Hamburg …"></textarea></div>
-          <button class="btn solid" type="submit">Anfrage senden <span class="arr">→</span></button>
-          <p class="mono" id="fmsg" style="margin-top:16px;color:var(--si2);display:none">Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage.</p>
-        </form>
+        <div class="form rv-r" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
+          <p>Kein Formular nötig — schreiben Sie uns direkt. Antwort innerhalb von 24 Stunden, mit Angebot, Assay-Daten und Festpreisfenster.</p>
+          <a class="btn solid" href="mailto:kontakt@everest-eagle.de" style="text-decoration:none;justify-content:center">E-Mail schreiben <span class="arr">→</span></a>
+          <a class="btn" href="tel:+49890000000" style="text-decoration:none;justify-content:center">+49 89 000 000-0</a>
+          <p class="mono" style="color:var(--si2)">Mo–Fr · 08:00–18:00 MEZ · Antwort ≤ 24 h</p>
+        </div>
       </div>
     </div>
   </section>
@@ -632,20 +620,7 @@ footer{border-top:1px solid var(--line);padding:44px 0 30px}
   }, {rootMargin:"-45% 0px -45% 0px"});
   document.querySelectorAll("[data-dot]").forEach(function(s){ io2.observe(s); });
 
-  /* Formular -> vorbereitete E-Mail */
-  var form = document.getElementById("cform");
-  form.addEventListener("submit", function(ev){
-    ev.preventDefault();
-    var d = new FormData(form);
-    var body = "Name: " + (d.get("name") || "") +
-               "\nE-Mail: " + (d.get("email") || "") +
-               "\nMetall: " + (d.get("metall") || "") +
-               "\n\n" + (d.get("nachricht") || "");
-    window.location.href = "mailto:kontakt@everest-eagle.de?subject=" +
-      encodeURIComponent("Anfrage über everest-eagle.de — " + (d.get("metall") || "")) +
-      "&body=" + encodeURIComponent(body);
-    document.getElementById("fmsg").style.display = "block";
-  });
+  /* Formular entfernt — Kontaktdaten genügen */
 })();
 </script>
 </body>

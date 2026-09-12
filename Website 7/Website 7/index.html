@@ -581,16 +581,13 @@ footer a:hover{color:#fff}
           <div class="c-line"><small>ADRESSE</small>Drakaris Mint GmbH · Kupferweg 7 · 33609 Bielefeld</div>
           <a href="https://ebay.de" target="_blank" rel="noopener" class="btn btn-copper" style="width:100%;margin-top:14px">Zum eBay-Shop →</a>
         </div>
-        <form class="contact-form" onsubmit="return sendForm(event)">
-          <div class="two">
-            <div class="field"><label for="n">Name *</label><input id="n" required placeholder="Max Mustermann"></div>
-            <div class="field"><label for="e">E-Mail *</label><input id="e" type="email" required placeholder="max@betrieb.de"></div>
-          </div>
-          <div class="field"><label for="t">Anliegen</label><select id="t"><option>Einzelkauf (1–10 Barren)</option><option>B2B / Palette ab 50 kg</option><option>Sondermaß nach Zeichnung</option><option>Sonstiges</option></select></div>
-          <div class="field"><label for="m">Nachricht *</label><textarea id="m" required placeholder="z. B. 40× 1 kg, Lieferung nach 33609, Wunschtermin …"></textarea></div>
-          <button class="btn btn-primary" type="submit" style="width:100%">Nachricht senden →</button>
-          <p class="hint" id="formok">Mit dem Absenden stimmst du der Verarbeitung zur Angebotserstellung zu. Keine Weitergabe an Dritte.</p>
-        </form>
+        <div class="contact-form" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px">
+          <h3>Ihr direktes Angebot.</h3>
+          <p style="font-size:15px;line-height:1.7">Rufen Sie an oder schreiben Sie uns — wir melden uns<br>innerhalb von 24 Stunden mit Festpreis und Verfügbarkeit.</p>
+          <a href="mailto:service@drakaris-mint.de" class="btn btn-primary" style="width:100%">E-Mail schreiben →</a>
+          <a href="tel:+495214470900" class="btn btn-copper" style="width:100%">+49 521 / 44 70 90</a>
+          <p class="hint">Persönliche Beratung ohne Formular — direkt, schnell, unverbindlich.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -636,11 +633,6 @@ sections.forEach(s => navObs.observe(s));
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }), {threshold:.12});
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 document.getElementById('yr').textContent = new Date().getFullYear();
-function sendForm(e){
-  e.preventDefault();
-  document.getElementById('formok').textContent = '✓ Danke! (Demo) Für ein echtes Angebot: +49 521 / 44 70 90 oder service@drakaris-mint.de';
-  return false;
-}
 </script>
 </body>
 </html>

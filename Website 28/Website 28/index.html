@@ -915,34 +915,12 @@ main { position: relative; z-index: 2; perspective: 1400px; }
         <p class="sec-tag rv">B&uuml;hne 07 <em>&middot; Signal</em></p>
         <h2 class="sec-title rv" data-d="1">Richten Sie das Teleskop</h2>
         <p class="sec-lede rv" data-d="2">Anfrage, Portefeuille-Ziel oder Sammlerstufe &mdash; wir antworten innerhalb eines Handelstages.</p>
-        <form class="rv" data-d="3" action="#" onsubmit="return handleSignal(event)">
-            <div class="l-field">
-                <label for="sigName">Name</label>
-                <input type="text" id="sigName" name="name" placeholder="Ihr Name" required>
-            </div>
-            <div class="l-field">
-                <label for="sigMail">E-Mail</label>
-                <input type="email" id="sigMail" name="email" placeholder="name@observatorium.de" required>
-            </div>
-            <div class="l-field full">
-                <label for="sigTopic">Interesse</label>
-                <select id="sigTopic" name="topic">
-                    <option>Feinsilber-Barren (LG / 400 oz)</option>
-                    <option>Chip-Barren &amp; Assay-Karten</option>
-                    <option>Kristall- &amp; Erz-Stufen</option>
-                    <option>Industrie-Granulat (Tonnage)</option>
-                    <option>Polstern-Fonds Beratung</option>
-                </select>
-            </div>
-            <div class="l-field full">
-                <label for="sigMsg">Nachricht</label>
-                <textarea id="sigMsg" name="msg" placeholder="St&uuml;ckzahl, Budget, Zeithorizont."></textarea>
-            </div>
+        <div class="rv" data-d="3" style="display:flex;flex-direction:column;gap:18px;max-width:560px">
+            <p class="sec-lede">Kein Formular nötig — senden Sie Ihr Signal direkt per E-Mail oder rufen Sie an. Diskret &amp; Antwort &le; 1 Handelstag.</p>
             <div class="form-row">
-                <button type="submit" class="hbtn hbtn--solid">Signal senden <span class="ar">&rarr;</span></button>
-                <span class="form-note" id="sigNote">Antwort &le; 1 Handelstag &middot; Diskret</span>
+                <a class="hbtn hbtn--solid" href="mailto:silber@northstar-observatorium.de" style="text-decoration:none">Signal senden <span class="ar">&rarr;</span></a>
             </div>
-        </form>
+        </div>
     </div>
 </section>
 
@@ -1227,16 +1205,6 @@ main { position: relative; z-index: 2; perspective: 1400px; }
     var yEl = document.getElementById('year');
     if (yEl) yEl.textContent = new Date().getFullYear();
 
-    window.handleSignal = function (e) {
-        e.preventDefault();
-        var note = document.getElementById('sigNote');
-        if (note) {
-            note.textContent = '\u25C6 SIGNAL EMPFANGEN \u2014 ANTWORT \u2264 1 HANDELSTAG';
-            note.style.color = '#7FD6FF';
-        }
-        e.target.reset();
-        return false;
-    };
 })();
 </script>
 </body>

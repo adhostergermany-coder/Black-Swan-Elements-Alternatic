@@ -1327,37 +1327,15 @@ body:not(.js) .reveal-img{ clip-path:none; }
           <div><b>Stille Stunden</b><span>Di–Fr 10–18 Uhr, Sa 10–14 Uhr</span></div>
         </div>
       </div>
-      <form class="req-form reveal" id="reqForm">
+      <div class="req-form reveal" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
         <div class="field">
-          <label for="fName">Ihr Name</label>
-          <input id="fName" type="text" name="name" required placeholder="Vor- und Zuname">
+          <label>Ihr Ziel</label>
+          <p style="font-size:15px;line-height:1.7;opacity:.8">Kein Formular nötig — schildern Sie Ihr Ziel (Bestandsaufbau, Erbstück oder Sammlung) direkt per E-Mail oder Telefon.</p>
         </div>
-        <div class="field">
-          <label for="fMail">E-Mail</label>
-          <input id="fMail" type="email" name="email" required placeholder="name@beispiel.de">
-        </div>
-        <div class="field">
-          <label for="fZiel">Ihr Ziel</label>
-          <select id="fZiel" name="ziel">
-            <option>Bestandsaufbau</option>
-            <option>Erbstück / Widmung</option>
-            <option>Sammlerstücke</option>
-            <option>Lagerung im Tresorhaus</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="fNachricht">Nachricht</label>
-          <textarea id="fNachricht" name="nachricht" placeholder="Was möchten Sie verwirklichen?"></textarea>
-        </div>
-        <div class="form-consent">
-          <input type="checkbox" id="fConsent" required>
-          <label for="fConsent">Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden.</label>
-        </div>
-        <button type="submit">Anfrage senden</button>
-        <p class="form-note" id="formNote">Demonstration — es werden keine Daten übertragen.</p>
-        <p class="form-note" hidden id="formOk">Vielen Dank — Ihre Anfrage ist notiert. (Demo)</p>
-        <p class="form-note" hidden id="formErr">Bitte prüfen Sie Ihre Eingaben.</p>
-      </form>
+        <button type="button" onclick="window.location.href='mailto:kabinett@eterna-assets.de'">E-Mail an das Kabinett</button>
+        <button type="button" onclick="window.location.href='tel:+4968118970417'">+49 681 1897 04 17</button>
+        <p class="form-note">Antwort binnen zwei Werktagen — mit konkreten Vorschlägen.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1500,20 +1478,7 @@ body:not(.js) .reveal-img{ clip-path:none; }
   }, { threshold:.5 });
   counters.forEach(function(el){ cio.observe(el); });
 
-  /* ---------- Demo-Formular ---------- */
-  var form = document.getElementById("reqForm");
-  form.addEventListener("submit", function(ev){
-    ev.preventDefault();
-    var ok = document.getElementById("formOk");
-    var err = document.getElementById("formErr");
-    if(form.checkValidity()){
-      ok.hidden = false; err.hidden = true;
-      form.querySelectorAll("input, textarea, select, button").forEach(function(el){ el.disabled = true; });
-    }else{
-      err.hidden = false;
-      form.reportValidity();
-    }
-  });
+  /* ---------- Formular entfernt — Direktkontakt ---------- */
 
   /* ============================================================
      3D- & Bewegungsschicht (nur Desktop-Zeiger, keine reduzierte Bewegung)

@@ -1148,33 +1148,13 @@ a { color: inherit; }
                     <div><dt>Öffnungszeit</dt><dd>Di–Fr 10–18 · Sa nach Vereinbarung</dd></div>
                 </dl>
             </div>
-            <form class="contact-panel reveal" style="--d:0.12s" onsubmit="return false">
+            <div class="contact-panel reveal" style="--d:0.12s;display:flex;flex-direction:column;justify-content:center;gap:18px">
                 <h3>Werkstück-Anfrage</h3>
-                <p class="cp-sub">Antwort innerhalb von 48 Stunden — mit Charge &amp; Preis.</p>
-                <div class="cp-row">
-                    <label for="f-name">Name</label>
-                    <input id="f-name" name="name" type="text" placeholder="Ihr Name" autocomplete="name">
-                </div>
-                <div class="cp-row">
-                    <label for="f-mail">E-Mail</label>
-                    <input id="f-mail" name="email" type="email" placeholder="name@firma.de" autocomplete="email">
-                </div>
-                <div class="cp-row">
-                    <label for="f-mat">Werkstoff</label>
-                    <select id="f-mat" name="material">
-                        <option>Kupfer 99,99 %</option>
-                        <option>Feinsilber 999</option>
-                        <option>Kupfer mit Patina</option>
-                        <option>Unsicher — beraten Sie mich</option>
-                    </select>
-                </div>
-                <div class="cp-row">
-                    <label for="f-msg">Nachricht</label>
-                    <textarea id="f-msg" name="message" placeholder="Form · Stückzahl · Oberfläche · Termin"></textarea>
-                </div>
-                <button class="btn btn-bronze cp-submit magnet" type="submit">Anfrage senden</button>
-                <p class="cp-note">Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.</p>
-            </form>
+                <p class="cp-sub">Direkt, ohne Formular — Beschreiben Sie Form, Stückzahl und Oberfläche per E-Mail oder Telefon.</p>
+                <a href="mailto:atelier@cucore.de" class="btn btn-bronze cp-submit magnet" style="text-decoration:none;justify-content:center">E-Mail an das Atelier</a>
+                <a href="tel:+494099822460" class="btn btn-line magnet" style="text-decoration:none;justify-content:center">+49 (0) 40 998 224 60</a>
+                <p class="cp-note">Antwort innerhalb von 48 Stunden — mit Charge &amp; Preis.</p>
+            </div>
         </div>
     </div>
 </section>

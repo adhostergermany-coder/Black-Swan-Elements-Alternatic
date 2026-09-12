@@ -1044,47 +1044,14 @@
                     <div class="contact-line"><span>Sitz</span><b>Speicherstadt 14 · 20457 Hamburg</b></div>
                 </div>
             </div>
-            <form class="contact-form rv" onsubmit="event.preventDefault(); this.reset();">
-                <div class="form-row">
-                    <div class="field">
-                        <label for="f-name">Name</label>
-                        <input id="f-name" type="text" required placeholder="Ihr Name">
-                    </div>
-                    <div class="field">
-                        <label for="f-firm">Unternehmen</label>
-                        <input id="f-firm" type="text" placeholder="Optional">
-                    </div>
+            <div class="contact-form rv" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
+                <div>
+                    <span class="kicker">Direkt anfragen</span>
+                    <p style="font-size:15px;line-height:1.7;opacity:.8;margin-top:10px">Kein Formular nötig — nennen Sie uns Menge, Reinheit und Lieferziel. Wir antworten mit Verfügbarkeiten, Assay-Dokumenten und Festpreis.</p>
                 </div>
-                <div class="form-row">
-                    <div class="field">
-                        <label for="f-mail">E-Mail</label>
-                        <input id="f-mail" type="email" required placeholder="name@firma.de">
-                    </div>
-                    <div class="field">
-                        <label for="f-tel">Telefon</label>
-                        <input id="f-tel" type="tel" placeholder="+49 …">
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="f-metal">Metall &amp; Form</label>
-                    <select id="f-metal" required>
-                        <option value="" disabled selected>Bitte wählen…</option>
-                        <option>Kupfer · Kathoden</option>
-                        <option>Kupfer · Barren</option>
-                        <option>Silber · Barren</option>
-                        <option>Silber · Granulat</option>
-                        <option>Legierung · nach Zeichnung</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="f-msg">Anfrage</label>
-                    <textarea id="f-msg" required placeholder="Menge, Reinheit, Lieferziel …"></textarea>
-                </div>
-                <div class="form-foot">
-                    <small>Mit dem Absenden akzeptieren Sie unsere Datenverarbeitung gemäß DSGVO.</small>
-                    <button type="submit" class="btn"><span>Anfrage senden</span></button>
-                </div>
-            </form>
+                <a href="mailto:handel@quantum-metals.de" class="btn" style="text-decoration:none;justify-content:center"><span>E-Mail schreiben</span></a>
+                <a href="tel:+49402281740" class="btn" style="text-decoration:none;justify-content:center;background:transparent;border:1px solid var(--line)"><span>+49 40 228 17 40</span></a>
+            </div>
         </div>
     </section>
 
