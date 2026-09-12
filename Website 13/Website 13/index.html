@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAWKING COPPER BARS | Kupferbarren aus Kathoden-Kupfer 99,99 %</title>
     <meta name="description" content="HAWKING COPPER BARS — Feinkupfer-Barren aus elektrolytisch raffiniertem Kathoden-Kupfer 99,99 %. Vom Katoden-Yard zum 1000-g-Barren. Verkauf über eBay.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2307090F'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23E8833A' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FFC07A'/%3E%3C/svg%3E">
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800&family=Outfit:wght@300;400;500&family=Chivo+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -94,7 +94,14 @@
         .brand{
             font-family:var(--fd); font-weight:600; font-size:15px;
             letter-spacing:.14em; text-decoration:none; color:var(--star); line-height:1.1;
+            display:inline-flex; align-items:center;
         }
+        .brand img{
+            height:36px; width:auto; max-width:250px; object-fit:contain; display:block;
+            filter:drop-shadow(0 0 8px rgba(232,131,58,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+            transition:transform .3s ease;
+        }
+        .brand:hover img{ transform:scale(1.05); }
         .brand em{ font-style:normal; color:var(--cu); }
         .brand small{
             display:block; margin-top:3px;
@@ -485,8 +492,8 @@
     <div id="depth" aria-hidden="true">TIEFE 0000 M</div>
 
     <nav id="topnav">
-        <a class="brand" href="#top">HAWKING<em>◆</em>COPPER&nbsp;BARS
-            <small>ELEKTROLYTKUPFER · 99,99&nbsp;%</small>
+        <a class="brand" href="#top" aria-label="HAWKING COPPER BARS — Startseite">
+            <img src="images/logo.png" alt="HAWKING COPPER BARS Logo">
         </a>
         <div class="navlinks">
             <a href="#element">Element</a>
@@ -728,7 +735,9 @@
     <footer>
         <div class="wrap">
             <div class="foot">
-                <span class="fbrand">HAWKING<em>◆</em>COPPER BARS</span>
+                <span class="fbrand">
+                    <img src="images/logo.png" alt="HAWKING COPPER BARS Logo" style="height:32px;width:auto;max-width:230px;object-fit:contain;display:block;">
+                </span>
                 <div class="flinks">
                     <a href="impressum.html">Impressum</a>
                     <a href="https://ebay.de" target="_blank" rel="noopener">eBay.de</a>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum | HAWKING COPPER BARS</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2307090F'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23E8833A' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FFC07A'/%3E%3C/svg%3E">
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Outfit:wght@300;400&family=Chivo+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -49,7 +49,11 @@
             display:flex; justify-content:space-between; align-items:center;
             padding:16px 34px;
         }
-        .phead .brand{ font-family:var(--fd); font-weight:600; font-size:13.5px; letter-spacing:.14em; text-decoration:none; }
+        .phead .brand{ font-family:var(--fd); font-weight:600; font-size:13.5px; letter-spacing:.14em; text-decoration:none; display:inline-flex; align-items:center; }
+        .phead .brand img{
+            height:32px; width:auto; max-width:230px; object-fit:contain; display:block;
+            filter:drop-shadow(0 0 8px rgba(232,131,58,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+        }
         .phead .brand em{ font-style:normal; color:var(--cu); }
         .phead a.back{
             font-family:var(--fm); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
@@ -108,7 +112,7 @@
     <div class="rlabel">HAWKING <b>◆</b> CU 29 <b>◆</b> IMPRESSUM</div>
 
     <header class="phead">
-        <a class="brand" href="index.html">HAWKING<em>◆</em>COPPER BARS</a>
+        <a class="brand" href="index.html" aria-label="HAWKING COPPER BARS — Startseite"><img src="images/logo.png" alt="HAWKING COPPER BARS Logo"></a>
         <a class="back" href="index.html">← Startseite</a>
     </header>
 
