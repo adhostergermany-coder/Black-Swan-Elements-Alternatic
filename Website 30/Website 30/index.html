@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IRONFORGE LAB | Kupfer- &amp; Silber-Konfigurator — Feuer formt Wert</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <meta name="description" content="IRONFORGE LAB: Stellen Sie Ihren Barren live zusammen — Metall, Gewicht, Oberfläche. Handguss seit 1989 aus München.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,7 +99,13 @@
             padding: 11px 40px 11px 116px;
             border-bottom: 1px solid var(--line);
         }
-        .logo { text-decoration: none; display: flex; align-items: baseline; gap: 12px; }
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        .logo img {
+            height: 38px; width: auto; max-width: 240px; object-fit: contain; display: block;
+            filter: drop-shadow(0 0 8px rgba(216,178,110,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+            transition: transform .35s var(--transition);
+        }
+        .logo:hover img { transform: scale(1.05); }
         .logo-name { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 4px; color: var(--bone); }
         .logo-name span { color: var(--amber); }
         .logo-lab {
@@ -440,9 +447,8 @@
         <div class="progress" id="progress"></div>
 
         <header class="header" id="header">
-            <a href="index.html" class="logo" data-hover>
-                <span class="logo-name">IRON<span>FORGE</span></span>
-                <span class="logo-lab">LAB · 30</span>
+            <a href="index.html" class="logo" data-hover aria-label="IRONFORGE — Startseite">
+                <img src="images/logo.png" alt="IRONFORGE ASSETS Logo">
             </a>
             <nav class="nav">
                 <a href="#labor" data-hover>Konfigurator</a>
@@ -650,7 +656,10 @@
         </section>
 
         <footer class="footer">
-            <div class="footer-brand">IRON<span>FORGE</span> LAB</div>
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="IRONFORGE ASSETS Logo" style="height:34px;width:auto;max-width:230px;object-fit:contain;display:block;margin-bottom:12px;">
+                LAB
+            </div>
             <div class="footer-meta">© 2026 IRONFORGE Edelmetallmanufaktur · Versuch 30</div>
             <div><a href="impressum.html" data-hover>Impressum</a></div>
         </footer>

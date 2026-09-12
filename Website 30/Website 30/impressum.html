@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum | IRONFORGE Edelmetallmanufaktur</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -47,6 +48,10 @@
 
         .logo-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 6px; color: var(--text); text-decoration: none; }
         .logo-name span { color: var(--ember); }
+        .logo-name img {
+            height: 36px; width: auto; max-width: 230px; object-fit: contain; display: block;
+            filter: drop-shadow(0 0 8px rgba(216,178,110,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+        }
 
         .back-link { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: 0.3s; }
         .back-link:hover { color: var(--ember-hot); }
@@ -85,7 +90,7 @@
 <body>
 
     <header class="header">
-        <a href="index.html" class="logo-name">IRON<span>FORGE</span></a>
+        <a href="index.html" class="logo-name" aria-label="IRONFORGE — Startseite"><img src="images/logo.png" alt="IRONFORGE ASSETS Logo"></a>
         <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
     </header>
 
