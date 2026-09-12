@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HIGHHORN RESERVE – Kupferbarren mit Berghorn-Motiv</title>
+    <link rel="icon" href="images/logo.png" type="image/png" />
     <meta
       name="description"
       content="HIGHHORN RESERVE – massive Kupferbarren mit Berghorn- und Gipfel-Motiv. 999 Feinkupfer, 1000 g, alpine Reserve-Edition."
@@ -231,6 +232,14 @@
         display: flex;
         align-items: center;
         gap: 12px;
+      }
+      .brand img {
+        height: 40px;
+        width: auto;
+        max-width: 230px;
+        object-fit: contain;
+        display: block;
+        filter: invert(1);
       }
       .hornmark {
         width: 46px;
@@ -1057,20 +1066,7 @@
       <header class="header">
         <div class="wrap header-inner">
           <a href="#top" class="brand" aria-label="HIGHHORN RESERVE Startseite">
-            <span class="hornmark" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              >
-                <path d="M4 19 L10 6 L14 13 L16.5 9.5 L20 19 Z" />
-              </svg>
-            </span>
-            <span class="brand-text"
-              ><strong>Highhorn</strong><span>RESERVE</span></span
-            >
+            <img src="images/logo.png" alt="HIGHHORN RESERVE Logo" />
           </a>
           <nav class="nav" id="nav">
             <a href="#revier">Revier</a>
@@ -1429,35 +1425,17 @@
                   margin-bottom: 14px;
                 "
               >
-                <span class="hornmark" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M4 19 L10 6 L14 13 L16.5 9.5 L20 19 Z" /></svg
-                ></span>
-                <span
-                  ><strong
-                    style="
-                      font-family: &quot;Source Serif 4&quot;, serif;
-                      color: #fff;
-                      font-size: 18px;
-                      display: block;
-                    "
-                    >Highhorn</strong
-                  ><span
-                    style="
-                      font-size: 10px;
-                      letter-spacing: 3px;
-                      font-weight: 800;
-                      color: #f0c886;
-                    "
-                    >RESERVE</span
-                  ></span
-                >
+                <img
+                  src="images/logo.png"
+                  alt="HIGHHORN RESERVE Logo"
+                  style="
+                    height: 38px;
+                    width: auto;
+                    max-width: 230px;
+                    object-fit: contain;
+                    display: block;
+                  "
+                />
               </div>
               <p style="font-size: 14px">
                 Massive Kupferbarren mit alpiner Symbolik — Horn, Gipfel und 999
