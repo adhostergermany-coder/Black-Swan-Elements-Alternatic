@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IMPERIAL TRUST — Edelmetall-Kontor · Kupfer 99,99 % &amp; Feinsilber 999</title>
 <meta name="description" content="IMPERIAL TRUST — Kontor für Edel- und Industriemetalle. Kupfer 99,99 %, Feinsilber 999 und geprüfte Halbzeuge in imperialer Güte.">
+<link rel="icon" href="images/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Baskervville:ital@0;1&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
@@ -90,6 +91,12 @@ body::before {
     transition: 0.4s var(--ease);
 }
 .rail-mono:hover { border-color: var(--copper); color: var(--copper-soft); transform: rotate(8deg); }
+.rail-logo { display: block; text-decoration: none; transition: 0.4s var(--ease); }
+.rail-logo img {
+    width: 52px; height: auto; display: block;
+    filter: drop-shadow(0 0 8px rgba(201,126,82,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+}
+.rail-logo:hover { transform: scale(1.06); }
 
 .rail-word {
     writing-mode: vertical-rl;
@@ -687,7 +694,7 @@ body::before {
 <body>
 <!-- ===== VERTICAL RAIL ===== -->
 <nav class="rail" aria-label="Hauptnavigation">
-    <a class="rail-mono" href="#top">IT</a>
+    <a class="rail-logo" href="#top" aria-label="IMPERIAL TUSK — zum Anfang"><img src="images/logo.png" alt="IMPERIAL TUSK Logo"></a>
     <div class="rail-word">Imperial&nbsp;Trust&nbsp;·&nbsp;MMXII</div>
     <div class="rail-dots">
         <a href="#kontor" title="Das Kontor">Ⅰ</a>
@@ -1065,7 +1072,7 @@ body::before {
             <a href="#prozess">Prozess</a>
             <a href="impressum.html">Impressum</a>
         </div>
-        <a class="rail-mono" href="#top" style="width:48px;height:48px;">IT</a>
+        <a class="rail-logo" href="#top" aria-label="IMPERIAL TUSK — nach oben"><img src="images/logo.png" alt="IMPERIAL TUSK Logo" style="width:64px;"></a>
     </div>
     <div class="footer-word">Imperial Trust</div>
     <div class="footer-base">
