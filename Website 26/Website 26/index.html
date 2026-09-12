@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLACK TEMPLAR METALS | Kupfer, Silber &amp; Stahl</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -77,10 +78,22 @@
 
         .logo {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             text-decoration: none;
             gap: 0;
         }
+
+        .logo img {
+            height: 44px;
+            width: auto;
+            max-width: 240px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(176,106,36,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+            transition: transform .35s var(--transition);
+        }
+
+        .logo:hover img { transform: scale(1.05); }
 
         .logo-name {
             font-family: 'Cormorant Garamond', serif;
@@ -1193,9 +1206,8 @@
 
     <!-- HEADER -->
     <header class="header" id="header">
-        <a href="#start" class="logo">
-            <span class="logo-name">BLACK <span>TEMPLAR</span></span>
-            <span class="logo-tagline">Metals · Kupfer · Silber · Stahl</span>
+        <a href="#start" class="logo" aria-label="BLACK TEMPLAR METALS — Startseite">
+            <img src="images/logo.png" alt="BLACK TEMPLAR METALS Logo">
         </a>
         <nav class="nav">
             <a href="#ueber">Über uns</a>
@@ -1577,9 +1589,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <a href="#start" class="logo">
-                        <span class="logo-name">BLACK <span>TEMPLAR</span></span>
-                        <span class="logo-tagline">Metals · Kupfer · Silber · Stahl</span>
+                    <a href="#start" class="logo" aria-label="BLACK TEMPLAR METALS — nach oben">
+                        <img src="images/logo.png" alt="BLACK TEMPLAR METALS Logo" style="height:40px;">
                     </a>
                     <p class="footer-desc">Handelsmanufaktur für Kupfer 99,99&nbsp;%, Feinsilber 999,0 und Baustahl 1.4301. Geprüft, gesiegelt, direkt aus der Halle.</p>
                 </div>

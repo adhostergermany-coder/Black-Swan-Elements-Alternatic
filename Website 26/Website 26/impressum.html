@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum — BLACK TEMPLAR METALS</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <meta name="description" content="Impressum von BLACK TEMPLAR METALS — Handelsmanufaktur für Kupfer, Feinsilber und Baustahl.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,8 +57,17 @@
 
         .logo {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            max-width: 230px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(176,106,36,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
         }
 
         .logo-name {
@@ -209,9 +219,8 @@
 <body>
 
 <header class="site-head">
-    <a href="index.html" class="logo">
-        <span class="logo-name">BLACK <span>TEMPLAR</span></span>
-        <span class="logo-tagline">Metals · Kupfer · Silber · Stahl</span>
+    <a href="index.html" class="logo" aria-label="BLACK TEMPLAR METALS — Startseite">
+        <img src="images/logo.png" alt="BLACK TEMPLAR METALS Logo">
     </a>
     <a href="index.html" class="head-link">Zur Manufaktur</a>
 </header>
