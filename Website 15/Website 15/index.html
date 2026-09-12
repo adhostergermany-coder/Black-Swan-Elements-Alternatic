@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAXONIA · Bimetall-Kontor — Kupfer 99,99 % &amp; Feinsilber 999</title>
 <meta name="description" content="SAXONIA Bimetall-Kontor — Zwei Metalle, ein Kontor. Elektrolyt-Kupfer 99,99 % und Feinsilber 999 aus sächsischer Handelstradition. Verkauf über eBay.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23120F0D'/%3E%3Cpath d='M32 5 59 18v28L32 59 5 46V18Z' fill='none' stroke='%23B0653A' stroke-width='3'/%3E%3Cpath d='M32 15v34M22 25l20 14M42 25 22 39' stroke='%23C9CDD4' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="images/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Sora:wght@100;200;300;400;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -75,6 +75,12 @@ section{scroll-margin-top:84px;position:relative}
 }
 .hd.solid::after{opacity:.85}
 .brand{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.brand img{
+  height:36px;width:auto;max-width:230px;object-fit:contain;display:block;
+  filter:drop-shadow(0 0 8px rgba(176,101,58,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));
+  transition:transform .4s var(--ease, ease);
+}
+.brand:hover img{transform:scale(1.05)}
 .brand-mark{width:34px;height:34px;position:relative;flex:0 0 auto}
 .brand-mark::before{content:"";position:absolute;inset:0;border:1.5px solid var(--cu);transform:rotate(45deg)}
 .brand-mark::after{content:"";position:absolute;inset:7px;border:1.5px solid var(--ag);transform:rotate(45deg)}
@@ -525,8 +531,7 @@ footer.site{
 <!-- ===================== HEADER ===================== -->
 <header class="hd" id="hd">
   <a class="brand" href="#top" aria-label="SAXONIA – Startseite">
-    <span class="brand-mark" aria-hidden="true"></span>
-    <span class="brand-name">SAX<b>ON</b>IA</span>
+    <img src="images/logo.png" alt="SAXONIA Logo">
   </a>
   <nav class="nav" aria-label="Hauptnavigation">
     <a href="#metalle">Metalle</a>
@@ -1025,8 +1030,7 @@ footer.site{
 <footer class="site">
   <div class="f-top">
     <a class="brand f-brand" href="#top" aria-label="SAXONIA – nach oben">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name" style="font-size:1rem">SAX<b>ON</b>IA</span>
+      <img src="images/logo.png" alt="SAXONIA Logo" style="height:32px;">
     </a>
     <div class="f-cols">
       <div class="f-col">
