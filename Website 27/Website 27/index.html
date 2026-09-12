@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEELIOS — Edelmetall-Handel · Feinsilber 999,0 · Werkzeugstahl</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <meta name="description" content="STEELIOS — Handelshaus für Feinsilber 999,0, Kupfer 99,99 % und Edelstahl 1.4301. Gegossene Barren, Mineralstufen und Kaltband in Galeriestärke.">
     <!--
         STEELIOS · Website 27 · Design "Kaltgalerie"
@@ -120,6 +121,11 @@
             box-shadow: 0 1px 0 var(--hair), 0 10px 30px rgba(23,26,31,.06);
         }
         .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+        .brand img {
+            height: 38px; width: auto; max-width: 220px; object-fit: contain;
+            background: #14171c; padding: 7px 12px; border-radius: 8px;
+            display: block;
+        }
         .brand-mark {
             width: 34px; height: 34px;
             border: 1px solid var(--ink);
@@ -969,11 +975,7 @@
 <!-- KOPFZEILE -->
 <header class="topbar" id="topbar">
     <a href="#top" class="brand" aria-label="STEELIOS — zum Anfang">
-        <span class="brand-mark"><span>S</span></span>
-        <span class="brand-word">
-            <b>STEELIOS</b>
-            <small>Edelmetall-Handel</small>
-        </span>
+        <img src="images/logo.png" alt="STEELIOS Logo">
     </a>
     <nav class="topnav" aria-label="Hauptnavigation">
         <a href="#haus">Haus</a>
@@ -1402,7 +1404,7 @@
     <div class="wrap">
         <div class="foot-top">
             <div class="foot-brand">
-                <b>STEELIOS</b>
+                <img src="images/logo.png" alt="STEELIOS Logo" style="height: 36px; width: auto; max-width: 220px; object-fit: contain; background: #14171c; padding: 7px 12px; border-radius: 8px; display: block; margin-bottom: 10px;">
                 <small>Feinsilber 999,0 · Kupfer 99,99 % · Edelstahl 1.4301</small>
             </div>
             <nav class="foot-nav" aria-label="Fußnavigation">
