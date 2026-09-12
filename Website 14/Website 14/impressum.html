@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impressum | SIBERIAN COPPER</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2316202B'/%3E%3Cpath d='M8 8h48v30L40 56H8z' fill='%23B26221'/%3E%3Cpath d='M18 18h28v4H18zm0 10h20v4H18z' fill='%23F4F7FA'/%3E%3C/svg%3E">
+    <link rel="icon" href="images/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Overpass:wght@200;300;400;600;800;900&display=swap" rel="stylesheet">
@@ -34,6 +34,10 @@ a{color:inherit}
   padding:0 4.5vw;height:72px;
 }
 .phead .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.phead .brand img{
+  height:32px;width:auto;max-width:220px;object-fit:contain;display:block;
+  filter:invert(1);
+}
 .phead .brand-glyph{
   width:38px;height:38px;background:var(--steel-ink);
   clip-path:polygon(0 0,100% 0,100% 68%,68% 100%,0 100%);
@@ -118,7 +122,7 @@ footer.site a:hover{color:var(--cu-hot)}
 
 @media (max-width:640px){
   .phead{padding:0 5vw}
-  .phead .brand-name{display:none}
+  .phead .brand img{height:28px}
   .cr-row{flex-direction:column;gap:.3rem}
   .cr-row em{text-align:left}
 }
@@ -128,8 +132,7 @@ footer.site a:hover{color:var(--cu-hot)}
 
 <header class="phead">
   <a class="brand" href="index.html" aria-label="SIBERIAN COPPER – Startseite">
-    <span class="brand-glyph">SC</span>
-    <span class="brand-name">SIBERIAN <em>COPPER</em></span>
+    <img src="images/logo.png" alt="SIBERIAN COPPER Logo">
   </a>
   <a class="back" href="index.html"><span>← Startseite</span></a>
 </header>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIBERIAN COPPER | Kupfer- und Silber-Metalle – Arktische Prägung</title>
 <meta name="description" content="SIBERIAN COPPER – Kupfer und Silber aus arktischer Fertigung. Material-Reserve, Barren und Halbzeug aus Kathoden-Kupfer 99,99 % und Feinsilber 999.">
+<link rel="icon" href="images/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Overpass:wght@200;300;400;600;800;900&display=swap" rel="stylesheet">
@@ -82,6 +83,13 @@ header.site{
   border-bottom:1px solid var(--line);
 }
 .brand{display:flex;align-items:center;gap:.8rem}
+.brand img{
+  height:34px;width:auto;max-width:230px;object-fit:contain;display:block;
+  filter:invert(1);
+  transition:transform .3s;
+}
+.brand:hover img{transform:scale(1.05)}
+footer.site .brand img{filter:drop-shadow(0 0 8px rgba(224,138,60,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.6));}
 .brand-glyph{
   width:38px;height:38px;flex:0 0 38px;background:var(--steel-ink);
   clip-path:polygon(0 0,100% 0,100% 68%,68% 100%,0 100%);
@@ -391,8 +399,7 @@ footer.site{background:#0F1720;color:#8FA0AE;padding:70px 4.5vw 34px}
 <!-- ================= HEADER ================= -->
 <header class="site" id="top">
   <a class="brand" href="#top" aria-label="SIBERIAN COPPER – Startseite">
-    <span class="brand-glyph">SC</span>
-    <span class="brand-name">SIBERIAN <em>COPPER</em></span>
+    <img src="images/logo.png" alt="SIBERIAN COPPER Logo">
   </a>
   <nav class="main" id="nav">
     <a href="#manifest">Manifest</a>
@@ -643,8 +650,7 @@ footer.site{background:#0F1720;color:#8FA0AE;padding:70px 4.5vw 34px}
   <div class="foot-grid">
     <div class="foot-brand">
       <a class="brand" href="#top" aria-label="SIBERIAN COPPER">
-        <span class="brand-glyph">SC</span>
-        <span class="brand-name" style="color:#E7EDF3">SIBERIAN <em>COPPER</em></span>
+        <img src="images/logo.png" alt="SIBERIAN COPPER Logo" style="height:38px;">
       </a>
       <p>
         Arktische Metall-Reserve für Kupfer und Silber. Werkstoffe, Barren und
