@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum | CUCORE — Atelier für Kupfer &amp; Silber</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%231F1913'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23B7803E' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23DFA968' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='5.5' fill='%23DFA968'/%3E%3C/svg%3E">
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600&family=Red+Hat+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -45,6 +45,11 @@
         }
 
         .logo { text-decoration: none; display: flex; align-items: center; gap: 13px; }
+
+        .logo img {
+            height: 46px; width: auto; max-width: 160px; object-fit: contain; display: block;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,.55));
+        }
 
         .logo-coin {
             width: 40px; height: 40px; border-radius: 50%;
@@ -164,12 +169,8 @@
 <body>
 
     <header class="header">
-        <a href="index.html" class="logo">
-            <span class="logo-coin">C</span>
-            <span>
-                <span class="logo-name">CUCORE</span>
-                <span class="logo-tagline">Kupfer · Silber</span>
-            </span>
+        <a href="index.html" class="logo" aria-label="CUCORE — Startseite">
+            <img src="images/logo.png" alt="CUCORE Logo">
         </a>
         <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
     </header>
