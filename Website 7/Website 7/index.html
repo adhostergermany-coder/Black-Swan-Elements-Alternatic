@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DRAKARIS MINT – Kupferbarren für Handwerk &amp; Industrie</title>
+<link rel="icon" href="images/logo.png" type="image/png">
 <meta name="description" content="DRAKARIS MINT – geprüfte Kupferbarren Cu 99,99 % für Handwerk, Werkstatt und Industrie. Festpreis, Prüfzertifikat, Versand in 24–48 h.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +42,12 @@ h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.12;letter-spacing:-.02em}
 
 /* brand */
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;position:relative}
+.brand img{
+  height:40px;width:auto;max-width:230px;object-fit:contain;display:block;
+  filter:drop-shadow(0 0 8px rgba(233,184,119,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.55));
+  transition:transform .3s ease;
+}
+.brand:hover img{transform:scale(1.05)}
 .brand-icon{width:46px;height:46px;border-radius:14px;background:rgba(233,184,119,.12);border:1.5px solid rgba(233,184,119,.35);display:grid;place-items:center;flex-shrink:0}
 .brand-icon span{font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#E9B877}
 .brand-text h2{font-family:'Sora',sans-serif;font-weight:800;font-size:17px;color:#fff;letter-spacing:.1em;line-height:1}
@@ -335,8 +342,7 @@ footer a:hover{color:#fff}
 <header class="header" id="header">
   <div class="container header-inner">
     <a class="brand" href="#top" aria-label="Drakaris Mint Startseite">
-      <span class="brand-icon"><span>DM</span></span>
-      <span class="brand-text"><h2>DRAKARIS</h2><small>Mint · Cu 99,99</small></span>
+      <img src="images/logo.png" alt="DRAKARIS MINT Logo">
     </a>
     <nav class="nav" id="nav">
       <a href="#sortiment">Sortiment</a>
@@ -594,7 +600,9 @@ footer a:hover{color:#fff}
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">DRAKARIS <em>MINT</em></div>
+        <div class="foot-brand">
+          <img src="images/logo.png" alt="DRAKARIS MINT Logo" style="height:38px;width:auto;max-width:230px;object-fit:contain;display:block;">
+        </div>
         <p style="font-size:13.5px;margin-top:12px;max-width:32ch">Geprüfte Kupferbarren ab Werk. Festpreis, Zertifikat, Versand in 24–48 h.</p>
       </div>
       <div><h4>MENÜ</h4><a href="#sortiment">Sortiment</a><a href="#warum">Warum wir</a><a href="#ablauf">Ablauf</a><a href="#b2b">B2B</a></div>
