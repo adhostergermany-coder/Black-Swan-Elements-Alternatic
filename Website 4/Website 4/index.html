@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HELIOS HORSE FORTUNE – Kupferbarren mit Sonnenpferd-Motiv</title>
   <meta name="description" content="HELIOS HORSE FORTUNE – massive Kupferbarren mit Sonnenpferd-Motiv. Sonne, Kraft und Fortune in 999 Feinkupfer.">
+  <link rel="icon" href="images/logo.png" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +67,7 @@
     body.scrolled .header{background:rgba(23,16,10,.96)}
     .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;background:#000}
+    .brand img{width:auto;height:42px;max-width:210px;object-fit:contain;background:transparent;border:none;border-radius:0}
     .brand-text{line-height:1.15}
     .brand-text strong{display:block;font-family:'Fraunces',serif;font-size:17px;letter-spacing:1.5px}
     .brand-text span{font-size:11px;letter-spacing:3px;color:var(--gold);font-weight:800}
@@ -208,9 +209,8 @@
 
   <header class="header">
     <div class="container header-inner">
-      <a href="#top" class="brand">
-        <img src="images/placeholder.jpg" alt="HELIOS HORSE FORTUNE Logo">
-        <span class="brand-text"><strong>HELIOS</strong><span>HORSE FORTUNE</span></span>
+      <a href="#top" class="brand" aria-label="HELIOS HORSE FORTUNE">
+        <img src="images/logo.png" alt="HELIOS HORSE FORTUNE Logo">
       </a>
       <nav class="nav" id="nav">
         <a href="#helios">Helios</a>
