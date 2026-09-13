@@ -6,102 +6,155 @@
     <title>Impressum | TALONRIDGE COPPER BARS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --copper: #B87333;
-            --copper-light: #D4956B;
+            --copper-warm: #C4884D;
             --copper-dark: #8B5A2B;
-            --dark: #0D0D0D;
-            --dark-alt: #141414;
-            --light: #F8F6F1;
-            --text-dark: #1A1A1A;
-            --text-muted: #6B6560;
-            --text-light: #F0ECE3;
-            --text-muted-light: #9A9590;
+            --navy-deep: #0F1D36;
+            --ivory: #FAF7F2;
+            --text-primary: #1A1A1A;
+            --text-secondary: #5A5A5A;
+            --text-tertiary: #8A8A8A;
+            --text-on-dark: #F0EBE3;
+            --border-light: #E5DFD5;
+            --white: #FFFFFF;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--text-dark);
-            background: var(--light);
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background: var(--ivory);
             line-height: 1.6;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-weight: 600;
+            -webkit-font-smoothing: antialiased;
         }
 
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            padding: 18px 60px;
-            background: rgba(13, 13, 13, 0.95);
+            background: rgba(250, 247, 242, 0.95);
             backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0 60px;
+            height: 72px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .logo {
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             text-decoration: none;
         }
 
-        .logo-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-light);
-            letter-spacing: 6px;
-            text-transform: uppercase;
+        .nav-brand-mark {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--copper) 0%, var(--copper-dark) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .logo-tagline {
-            font-size: 9px;
+        .nav-brand-mark span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--white);
+        }
+
+        .nav-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-brand-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+            line-height: 1.1;
+        }
+
+        .nav-brand-sub {
+            font-family: var(--font-mono);
+            font-size: 9.5px;
             color: var(--copper);
-            letter-spacing: 4px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 500;
         }
 
         .back-link {
-            color: var(--text-muted-light);
+            font-family: var(--font-body);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 500;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            transition: color 0.3s;
         }
 
         .back-link:hover { color: var(--copper); }
 
         .page-content {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
             padding: 160px 60px 100px;
         }
 
+        .page-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--copper);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-eyebrow::before {
+            content: '';
+            width: 24px; height: 1px;
+            background: var(--copper);
+        }
+
         .page-content h1 {
-            font-size: 42px;
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4vw, 48px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
             margin-bottom: 40px;
-            color: var(--text-dark);
+            color: var(--text-primary);
         }
 
         .page-content h2 {
-            font-size: 24px;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
             margin-top: 36px;
             margin-bottom: 12px;
-            color: var(--text-dark);
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
         }
 
         .page-content p,
         .page-content li {
             font-size: 15px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 12px;
         }
@@ -114,29 +167,39 @@
         .page-content a {
             color: var(--copper);
             text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .page-content a:hover { text-decoration: underline; }
+        .page-content a:hover { color: var(--copper-dark); }
 
         .divider {
             border: none;
-            border-top: 1px solid rgba(0,0,0,0.08);
+            border-top: 1px solid var(--border-light);
             margin: 32px 0;
         }
 
         .footer-mini {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
             padding: 28px 60px;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            font-size: 13px;
-            color: var(--text-muted);
+            border-top: 1px solid var(--border-light);
+            font-size: 12px;
+            color: var(--text-tertiary);
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
+        .footer-mini a {
+            color: var(--copper);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-mini a:hover { color: var(--copper-dark); }
+
         @media (max-width: 700px) {
-            .header { padding: 16px 24px; }
+            .header { padding: 0 24px; }
             .page-content { padding: 120px 24px 60px; }
             .page-content h1 { font-size: 32px; }
             .footer-mini { padding: 20px 24px; flex-direction: column; gap: 8px; }
@@ -146,19 +209,23 @@
 <body>
 
     <header class="header">
-        <a href="index.html" class="logo">
-            <span class="logo-name">TALONRIDGE</span><br>
-            <span class="logo-tagline">Copper Bars</span>
+        <a href="index.html" class="nav-brand">
+            <div class="nav-brand-mark"><span>Cu</span></div>
+            <div class="nav-brand-text">
+            <span class="nav-brand-name">TALONRIDGE</span>
+            <span class="nav-brand-sub">Copper Bars</span>
+            </div>
         </a>
         <a href="index.html" class="back-link">&larr; Zurück zur Startseite</a>
     </header>
 
     <main class="page-content">
+        <div class="page-eyebrow">Rechtliches</div>
         <h1>Impressum</h1>
 
         <h2>Angaben gemäß § 5 TMG</h2>
         <p>
-            Talonridge Copper Bars<br>
+            TALONRIDGE COPPER BARS<br>
             Musterstraße 12<br>
             80331 München
         </p>
@@ -213,9 +280,8 @@
         </p>
     </main>
 
-    <footer class="footer-mini">
-        <p>&copy; 2026 Talonridge Copper Bars</p>
-        <a href="index.html" style="color:var(--copper); text-decoration:none;">Startseite</a>
+    <footer class="footer-mini">                <p>&copy; 2026 TALONRIDGE COPPER BARS. Alle Rechte vorbehalten.</p>
+        <a href="index.html">Startseite</a>
     </footer>
 
 </body>
