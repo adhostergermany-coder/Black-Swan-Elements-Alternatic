@@ -446,6 +446,145 @@
             *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
             .rv { opacity: 1; transform: none; }
         }
+
+        /* ============ CHARTS ============ */
+        .chart-card { background: var(--char); border: 1px solid var(--border); border-radius: 10px; padding: 28px; }
+        .chart-card .ctop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .chart-card .ctop h4 { font-size: 13px; letter-spacing: 2px; color: var(--cream); }
+        .chart-card .ctop .tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.6px; color: var(--copper-bright); text-transform: uppercase; }
+        .chart-card .ctop .tag.dim { color: var(--muted); }
+        .chart-card svg { width: 100%; display: block; }
+        .chart-card .cfoot { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 14px; letter-spacing: 1px; }
+        .chart-card .cfoot .mid { color: var(--cream); }
+        .chart-card .clegend { display: flex; gap: 20px; margin-top: 16px; }
+        .chart-card .clegend span { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.4px; display: flex; align-items: center; gap: 8px; }
+        .chart-card .clegend span i { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+        .chart-card .clegend .lg { color: var(--cream); }
+        .chart-card .clegend .lg i { background: var(--copper-bright); }
+        .chart-card .clegend .lh { color: var(--muted); }
+        .chart-card .clegend .lh i { background: var(--patina); }
+
+        .bar-chart { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+        .bar-row { display: grid; grid-template-columns: 80px 1fr 60px; gap: 14px; align-items: center; }
+        .bar-row .blbl { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.4px; color: var(--muted); text-align: right; }
+        .bar-row .blbl b { color: var(--cream); font-weight: 700; }
+        .bar-row .bwrap { height: 22px; background: var(--bg-lowest); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; position: relative; }
+        .bar-row .bfill { height: 100%; width: 0; border-radius: 3px; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+        .bar-row .bfill.cu { background: linear-gradient(90deg, var(--copper-raw), var(--copper-bright)); }
+        .bar-row .bfill.std { background: rgba(142, 144, 148, 0.3); }
+        .bar-row .bfill.gold { background: rgba(255, 215, 0, 0.25); }
+        .bar-row .bfill.silver { background: rgba(192, 192, 192, 0.2); }
+        .bar-row .bfill.iron { background: rgba(100, 110, 120, 0.25); }
+        .bar-row .bfill.al { background: rgba(160, 170, 180, 0.18); }
+        .bar-row .bval { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cream); font-weight: 700; }
+        .bar-row .bval small { font-size: 10px; color: var(--muted); }
+
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .gauge-wrap { display: flex; align-items: center; justify-content: center; padding: 10px 0; }
+        .gauge-wrap svg text { font-family: 'Space Mono', monospace; }
+
+        /* ============ LIGHT / DARK ALTERNATING SECTIONS ============ */
+        .sec-light {
+            background: #F1EDE2;
+            color: #121316;
+        }
+        .sec-light .shead h2 { color: #121316; }
+        .sec-light .shead .code { color: #6E6A57; }
+        .sec-light .shead .code b { color: #121316; }
+        .sec-light .shead .code .hl { color: #B4552D; }
+        .sec-light .kick { color: #B4552D; }
+
+        .sec-light .fig-card,
+        .sec-light .assay-table,
+        .sec-light .chart-card,
+        .sec-light .cert {
+            background: #E7E1D2;
+            border-color: rgba(20, 16, 14, 0.12);
+        }
+        .sec-light .fig-card h3,
+        .sec-light .fig-lead,
+        .sec-light .assay-head h3,
+        .sec-light .chart-card .ctop h4,
+        .sec-light .cert h3 { color: #121316; }
+
+        .sec-light .fig-card p.body,
+        .sec-light .cert p.sub { color: #4C463C; }
+        .sec-light .fig-card p.body b,
+        .sec-light .fig-card p.body strong { color: #121316; }
+        .sec-light .cert li { background: rgba(20, 16, 14, 0.05); border-color: rgba(20, 16, 14, 0.1); color: #121316; }
+
+        .sec-light .arow { color: #121316; }
+        .sec-light .arow span { color: #6E6A57; }
+        .sec-light .arow b { color: #121316; }
+        .sec-light .arow b i { color: #B4552D; }
+        .sec-light .arow:nth-child(odd) { background: rgba(20, 16, 14, 0.04); }
+
+        .sec-light .stat { background: #FBF9F3; border-color: rgba(20, 16, 14, 0.1); }
+        .sec-light .stat span { color: #6E6A57; }
+        .sec-light .stat b { color: #121316; }
+        .sec-light .stat small { color: #6E6A57; }
+
+        .sec-light .bar-row .blbl { color: #6E6A57; }
+        .sec-light .bar-row .blbl b { color: #121316; }
+        .sec-light .bar-row .bwrap { background: #DDD7C8; border-color: rgba(20, 16, 14, 0.1); }
+        .sec-light .bar-row .bval { color: #121316; }
+        .sec-light .chart-card .ctop .tag { color: #B4552D; }
+        .sec-light .chart-card .cfoot { color: #6E6A57; }
+        .sec-light .chart-card .cfoot .mid { color: #121316; }
+        .sec-light .chart-card .clegend .lg { color: #121316; }
+        .sec-light .chart-card .clegend .lh { color: #6E6A57; }
+
+        .sec-light .pcard {
+            background: #E7E1D2;
+            border-color: rgba(20, 16, 14, 0.12);
+        }
+        .sec-light .pcard:hover { border-color: #B4552D; }
+        .sec-light .pcard h3 { color: #121316; }
+        .sec-light .pcard .sub { color: #6E6A57; }
+        .sec-light .pcard .pcard-img { background: #DDD7C8; border-color: rgba(20, 16, 14, 0.1); }
+        .sec-light .pcard .price { border-color: rgba(20, 16, 14, 0.1); }
+        .sec-light .pcard .price b { color: #121316; }
+        .sec-light .pcard .price span { color: #6E6A57; }
+        .sec-light .pcard .buy { background: #DDD7C8; color: #8A3F20; border: 1px solid rgba(20,16,14,0.1); }
+        .sec-light .pcard .buy:hover { background: #B4552D; color: #FBF9F3; }
+        .sec-light .pcard .buy.solid { background: #B4552D; color: #FBF9F3; }
+        .sec-light .pcard .buy.solid:hover { background: #8A3F20; }
+
+        .sec-light .trust {
+            background: #E7E1D2;
+            border-color: rgba(20, 16, 14, 0.12);
+        }
+        .sec-light .trust p { color: #4C463C; }
+        .sec-light .trust p a { color: #B4552D; }
+        .sec-light .trust .tcode { color: #6E6A57; }
+        .sec-light .trust .trust-ic { background: rgba(180, 85, 45, 0.12); color: #B4552D; }
+
+        .sec-light .herk-left { background: #E7E1D2; border-color: rgba(20,16,14,0.12); }
+        .sec-light .herk-left .geo { color: #4A7A74; }
+        .sec-light .herk-left p { color: #4C463C; }
+        .sec-light .herk-left p b { color: #121316; }
+        .sec-light .herk-imgs figure { border-color: rgba(20,16,14,0.1); }
+        .sec-light .herk-imgs figcaption { background: rgba(20,16,14,0.85); }
+
+        .sec-light .spectrum { background: #FBF9F3; border-color: rgba(20,16,14,0.1); }
+        .sec-light .spectrum .srow { color: #6E6A57; }
+        .sec-light .spectrum .srow b { color: #B4552D; }
+        .sec-light .spectrum .sfoot { color: #6E6A57; }
+        .sec-light .spectrum .sfoot .mid { color: #121316; }
+        .sec-light .spectrum svg line { stroke: rgba(20,16,14,0.12); }
+
+        .sec-light .cert .doc { background: #FBF9F3; border-color: rgba(20,16,14,0.1); }
+        .sec-light .cert .doc span { color: #6E6A57; }
+        .sec-light .cert .doc b { color: #B4552D; }
+        .sec-light .cert .chead { color: #B4552D; }
+
+        .sec-light .fig-img { border-color: rgba(20,16,14,0.1); }
+
+        @media (max-width: 768px) {
+            .chart-row { grid-template-columns: 1fr; }
+            .bar-row { grid-template-columns: 64px 1fr 50px; }
+        }
     </style>
 </head>
 <body>
@@ -458,6 +597,7 @@
             </div>
             <nav class="main" aria-label="Hauptnavigation">
                 <a href="#material" class="on">Material</a>
+                <a href="#preise">Preise</a>
                 <a href="#serie">Serie</a>
                 <a href="#prozess">Prozess</a>
                 <a href="#herkunft">Herkunft</a>
@@ -476,11 +616,12 @@
         <div class="drawer-panel">
             <button class="drawer-close" id="drawerClose" aria-label="Menü schließen">×</button>
             <a class="link" href="#material"><span>Material</span><small>01</small></a>
-            <a class="link" href="#serie"><span>Die Serie</span><small>02</small></a>
-            <a class="link" href="#prozess"><span>Prozess</span><small>03</small></a>
-            <a class="link" href="#herkunft"><span>Herkunft</span><small>04</small></a>
-            <a class="link" href="#faq"><span>FAQ</span><small>05</small></a>
-            <a class="link" href="#kontakt"><span>Kontakt</span><small>06</small></a>
+            <a class="link" href="#preise"><span>Kupferpreis</span><small>02</small></a>
+            <a class="link" href="#serie"><span>Die Serie</span><small>03</small></a>
+            <a class="link" href="#prozess"><span>Prozess</span><small>04</small></a>
+            <a class="link" href="#herkunft"><span>Herkunft</span><small>05</small></a>
+            <a class="link" href="#faq"><span>FAQ</span><small>06</small></a>
+            <a class="link" href="#kontakt"><span>Kontakt</span><small>07</small></a>
             <a class="drawer-cta" href="https://ebay.de" target="_blank" rel="noopener">Auf eBay kaufen →</a>
         </div>
     </nav>
@@ -542,7 +683,7 @@
         </section>
 
         <!-- ===== 01 MATERIAL ===== -->
-        <section class="material" id="material">
+        <section class="material sec-light" id="material">
             <div class="wrap">
                 <div class="shead rv">
                     <div><span class="kick">01 — Das Material</span><h2>Element,<br>kein Produkt.</h2></div>
@@ -572,16 +713,153 @@
                             <div class="stat"><span>Schmelzpunkt</span><b>1084,62 <small style="font-size:11px">°C</small></b><small>Physikalischer Fixwert</small></div>
                             <div class="stat"><span>Ordnungszahl</span><b class="cu">29 <small style="font-size:11px">Cu</small></b><small>Periode 4, Gruppe 11</small></div>
                         </div>
+
+                        <!-- DENSITY COMPARISON CHART -->
+                        <div class="chart-card rv" style="margin-top:12px">
+                            <div class="ctop">
+                                <h4>DICHTEVERGLEICH</h4>
+                                <span class="tag">g/cm³ · 20°C</span>
+                            </div>
+                            <div class="bar-chart">
+                                <div class="bar-row"><span class="blbl"><b>Cu</b> Kupfer</span><div class="bwrap"><div class="bfill cu" data-w="46.4"></div></div><span class="bval">8,96</span></div>
+                                <div class="bar-row"><span class="blbl"><b>Ag</b> Silber</span><div class="bwrap"><div class="bfill silver" data-w="54.4"></div></div><span class="bval">10,49</span></div>
+                                <div class="bar-row"><span class="blbl"><b>Au</b> Gold</span><div class="bwrap"><div class="bfill gold" data-w="100"></div></div><span class="bval">19,30</span></div>
+                                <div class="bar-row"><span class="blbl"><b>Fe</b> Eisen</span><div class="bwrap"><div class="bfill iron" data-w="40.8"></div></div><span class="bval">7,87</span></div>
+                                <div class="bar-row"><span class="blbl"><b>Al</b> Aluminium</span><div class="bwrap"><div class="bfill al" data-w="14.0"></div></div><span class="bval">2,70</span></div>
+                            </div>
+                            <div class="clegend">
+                                <span class="lg"><i></i>IMPERAL Cu-ETP</span>
+                                <span class="lh"><i></i>Andere Metalle</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== 02 SERIE ===== -->
-        <section class="serie" id="serie">
+        <!-- ===== 02 KUPFERPREIS ===== -->
+        <section class="material" id="preise">
             <div class="wrap">
                 <div class="shead rv">
-                    <div><span class="kick">02 — Die Serie</span><h2>Vier Gewichte.<br>Ein Standard.</h2></div>
+                    <div><span class="kick">02 — Kupferpreis</span><h2>Markt in<br>Echtzeit.</h2></div>
+                    <div class="code">LME SPOT + 12M<br><span class="hl">KURSENTWICKLUNG</span></div>
+                </div>
+                <div class="chart-row">
+                    <!-- LINE CHART: Copper Price History -->
+                    <div class="chart-card rv">
+                        <div class="ctop">
+                            <h4>KUPFERPREIS — 12 MONATE</h4>
+                            <span class="tag">LME · USD/MT</span>
+                        </div>
+                        <svg viewBox="0 0 600 260" id="priceChart">
+                            <!-- Grid lines -->
+                            <line x1="50" y1="20" x2="50" y2="220" stroke="#2E3238" stroke-width="1"/>
+                            <line x1="50" y1="220" x2="580" y2="220" stroke="#2E3238" stroke-width="1"/>
+                            <line x1="50" y1="170" x2="580" y2="170" stroke="#2E3238" stroke-width="0.5" stroke-dasharray="4 4"/>
+                            <line x1="50" y1="120" x2="580" y2="120" stroke="#2E3238" stroke-width="0.5" stroke-dasharray="4 4"/>
+                            <line x1="50" y1="70" x2="580" y2="70" stroke="#2E3238" stroke-width="0.5" stroke-dasharray="4 4"/>
+                            <line x1="50" y1="20" x2="580" y2="20" stroke="#2E3238" stroke-width="0.5" stroke-dasharray="4 4"/>
+                            <!-- Y axis labels -->
+                            <text x="44" y="224" fill="#8E9094" font-family="Space Mono,monospace" font-size="9" text-anchor="end">8.200</text>
+                            <text x="44" y="174" fill="#8E9094" font-family="Space Mono,monospace" font-size="9" text-anchor="end">8.800</text>
+                            <text x="44" y="124" fill="#8E9094" font-family="Space Mono,monospace" font-size="9" text-anchor="end">9.400</text>
+                            <text x="44" y="74" fill="#8E9094" font-family="Space Mono,monospace" font-size="9" text-anchor="end">10.000</text>
+                            <text x="44" y="24" fill="#8E9094" font-family="Space Mono,monospace" font-size="9" text-anchor="end">10.600</text>
+                            <!-- Area fill -->
+                            <path d="M70,180 L114,172 L158,164 L202,148 L246,156 L290,130 L334,118 L378,104 L422,96 L466,88 L510,72 L554,60 L554,220 L70,220 Z" fill="url(#areaGrad)" opacity="0.35"/>
+                            <!-- Price line -->
+                            <path d="M70,180 L114,172 L158,164 L202,148 L246,156 L290,130 L334,118 L378,104 L422,96 L466,88 L510,72 L554,60" fill="none" stroke="#E5833E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="priceLine"/>
+                            <!-- Data points -->
+                            <circle cx="70" cy="180" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="114" cy="172" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="158" cy="164" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="202" cy="148" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="246" cy="156" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="290" cy="130" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="334" cy="118" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="378" cy="104" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="422" cy="96" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="466" cy="88" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="510" cy="72" r="3.5" fill="#E5833E" stroke="#121316" stroke-width="1.5"/>
+                            <circle cx="554" cy="60" r="4.5" fill="#E5833E" stroke="#121316" stroke-width="2"/>
+                            <!-- Current price label -->
+                            <rect x="530" y="36" width="48" height="18" rx="3" fill="#E5833E"/>
+                            <text x="554" y="49" fill="#1a0d00" font-family="Space Mono,monospace" font-size="9" font-weight="700" text-anchor="middle">10.482</text>
+                            <!-- X axis labels -->
+                            <text x="70" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Okt</text>
+                            <text x="158" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Dez</text>
+                            <text x="246" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Feb</text>
+                            <text x="334" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Apr</text>
+                            <text x="422" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Jun</text>
+                            <text x="510" y="238" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">Aug</text>
+                            <text x="554" y="238" fill="#E5833E" font-family="Space Mono,monospace" font-size="8" font-weight="700" text-anchor="middle">Aktuell</text>
+                            <defs>
+                                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#E5833E" stop-opacity="0.4"/>
+                                    <stop offset="100%" stop-color="#E5833E" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="cfoot">
+                            <span>Q4 2025</span>
+                            <span class="mid">+18,4 % YTD</span>
+                            <span>Sep 2026</span>
+                        </div>
+                        <div class="clegend">
+                            <span class="lg"><i></i>LME Kassakurs</span>
+                            <span class="lh"><i></i>SMA 200 Tage</span>
+                        </div>
+                    </div>
+
+                    <!-- GAUGE: Reinheitsgrad -->
+                    <div class="chart-card rv">
+                        <div class="ctop">
+                            <h4>REINHEITSANALYSE</h4>
+                            <span class="tag">ASSAY-ZERTIFIKAT</span>
+                        </div>
+                        <div class="gauge-wrap">
+                            <svg viewBox="0 0 300 220" id="purityGauge">
+                                <!-- Gauge background arc -->
+                                <path d="M40,180 A110,110 0 0,1 260,180" fill="none" stroke="#2E3238" stroke-width="18" stroke-linecap="round"/>
+                                <!-- Gauge filled arc — 99.99% ≈ nearly full -->
+                                <path d="M40,180 A110,110 0 0,1 259,174" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round" id="gaugeArc" stroke-dasharray="0 660"/>
+                                <!-- Center text -->
+                                <text x="150" y="148" fill="#E5833E" font-family="Oswald,sans-serif" font-size="52" font-weight="700" text-anchor="middle" id="gaugeVal">0</text>
+                                <text x="150" y="170" fill="#8E9094" font-family="Space Mono,monospace" font-size="11" letter-spacing="3" text-anchor="middle">% REINHEIT</text>
+                                <!-- Ticks -->
+                                <text x="28" y="192" fill="#8E9094" font-family="Space Mono,monospace" font-size="8">0%</text>
+                                <text x="144" y="60" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="middle">50%</text>
+                                <text x="272" y="192" fill="#8E9094" font-family="Space Mono,monospace" font-size="8" text-anchor="end">100%</text>
+                                <!-- Spec markers -->
+                                <circle cx="40" cy="180" r="4" fill="#2E3238" stroke="#8E9094" stroke-width="1.5"/>
+                                <circle cx="259" cy="174" r="4" fill="#E5833E" stroke="#121316" stroke-width="2"/>
+                                <defs>
+                                    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#B4552D"/>
+                                        <stop offset="60%" stop-color="#E5833E"/>
+                                        <stop offset="100%" stop-color="#4A7A74"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <!-- Assay spec rows -->
+                        <div style="margin-top:8px">
+                            <div class="arow" style="padding:10px 12px"><span>Cu-Gehalt</span><b class="cu" style="font-size:14px">99,99 %</b></div>
+                            <div class="arow" style="padding:10px 12px"><span>O-Gehalt</span><b style="font-size:14px">≤ 0,0005 %</b></div>
+                            <div class="arow" style="padding:10px 12px"><span>Bi-Gehalt</span><b style="font-size:14px">≤ 0,001 %</b></div>
+                            <div class="arow" style="padding:10px 12px"><span>Pb-Gehalt</span><b style="font-size:14px">≤ 0,001 %</b></div>
+                            <div class="arow" style="padding:10px 12px"><span>Fe-Gehalt</span><b style="font-size:14px">≤ 0,001 %</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 03 SERIE ===== -->
+        <section class="serie sec-light" id="serie">
+            <div class="wrap">
+                <div class="shead rv">
+                    <div><span class="kick">03 — Die Serie</span><h2>Vier Gewichte.<br>Ein Standard.</h2></div>
                     <div class="code">SERIE: IMP-I<br><span class="hl">JE BARREN EINZELN NUMMERIERT</span></div>
                 </div>
                 <div class="cards">
@@ -648,7 +926,7 @@
         <section class="prozess" id="prozess">
             <div class="wrap">
                 <div class="shead rv">
-                    <div><span class="kick">03 — Der Prozess</span><h2>Vom Bergwerk<br>zum Barren.</h2></div>
+                    <div><span class="kick">04 — Der Prozess</span><h2>Vom Bergwerk<br>zum Barren.</h2></div>
                     <div class="code">ROUTE: MINE → MELT<br><b>4 STATIONEN DER REINHEIT</b></div>
                 </div>
                 <div class="steps">
@@ -677,10 +955,10 @@
         </section>
 
         <!-- ===== 04 HERKUNFT ===== -->
-        <section class="herkunft" id="herkunft">
+        <section class="herkunft sec-light" id="herkunft">
             <div class="wrap">
                 <div class="shead rv">
-                    <div><span class="kick">04 — Herkunft &amp; Reinheit</span><h2>Nachvollziehbar<br>bis zur Quelle.</h2></div>
+                    <div><span class="kick">05 — Herkunft &amp; Reinheit</span><h2>Nachvollziehbar<br>bis zur Quelle.</h2></div>
                     <div class="code">AUDIT: JÄHRLICH<br><b>CHAIN OF CUSTODY</b></div>
                 </div>
                 <div class="herk-grid">
@@ -721,7 +999,7 @@
         <section class="faq" id="faq">
             <div class="wrap">
                 <div class="shead rv">
-                    <div><span class="kick">05 — FAQ</span><h2>Kurz<br>gefragt.</h2></div>
+                    <div><span class="kick">06 — FAQ</span><h2>Kurz<br>gefragt.</h2></div>
                     <div class="code">5 FRAGEN &amp; ANTWORTEN<br><span class="hl">TRANSPARENZ IM DETAIL</span></div>
                 </div>
                 <div class="faq-list rv">
@@ -776,6 +1054,7 @@
                 <div class="foot-col">
                     <h5>Kollektion</h5>
                     <a href="#material">Materialität</a>
+                    <a href="#preise">Kupferpreis</a>
                     <a href="#serie">Barren Serie</a>
                     <a href="#prozess">Guss &amp; Raffination</a>
                     <a href="#herkunft">Herkunftsnachweis</a>
@@ -864,6 +1143,76 @@
         totop.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
         });
+
+        /* ===== CHART ANIMATIONS ===== */
+        // Bar chart fill animation
+        function animateBars() {
+            document.querySelectorAll('.bfill[data-w]').forEach(function (bar) {
+                var w = parseFloat(bar.getAttribute('data-w'));
+                bar.style.width = w + '%';
+            });
+        }
+
+        // Price line draw animation
+        function animateLine() {
+            var line = document.getElementById('priceLine');
+            if (!line) return;
+            var len = line.getTotalLength();
+            if (reduce) { line.style.strokeDasharray = 'none'; return; }
+            line.style.strokeDasharray = len;
+            line.style.strokeDashoffset = len;
+            line.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1)';
+            requestAnimationFrame(function () { line.style.strokeDashoffset = '0'; });
+        }
+
+        // Gauge arc + value animation
+        function animateGauge() {
+            var arc = document.getElementById('gaugeArc');
+            var val = document.getElementById('gaugeVal');
+            if (!arc || !val) return;
+            var totalLen = 660;
+            var purity = 99.99;
+            var targetDash = (purity / 100) * totalLen;
+            var duration = 1800;
+            var t0 = null;
+
+            function fmt(v) { return v.toFixed(2).replace('.', ','); }
+
+            if (reduce) {
+                arc.setAttribute('stroke-dasharray', targetDash + ' ' + totalLen);
+                val.textContent = fmt(purity);
+                return;
+            }
+
+            function frame(t) {
+                if (!t0) t0 = t;
+                var p = Math.min((t - t0) / duration, 1);
+                var ease = 1 - Math.pow(1 - p, 4);
+                arc.setAttribute('stroke-dasharray', (targetDash * ease) + ' ' + totalLen);
+                val.textContent = fmt(purity * ease);
+                if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+
+        // Trigger chart animations on scroll
+        if ('IntersectionObserver' in window && !reduce) {
+            var chartObs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (en.isIntersecting) {
+                        if (en.target.closest('.bar-chart') || en.target.classList.contains('bar-chart')) animateBars();
+                        if (en.target.querySelector('#gaugeArc') || en.target.id === 'purityGauge') animateGauge();
+                        if (en.target.querySelector('#priceLine') || en.target.id === 'priceChart') animateLine();
+                        chartObs.unobserve(en.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            document.querySelectorAll('.bar-chart, #purityGauge, #priceChart').forEach(function (el) { chartObs.observe(el); });
+        } else {
+            animateBars();
+            animateGauge();
+            animateLine();
+        }
     })();
     </script>
 </body>
