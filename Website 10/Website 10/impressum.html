@@ -71,13 +71,11 @@
             height: 74px;
         }
         .logo {
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 6px;
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
         }
-        .logo b { color: var(--rust-hot); }
+        .logo img { height: 50px; width: auto; display: block; }
         .back-link {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 11.5px;
@@ -196,7 +194,7 @@
     <div class="accent-rail" aria-hidden="true"></div>
 
     <header class="header">
-        <a href="index.html" class="logo">IMP<b>E</b>RAL</a>
+        <a href="index.html" class="logo" aria-label="IMPERAL"><img src="images/logo.png" alt="IMPERAL" width="98" height="66"></a>
         <a href="index.html" class="back-link">← Zurück zur Startseite</a>
     </header>
 

@@ -85,9 +85,9 @@
             height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
         }
         .brand { display: flex; align-items: center; gap: 18px; }
-        .logo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 2px; color: var(--cream); }
-        .logo sup { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--copper-bright); margin-left: 6px; letter-spacing: 1px; }
-        .logo:hover { color: var(--copper-bright); }
+        .logo { display: inline-flex; align-items: center; }
+        .logo img { height: 54px; width: auto; display: block; }
+        .logo:hover { opacity: 0.85; }
         .assay {
             display: flex; align-items: center; gap: 8px;
             background: var(--char); border: 1px solid var(--border);
@@ -382,7 +382,7 @@
         /* ============ FOOTER ============ */
         footer { background: var(--bg-lowest); border-top: 1px solid var(--border); padding: 80px 0 34px; }
         .foot-grid { display: grid; grid-template-columns: 4fr 2fr 3fr 3fr; gap: 40px; padding-bottom: 56px; border-bottom: 1px solid var(--border); }
-        .foot-brand .logo { font-size: 30px; }
+        .foot-brand .logo img { height: 74px; }
         .foot-brand p { font-size: 13px; color: var(--muted); max-width: 340px; margin: 16px 0 18px; }
         .lot { display: inline-flex; gap: 10px; align-items: center; background: var(--char); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.2px; }
         .lot span { color: var(--copper-bright); }
@@ -592,7 +592,7 @@
     <header>
         <div class="bar">
             <div class="brand">
-                <a class="logo" href="#start">IMPERAL<sup>Cu 29</sup></a>
+                <a class="logo" href="#start" aria-label="IMPERAL"><img src="images/logo.png" alt="IMPERAL" width="98" height="66"></a>
                 <div class="assay"><i></i>ASSAY PURITY:&nbsp;<b>99.99% Cu-ETP</b></div>
             </div>
             <nav class="main" aria-label="Hauptnavigation">
@@ -1047,7 +1047,7 @@
         <div class="wrap">
             <div class="foot-grid">
                 <div class="foot-brand">
-                    <a class="logo" href="#start">IMPERAL<sup>Cu 29</sup></a>
+                    <a class="logo" href="#start" aria-label="IMPERAL"><img src="images/logo.png" alt="IMPERAL" width="98" height="66"></a>
                     <p>Elektrolytisches Reinstkupfer für Sammler, physische Elementinhaber und metallurgische Präzisionsanwendungen. Zertifizierte Barrencharge 99.99% Reingehalt nach DIN EN 1977.</p>
                     <div class="lot"><span>LOT IDENT:</span><b>CU-ETP-2024-B88</b></div>
                 </div>
